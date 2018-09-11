@@ -1,0 +1,5 @@
+{
+  "frontend.css": "/build/css/frontend.css",
+  "frontend.js": "/build/js/frontend.js",
+  "vendor-frontend.js": "/build/js/vendor-frontend.js"
+}
