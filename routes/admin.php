@@ -4,6 +4,10 @@ Route::get('index/search', 'AjaxController@search')->name('search');
 Route::get('routes/search', 'AjaxController@routesSearch')->name('routes.search');
 Route::get('tags/search', 'AjaxController@tagsSearch')->name('tags.search');
 Route::post('images/upload', 'AjaxController@imageUpload')->name('images.upload');
+
+Route::get('jobcards/{jobcard}/show', 'JobcardController@show')->name('jobcards.show');
+Route::get('jobcards/search', 'JobcardController@search')->name('jobcards.search');
+Route::get('jobcards/latest', 'JobcardController@getLastestJobcards')->name('jobcards.latest');
 Route::resource('jobcards', 'JobcardController', [
                 'only' => ['store', 'update', 'destroy'],
             ]);

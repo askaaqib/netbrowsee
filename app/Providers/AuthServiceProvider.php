@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Jobcard;
 use App\Models\Post;
 use App\Models\User;
 use App\Policies\PostPolicy;
 use App\Policies\UserPolicy;
+use App\Policies\JobcardPolicy;
 use Illuminate\Support\Facades\Gate;
 use App\Repositories\Contracts\AccountRepository;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         = [
             User::class => UserPolicy::class,
             Post::class => PostPolicy::class,
+            Jobcard::class => JobcardPolicy::class,
         ];
 
     /**

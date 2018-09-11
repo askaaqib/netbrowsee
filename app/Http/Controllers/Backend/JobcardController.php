@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Jobcard;
 use Illuminate\Http\Request;
+use App\Utils\RequestSearchQuery;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreJobcardRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\JobcardRepository;
+
 
 class JobcardController extends BackendController
 {
@@ -28,6 +31,66 @@ class JobcardController extends BackendController
     }
 
     /**
+     * Show the application dashboard.
+     *
+     * @param Request $request
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function search(Request $request)
+    {
+
+        /** @var Builder $query */
+        $query = $this->jobcard->query();
+        
+        $requestSearchQuery = new RequestSearchQuery($request, $query, [
+            'jobcard_num',
+            'description',
+            'problem_type',
+        ]);
+
+        if ($request->get('exportData')) {
+            return $requestSearchQuery->export([
+                'jobcard_num',
+                'description',
+                'problem_type',
+                'priority',
+                'jobcard.created_at',
+                'jobcard.updated_at',
+            ],
+                [
+                    __('validation.jobcards.jobcard_num'),
+                    __('validation.jobcards.description'),
+                    __('validation.jobcards.problem_type'),
+                    __('validation.jobcards.priority'),
+                    __('labels.created_at'),
+                    __('labels.updated_at'),
+                ],
+                'jobcard');
+        }
+
+        return $requestSearchQuery->result([
+            'jobcard.id',
+            'jobcard_num',
+            'description',
+            'problem_type',
+            'priority',
+            'status',
+            'facility_name',
+            'district',
+            'sub_district',
+            'quoted_amount',
+            'before_pictures',
+            'during_pictures',
+            'after_pictures',
+            'jobcard.created_at',
+            'jobcard.updated_at',
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -44,7 +107,7 @@ class JobcardController extends BackendController
      */
     public function store(StoreJobcardRequest $request)
     {
-        $this->authorize('create jobcard');
+        
         //dd($request->all());    
         $jobcard = $this->jobcard->make(
             $request->only('jobcard_num')
@@ -60,6 +123,16 @@ class JobcardController extends BackendController
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getLastestJobcards()
+    {
+        $query = $this->jobcard->query();        
+
+        return $query->orderByDesc('created_at')->limit(10)->get();
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Jobcard  $jobcard
@@ -67,7 +140,7 @@ class JobcardController extends BackendController
      */
     public function show(Jobcard $jobcard)
     {
-        //
+        return $jobcard;
     }
 
     /**

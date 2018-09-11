@@ -27,7 +27,7 @@ class Jobcard extends Model
         'jobcard_num',
     ];
 
-    //protected $table = 'jobcard';
+    protected $table = 'jobcard';
 
     const DRAFT = 0;
     const PENDING = 1;
