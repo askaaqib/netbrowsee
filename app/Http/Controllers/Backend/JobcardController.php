@@ -5,18 +5,26 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Jobcard;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreJobcardRequest;
+use Illuminate\Database\Eloquent\Builder;
+use App\Repositories\Contracts\JobcardRepository;
 
-
-class JobcardController extends Controller
+class JobcardController extends BackendController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @var JobcardRepository
      */
-    public function index()
+    protected $jobcards;
+
+    /**
+     * Create a new controller instance.
+     *
+     *
+     * @param \App\Repositories\Contracts\JobcardRepository $jobcards
+     */
+    public function __construct(JobcardRepository $jobcard)
     {
-        //
+        //dd($jobcards);
+        $this->jobcard = $jobcard;
     }
 
     /**
@@ -36,7 +44,19 @@ class JobcardController extends Controller
      */
     public function store(StoreJobcardRequest $request)
     {
-        $this->authorize('create jobcards');
+        $this->authorize('create jobcard');
+        //dd($request->all());    
+        $jobcard = $this->jobcard->make(
+            $request->only('jobcard_num')
+        ); 
+        
+        if ('publish' === $request->input('status')) {
+            $this->jobcard->saveAndPublish($jobcard, $request->input());
+        } else {
+            $this->jobcard->saveAsDraft($jobcard, $request->input());
+        }
+
+        return $this->redirectResponse($request, __('alerts.backend.jobcards.created'));
     }
 
     /**

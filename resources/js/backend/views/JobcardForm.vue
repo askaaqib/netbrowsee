@@ -10,6 +10,7 @@
               label-for="jobcard_num"
               horizontal
               :label-cols="2"
+              :feedback="feedback('jobcard_num')"
             >
               <b-form-input
                 id="jobcard_num"
@@ -43,6 +44,7 @@
               label-for="problem_type"
               horizontal
               :label-cols="2"
+              :feedback="feedback('problem_type')"
             >
               <b-form-input
                 id="problem_type"
@@ -59,6 +61,7 @@
               label-for="priority"
               horizontal
               :label-cols="2"
+              :feedback="feedback('priority')"
             >
               <b-form-input
                 id="priority"
@@ -75,6 +78,7 @@
               label-for="facility_name"
               horizontal
               :label-cols="2"
+              :feedback="feedback('facility_name')"
             >
               <b-form-input
                 id="facility_name"
@@ -91,6 +95,7 @@
               label-for="district"
               horizontal
               :label-cols="2"
+              :feedback="feedback('district')"
             >
               <b-form-input
                 id="district"
@@ -107,6 +112,7 @@
               label-for="sub_district"
               horizontal
               :label-cols="2"
+              :feedback="feedback('sub_district')"
             >
               <b-form-input
                 id="sub_district"
@@ -123,6 +129,7 @@
               label-for="project_manager"
               horizontal
               :label-cols="2"
+              :feedback="feedback('project_manager')"
             >
               <b-form-input
                 id="project_manager"
@@ -139,6 +146,7 @@
               label-for="labour_paid"
               horizontal
               :label-cols="2"
+              :feedback="feedback('labour_paid')"
             >
               <b-form-input
                 id="labour_paid"
@@ -155,6 +163,7 @@
               label-for="travelling_paid"
               horizontal
               :label-cols="2"
+              :feedback="feedback('travelling_paid')"
             >
               <b-form-input
                 id="travelling_paid"
@@ -171,6 +180,7 @@
               label-for="materials_paid"
               horizontal
               :label-cols="2"
+              :feedback="feedback('materials_paid')"
             >
               <b-form-input
                 id="materials_paid"
@@ -187,6 +197,7 @@
               label-for="quoted_amount"
               horizontal
               :label-cols="2"
+              :feedback="feedback('quoted_amount')"
             >
               <b-form-input
                 id="quoted_amount"
@@ -203,6 +214,7 @@
               label-for="status"
               horizontal
               :label-cols="2"
+              :feedback="feedback('status')"
             >
               <b-form-input
                 id="status"
@@ -219,6 +231,7 @@
               label-for="assigned_to"
               horizontal
               :label-cols="2"
+              :feedback="feedback('assigned_to')"
             >
               <b-form-input
                 id="assigned_to"
@@ -235,6 +248,7 @@
               label-for="before_pictures"
               horizontal
               :label-cols="2"
+              :feedback="feedback('before_pictures')"
             >
               <b-form-input
                 id="before_pictures"
@@ -251,6 +265,7 @@
               label-for="during_after_pictures"
               horizontal
               :label-cols="2"
+              :feedback="feedback('during_after_pictures')"
             >
               <b-form-input
                 id="during_after_pictures"
@@ -271,11 +286,19 @@
               <b-col md>
                 <input name="status" type="hidden" value="publish">
 
-                <b-dropdown right :text="$t('buttons.jobcards.save_and_publish')" class="float-right"
+                <!-- <b-dropdown right :text="$t('buttons.jobcards.save_and_publish')" class="float-right"
                             variant="success" size="md" @click="model.status = 'publish'; onSubmit()"
                             :disabled="pending"
                             v-if="isNew || this.$app.user.can('edit jobcards') || this.$app.user.can('edit own jobcards')"
                 >
+                </b-dropdown> -->
+                <b-dropdown right split :text="$t('buttons.jobcards.save_and_publish')" class="float-right"
+                            variant="success" size="sm" @click="model.status = 'publish'; onSubmit()"
+                            :disabled="pending"
+                            v-if="isNew || this.$app.user.can('edit jobcards') || this.$app.user.can('edit own jobcards')"
+                >
+                  <b-dropdown-item @click="model.status = 'draft'; onSubmit()">{{ $t('buttons.jobcards.save_as_draft') }}
+                  </b-dropdown-item>
                 </b-dropdown>
               </b-col>
             </b-row>

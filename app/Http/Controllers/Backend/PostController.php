@@ -146,7 +146,7 @@ class PostController extends BackendController
         $post = $this->posts->make(
             $request->only('title', 'summary', 'body', 'published_at', 'unpublished_at', 'pinned', 'promoted')
         );
-
+        
         if ('publish' === $request->input('status')) {
             $this->posts->saveAndPublish($post, $request->input(), $request->file('featured_image'));
         } else {
