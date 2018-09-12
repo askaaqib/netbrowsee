@@ -286,12 +286,6 @@
               <b-col md>
                 <input name="status" type="hidden" value="publish">
 
-                <!-- <b-dropdown right :text="$t('buttons.jobcards.save_and_publish')" class="float-right"
-                            variant="success" size="md" @click="model.status = 'publish'; onSubmit()"
-                            :disabled="pending"
-                            v-if="isNew || this.$app.user.can('edit jobcards') || this.$app.user.can('edit own jobcards')"
-                >
-                </b-dropdown> -->
                 <b-dropdown right split :text="$t('buttons.jobcards.save_and_publish')" class="float-right"
                             variant="success" size="sm" @click="model.status = 'publish'; onSubmit()"
                             :disabled="pending"
@@ -313,7 +307,7 @@
 import form from '../mixins/form'
 
 export default {
-  name: 'PostForm',
+  name: 'JobcardForm',
   mixins: [form],
   data () {
     return {

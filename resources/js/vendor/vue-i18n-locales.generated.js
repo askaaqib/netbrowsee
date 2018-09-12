@@ -1080,19 +1080,48 @@ export default {
                         "publication": "Publication options"
                     },
                     "descriptions": {
-                        "meta_title": "If leave empty, title will be that of article' title by default.",
-                        "meta_description": "If leave empty, description will be that of article's summary by default."
+                        "meta_title": "If leave empty, title will be that of jobcard's title by default.",
+                        "meta_description": "If leave empty, description will be that of jobcard's summary by default."
                     },
                     "placeholders": {
                         "body": "Write your content...",
-                        "meta_title": "Article's title.",
-                        "meta_description": "Article's summary."
+                        "meta_title": "Jobcard's title.",
+                        "meta_description": "Jobcard's summary."
                     },
                     "actions": {
                         "destroy": "Delete selected jobcards",
                         "publish": "Publish selected jobcards",
                         "pin": "Pin selected jobcards",
                         "promote": "Promote selected jobcards"
+                    }
+                },
+                "projects": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Projects",
+                        "index": "Project list",
+                        "create": "Create Project",
+                        "edit": "Edit Project",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of project's title by default.",
+                        "meta_description": "If leave empty, description will be that of project's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Projects's title.",
+                        "meta_description": "Projects's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected projects",
+                        "publish": "Publish selected projects",
+                        "pin": "Pin selected projects",
+                        "promote": "Promote selected projects"
                     }
                 }
             },
@@ -1203,6 +1232,16 @@ export default {
                     "bulk_pending": "Selected jobcards are awaiting moderation",
                     "bulk_pinned": "Selected jobcards pinned",
                     "bulk_promoted": "Selected jobcards promoted"
+                },
+                "projects": {
+                    "created": "Project created",
+                    "updated": "Project updated",
+                    "deleted": "Project deleted",
+                    "bulk_destroyed": "Selected projects deleted",
+                    "bulk_published": "Selected projects published",
+                    "bulk_pending": "Selected projects are awaiting moderation",
+                    "bulk_pinned": "Selected projects pinned",
+                    "bulk_promoted": "Selected projects promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -1627,6 +1666,11 @@ export default {
             },
             "jobcards": {
                 "create": "Create jobcard",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "projects": {
+                "create": "Create Project",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             }

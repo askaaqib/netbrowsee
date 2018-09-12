@@ -67,6 +67,18 @@ return [
             'bulk_promoted'  => 'Selected jobcards promoted',
         ],
 
+
+        'projects' => [
+            'created'        => 'Project created',
+            'updated'        => 'Project updated',
+            'deleted'        => 'Project deleted',
+            'bulk_destroyed' => 'Selected projects deleted',
+            'bulk_published' => 'Selected projects published',
+            'bulk_pending'   => 'Selected projects are awaiting moderation',
+            'bulk_pinned'    => 'Selected projects pinned',
+            'bulk_promoted'  => 'Selected projects promoted',
+        ],
+
         'actions' => [
             'invalid' => 'Invalid action',
         ],

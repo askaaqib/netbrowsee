@@ -22,6 +22,12 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       access: app.blogEnabled && app.user.can('view own jobcards')
     },
     {
+      name: i18n.t('labels.backend.projects.titles.main'),
+      url: '/projects',
+      icon: 'fe fe-list',
+      access: app.blogEnabled && app.user.can('view own projects')
+    },
+    {
       name: i18n.t('labels.backend.posts.titles.main'),
       url: '/posts',
       icon: 'fe fe-book',

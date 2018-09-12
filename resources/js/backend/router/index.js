@@ -11,6 +11,8 @@ import PostForm from '../views/PostForm'
 import JobcardForm from '../views/JobcardForm'
 import PostList from '../views/PostList'
 import JobcardList from '../views/JobcardList'
+import ProjectList from '../views/ProjectList'
+import ProjectForm from '../views/ProjectForm'
 import FormSettingForm from '../views/FormSettingForm'
 import FormSettingList from '../views/FormSettingList'
 import FormSubmissionShow from '../views/FormSubmissionShow'
@@ -130,6 +132,44 @@ export function createRouter (base, i18n) {
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.jobcards.titles.edit')
+                }
+              }
+            ]
+          },
+          {
+            path: 'projects',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.projects.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'projects',
+                component: ProjectList,
+                meta: {
+                  label: i18n.t('labels.backend.projects.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'projects_create',
+                component: ProjectForm,
+                meta: {
+                  label: i18n.t('labels.backend.projects.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'projects_edit',
+                component: ProjectForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.projects.titles.edit')
                 }
               }
             ]
