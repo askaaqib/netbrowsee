@@ -79,6 +79,17 @@ return [
             'bulk_promoted'  => 'Selected projects promoted',
         ],
 
+        'project_managers' => [
+            'created'        => 'Project Manager created',
+            'updated'        => 'Project Manager updated',
+            'deleted'        => 'Project Manager deleted',
+            'bulk_destroyed' => 'Selected project managers deleted',
+            'bulk_published' => 'Selected project managers published',
+            'bulk_pending'   => 'Selected project managers are awaiting moderation',
+            'bulk_pinned'    => 'Selected project managers pinned',
+            'bulk_promoted'  => 'Selected project managers promoted',
+        ],
+
         'actions' => [
             'invalid' => 'Invalid action',
         ],

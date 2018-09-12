@@ -19,6 +19,12 @@ Route::get('projects/search', 'ProjectController@search')->name('projects.search
 Route::get('projects/latest', 'ProjectController@getLastestprojects')->name('projects.latest');
 Route::resource('projects', 'ProjectController', ['only' => ['store', 'update', 'destroy'],]);
 
+/* Project Manager Routes */
+Route::post('project_managers/batch_action', 'ProjectManagerController@batchAction')->name('project_managers.batch_action');
+Route::get('project_managers/{project}/show', 'ProjectManagerController@show')->name('project_managers.show');
+Route::get('project_managers/search', 'ProjectManagerController@search')->name('project_managers.search');
+Route::resource('project_managers', 'ProjectManagerController', ['only' => ['store', 'update', 'destroy'],]);
+
 Route::group(
     ['middleware' => ['can:view form_settings']],
     function () {

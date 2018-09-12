@@ -344,6 +344,40 @@ return [
                 'promote' => 'Promote selected projects',
             ],
         ],
+
+        'project_managers' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Project Managers',
+                'index'       => 'Project Managers list',
+                'create'      => 'Create Project Managers',
+                'edit'        => 'Edit Project Managers',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Project Manager\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Project Manager\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Projects Manager\'s title.',
+                'meta_description' => 'Projects Manager\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected project managers',
+                'publish' => 'Publish selected project managers',
+                'pin'     => 'Pin selected project managers',
+                'promote' => 'Promote selected project managers',
+            ],
+        ],
     ],
 
     'frontend' => [

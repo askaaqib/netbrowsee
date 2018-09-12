@@ -55,4 +55,10 @@ return [
         'save_and_publish' => 'Save and publish',
         'save_as_draft'    => 'Save as draft',
     ],
+
+    'project_managers' => [
+        'create'           => 'Create Project Manager',
+        'save_and_publish' => 'Save and publish',
+        'save_as_draft'    => 'Save as draft',
+    ],
 ];

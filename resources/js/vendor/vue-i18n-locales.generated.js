@@ -1123,6 +1123,35 @@ export default {
                         "pin": "Pin selected projects",
                         "promote": "Promote selected projects"
                     }
+                },
+                "project_managers": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Project Managers",
+                        "index": "Project Managers list",
+                        "create": "Create Project Managers",
+                        "edit": "Edit Project Managers",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of Project Manager's title by default.",
+                        "meta_description": "If leave empty, description will be that of Project Manager's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Projects Manager's title.",
+                        "meta_description": "Projects Manager's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected project managers",
+                        "publish": "Publish selected project managers",
+                        "pin": "Pin selected project managers",
+                        "promote": "Promote selected project managers"
+                    }
                 }
             },
             "frontend": {
@@ -1242,6 +1271,16 @@ export default {
                     "bulk_pending": "Selected projects are awaiting moderation",
                     "bulk_pinned": "Selected projects pinned",
                     "bulk_promoted": "Selected projects promoted"
+                },
+                "project_managers": {
+                    "created": "Project Manager created",
+                    "updated": "Project Manager updated",
+                    "deleted": "Project Manager deleted",
+                    "bulk_destroyed": "Selected project managers deleted",
+                    "bulk_published": "Selected project managers published",
+                    "bulk_pending": "Selected project managers are awaiting moderation",
+                    "bulk_pinned": "Selected project managers pinned",
+                    "bulk_promoted": "Selected project managers promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -1671,6 +1710,11 @@ export default {
             },
             "projects": {
                 "create": "Create Project",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "project_managers": {
+                "create": "Create Project Manager",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             }

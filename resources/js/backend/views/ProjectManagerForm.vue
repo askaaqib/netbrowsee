@@ -69,7 +69,7 @@
 import form from '../mixins/form'
 
 export default {
-  name: 'ProjectForm',
+  name: 'ProjectManagerForm',
   mixins: [form],
   data () {
     return {
@@ -78,9 +78,9 @@ export default {
         time_24hr: true,
         enableTime: true
       },
-      modelName: 'project',
-      resourceRoute: 'projects',
-      listPath: '/projects',
+      modelName: 'projectmanager',
+      resourceRoute: 'project_managers',
+      listPath: '/project_managers',
       tags: [],
       model: {
         name: null,
