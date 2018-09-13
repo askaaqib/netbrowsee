@@ -25,6 +25,7 @@ Route::get('project_managers/{project_manager}/show', 'ProjectManagerController@
 Route::get('project_managers/search', 'ProjectManagerController@search')->name('project_managers.search');
 Route::resource('project_managers', 'ProjectManagerController', ['only' => ['store', 'update', 'destroy'],]);
 
+
 /* Labour Rates Routes */
 Route::post('labour_rates/batch_action', 'LabourRateController@batchAction')->name('labour_rates.batch_action');
 Route::get('labour_rates/{labour_rate}/show', 'LabourRateController@show')->name('labour_rates.show');
@@ -37,6 +38,14 @@ Route::get('materials_rates/{materials_rate}/show', 'MaterialRateController@show
 Route::get('materials_rates/search', 'MaterialRateController@search')->name('materials_rates.search');
 Route::resource('materials_rates', 'MaterialRateController', ['only' => ['store', 'update', 'destroy'],]);
 
+
+
+Route::get('quotes/{quotes}/show', 'QuotesController@show')->name('quotes.show');
+Route::get('quotes/search', 'QuotesController@search')->name('quotes.search');
+Route::get('quotes/latest', 'QuotesController@getLastestquotes')->name('quotes.latest');
+Route::resource('quotes', 'QuotesController', [
+                'only' => ['store', 'update', 'destroy'],
+            ]);
 Route::group(
     ['middleware' => ['can:view form_settings']],
     function () {

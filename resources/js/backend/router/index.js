@@ -27,10 +27,8 @@ import UserForm from '../views/UserForm'
 import UserList from '../views/UserList'
 import RoleForm from '../views/RoleForm'
 import RoleList from '../views/RoleList'
-import MetaForm from '../views/MetaForm'
-import MetaList from '../views/MetaList'
-import RedirectionForm from '../views/RedirectionForm'
-import RedirectionList from '../views/RedirectionList'
+import quotesForm from '../views/quotesForm'
+import quotesList from '../views/quotesList'
 
 Vue.use(Router)
 
@@ -439,77 +437,39 @@ export function createRouter (base, i18n) {
             ]
           },
           {
-            path: 'metas',
+            path: 'quotes',
             component: {
               render (c) {
                 return c('router-view')
               }
             },
             meta: {
-              label: i18n.t('labels.backend.metas.titles.main')
+              label: i18n.t('labels.backend.quotes.titles.main')
             },
             children: [
               {
                 path: '/',
-                name: 'metas',
-                component: MetaList,
+                name: 'quotes',
+                component: quotesList,
                 meta: {
-                  label: i18n.t('labels.backend.metas.titles.index')
+                  label: i18n.t('labels.backend.quotes.titles.index')
                 }
               },
               {
                 path: 'create',
-                name: 'metas_create',
-                component: MetaForm,
+                name: 'quotes_create',
+                component: quotesForm,
                 meta: {
-                  label: i18n.t('labels.backend.metas.titles.create')
+                  label: i18n.t('labels.backend.quotes.titles.create')
                 }
               },
               {
                 path: ':id/edit',
-                name: 'metas_edit',
-                component: MetaForm,
+                name: 'quotes_edit',
+                component: quotesForm,
                 props: true,
                 meta: {
-                  label: i18n.t('labels.backend.metas.titles.edit')
-                }
-              }
-            ]
-          },
-          {
-            path: 'redirections',
-            component: {
-              render (c) {
-                return c('router-view')
-              }
-            },
-            meta: {
-              label: i18n.t('labels.backend.redirections.titles.main')
-            },
-            children: [
-              {
-                path: '/',
-                name: 'redirections',
-                component: RedirectionList,
-                meta: {
-                  label: i18n.t('labels.backend.redirections.titles.index')
-                }
-              },
-              {
-                path: 'create',
-                name: 'redirections_create',
-                component: RedirectionForm,
-                meta: {
-                  label: i18n.t('labels.backend.redirections.titles.create')
-                }
-              },
-              {
-                path: ':id/edit',
-                name: 'redirections_edit',
-                component: RedirectionForm,
-                props: true,
-                meta: {
-                  label: i18n.t('labels.backend.redirections.titles.edit')
+                  label: i18n.t('labels.backend.quotes.titles.edit')
                 }
               }
             ]

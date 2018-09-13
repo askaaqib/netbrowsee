@@ -12,6 +12,7 @@ use App\Repositories\EloquentTagRepository;
 use App\Repositories\EloquentMetaRepository;
 use App\Repositories\EloquentPostRepository;
 use App\Repositories\EloquentJobcardRepository;
+use App\Repositories\EloquentQuotesRepository;
 use App\Repositories\EloquentProjectRepository;
 use App\Repositories\EloquentProjectManagerRepository;
 use App\Repositories\EloquentLabourRateRepository;
@@ -26,6 +27,7 @@ use App\Repositories\Contracts\ProjectManagerRepository;
 use App\Repositories\Contracts\LabourRateRepository;
 use App\Repositories\Contracts\MaterialRateRepository;
 use App\Repositories\Contracts\JobcardRepository;
+use App\Repositories\Contracts\QuotesRepository;
 use App\Repositories\Contracts\RoleRepository;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\EloquentAccountRepository;
@@ -117,6 +119,11 @@ class AppServiceProvider extends ServiceProvider
             ProjectRepository::class,
             EloquentProjectRepository::class
         );
+        $this->app->bind(
+          QuotesRepository::class,
+          EloquentQuotesRepository::class
+        );
+
 
         $this->app->bind(
             ProjectManagerRepository::class,

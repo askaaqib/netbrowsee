@@ -1320,6 +1320,16 @@ export default {
                     "bulk_pinned": "Selected jobcards pinned",
                     "bulk_promoted": "Selected jobcards promoted"
                 },
+                "quotes": {
+                    "created": "Quotes created",
+                    "updated": "Quotes updated",
+                    "deleted": "Quotes deleted",
+                    "bulk_destroyed": "Selected Quotes deleted",
+                    "bulk_published": "Selected Quotes published",
+                    "bulk_pending": "Selected Quotes are awaiting moderation",
+                    "bulk_pinned": "Selected Quotes pinned",
+                    "bulk_promoted": "Selected Quotes promoted"
+                },
                 "projects": {
                     "created": "Project created",
                     "updated": "Project updated",
@@ -1733,6 +1743,17 @@ export default {
                 "before_pictures": "Before Pictures",
                 "during_after_pictures": "During & After Pictures",
                 "upload_jobcard": "Upload Jobcard"
+            },
+            "quotes": {
+                "quotes_num": "Quote Number",
+                "project_num": "Project Number",
+                "quotes_name": "Quotes Name",
+                "travelling_time": "Travelling Time",
+                "travelling_km": "Travelling KM",
+                "vat_amount": "Vat Amount",
+                "net_amount": "Net Amount",
+                "total_amount": "Total Amount",
+                "quotation_date": "Quotation Date"
             }
         },
         "buttons": {
@@ -1774,6 +1795,11 @@ export default {
             },
             "jobcards": {
                 "create": "Create jobcard",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "quotes": {
+                "create": "Create Quotes",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             },
