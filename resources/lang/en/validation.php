@@ -177,6 +177,7 @@ return [
         'published_at'              => 'Publish at',
         'unpublished_at'            => 'Unpublish at',
         'metable_type'              => 'Entity',
+        'rate'                      => 'Rate',
     ],
 
     'jobcards' => [

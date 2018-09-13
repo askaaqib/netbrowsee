@@ -61,4 +61,9 @@ return [
         'save_and_publish' => 'Save and publish',
         'save_as_draft'    => 'Save as draft',
     ],
+    'labour_rates' => [
+        'create'           => 'Create Labour Rate',
+        'save_and_publish' => 'Save and publish',
+        'save_as_draft'    => 'Save as draft',
+    ],
 ];

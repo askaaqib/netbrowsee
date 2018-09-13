@@ -15,6 +15,8 @@ import ProjectList from '../views/ProjectList'
 import ProjectForm from '../views/ProjectForm'
 import ProjectManagerList from '../views/ProjectManagerList'
 import ProjectManagerForm from '../views/ProjectManagerForm'
+import LabourRateList from '../views/LabourRateList'
+import LabourRateForm from '../views/LabourRateForm'
 import FormSettingForm from '../views/FormSettingForm'
 import FormSettingList from '../views/FormSettingList'
 import FormSubmissionShow from '../views/FormSubmissionShow'
@@ -214,6 +216,45 @@ export function createRouter (base, i18n) {
               }
             ]
           },
+          {
+            path: 'labour_rates',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.labour_rates.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'labour_rates',
+                component: LabourRateList,
+                meta: {
+                  label: i18n.t('labels.backend.labour_rates.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'labour_rates_create',
+                component: LabourRateForm,
+                meta: {
+                  label: i18n.t('labels.backend.labour_rates.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'labour_rates_edit',
+                component: LabourRateForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.labour_rates.titles.edit')
+                }
+              }
+            ]
+          },
+
           {
             path: 'form-submissions',
             component: {

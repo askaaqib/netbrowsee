@@ -378,6 +378,40 @@ return [
                 'promote' => 'Promote selected project managers',
             ],
         ],
+
+        'labour_rates' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Labour Rates',
+                'index'       => 'Labour Rates list',
+                'create'      => 'Create Labour Rates',
+                'edit'        => 'Edit Labour Rates',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Labour Rate\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Labour Rate\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Labour Rate\'s title.',
+                'meta_description' => 'Labour Rate\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected labour Rates',
+                'publish' => 'Publish selected labour Rates',
+                'pin'     => 'Pin selected labour Rates',
+                'promote' => 'Promote selected labour Rates',
+            ],
+        ],
     ],
 
     'frontend' => [

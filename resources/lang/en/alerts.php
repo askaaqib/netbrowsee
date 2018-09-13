@@ -79,7 +79,7 @@ return [
             'bulk_promoted'  => 'Selected projects promoted',
         ],
 
-        'project_managers' => [
+        'labour_rates' => [
             'created'        => 'Project Manager created',
             'updated'        => 'Project Manager updated',
             'deleted'        => 'Project Manager deleted',
@@ -88,6 +88,17 @@ return [
             'bulk_pending'   => 'Selected project managers are awaiting moderation',
             'bulk_pinned'    => 'Selected project managers pinned',
             'bulk_promoted'  => 'Selected project managers promoted',
+        ],
+
+        'labour_rates' => [
+            'created'        => 'Labour Rate created',
+            'updated'        => 'Labour Rate updated',
+            'deleted'        => 'Labour Rate deleted',
+            'bulk_destroyed' => 'Selected labour rates deleted',
+            'bulk_published' => 'Selected labour rates published',
+            'bulk_pending'   => 'Selected labour rates are awaiting moderation',
+            'bulk_pinned'    => 'Selected labour rates pinned',
+            'bulk_promoted'  => 'Selected labour rates promoted',
         ],
 
         'actions' => [

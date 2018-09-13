@@ -25,6 +25,12 @@ Route::get('project_managers/{project_manager}/show', 'ProjectManagerController@
 Route::get('project_managers/search', 'ProjectManagerController@search')->name('project_managers.search');
 Route::resource('project_managers', 'ProjectManagerController', ['only' => ['store', 'update', 'destroy'],]);
 
+/* Labour Rates Routes */
+Route::post('labour_rates/batch_action', 'LabourRateController@batchAction')->name('labour_rates.batch_action');
+Route::get('labour_rates/{labour_rate}/show', 'LabourRateController@show')->name('labour_rates.show');
+Route::get('labour_rates/search', 'LabourRateController@search')->name('labour_rates.search');
+Route::resource('labour_rates', 'LabourRateController', ['only' => ['store', 'update', 'destroy'],]);
+
 Route::group(
     ['middleware' => ['can:view form_settings']],
     function () {

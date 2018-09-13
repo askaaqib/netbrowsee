@@ -1152,6 +1152,35 @@ export default {
                         "pin": "Pin selected project managers",
                         "promote": "Promote selected project managers"
                     }
+                },
+                "labour_rates": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Labour Rates",
+                        "index": "Labour Rates list",
+                        "create": "Create Labour Rates",
+                        "edit": "Edit Labour Rates",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of Labour Rate's title by default.",
+                        "meta_description": "If leave empty, description will be that of Labour Rate's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Labour Rate's title.",
+                        "meta_description": "Labour Rate's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected labour Rates",
+                        "publish": "Publish selected labour Rates",
+                        "pin": "Pin selected labour Rates",
+                        "promote": "Promote selected labour Rates"
+                    }
                 }
             },
             "frontend": {
@@ -1272,15 +1301,15 @@ export default {
                     "bulk_pinned": "Selected projects pinned",
                     "bulk_promoted": "Selected projects promoted"
                 },
-                "project_managers": {
-                    "created": "Project Manager created",
-                    "updated": "Project Manager updated",
-                    "deleted": "Project Manager deleted",
-                    "bulk_destroyed": "Selected project managers deleted",
-                    "bulk_published": "Selected project managers published",
-                    "bulk_pending": "Selected project managers are awaiting moderation",
-                    "bulk_pinned": "Selected project managers pinned",
-                    "bulk_promoted": "Selected project managers promoted"
+                "labour_rates": {
+                    "created": "Labour Rate created",
+                    "updated": "Labour Rate updated",
+                    "deleted": "Labour Rate deleted",
+                    "bulk_destroyed": "Selected labour rates deleted",
+                    "bulk_published": "Selected labour rates published",
+                    "bulk_pending": "Selected labour rates are awaiting moderation",
+                    "bulk_pinned": "Selected labour rates pinned",
+                    "bulk_promoted": "Selected labour rates promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -1643,7 +1672,8 @@ export default {
                 "tags": "Tags",
                 "published_at": "Publish at",
                 "unpublished_at": "Unpublish at",
-                "metable_type": "Entity"
+                "metable_type": "Entity",
+                "rate": "Rate"
             },
             "jobcards": {
                 "jobcard_num": "Jobcard Number",
@@ -1715,6 +1745,11 @@ export default {
             },
             "project_managers": {
                 "create": "Create Project Manager",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "labour_rates": {
+                "create": "Create Labour Rate",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             }
