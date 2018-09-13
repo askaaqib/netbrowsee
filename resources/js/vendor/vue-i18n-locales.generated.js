@@ -1340,6 +1340,74 @@ export default {
                         "publication": "Publication options"
                     },
                     "descriptions": {
+<<<<<<< HEAD
+                        "meta_title": "If leave empty, title will be that of Project Manager's title by default.",
+                        "meta_description": "If leave empty, description will be that of Project Manager's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Projects Manager's title.",
+                        "meta_description": "Projects Manager's summary."
+=======
+                        "meta_title": "If leave empty, title will be that of jobcard's title by default.",
+                        "meta_description": "If leave empty, description will be that of jobcard's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Jobcard's title.",
+                        "meta_description": "Jobcard's summary."
+>>>>>>> e79ea08365052e1a434eb0c0d09ec8388e499809
+                    },
+                    "actions": {
+                        "destroy": "Delete selected project managers",
+                        "publish": "Publish selected project managers",
+                        "pin": "Pin selected project managers",
+                        "promote": "Promote selected project managers"
+                    }
+                },
+                "projects": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Projects",
+                        "index": "Project list",
+                        "create": "Create Project",
+                        "edit": "Edit Project",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of project's title by default.",
+                        "meta_description": "If leave empty, description will be that of project's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Projects's title.",
+                        "meta_description": "Projects's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected projects",
+                        "publish": "Publish selected projects",
+                        "pin": "Pin selected projects",
+                        "promote": "Promote selected projects"
+                    }
+                },
+                "project_managers": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Project Managers",
+                        "index": "Project Managers list",
+                        "create": "Create Project Managers",
+                        "edit": "Edit Project Managers",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
                         "meta_title": "If leave empty, title will be that of Project Manager's title by default.",
                         "meta_description": "If leave empty, description will be that of Project Manager's summary by default."
                     },
@@ -1393,12 +1461,97 @@ export default {
             },
             "frontend": []
         },
+<<<<<<< HEAD
         "mails": {
             "layout": {
                 "hello": "Hello !",
                 "regards": "Regards",
                 "trouble": "If you’re having trouble clicking the {action} button, copy and paste the URL below into your web browser :",
                 "all_rights_reserved": "All rights reserved."
+=======
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "User created",
+                    "updated": "User updated",
+                    "deleted": "User deleted",
+                    "bulk_destroyed": "Selected users deleted",
+                    "bulk_enabled": "Selected users enabled",
+                    "bulk_disabled": "Selected users disabled"
+                },
+                "roles": {
+                    "created": "Role created",
+                    "updated": "Role updated",
+                    "deleted": "Role deleted"
+                },
+                "metas": {
+                    "created": "Meta created",
+                    "updated": "Meta updated",
+                    "deleted": "Meta deleted",
+                    "bulk_destroyed": "Selected metas deleted"
+                },
+                "form_submissions": {
+                    "deleted": "Submission deleted",
+                    "bulk_destroyed": "Selected submissions deleted"
+                },
+                "form_settings": {
+                    "created": "Form setting created",
+                    "updated": "Form setting updated",
+                    "deleted": "Form setting deleted"
+                },
+                "redirections": {
+                    "created": "Redirection created",
+                    "updated": "Redirection updated",
+                    "deleted": "Redirection deleted",
+                    "bulk_destroyed": "Selected redirections deleted",
+                    "bulk_enabled": "Selected redirections enabled",
+                    "bulk_disabled": "Selected redirections disabled",
+                    "file_imported": "File successfully imported"
+                },
+                "posts": {
+                    "created": "Post created",
+                    "updated": "Post updated",
+                    "deleted": "Post deleted",
+                    "bulk_destroyed": "Selected posts deleted",
+                    "bulk_published": "Selected posts published",
+                    "bulk_pending": "Selected posts are awaiting moderation",
+                    "bulk_pinned": "Selected posts pinned",
+                    "bulk_promoted": "Selected posts promoted"
+                },
+                "jobcards": {
+                    "created": "Jobcard created",
+                    "updated": "Jobcard updated",
+                    "deleted": "Jobcard deleted",
+                    "bulk_destroyed": "Selected jobcards deleted",
+                    "bulk_published": "Selected jobcards published",
+                    "bulk_pending": "Selected jobcards are awaiting moderation",
+                    "bulk_pinned": "Selected jobcards pinned",
+                    "bulk_promoted": "Selected jobcards promoted"
+                },
+                "projects": {
+                    "created": "Project created",
+                    "updated": "Project updated",
+                    "deleted": "Project deleted",
+                    "bulk_destroyed": "Selected projects deleted",
+                    "bulk_published": "Selected projects published",
+                    "bulk_pending": "Selected projects are awaiting moderation",
+                    "bulk_pinned": "Selected projects pinned",
+                    "bulk_promoted": "Selected projects promoted"
+                },
+                "project_managers": {
+                    "created": "Project Manager created",
+                    "updated": "Project Manager updated",
+                    "deleted": "Project Manager deleted",
+                    "bulk_destroyed": "Selected project managers deleted",
+                    "bulk_published": "Selected project managers published",
+                    "bulk_pending": "Selected project managers are awaiting moderation",
+                    "bulk_pinned": "Selected project managers pinned",
+                    "bulk_promoted": "Selected project managers promoted"
+                },
+                "actions": {
+                    "invalid": "Invalid action"
+                }
+>>>>>>> e79ea08365052e1a434eb0c0d09ec8388e499809
             },
             "password_reset": {
                 "subject": "Password reset",

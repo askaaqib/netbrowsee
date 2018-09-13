@@ -67,7 +67,7 @@ return [
             'bulk_promoted'  => 'Selected jobcards promoted',
         ],
 
-        'jobcards' => [
+        'quotes' => [
           'created'        => 'Quotes created',
           'updated'        => 'Quotes updated',
           'deleted'        => 'Quotes deleted',

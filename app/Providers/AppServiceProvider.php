@@ -12,7 +12,10 @@ use App\Repositories\EloquentTagRepository;
 use App\Repositories\EloquentMetaRepository;
 use App\Repositories\EloquentPostRepository;
 use App\Repositories\EloquentJobcardRepository;
+<<<<<<< HEAD
 use App\Repositories\EloquentQuotesRepository;
+=======
+>>>>>>> e79ea08365052e1a434eb0c0d09ec8388e499809
 use App\Repositories\EloquentProjectRepository;
 use App\Repositories\EloquentProjectManagerRepository;
 use App\Repositories\EloquentRoleRepository;
@@ -115,7 +118,7 @@ class AppServiceProvider extends ServiceProvider
             ProjectRepository::class,
             EloquentProjectRepository::class
         );
-
+        
         $this->app->bind(
           QuotesRepository::class,
           EloquentQuotesRepository::class
