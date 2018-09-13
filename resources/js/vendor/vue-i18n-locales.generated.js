@@ -1,37 +1,160 @@
 export default {
     "ar": {
-        "passwords": {
-            "password": "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل ومطابقة لتأكيدها.",
-            "reset": "لقد تم إعادة تعيين كلمة مرورك!",
-            "sent": "قمنا بإرسال رابط إعادة تعيين كلمة مرورك إلى بريدك الإلكتروني!",
-            "token": "رمز إعادة تعيين كلمة المرور هذا غير صالح.",
-            "user": "لم نستطع إيجاد مستخدم ينتمي إليه هذا البريد الإلكتروني."
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "تم إنشاء المستخدم",
+                    "updated": "تم تعديل المستخدم",
+                    "deleted": "تم حذف المستخدم",
+                    "bulk_destroyed": "تم حذف المستخدمين المختارين",
+                    "bulk_enabled": "تم تفعيل المستخدمين المختارين",
+                    "bulk_disabled": "تم تعطيل المستخدمين المختارين"
+                },
+                "roles": {
+                    "created": "تم إنشاء الدور",
+                    "updated": "تم تعديل الدور",
+                    "deleted": "تم حذف الدور"
+                },
+                "metas": {
+                    "created": "تم إنشاء البيانات الوصفية",
+                    "updated": "تم تعديل البيانات الوصفية",
+                    "deleted": "تم حذف البيانات الوصفية",
+                    "bulk_destroyed": "تم حذف البيانات الوصفية المختارة"
+                },
+                "form_submissions": {
+                    "deleted": "تم حذف المرسَل",
+                    "bulk_destroyed": "تم حذف المرسَلات المختارة"
+                },
+                "form_settings": {
+                    "created": "تم إنشاء إعداد الإستمارة",
+                    "updated": "تم تعديل إعداد الإستمارة",
+                    "deleted": "تم حذف إعداد الإستمارة"
+                },
+                "redirections": {
+                    "created": "تم إنشاء قاعدة التوجيه",
+                    "updated": "تم تعديل قاعدة التوجيه",
+                    "deleted": "تم حذف قاعدة التوجيه",
+                    "bulk_destroyed": "تم حذف قواعد التوجيه المختارة",
+                    "bulk_enabled": "تم تفعيل قواعد التوجيه المختارة",
+                    "bulk_disabled": "تم تعطيل قواعد التوجيه المختارة",
+                    "file_imported": "تم إستيراد الملف بنجاح"
+                },
+                "posts": {
+                    "created": "تم إنشاء المقالة",
+                    "updated": "تم تعديل المقالة",
+                    "deleted": "تم حذف المقالة",
+                    "bulk_destroyed": "تم حذف المقالات المختارة",
+                    "bulk_published": "تم نشر المقالات المختارة",
+                    "bulk_pending": "المقالات المختارة قيد المراجعة",
+                    "bulk_pinned": "تم تثبيت المقالات المختارة",
+                    "bulk_promoted": "تم ترقية المقالات المختارة"
+                },
+                "actions": {
+                    "invalid": "إجراء غير صالح"
+                }
+            },
+            "frontend": []
         },
         "auth": {
             "failed": "البيانات المدخلة لا تتطابق مع قاعدة بياناتنا.",
             "throttle": "تم تجريب عدد كبير من محاولات الدخول. يرجى المحاولة مجدداً بعد {seconds} ثانية."
         },
-        "mails": {
-            "layout": {
-                "hello": "مرحباً !",
-                "regards": "تحيات",
-                "trouble": "إذا واجهت أي مشكلة بالضغط على الزر {action}، يرجى نسخ ولصق الرابط أدناه في المتصفح الخاص بك :",
-                "all_rights_reserved": "جميع الحقوق محفوظة."
+        "buttons": {
+            "cancel": "إلغاء",
+            "save": "حفظ",
+            "close": "إغلاق",
+            "create": "إنشاء",
+            "delete": "حذف",
+            "confirm": "تأكيد",
+            "show": "عرض",
+            "edit": "تعديل",
+            "update": "تحديث",
+            "view": "مشاهدة",
+            "preview": "معاينة",
+            "back": "تراجع",
+            "send": "إرسال",
+            "login-as": "تسجيل الدخول كـ {name}",
+            "apply": "تطبيق",
+            "users": {
+                "create": "إنشاء مستخدم"
             },
-            "password_reset": {
-                "subject": "إعادة تعيين كلمة المرور",
-                "intro": "تم إرسال هذا البريد الإلكتروني لأننا تلقينا طلب إعادة تعيين كلمة المرور للحساب الخاص بك",
-                "action": "إعادة تعيين كلمة المرور",
-                "outro": "إذا لم تطلب إعادة تعيين كلمة المرور، فلا داعي لاتخاذ أي إجراء"
+            "roles": {
+                "create": "إنشاء دور"
             },
-            "contact": {
-                "subject": "رسالة إتصال جديدة",
-                "new_contact": "لقد تلقيت رسالة إتصال جديدة. معلومات الإرسال :"
+            "metas": {
+                "create": "إنشاء معلومة وصفية"
             },
-            "alert": {
-                "subject": "خطأ في [{app_name}]",
-                "message": "لقد واجهت خطأ غير متوقع من طرف الخادم بالرسالة التالية : {message}.",
-                "trace": "تفاصيل التقفي :"
+            "form_settings": {
+                "create": "إنشاء إعداد"
+            },
+            "redirections": {
+                "create": "إنشاء قاعدة توجيه",
+                "import": "إستيراد CSV"
+            },
+            "posts": {
+                "create": "إنشاء مقالة",
+                "save_and_publish": "حفظ ونشر",
+                "save_as_draft": "حفظ كمسودة"
+            }
+        },
+        "exceptions": {
+            "general": "خطأ في الخادم",
+            "unauthorized": "إجراء غير مسموح",
+            "backend": {
+                "users": {
+                    "create": "خطأ في إنشاء المستخدم",
+                    "update": "خطأ في تعديل المستخدم",
+                    "delete": "خطأ في حذف المستخدم",
+                    "first_user_cannot_be_edited": "لا يمكن تعديل معلومات المستخدم كامل الصلاحيات",
+                    "first_user_cannot_be_disabled": "لا يمكن تعطيل حساب المستخدم كامل الصلاحيات",
+                    "first_user_cannot_be_destroyed": "لا يمكن حذف حساب المستخدم كامل الصلاحيات",
+                    "first_user_cannot_be_impersonated": "لا يمكن إنتحال شخصية المستخدم كامل الصلاحيات",
+                    "cannot_set_superior_roles": "لا يمكنك الحصول على أدوار تفوق الدور الخاص بك"
+                },
+                "roles": {
+                    "create": "خطأ في إنشاء الدور",
+                    "update": "خطأ في تعديل الدور",
+                    "delete": "خطأ في حذف الدور"
+                },
+                "metas": {
+                    "create": "خطأ في إنشاء المعلومة الوصفية",
+                    "update": "خطأ في تعديل المعلومة الوصفية",
+                    "delete": "خطأ في حذف المعلومة الوصفية",
+                    "already_exist": " يوجد معلومات وصفية لهذا الرابط منشأ مسبقاً"
+                },
+                "form_submissions": {
+                    "create": "خطأ في إنشاء المرسَل",
+                    "delete": "خطأ في حذف المرسَل"
+                },
+                "form_settings": {
+                    "create": "خطا في إنشاء إعداد الإستمارة",
+                    "update": "خطا في تعديل إعداد الإستمارة",
+                    "delete": "خطا في حذف إعداد الإستمارة",
+                    "already_exist": "يوجد إعداد مرتبط بهذه الإستمارة منشأ مسبقاً"
+                },
+                "redirections": {
+                    "create": "خطأ في إنشاء قاعدة التوجيه",
+                    "update": "خطأ في تعديل قاعدة التوجيه",
+                    "delete": "خطأ في حذف قاعدة التوجيه",
+                    "already_exist": " يوجد قاعدة توجيه لهذا المسار منشأة مسبقاً"
+                },
+                "posts": {
+                    "create": "خطأ في إنشاء المقالة",
+                    "update": "خطأ في تعديل المقالة",
+                    "save": "خطأ في حفظ المقالة",
+                    "delete": "خطأ في حذف المقالة"
+                }
+            },
+            "frontend": {
+                "user": {
+                    "email_taken": "عنوان البريد المدخل موجود مسبقاً.",
+                    "password_mismatch": "لا يوجد تطابق مع كلمة المرور القديمة.",
+                    "delete_account": "خطأ في حذف الحساب.",
+                    "updating_disabled": "تعديل معلومات الحساب غير مفعل."
+                },
+                "auth": {
+                    "registration_disabled": "عملية التسجيل غير مفعلة."
+                }
             }
         },
         "forms": {
@@ -305,18 +428,6 @@ export default {
                 }
             }
         },
-        "pagination": {
-            "previous": "&laquo; السابق",
-            "next": "التالي &raquo;"
-        },
-        "routes": {
-            "home": "الرئيسية",
-            "about": "حول",
-            "contact": "اتصل-بنا",
-            "contact-sent": "تم-الإرسال",
-            "legal-mentions": "إشارات-قانونية",
-            "redactors": "blog\/redactors\/{user}"
-        },
         "logs": {
             "backend": {
                 "users": {
@@ -330,60 +441,39 @@ export default {
             },
             "frontend": []
         },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "تم إنشاء المستخدم",
-                    "updated": "تم تعديل المستخدم",
-                    "deleted": "تم حذف المستخدم",
-                    "bulk_destroyed": "تم حذف المستخدمين المختارين",
-                    "bulk_enabled": "تم تفعيل المستخدمين المختارين",
-                    "bulk_disabled": "تم تعطيل المستخدمين المختارين"
-                },
-                "roles": {
-                    "created": "تم إنشاء الدور",
-                    "updated": "تم تعديل الدور",
-                    "deleted": "تم حذف الدور"
-                },
-                "metas": {
-                    "created": "تم إنشاء البيانات الوصفية",
-                    "updated": "تم تعديل البيانات الوصفية",
-                    "deleted": "تم حذف البيانات الوصفية",
-                    "bulk_destroyed": "تم حذف البيانات الوصفية المختارة"
-                },
-                "form_submissions": {
-                    "deleted": "تم حذف المرسَل",
-                    "bulk_destroyed": "تم حذف المرسَلات المختارة"
-                },
-                "form_settings": {
-                    "created": "تم إنشاء إعداد الإستمارة",
-                    "updated": "تم تعديل إعداد الإستمارة",
-                    "deleted": "تم حذف إعداد الإستمارة"
-                },
-                "redirections": {
-                    "created": "تم إنشاء قاعدة التوجيه",
-                    "updated": "تم تعديل قاعدة التوجيه",
-                    "deleted": "تم حذف قاعدة التوجيه",
-                    "bulk_destroyed": "تم حذف قواعد التوجيه المختارة",
-                    "bulk_enabled": "تم تفعيل قواعد التوجيه المختارة",
-                    "bulk_disabled": "تم تعطيل قواعد التوجيه المختارة",
-                    "file_imported": "تم إستيراد الملف بنجاح"
-                },
-                "posts": {
-                    "created": "تم إنشاء المقالة",
-                    "updated": "تم تعديل المقالة",
-                    "deleted": "تم حذف المقالة",
-                    "bulk_destroyed": "تم حذف المقالات المختارة",
-                    "bulk_published": "تم نشر المقالات المختارة",
-                    "bulk_pending": "المقالات المختارة قيد المراجعة",
-                    "bulk_pinned": "تم تثبيت المقالات المختارة",
-                    "bulk_promoted": "تم ترقية المقالات المختارة"
-                },
-                "actions": {
-                    "invalid": "إجراء غير صالح"
-                }
+        "mails": {
+            "layout": {
+                "hello": "مرحباً !",
+                "regards": "تحيات",
+                "trouble": "إذا واجهت أي مشكلة بالضغط على الزر {action}، يرجى نسخ ولصق الرابط أدناه في المتصفح الخاص بك :",
+                "all_rights_reserved": "جميع الحقوق محفوظة."
             },
-            "frontend": []
+            "password_reset": {
+                "subject": "إعادة تعيين كلمة المرور",
+                "intro": "تم إرسال هذا البريد الإلكتروني لأننا تلقينا طلب إعادة تعيين كلمة المرور للحساب الخاص بك",
+                "action": "إعادة تعيين كلمة المرور",
+                "outro": "إذا لم تطلب إعادة تعيين كلمة المرور، فلا داعي لاتخاذ أي إجراء"
+            },
+            "contact": {
+                "subject": "رسالة إتصال جديدة",
+                "new_contact": "لقد تلقيت رسالة إتصال جديدة. معلومات الإرسال :"
+            },
+            "alert": {
+                "subject": "خطأ في [{app_name}]",
+                "message": "لقد واجهت خطأ غير متوقع من طرف الخادم بالرسالة التالية : {message}.",
+                "trace": "تفاصيل التقفي :"
+            }
+        },
+        "pagination": {
+            "previous": "&laquo; السابق",
+            "next": "التالي &raquo;"
+        },
+        "passwords": {
+            "password": "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل ومطابقة لتأكيدها.",
+            "reset": "لقد تم إعادة تعيين كلمة مرورك!",
+            "sent": "قمنا بإرسال رابط إعادة تعيين كلمة مرورك إلى بريدك الإلكتروني!",
+            "token": "رمز إعادة تعيين كلمة المرور هذا غير صالح.",
+            "user": "لم نستطع إيجاد مستخدم ينتمي إليه هذا البريد الإلكتروني."
         },
         "permissions": {
             "categories": {
@@ -539,65 +629,13 @@ export default {
                 "description": "قادر على أخذ صلاحيات مستخدم أخر، خاص بحالات التجريب."
             }
         },
-        "exceptions": {
-            "general": "خطأ في الخادم",
-            "unauthorized": "إجراء غير مسموح",
-            "backend": {
-                "users": {
-                    "create": "خطأ في إنشاء المستخدم",
-                    "update": "خطأ في تعديل المستخدم",
-                    "delete": "خطأ في حذف المستخدم",
-                    "first_user_cannot_be_edited": "لا يمكن تعديل معلومات المستخدم كامل الصلاحيات",
-                    "first_user_cannot_be_disabled": "لا يمكن تعطيل حساب المستخدم كامل الصلاحيات",
-                    "first_user_cannot_be_destroyed": "لا يمكن حذف حساب المستخدم كامل الصلاحيات",
-                    "first_user_cannot_be_impersonated": "لا يمكن إنتحال شخصية المستخدم كامل الصلاحيات",
-                    "cannot_set_superior_roles": "لا يمكنك الحصول على أدوار تفوق الدور الخاص بك"
-                },
-                "roles": {
-                    "create": "خطأ في إنشاء الدور",
-                    "update": "خطأ في تعديل الدور",
-                    "delete": "خطأ في حذف الدور"
-                },
-                "metas": {
-                    "create": "خطأ في إنشاء المعلومة الوصفية",
-                    "update": "خطأ في تعديل المعلومة الوصفية",
-                    "delete": "خطأ في حذف المعلومة الوصفية",
-                    "already_exist": " يوجد معلومات وصفية لهذا الرابط منشأ مسبقاً"
-                },
-                "form_submissions": {
-                    "create": "خطأ في إنشاء المرسَل",
-                    "delete": "خطأ في حذف المرسَل"
-                },
-                "form_settings": {
-                    "create": "خطا في إنشاء إعداد الإستمارة",
-                    "update": "خطا في تعديل إعداد الإستمارة",
-                    "delete": "خطا في حذف إعداد الإستمارة",
-                    "already_exist": "يوجد إعداد مرتبط بهذه الإستمارة منشأ مسبقاً"
-                },
-                "redirections": {
-                    "create": "خطأ في إنشاء قاعدة التوجيه",
-                    "update": "خطأ في تعديل قاعدة التوجيه",
-                    "delete": "خطأ في حذف قاعدة التوجيه",
-                    "already_exist": " يوجد قاعدة توجيه لهذا المسار منشأة مسبقاً"
-                },
-                "posts": {
-                    "create": "خطأ في إنشاء المقالة",
-                    "update": "خطأ في تعديل المقالة",
-                    "save": "خطأ في حفظ المقالة",
-                    "delete": "خطأ في حذف المقالة"
-                }
-            },
-            "frontend": {
-                "user": {
-                    "email_taken": "عنوان البريد المدخل موجود مسبقاً.",
-                    "password_mismatch": "لا يوجد تطابق مع كلمة المرور القديمة.",
-                    "delete_account": "خطأ في حذف الحساب.",
-                    "updating_disabled": "تعديل معلومات الحساب غير مفعل."
-                },
-                "auth": {
-                    "registration_disabled": "عملية التسجيل غير مفعلة."
-                }
-            }
+        "routes": {
+            "home": "الرئيسية",
+            "about": "حول",
+            "contact": "اتصل-بنا",
+            "contact-sent": "تم-الإرسال",
+            "legal-mentions": "إشارات-قانونية",
+            "redactors": "blog\/redactors\/{user}"
         },
         "validation": {
             "accepted": "يجب قبول الحقل {attribute}.",
@@ -741,53 +779,73 @@ export default {
                 "unpublished_at": "إيقاف النشر في",
                 "metable_type": "كيان"
             }
-        },
-        "buttons": {
-            "cancel": "إلغاء",
-            "save": "حفظ",
-            "close": "إغلاق",
-            "create": "إنشاء",
-            "delete": "حذف",
-            "confirm": "تأكيد",
-            "show": "عرض",
-            "edit": "تعديل",
-            "update": "تحديث",
-            "view": "مشاهدة",
-            "preview": "معاينة",
-            "back": "تراجع",
-            "send": "إرسال",
-            "login-as": "تسجيل الدخول كـ {name}",
-            "apply": "تطبيق",
-            "users": {
-                "create": "إنشاء مستخدم"
-            },
-            "roles": {
-                "create": "إنشاء دور"
-            },
-            "metas": {
-                "create": "إنشاء معلومة وصفية"
-            },
-            "form_settings": {
-                "create": "إنشاء إعداد"
-            },
-            "redirections": {
-                "create": "إنشاء قاعدة توجيه",
-                "import": "إستيراد CSV"
-            },
-            "posts": {
-                "create": "إنشاء مقالة",
-                "save_and_publish": "حفظ ونشر",
-                "save_as_draft": "حفظ كمسودة"
-            }
         }
     },
     "en": {
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "User created",
+                    "updated": "User updated",
+                    "deleted": "User deleted",
+                    "bulk_destroyed": "Selected users deleted",
+                    "bulk_enabled": "Selected users enabled",
+                    "bulk_disabled": "Selected users disabled"
+                },
+                "roles": {
+                    "created": "Role created",
+                    "updated": "Role updated",
+                    "deleted": "Role deleted"
+                },
+                "metas": {
+                    "created": "Meta created",
+                    "updated": "Meta updated",
+                    "deleted": "Meta deleted",
+                    "bulk_destroyed": "Selected metas deleted"
+                },
+                "form_submissions": {
+                    "deleted": "Submission deleted",
+                    "bulk_destroyed": "Selected submissions deleted"
+                },
+                "form_settings": {
+                    "created": "Form setting created",
+                    "updated": "Form setting updated",
+                    "deleted": "Form setting deleted"
+                },
+                "redirections": {
+                    "created": "Redirection created",
+                    "updated": "Redirection updated",
+                    "deleted": "Redirection deleted",
+                    "bulk_destroyed": "Selected redirections deleted",
+                    "bulk_enabled": "Selected redirections enabled",
+                    "bulk_disabled": "Selected redirections disabled",
+                    "file_imported": "File successfully imported"
+                },
+                "posts": {
+                    "created": "Post created",
+                    "updated": "Post updated",
+                    "deleted": "Post deleted",
+                    "bulk_destroyed": "Selected posts deleted",
+                    "bulk_published": "Selected posts published",
+                    "bulk_pending": "Selected posts are awaiting moderation",
+                    "bulk_pinned": "Selected posts pinned",
+                    "bulk_promoted": "Selected posts promoted"
+                },
+                "jobcards": {
+                    "created": "Quotes created",
+                    "updated": "Quotes updated",
+                    "deleted": "Quotes deleted",
+                    "bulk_destroyed": "Selected Quotes deleted",
+                    "bulk_published": "Selected Quotes published",
+                    "bulk_pending": "Selected Quotes are awaiting moderation",
+                    "bulk_pinned": "Selected Quotes pinned",
+                    "bulk_promoted": "Selected Quotes promoted"
+                },
+                "actions": {
+                    "invalid": "Invalid action"
+                }
+            },
+            "frontend": []
         },
         "auth": {
             "failed": "These credentials do not match our records.",
@@ -796,27 +854,112 @@ export default {
                 "unacceptable": "{provider} is not an acceptable login type."
             }
         },
-        "mails": {
-            "layout": {
-                "hello": "Hello !",
-                "regards": "Regards",
-                "trouble": "If you’re having trouble clicking the {action} button, copy and paste the URL below into your web browser :",
-                "all_rights_reserved": "All rights reserved."
+        "buttons": {
+            "cancel": "Cancel",
+            "save": "Save",
+            "close": "Close",
+            "create": "Create",
+            "delete": "Delete",
+            "confirm": "Confirm",
+            "show": "Show",
+            "edit": "Edit",
+            "update": "Update",
+            "view": "View",
+            "preview": "Preview",
+            "back": "Back",
+            "send": "Send",
+            "login-as": "Login as {name}",
+            "apply": "Apply",
+            "users": {
+                "create": "Create user"
             },
-            "password_reset": {
-                "subject": "Password reset",
-                "intro": "You are receiving this email because we received a password reset request for your account.",
-                "action": "Reset Password",
-                "outro": "If you did not request a password reset, no further action is required."
+            "roles": {
+                "create": "Create role"
             },
-            "contact": {
-                "subject": "New contact message",
-                "new_contact": "You've got a new contact message. Submission detail :"
+            "metas": {
+                "create": "Create meta"
             },
-            "alert": {
-                "subject": "[{app_name}] Exception error",
-                "message": "You've got unexpected server exception error which message is : {message}.",
-                "trace": "All trace detail :"
+            "form_settings": {
+                "create": "Create setting"
+            },
+            "redirections": {
+                "create": "Create redirection",
+                "import": "Import CSV"
+            },
+            "posts": {
+                "create": "Create post",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "jobcards": {
+                "create": "Create jobcard",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "quotes": {
+                "create": "Create Quotes",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            }
+        },
+        "exceptions": {
+            "general": "Server exception",
+            "unauthorized": "Action not allowed",
+            "backend": {
+                "users": {
+                    "create": "Error on user creation",
+                    "update": "Error on user updating",
+                    "delete": "Error on user deletion",
+                    "first_user_cannot_be_edited": "You cannot edit super admin user",
+                    "first_user_cannot_be_disabled": "Super admin user cannot be disabled",
+                    "first_user_cannot_be_destroyed": "Super admin user cannot be deleted",
+                    "first_user_cannot_be_impersonated": "Super admin user cannot be impersonated",
+                    "cannot_set_superior_roles": "You cannot attribute roles superior to yours"
+                },
+                "roles": {
+                    "create": "Error on role creation",
+                    "update": "Error on role updating",
+                    "delete": "Error on role deletion"
+                },
+                "metas": {
+                    "create": "Error on meta creation",
+                    "update": "Error on meta updating",
+                    "delete": "Error on meta deletion",
+                    "already_exist": "There is already a meta for this locale route"
+                },
+                "form_submissions": {
+                    "create": "Error on submission creation",
+                    "delete": "Error on submission deletion"
+                },
+                "form_settings": {
+                    "create": "Error on form setting creation",
+                    "update": "Error on form setting updating",
+                    "delete": "Error on form setting deletion",
+                    "already_exist": "There is already a setting linked to this form"
+                },
+                "redirections": {
+                    "create": "Error on redirection creation",
+                    "update": "Error on redirection updating",
+                    "delete": "Error on redirection deletion",
+                    "already_exist": "There is already a redirection for this path"
+                },
+                "posts": {
+                    "create": "Error on post creation",
+                    "update": "Error on post updating",
+                    "save": "Error on post saving",
+                    "delete": "Error on post deletion"
+                }
+            },
+            "frontend": {
+                "user": {
+                    "email_taken": "That e-mail address is already taken.",
+                    "password_mismatch": "That is not your old password.",
+                    "delete_account": "Error on account deletion.",
+                    "updating_disabled": "Account editing is disabled."
+                },
+                "auth": {
+                    "registration_disabled": "Registration is disabled."
+                }
             }
         },
         "forms": {
@@ -1094,6 +1237,35 @@ export default {
                         "pin": "Pin selected jobcards",
                         "promote": "Promote selected jobcards"
                     }
+                },
+                "quotes": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Quotes",
+                        "index": "Quotes list",
+                        "create": "Create Quotes",
+                        "edit": "Edit Quotes",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of article' title by default.",
+                        "meta_description": "If leave empty, description will be that of article's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Article's title.",
+                        "meta_description": "Article's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected Quotes",
+                        "publish": "Publish selected Quotes",
+                        "pin": "Pin selected Quotes",
+                        "promote": "Promote selected Quotes"
+                    }
                 }
             },
             "frontend": {
@@ -1120,18 +1292,6 @@ export default {
                 }
             }
         },
-        "pagination": {
-            "previous": "&laquo; Previous",
-            "next": "Next &raquo;"
-        },
-        "routes": {
-            "home": "home",
-            "about": "about",
-            "contact": "contact",
-            "contact-sent": "contact-sent",
-            "legal-mentions": "legal-mentions",
-            "redactors": "blog\/redactors\/{user}"
-        },
         "logs": {
             "backend": {
                 "users": {
@@ -1145,70 +1305,39 @@ export default {
             },
             "frontend": []
         },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "User created",
-                    "updated": "User updated",
-                    "deleted": "User deleted",
-                    "bulk_destroyed": "Selected users deleted",
-                    "bulk_enabled": "Selected users enabled",
-                    "bulk_disabled": "Selected users disabled"
-                },
-                "roles": {
-                    "created": "Role created",
-                    "updated": "Role updated",
-                    "deleted": "Role deleted"
-                },
-                "metas": {
-                    "created": "Meta created",
-                    "updated": "Meta updated",
-                    "deleted": "Meta deleted",
-                    "bulk_destroyed": "Selected metas deleted"
-                },
-                "form_submissions": {
-                    "deleted": "Submission deleted",
-                    "bulk_destroyed": "Selected submissions deleted"
-                },
-                "form_settings": {
-                    "created": "Form setting created",
-                    "updated": "Form setting updated",
-                    "deleted": "Form setting deleted"
-                },
-                "redirections": {
-                    "created": "Redirection created",
-                    "updated": "Redirection updated",
-                    "deleted": "Redirection deleted",
-                    "bulk_destroyed": "Selected redirections deleted",
-                    "bulk_enabled": "Selected redirections enabled",
-                    "bulk_disabled": "Selected redirections disabled",
-                    "file_imported": "File successfully imported"
-                },
-                "posts": {
-                    "created": "Post created",
-                    "updated": "Post updated",
-                    "deleted": "Post deleted",
-                    "bulk_destroyed": "Selected posts deleted",
-                    "bulk_published": "Selected posts published",
-                    "bulk_pending": "Selected posts are awaiting moderation",
-                    "bulk_pinned": "Selected posts pinned",
-                    "bulk_promoted": "Selected posts promoted"
-                },
-                "jobcards": {
-                    "created": "Jobcard created",
-                    "updated": "Jobcard updated",
-                    "deleted": "Jobcard deleted",
-                    "bulk_destroyed": "Selected jobcards deleted",
-                    "bulk_published": "Selected jobcards published",
-                    "bulk_pending": "Selected jobcards are awaiting moderation",
-                    "bulk_pinned": "Selected jobcards pinned",
-                    "bulk_promoted": "Selected jobcards promoted"
-                },
-                "actions": {
-                    "invalid": "Invalid action"
-                }
+        "mails": {
+            "layout": {
+                "hello": "Hello !",
+                "regards": "Regards",
+                "trouble": "If you’re having trouble clicking the {action} button, copy and paste the URL below into your web browser :",
+                "all_rights_reserved": "All rights reserved."
             },
-            "frontend": []
+            "password_reset": {
+                "subject": "Password reset",
+                "intro": "You are receiving this email because we received a password reset request for your account.",
+                "action": "Reset Password",
+                "outro": "If you did not request a password reset, no further action is required."
+            },
+            "contact": {
+                "subject": "New contact message",
+                "new_contact": "You've got a new contact message. Submission detail :"
+            },
+            "alert": {
+                "subject": "[{app_name}] Exception error",
+                "message": "You've got unexpected server exception error which message is : {message}.",
+                "trace": "All trace detail :"
+            }
+        },
+        "pagination": {
+            "previous": "&laquo; Previous",
+            "next": "Next &raquo;"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
         },
         "permissions": {
             "categories": {
@@ -1364,65 +1493,13 @@ export default {
                 "description": "Can take ownership of others user identities. Useful for tests."
             }
         },
-        "exceptions": {
-            "general": "Server exception",
-            "unauthorized": "Action not allowed",
-            "backend": {
-                "users": {
-                    "create": "Error on user creation",
-                    "update": "Error on user updating",
-                    "delete": "Error on user deletion",
-                    "first_user_cannot_be_edited": "You cannot edit super admin user",
-                    "first_user_cannot_be_disabled": "Super admin user cannot be disabled",
-                    "first_user_cannot_be_destroyed": "Super admin user cannot be deleted",
-                    "first_user_cannot_be_impersonated": "Super admin user cannot be impersonated",
-                    "cannot_set_superior_roles": "You cannot attribute roles superior to yours"
-                },
-                "roles": {
-                    "create": "Error on role creation",
-                    "update": "Error on role updating",
-                    "delete": "Error on role deletion"
-                },
-                "metas": {
-                    "create": "Error on meta creation",
-                    "update": "Error on meta updating",
-                    "delete": "Error on meta deletion",
-                    "already_exist": "There is already a meta for this locale route"
-                },
-                "form_submissions": {
-                    "create": "Error on submission creation",
-                    "delete": "Error on submission deletion"
-                },
-                "form_settings": {
-                    "create": "Error on form setting creation",
-                    "update": "Error on form setting updating",
-                    "delete": "Error on form setting deletion",
-                    "already_exist": "There is already a setting linked to this form"
-                },
-                "redirections": {
-                    "create": "Error on redirection creation",
-                    "update": "Error on redirection updating",
-                    "delete": "Error on redirection deletion",
-                    "already_exist": "There is already a redirection for this path"
-                },
-                "posts": {
-                    "create": "Error on post creation",
-                    "update": "Error on post updating",
-                    "save": "Error on post saving",
-                    "delete": "Error on post deletion"
-                }
-            },
-            "frontend": {
-                "user": {
-                    "email_taken": "That e-mail address is already taken.",
-                    "password_mismatch": "That is not your old password.",
-                    "delete_account": "Error on account deletion.",
-                    "updating_disabled": "Account editing is disabled."
-                },
-                "auth": {
-                    "registration_disabled": "Registration is disabled."
-                }
-            }
+        "routes": {
+            "home": "home",
+            "about": "about",
+            "contact": "contact",
+            "contact-sent": "contact-sent",
+            "legal-mentions": "legal-mentions",
+            "redactors": "blog\/redactors\/{user}"
         },
         "validation": {
             "accepted": "The {attribute} must be accepted.",
@@ -1586,85 +1663,176 @@ export default {
                 "before_pictures": "Before Pictures",
                 "during_after_pictures": "During & After Pictures",
                 "upload_jobcard": "Upload Jobcard"
-            }
-        },
-        "buttons": {
-            "cancel": "Cancel",
-            "save": "Save",
-            "close": "Close",
-            "create": "Create",
-            "delete": "Delete",
-            "confirm": "Confirm",
-            "show": "Show",
-            "edit": "Edit",
-            "update": "Update",
-            "view": "View",
-            "preview": "Preview",
-            "back": "Back",
-            "send": "Send",
-            "login-as": "Login as {name}",
-            "apply": "Apply",
-            "users": {
-                "create": "Create user"
             },
-            "roles": {
-                "create": "Create role"
-            },
-            "metas": {
-                "create": "Create meta"
-            },
-            "form_settings": {
-                "create": "Create setting"
-            },
-            "redirections": {
-                "create": "Create redirection",
-                "import": "Import CSV"
-            },
-            "posts": {
-                "create": "Create post",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "jobcards": {
-                "create": "Create jobcard",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
+            "quotes": {
+                "quotes_num": "Quote Number",
+                "project_num": "Project Number",
+                "quotes_name": "Quotes Name",
+                "travelling_time": "Travelling Time",
+                "travelling_km": "Travelling KM",
+                "vat_amount": "Vat Amount",
+                "net_amount": "Net Amount",
+                "total_amount": "Total Amount",
+                "quotation_date": "Quotation Date"
             }
         }
     },
     "es": {
-        "passwords": {
-            "password": "Las contraseñas deben coincidir y contener al menos 6 caracteres",
-            "reset": "¡Tu contraseña ha sido restablecida!",
-            "sent": "¡Te hemos enviado por correo el enlace para restablecer tu contraseña!",
-            "token": "El token de recuperación de contraseña es inválido.",
-            "user": "No podemos encontrar ningún usuario con ese correo electrónico."
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "Usuario creado",
+                    "updated": "Usuario actualizado",
+                    "deleted": "Usuario eliminado",
+                    "bulk_destroyed": "Usuarios seleccionados eliminados",
+                    "bulk_enabled": "Usuarios seleccionados habilitados",
+                    "bulk_disabled": "Usuarios seleccionados deshabilitados"
+                },
+                "roles": {
+                    "created": "Rol creado",
+                    "updated": "Rol actualizado",
+                    "deleted": "Rol eliminado"
+                },
+                "metas": {
+                    "created": "Meta creado",
+                    "updated": "Meta actualizado",
+                    "deleted": "Meta eliminado",
+                    "bulk_destroyed": "Metas seleccionadas eliminadas"
+                },
+                "form_submissions": {
+                    "deleted": "Solicitud eliminada",
+                    "bulk_destroyed": "Solicitudes seleccionadas eliminadas"
+                },
+                "form_settings": {
+                    "created": "Configuración de formulario creada",
+                    "updated": "Configuración de formulario actualizada",
+                    "deleted": "Configuración de formulario eliminada"
+                },
+                "redirections": {
+                    "created": "Redirección creada",
+                    "updated": "Redirección actualizada",
+                    "deleted": "Redirección eliminada",
+                    "bulk_destroyed": "Redirecciones seleccionadas eliminadas",
+                    "bulk_enabled": "Redirecciones seleccionadas habilitadas",
+                    "bulk_disabled": "Redirecciones seleccionadas deshabilitadas",
+                    "file_imported": "Archivo importado con éxito"
+                },
+                "posts": {
+                    "created": "Articulo creado",
+                    "updated": "Articulo actualizado",
+                    "deleted": "Articulo eliminado",
+                    "bulk_destroyed": "Artículos seleccionados eliminados",
+                    "bulk_published": "Artículos seleccionados publicados",
+                    "bulk_pending": "Los artículos seleccionados esperan moderación",
+                    "bulk_pinned": "Los artículos seleccionados fijadas",
+                    "bulk_promoted": "Los artículos seleccionados promocionados"
+                },
+                "actions": {
+                    "invalid": "Acción no válida"
+                }
+            },
+            "frontend": []
         },
         "auth": {
             "failed": "Estas credenciales no coinciden con nuestros registros.",
             "throttle": "Demasiados intentos de inicio de sesión. "
         },
-        "mails": {
-            "layout": {
-                "hello": "Hola !",
-                "regards": "Saludos",
-                "trouble": "Si tiene problemas para hacer clic en botón {action}, copie y pegue la siguiente URL en su navegador web :",
-                "all_rights_reserved": "Todos los derechos reservados."
+        "buttons": {
+            "cancel": "Cancelar",
+            "save": "Salvar",
+            "close": "Cerrar",
+            "create": "Crear",
+            "delete": "Borrar",
+            "confirm": "Confirmar",
+            "show": "Mostrar",
+            "edit": "Editar",
+            "update": "Actualizar",
+            "view": "Ver",
+            "preview": "Previsualizar",
+            "back": "Atras",
+            "send": "Enviar",
+            "login-as": "Iniciar como {name}",
+            "apply": "Aplicar",
+            "users": {
+                "create": "Crear usuario"
             },
-            "password_reset": {
-                "subject": "Restablecimiento de contraseña",
-                "intro": "Recibió este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.",
-                "action": "Restablecer la contraseña",
-                "outro": "Si no solicitó un restablecimiento de contraseña, no se requiere ninguna acción adicional."
+            "roles": {
+                "create": "Crear rol"
             },
-            "contact": {
-                "subject": "Nuevo mensaje de contacto",
-                "new_contact": "Tienes un nuevo mensaje de contacto. Detalle de presentación :"
+            "metas": {
+                "create": "Crear meta"
             },
-            "alert": {
-                "subject": "[{app_name}] Error de excepción",
-                "message": "Tienes un error de excepción del servidor inesperado, que es el mensaje : {message}.",
-                "trace": "Todos los detalles de rastreo :"
+            "form_settings": {
+                "create": "Crear configuración"
+            },
+            "redirections": {
+                "create": "Crear redirección",
+                "import": "Importar CSV"
+            },
+            "posts": {
+                "create": "Crear publicación",
+                "save_and_publish": "Guardar y publicar",
+                "save_as_draft": "Guardar como borrador"
+            }
+        },
+        "exceptions": {
+            "general": "Excepción del servidor",
+            "unauthorized": "Acción no permitida",
+            "backend": {
+                "users": {
+                    "create": "Error en la creación del usuario",
+                    "update": "Error en la actualización del usuario",
+                    "delete": "Error en la eliminación del usuario",
+                    "first_user_cannot_be_edited": "No puedes editar el usuario súper administrador",
+                    "first_user_cannot_be_disabled": "El usuario súper administrador no puede ser deshabilitado",
+                    "first_user_cannot_be_destroyed": "El usuario súper administrador no puede ser eliminado",
+                    "first_user_cannot_be_impersonated": "El usuario Super administrador no puede ser suplantado",
+                    "cannot_set_superior_roles": "No puedes atribuir roles superiores a los tuyos"
+                },
+                "roles": {
+                    "create": "Error en la creación de roles",
+                    "update": "Error en la actualización de roles",
+                    "delete": "Error en la eliminación de roles"
+                },
+                "metas": {
+                    "create": "Error en la creación de la meta",
+                    "update": "Error en la actualización de la meta",
+                    "delete": "Error en la eliminación de la meta",
+                    "already_exist": "Ya hay una meta para esta ruta de configuración regional"
+                },
+                "form_submissions": {
+                    "create": "Error en la creación de la solicitud",
+                    "delete": "Error en la eliminación de la solicitud"
+                },
+                "form_settings": {
+                    "create": "Error en la creación de configuración de formulario",
+                    "update": "Error en la actualización de configuración del formulario",
+                    "delete": "Error en la eliminación de configuración del formulario",
+                    "already_exist": "Ya hay una configuración vinculada a este formulario"
+                },
+                "redirections": {
+                    "create": "Error en la creación de la redirección",
+                    "update": "Error en la actualización de la redirección",
+                    "delete": "Error en la eliminación de la redirección",
+                    "already_exist": "Ya hay una redirección para este camino"
+                },
+                "posts": {
+                    "create": "Error en la creación del articulo",
+                    "update": "Error en la actualización del articulo",
+                    "save": "Error en la salvado del articulo",
+                    "delete": "Error en la eliminación del articulo"
+                }
+            },
+            "frontend": {
+                "user": {
+                    "email_taken": "Esa dirección de correo electrónico ya está es uso.",
+                    "password_mismatch": "Esa no es tu contraseña anterior.",
+                    "delete_account": "Error al eliminar la cuenta.",
+                    "updating_disabled": "La edición de cuenta está deshabilitada."
+                },
+                "auth": {
+                    "registration_disabled": "El registro está desactivado."
+                }
             }
         },
         "forms": {
@@ -1939,18 +2107,6 @@ export default {
                 }
             }
         },
-        "pagination": {
-            "previous": "&laquo; Anterior",
-            "next": "Siguiente &raquo;"
-        },
-        "routes": {
-            "home": "inicio",
-            "about": "acerca",
-            "contact": "contacto",
-            "contact-sent": "envio-contacto",
-            "legal-mentions": "menciones-legales",
-            "redactors": "blog\/redactores\/{user}"
-        },
         "logs": {
             "backend": {
                 "users": {
@@ -1964,60 +2120,39 @@ export default {
             },
             "frontend": []
         },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "Usuario creado",
-                    "updated": "Usuario actualizado",
-                    "deleted": "Usuario eliminado",
-                    "bulk_destroyed": "Usuarios seleccionados eliminados",
-                    "bulk_enabled": "Usuarios seleccionados habilitados",
-                    "bulk_disabled": "Usuarios seleccionados deshabilitados"
-                },
-                "roles": {
-                    "created": "Rol creado",
-                    "updated": "Rol actualizado",
-                    "deleted": "Rol eliminado"
-                },
-                "metas": {
-                    "created": "Meta creado",
-                    "updated": "Meta actualizado",
-                    "deleted": "Meta eliminado",
-                    "bulk_destroyed": "Metas seleccionadas eliminadas"
-                },
-                "form_submissions": {
-                    "deleted": "Solicitud eliminada",
-                    "bulk_destroyed": "Solicitudes seleccionadas eliminadas"
-                },
-                "form_settings": {
-                    "created": "Configuración de formulario creada",
-                    "updated": "Configuración de formulario actualizada",
-                    "deleted": "Configuración de formulario eliminada"
-                },
-                "redirections": {
-                    "created": "Redirección creada",
-                    "updated": "Redirección actualizada",
-                    "deleted": "Redirección eliminada",
-                    "bulk_destroyed": "Redirecciones seleccionadas eliminadas",
-                    "bulk_enabled": "Redirecciones seleccionadas habilitadas",
-                    "bulk_disabled": "Redirecciones seleccionadas deshabilitadas",
-                    "file_imported": "Archivo importado con éxito"
-                },
-                "posts": {
-                    "created": "Articulo creado",
-                    "updated": "Articulo actualizado",
-                    "deleted": "Articulo eliminado",
-                    "bulk_destroyed": "Artículos seleccionados eliminados",
-                    "bulk_published": "Artículos seleccionados publicados",
-                    "bulk_pending": "Los artículos seleccionados esperan moderación",
-                    "bulk_pinned": "Los artículos seleccionados fijadas",
-                    "bulk_promoted": "Los artículos seleccionados promocionados"
-                },
-                "actions": {
-                    "invalid": "Acción no válida"
-                }
+        "mails": {
+            "layout": {
+                "hello": "Hola !",
+                "regards": "Saludos",
+                "trouble": "Si tiene problemas para hacer clic en botón {action}, copie y pegue la siguiente URL en su navegador web :",
+                "all_rights_reserved": "Todos los derechos reservados."
             },
-            "frontend": []
+            "password_reset": {
+                "subject": "Restablecimiento de contraseña",
+                "intro": "Recibió este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.",
+                "action": "Restablecer la contraseña",
+                "outro": "Si no solicitó un restablecimiento de contraseña, no se requiere ninguna acción adicional."
+            },
+            "contact": {
+                "subject": "Nuevo mensaje de contacto",
+                "new_contact": "Tienes un nuevo mensaje de contacto. Detalle de presentación :"
+            },
+            "alert": {
+                "subject": "[{app_name}] Error de excepción",
+                "message": "Tienes un error de excepción del servidor inesperado, que es el mensaje : {message}.",
+                "trace": "Todos los detalles de rastreo :"
+            }
+        },
+        "pagination": {
+            "previous": "&laquo; Anterior",
+            "next": "Siguiente &raquo;"
+        },
+        "passwords": {
+            "password": "Las contraseñas deben coincidir y contener al menos 6 caracteres",
+            "reset": "¡Tu contraseña ha sido restablecida!",
+            "sent": "¡Te hemos enviado por correo el enlace para restablecer tu contraseña!",
+            "token": "El token de recuperación de contraseña es inválido.",
+            "user": "No podemos encontrar ningún usuario con ese correo electrónico."
         },
         "permissions": {
             "categories": {
@@ -2173,65 +2308,13 @@ export default {
                 "description": "Puede tomar posesión de otras identidades de usuario. Útil para las pruebas."
             }
         },
-        "exceptions": {
-            "general": "Excepción del servidor",
-            "unauthorized": "Acción no permitida",
-            "backend": {
-                "users": {
-                    "create": "Error en la creación del usuario",
-                    "update": "Error en la actualización del usuario",
-                    "delete": "Error en la eliminación del usuario",
-                    "first_user_cannot_be_edited": "No puedes editar el usuario súper administrador",
-                    "first_user_cannot_be_disabled": "El usuario súper administrador no puede ser deshabilitado",
-                    "first_user_cannot_be_destroyed": "El usuario súper administrador no puede ser eliminado",
-                    "first_user_cannot_be_impersonated": "El usuario Super administrador no puede ser suplantado",
-                    "cannot_set_superior_roles": "No puedes atribuir roles superiores a los tuyos"
-                },
-                "roles": {
-                    "create": "Error en la creación de roles",
-                    "update": "Error en la actualización de roles",
-                    "delete": "Error en la eliminación de roles"
-                },
-                "metas": {
-                    "create": "Error en la creación de la meta",
-                    "update": "Error en la actualización de la meta",
-                    "delete": "Error en la eliminación de la meta",
-                    "already_exist": "Ya hay una meta para esta ruta de configuración regional"
-                },
-                "form_submissions": {
-                    "create": "Error en la creación de la solicitud",
-                    "delete": "Error en la eliminación de la solicitud"
-                },
-                "form_settings": {
-                    "create": "Error en la creación de configuración de formulario",
-                    "update": "Error en la actualización de configuración del formulario",
-                    "delete": "Error en la eliminación de configuración del formulario",
-                    "already_exist": "Ya hay una configuración vinculada a este formulario"
-                },
-                "redirections": {
-                    "create": "Error en la creación de la redirección",
-                    "update": "Error en la actualización de la redirección",
-                    "delete": "Error en la eliminación de la redirección",
-                    "already_exist": "Ya hay una redirección para este camino"
-                },
-                "posts": {
-                    "create": "Error en la creación del articulo",
-                    "update": "Error en la actualización del articulo",
-                    "save": "Error en la salvado del articulo",
-                    "delete": "Error en la eliminación del articulo"
-                }
-            },
-            "frontend": {
-                "user": {
-                    "email_taken": "Esa dirección de correo electrónico ya está es uso.",
-                    "password_mismatch": "Esa no es tu contraseña anterior.",
-                    "delete_account": "Error al eliminar la cuenta.",
-                    "updating_disabled": "La edición de cuenta está deshabilitada."
-                },
-                "auth": {
-                    "registration_disabled": "El registro está desactivado."
-                }
-            }
+        "routes": {
+            "home": "inicio",
+            "about": "acerca",
+            "contact": "contacto",
+            "contact-sent": "envio-contacto",
+            "legal-mentions": "menciones-legales",
+            "redactors": "blog\/redactores\/{user}"
         },
         "validation": {
             "accepted": "{attribute} debe ser aceptado.",
@@ -2376,53 +2459,63 @@ export default {
                 "unpublished_at": "Anular publicación en",
                 "metable_type": "Entidad"
             }
-        },
-        "buttons": {
-            "cancel": "Cancelar",
-            "save": "Salvar",
-            "close": "Cerrar",
-            "create": "Crear",
-            "delete": "Borrar",
-            "confirm": "Confirmar",
-            "show": "Mostrar",
-            "edit": "Editar",
-            "update": "Actualizar",
-            "view": "Ver",
-            "preview": "Previsualizar",
-            "back": "Atras",
-            "send": "Enviar",
-            "login-as": "Iniciar como {name}",
-            "apply": "Aplicar",
-            "users": {
-                "create": "Crear usuario"
-            },
-            "roles": {
-                "create": "Crear rol"
-            },
-            "metas": {
-                "create": "Crear meta"
-            },
-            "form_settings": {
-                "create": "Crear configuración"
-            },
-            "redirections": {
-                "create": "Crear redirección",
-                "import": "Importar CSV"
-            },
-            "posts": {
-                "create": "Crear publicación",
-                "save_and_publish": "Guardar y publicar",
-                "save_as_draft": "Guardar como borrador"
-            }
         }
     },
     "fr": {
-        "passwords": {
-            "password": "Les mots de passe doivent contenir au moins six caractères et doivent être identiques.",
-            "reset": "Votre mot de passe a été réinitialisé !",
-            "sent": "Nous vous avons envoyé par courriel le lien de réinitialisation du mot de passe !",
-            "token": "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
-            "user": "Aucun utilisateur n'a été trouvé avec cette adresse e-mail."
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "Utilisateur créé",
+                    "updated": "Utilisateur mis à jour",
+                    "deleted": "Utilisateur supprimé",
+                    "bulk_destroyed": "Utilisateurs sélectionnés supprimés",
+                    "bulk_enabled": "Utilisateurs sélectionnés activés",
+                    "bulk_disabled": "Utilisateurs sélectionnés désactivés"
+                },
+                "roles": {
+                    "created": "Rôle créé",
+                    "updated": "Rôle mis à jour",
+                    "deleted": "Rôle supprimé"
+                },
+                "metas": {
+                    "created": "Meta créée",
+                    "updated": "Meta mise à jour",
+                    "deleted": "Meta supprimée",
+                    "bulk_destroyed": "Metas sélectionnées supprimées"
+                },
+                "form_submissions": {
+                    "deleted": "Soumission supprimée",
+                    "bulk_destroyed": "Soumissions sélectionnées supprimées"
+                },
+                "form_settings": {
+                    "created": "Paramétrage de formulaire créé",
+                    "updated": "Paramétrage de formulaire mis à jour",
+                    "deleted": "Paramétrage de formulaire supprimé"
+                },
+                "redirections": {
+                    "created": "Redirection créée",
+                    "updated": "Redirection mise à jour",
+                    "deleted": "Redirection supprimée",
+                    "bulk_destroyed": "Redirections sélectionnées supprimées",
+                    "bulk_enabled": "Redirections sélectionnées activées",
+                    "bulk_disabled": "Redirections sélectionnées désactivées",
+                    "file_imported": "Fichier importé avec succès"
+                },
+                "posts": {
+                    "created": "Article créé",
+                    "updated": "Article mis à jour",
+                    "deleted": "Article supprimé",
+                    "bulk_destroyed": "Articles sélectionnés supprimés",
+                    "bulk_published": "Articles sélectionnés publiés",
+                    "bulk_pending": "Articles sélectionnés en attente de modération",
+                    "bulk_pinned": "Articles sélectionnés épinglé",
+                    "bulk_promoted": "Articles sélectionnés mis en avant"
+                },
+                "actions": {
+                    "invalid": "Action invalide"
+                }
+            },
+            "frontend": []
         },
         "auth": {
             "failed": "Ces identifiants ne correspondent pas à nos enregistrements",
@@ -2431,27 +2524,102 @@ export default {
                 "unacceptable": "{provider} n'est pas accepté."
             }
         },
-        "mails": {
-            "layout": {
-                "hello": "Bonjour !",
-                "regards": "Cordialement",
-                "trouble": "Si vous rencontrer un problème en cliquant sur le bouton {action}, copier et coller l'URL suivante dans votre navigateur :",
-                "all_rights_reserved": "Tous droits réservés."
+        "buttons": {
+            "cancel": "Annuler",
+            "save": "Sauvegarder",
+            "close": "Fermer",
+            "create": "Créer",
+            "delete": "Supprimer",
+            "confirm": "Valider",
+            "show": "Voir",
+            "edit": "Editer",
+            "update": "Mettre à jour",
+            "view": "Voir",
+            "preview": "Prévisualiser",
+            "back": "Retour",
+            "send": "Envoyer",
+            "login-as": "Se loguer en tant que {name}",
+            "apply": "Appliquer",
+            "users": {
+                "create": "Créer un utilisateur"
             },
-            "password_reset": {
-                "subject": "Réinitialisation de mon mot de passe",
-                "intro": "Vous recevez cet email car vous avez effectué une demande de réinitialisation de mot de passe.",
-                "action": "Réinitialiser le mot de passe",
-                "outro": "Si vous n'avez pas fait cette demande de réinitialisation, aucune action n'est requise."
+            "roles": {
+                "create": "Créer un rôle"
             },
-            "contact": {
-                "subject": "Nouveau message de contact",
-                "new_contact": "Vous avez reçu un nouveau message de contact. Détail de la soumission :"
+            "metas": {
+                "create": "Créer une meta"
             },
-            "alert": {
-                "subject": "[{app_name}] Exception error",
-                "message": "Une exception serveur non prévue a été levée dont le message est : {message}.",
-                "trace": "Trace complète :"
+            "form_settings": {
+                "create": "Créer un paramètre"
+            },
+            "redirections": {
+                "create": "Créer une redirection",
+                "import": "Importer le CSV"
+            },
+            "posts": {
+                "create": "Créer un article",
+                "save_and_publish": "Enregistrer et publier",
+                "save_as_draft": "Enregistrer en tant que brouillon"
+            }
+        },
+        "exceptions": {
+            "general": "Erreur serveur",
+            "unauthorized": "Action non autorisée",
+            "backend": {
+                "users": {
+                    "create": "Erreur lors de la création de l'utilisateur",
+                    "update": "Erreur lors de la mise à jour de l'utilisateur",
+                    "delete": "Erreur lors de la suppression de l'utilisateur",
+                    "first_user_cannot_be_edited": "Vous ne pouvez pas éditer l'utilisateur super admin",
+                    "first_user_cannot_be_disabled": "L'utilisateur super admin ne peut pas être désactivé",
+                    "first_user_cannot_be_destroyed": "L'utilisateur super admin ne peut pas être supprimé",
+                    "first_user_cannot_be_impersonated": "L'utilisateur super admin ne peut pas être usurpé",
+                    "cannot_set_superior_roles": "Vous ne pouvez pas attribuer de rôle supérieur au vôtre"
+                },
+                "roles": {
+                    "create": "Erreur lors de la création du rôle",
+                    "update": "Erreur lors de la mise à jour du rôle",
+                    "delete": "Erreur lors de la suppression du rôle"
+                },
+                "metas": {
+                    "create": "Erreur lors de la création de la meta",
+                    "update": "Erreur lors de la mise à jour de la meta",
+                    "delete": "Erreur lors de la suppression de la meta",
+                    "already_exist": "Il existe déjà une meta pour cette route"
+                },
+                "form_submissions": {
+                    "create": "Erreur lors de la création de la soumission",
+                    "delete": "Erreur lors de la suppression de la soumission"
+                },
+                "form_settings": {
+                    "create": "Erreur lors de la création du paramètre de formulaire",
+                    "update": "Erreur lors de la mise à jour du paramètre de formulaire",
+                    "delete": "Erreur lors de la suppression du paramètre de formulaire",
+                    "already_exist": "Il existe déjà un paramétrage pour ce formulaire"
+                },
+                "redirections": {
+                    "create": "Erreur lors de la création de la redirection",
+                    "update": "Erreur lors de la mise à jour de la redirection",
+                    "delete": "Erreur lors de la suppression de la redirection",
+                    "already_exist": "Il existe déjà une redirection pour ce chemin"
+                },
+                "posts": {
+                    "create": "Erreur lors de la création de l'article",
+                    "update": "Erreur lors de la mise à jour de l'article",
+                    "save": "Erreur lors de l'enregistrement de l'article",
+                    "delete": "Erreur lors de la suppression de l'article"
+                }
+            },
+            "frontend": {
+                "user": {
+                    "email_taken": "Cet email est déjà utilisé par un compte existant.",
+                    "password_mismatch": "L'ancien mot de passe est incorrect.",
+                    "delete_account": "Erreur lors de la suppression de votre compte.",
+                    "updating_disabled": "La modification de compte est désactivée."
+                },
+                "auth": {
+                    "registration_disabled": "L'enregistrement d'utilisateurs est désactivé."
+                }
             }
         },
         "forms": {
@@ -2725,18 +2893,6 @@ export default {
                 }
             }
         },
-        "pagination": {
-            "previous": "&laquo; Précédent",
-            "next": "Suivant &raquo;"
-        },
-        "routes": {
-            "home": "accueil",
-            "about": "qui-sommes-nous",
-            "contact": "demande-de-contact",
-            "contact-sent": "message-envoyee",
-            "legal-mentions": "mentions-legales",
-            "redactors": "blog\/redacteurs\/{user}"
-        },
         "logs": {
             "backend": {
                 "users": {
@@ -2750,60 +2906,39 @@ export default {
             },
             "frontend": []
         },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "Utilisateur créé",
-                    "updated": "Utilisateur mis à jour",
-                    "deleted": "Utilisateur supprimé",
-                    "bulk_destroyed": "Utilisateurs sélectionnés supprimés",
-                    "bulk_enabled": "Utilisateurs sélectionnés activés",
-                    "bulk_disabled": "Utilisateurs sélectionnés désactivés"
-                },
-                "roles": {
-                    "created": "Rôle créé",
-                    "updated": "Rôle mis à jour",
-                    "deleted": "Rôle supprimé"
-                },
-                "metas": {
-                    "created": "Meta créée",
-                    "updated": "Meta mise à jour",
-                    "deleted": "Meta supprimée",
-                    "bulk_destroyed": "Metas sélectionnées supprimées"
-                },
-                "form_submissions": {
-                    "deleted": "Soumission supprimée",
-                    "bulk_destroyed": "Soumissions sélectionnées supprimées"
-                },
-                "form_settings": {
-                    "created": "Paramétrage de formulaire créé",
-                    "updated": "Paramétrage de formulaire mis à jour",
-                    "deleted": "Paramétrage de formulaire supprimé"
-                },
-                "redirections": {
-                    "created": "Redirection créée",
-                    "updated": "Redirection mise à jour",
-                    "deleted": "Redirection supprimée",
-                    "bulk_destroyed": "Redirections sélectionnées supprimées",
-                    "bulk_enabled": "Redirections sélectionnées activées",
-                    "bulk_disabled": "Redirections sélectionnées désactivées",
-                    "file_imported": "Fichier importé avec succès"
-                },
-                "posts": {
-                    "created": "Article créé",
-                    "updated": "Article mis à jour",
-                    "deleted": "Article supprimé",
-                    "bulk_destroyed": "Articles sélectionnés supprimés",
-                    "bulk_published": "Articles sélectionnés publiés",
-                    "bulk_pending": "Articles sélectionnés en attente de modération",
-                    "bulk_pinned": "Articles sélectionnés épinglé",
-                    "bulk_promoted": "Articles sélectionnés mis en avant"
-                },
-                "actions": {
-                    "invalid": "Action invalide"
-                }
+        "mails": {
+            "layout": {
+                "hello": "Bonjour !",
+                "regards": "Cordialement",
+                "trouble": "Si vous rencontrer un problème en cliquant sur le bouton {action}, copier et coller l'URL suivante dans votre navigateur :",
+                "all_rights_reserved": "Tous droits réservés."
             },
-            "frontend": []
+            "password_reset": {
+                "subject": "Réinitialisation de mon mot de passe",
+                "intro": "Vous recevez cet email car vous avez effectué une demande de réinitialisation de mot de passe.",
+                "action": "Réinitialiser le mot de passe",
+                "outro": "Si vous n'avez pas fait cette demande de réinitialisation, aucune action n'est requise."
+            },
+            "contact": {
+                "subject": "Nouveau message de contact",
+                "new_contact": "Vous avez reçu un nouveau message de contact. Détail de la soumission :"
+            },
+            "alert": {
+                "subject": "[{app_name}] Exception error",
+                "message": "Une exception serveur non prévue a été levée dont le message est : {message}.",
+                "trace": "Trace complète :"
+            }
+        },
+        "pagination": {
+            "previous": "&laquo; Précédent",
+            "next": "Suivant &raquo;"
+        },
+        "passwords": {
+            "password": "Les mots de passe doivent contenir au moins six caractères et doivent être identiques.",
+            "reset": "Votre mot de passe a été réinitialisé !",
+            "sent": "Nous vous avons envoyé par courriel le lien de réinitialisation du mot de passe !",
+            "token": "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
+            "user": "Aucun utilisateur n'a été trouvé avec cette adresse e-mail."
         },
         "permissions": {
             "categories": {
@@ -2959,65 +3094,13 @@ export default {
                 "description": "Permet de prendre l'identité d'un autre utilisateur. Utile pour les tests."
             }
         },
-        "exceptions": {
-            "general": "Erreur serveur",
-            "unauthorized": "Action non autorisée",
-            "backend": {
-                "users": {
-                    "create": "Erreur lors de la création de l'utilisateur",
-                    "update": "Erreur lors de la mise à jour de l'utilisateur",
-                    "delete": "Erreur lors de la suppression de l'utilisateur",
-                    "first_user_cannot_be_edited": "Vous ne pouvez pas éditer l'utilisateur super admin",
-                    "first_user_cannot_be_disabled": "L'utilisateur super admin ne peut pas être désactivé",
-                    "first_user_cannot_be_destroyed": "L'utilisateur super admin ne peut pas être supprimé",
-                    "first_user_cannot_be_impersonated": "L'utilisateur super admin ne peut pas être usurpé",
-                    "cannot_set_superior_roles": "Vous ne pouvez pas attribuer de rôle supérieur au vôtre"
-                },
-                "roles": {
-                    "create": "Erreur lors de la création du rôle",
-                    "update": "Erreur lors de la mise à jour du rôle",
-                    "delete": "Erreur lors de la suppression du rôle"
-                },
-                "metas": {
-                    "create": "Erreur lors de la création de la meta",
-                    "update": "Erreur lors de la mise à jour de la meta",
-                    "delete": "Erreur lors de la suppression de la meta",
-                    "already_exist": "Il existe déjà une meta pour cette route"
-                },
-                "form_submissions": {
-                    "create": "Erreur lors de la création de la soumission",
-                    "delete": "Erreur lors de la suppression de la soumission"
-                },
-                "form_settings": {
-                    "create": "Erreur lors de la création du paramètre de formulaire",
-                    "update": "Erreur lors de la mise à jour du paramètre de formulaire",
-                    "delete": "Erreur lors de la suppression du paramètre de formulaire",
-                    "already_exist": "Il existe déjà un paramétrage pour ce formulaire"
-                },
-                "redirections": {
-                    "create": "Erreur lors de la création de la redirection",
-                    "update": "Erreur lors de la mise à jour de la redirection",
-                    "delete": "Erreur lors de la suppression de la redirection",
-                    "already_exist": "Il existe déjà une redirection pour ce chemin"
-                },
-                "posts": {
-                    "create": "Erreur lors de la création de l'article",
-                    "update": "Erreur lors de la mise à jour de l'article",
-                    "save": "Erreur lors de l'enregistrement de l'article",
-                    "delete": "Erreur lors de la suppression de l'article"
-                }
-            },
-            "frontend": {
-                "user": {
-                    "email_taken": "Cet email est déjà utilisé par un compte existant.",
-                    "password_mismatch": "L'ancien mot de passe est incorrect.",
-                    "delete_account": "Erreur lors de la suppression de votre compte.",
-                    "updating_disabled": "La modification de compte est désactivée."
-                },
-                "auth": {
-                    "registration_disabled": "L'enregistrement d'utilisateurs est désactivé."
-                }
-            }
+        "routes": {
+            "home": "accueil",
+            "about": "qui-sommes-nous",
+            "contact": "demande-de-contact",
+            "contact-sent": "message-envoyee",
+            "legal-mentions": "mentions-legales",
+            "redactors": "blog\/redacteurs\/{user}"
         },
         "validation": {
             "accepted": "Le champ {attribute} doit être accepté.",
@@ -3161,44 +3244,6 @@ export default {
                 "published_at": "Publier le",
                 "unpublished_at": "Dépublier le",
                 "metable_type": "Entité"
-            }
-        },
-        "buttons": {
-            "cancel": "Annuler",
-            "save": "Sauvegarder",
-            "close": "Fermer",
-            "create": "Créer",
-            "delete": "Supprimer",
-            "confirm": "Valider",
-            "show": "Voir",
-            "edit": "Editer",
-            "update": "Mettre à jour",
-            "view": "Voir",
-            "preview": "Prévisualiser",
-            "back": "Retour",
-            "send": "Envoyer",
-            "login-as": "Se loguer en tant que {name}",
-            "apply": "Appliquer",
-            "users": {
-                "create": "Créer un utilisateur"
-            },
-            "roles": {
-                "create": "Créer un rôle"
-            },
-            "metas": {
-                "create": "Créer une meta"
-            },
-            "form_settings": {
-                "create": "Créer un paramètre"
-            },
-            "redirections": {
-                "create": "Créer une redirection",
-                "import": "Importer le CSV"
-            },
-            "posts": {
-                "create": "Créer un article",
-                "save_and_publish": "Enregistrer et publier",
-                "save_as_draft": "Enregistrer en tant que brouillon"
             }
         }
     }

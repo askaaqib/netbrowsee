@@ -199,4 +199,17 @@ return [
         'during_after_pictures'           => 'During & After Pictures',
         'upload_jobcard'           => 'Upload Jobcard',
     ],
+
+    'quotes' => [
+      'quotes_num'                => 'Quote Number',
+      'project_num'               => 'Project Number',
+      'quotes_name'               => 'Quotes Name',
+      'travelling_time'           => 'Travelling Time',
+      'travelling_km'             => 'Travelling KM',
+      'vat_amount'                => 'Vat Amount',
+      'net_amount'                => 'Net Amount',
+      'total_amount'              => 'Total Amount',
+      'quotation_date'           => 'Quotation Date',
+      
+  ],
 ];

@@ -75,20 +75,14 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
     },
     {
       title: true,
-      name: i18n.t('labels.backend.sidebar.seo'),
-      access: app.user.can('view metas') || app.user.can('view redirections')
+      name: 'Quotation Management',
+      access: app.blogEnabled && app.user.can('view')
     },
     {
-      name: i18n.t('labels.backend.metas.titles.main'),
-      url: '/metas',
-      icon: 'fe fe-tag',
-      access: app.user.can('view metas')
-    },
-    {
-      name: i18n.t('labels.backend.redirections.titles.main'),
-      url: '/redirections',
-      icon: 'fe fe-fast-forward',
-      access: app.user.can('view redirections')
+      name: 'Quotes',
+      url: '/quotes',
+      icon: 'fe fe-info',
+      access: app.user.can('view')
     }
   ]
 }

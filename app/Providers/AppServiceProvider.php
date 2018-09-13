@@ -12,12 +12,14 @@ use App\Repositories\EloquentTagRepository;
 use App\Repositories\EloquentMetaRepository;
 use App\Repositories\EloquentPostRepository;
 use App\Repositories\EloquentJobcardRepository;
+use App\Repositories\EloquentQuotesRepository;
 use App\Repositories\EloquentRoleRepository;
 use App\Repositories\EloquentUserRepository;
 use App\Repositories\Contracts\TagRepository;
 use App\Repositories\Contracts\MetaRepository;
 use App\Repositories\Contracts\PostRepository;
 use App\Repositories\Contracts\JobcardRepository;
+use App\Repositories\Contracts\QuotesRepository;
 use App\Repositories\Contracts\RoleRepository;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\EloquentAccountRepository;
@@ -103,6 +105,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             JobcardRepository::class,
             EloquentJobcardRepository::class
+        );
+
+        $this->app->bind(
+          QuotesRepository::class,
+          EloquentQuotesRepository::class
         );
 
         $this->app->bind(

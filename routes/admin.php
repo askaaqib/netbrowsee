@@ -12,6 +12,13 @@ Route::resource('jobcards', 'JobcardController', [
                 'only' => ['store', 'update', 'destroy'],
             ]);
 
+
+Route::get('quotes/{quotes}/show', 'QuotesController@show')->name('quotes.show');
+Route::get('quotes/search', 'QuotesController@search')->name('quotes.search');
+Route::get('quotes/latest', 'QuotesController@getLastestquotes')->name('quotes.latest');
+Route::resource('quotes', 'QuotesController', [
+                'only' => ['store', 'update', 'destroy'],
+            ]);
 Route::group(
     ['middleware' => ['can:view form_settings']],
     function () {

@@ -67,6 +67,17 @@ return [
             'bulk_promoted'  => 'Selected jobcards promoted',
         ],
 
+        'jobcards' => [
+          'created'        => 'Quotes created',
+          'updated'        => 'Quotes updated',
+          'deleted'        => 'Quotes deleted',
+          'bulk_destroyed' => 'Selected Quotes deleted',
+          'bulk_published' => 'Selected Quotes published',
+          'bulk_pending'   => 'Selected Quotes are awaiting moderation',
+          'bulk_pinned'    => 'Selected Quotes pinned',
+          'bulk_promoted'  => 'Selected Quotes promoted',
+      ],
+
         'actions' => [
             'invalid' => 'Invalid action',
         ],
