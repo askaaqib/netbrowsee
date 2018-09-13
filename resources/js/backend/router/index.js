@@ -206,7 +206,7 @@ export function createRouter (base, i18n) {
               {
                 path: ':id/edit',
                 name: 'project_managers_edit',
-                component: ProjectForm,
+                component: ProjectManagerForm,
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.project_managers.titles.edit')

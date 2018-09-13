@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class Project extends Model
+class ProjectManager extends Model
 {
 	/**
 	 * The attributes that are mass assignable.
@@ -14,6 +14,7 @@ class Project extends Model
 	 */
 	protected $fillable = [
 	    'name',
+	    'description',
 	];
 
    	protected $table = 'project_managers';

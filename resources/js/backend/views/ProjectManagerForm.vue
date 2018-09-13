@@ -4,7 +4,7 @@
       <b-row>
         <b-col xl="8">
           <b-card>
-            <h3 class="card-title" slot="header">{{ isNew ? $t('labels.backend.projects.titles.create') : $t('labels.backend.projects.titles.edit') }}</h3>
+            <h3 class="card-title" slot="header">{{ isNew ? $t('labels.backend.project_managers.titles.create') : $t('labels.backend.project_managers.titles.edit') }}</h3>
             <b-form-group
               :label="$t('validation.attributes.name')"
               label-for="name"
@@ -41,20 +41,16 @@
 
             <b-row slot="footer">
               <b-col md>
-                <b-button to="/jobcards" exact variant="danger" size="md">
+                <b-button to="/project_managers" exact variant="danger" size="md">
                   {{ $t('buttons.back') }}
                 </b-button>
               </b-col>
               <b-col md>
-                <input name="status" type="hidden" value="publish">
-
-                <b-dropdown right split :text="$t('buttons.jobcards.save_and_publish')" class="float-right"
-                            variant="success" size="sm" @click="model.status = 'publish'; onSubmit()"
+                <b-dropdown right split :text="$t('buttons.project_managers.save_and_publish')" class="float-right"
+                            variant="success" size="sm" @click="onSubmit()"
                             :disabled="pending"
-                            v-if="isNew || this.$app.user.can('edit projects') || this.$app.user.can('edit own projects')"
+                            v-if="isNew || this.$app.user.can('edit project managers') || this.$app.user.can('edit own project managers')"
                 >
-                  <b-dropdown-item @click="model.status = 'draft'; onSubmit()">{{ $t('buttons.jobcards.save_as_draft') }}
-                  </b-dropdown-item>
                 </b-dropdown>
               </b-col>
             </b-row>
@@ -78,10 +74,9 @@ export default {
         time_24hr: true,
         enableTime: true
       },
-      modelName: 'projectmanager',
+      modelName: 'project_manager',
       resourceRoute: 'project_managers',
       listPath: '/project_managers',
-      tags: [],
       model: {
         name: null,
         description: null

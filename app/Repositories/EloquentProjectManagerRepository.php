@@ -35,10 +35,10 @@ class EloquentProjectManagerRepository extends EloquentBaseRepository implements
      */
     public function save(ProjectManager $project_manager, array $input)
     {
-
+        
         DB::transaction(function () use ($project_manager, $input) {
             if (! $project_manager->save()) {
-                throw new GeneralException(__('exceptions.backend.projectManagers.save'));
+                throw new GeneralException(__('exceptions.backend.project_managers.save'));
             }           
             return true;
         });
@@ -56,7 +56,7 @@ class EloquentProjectManagerRepository extends EloquentBaseRepository implements
     public function destroy(ProjectManager $project_manager)
     {
         if (! $project_manager->delete()) {
-            throw new GeneralException(__('exceptions.backend.projectManagers.delete'));
+            throw new GeneralException(__('exceptions.backend.project_managers.delete'));
         }
 
         return true;

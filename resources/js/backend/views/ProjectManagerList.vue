@@ -39,10 +39,10 @@
           <template slot="description" slot-scope="row">
             <span v-text="row.item.description"></span>
           </template>
-          <template slot="project.created_at" slot-scope="row">
+          <template slot="project_managers.created_at" slot-scope="row">
             {{ row.item.created_at }}
           </template>
-          <template slot="project.updated_at" slot-scope="row">
+          <template slot="project_managers.updated_at" slot-scope="row">
             {{ row.item.updated_at }}
           </template>
           <template slot="actions" slot-scope="row">
@@ -75,7 +75,7 @@ export default {
         { key: 'actions', label: this.$t('labels.actions'), 'class': 'nowrap' }
       ],
       actions: {
-        destroy: this.$t('labels.backend.jobcards.actions.destroy')
+        destroy: this.$t('labels.backend.project_managers.actions.destroy')
       }
     }
   },
@@ -87,7 +87,7 @@ export default {
       return this.$refs.datatable.refresh()
     },
     onDelete (id) {
-      this.$refs.datasource.deleteRow({ project_managers: id })
+      this.$refs.datasource.deleteRow({ project_manager: id })
     }
   }
 }

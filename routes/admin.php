@@ -21,7 +21,7 @@ Route::resource('projects', 'ProjectController', ['only' => ['store', 'update', 
 
 /* Project Manager Routes */
 Route::post('project_managers/batch_action', 'ProjectManagerController@batchAction')->name('project_managers.batch_action');
-Route::get('project_managers/{project}/show', 'ProjectManagerController@show')->name('project_managers.show');
+Route::get('project_managers/{project_manager}/show', 'ProjectManagerController@show')->name('project_managers.show');
 Route::get('project_managers/search', 'ProjectManagerController@search')->name('project_managers.search');
 Route::resource('project_managers', 'ProjectManagerController', ['only' => ['store', 'update', 'destroy'],]);
 

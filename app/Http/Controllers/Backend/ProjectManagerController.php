@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Project;
+use App\Models\ProjectManager;
 use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
 use Illuminate\Support\Facades\Gate;
@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateProjectManagerRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\ProjectManagerRepository;
 
-class ProjectController extends BackendController
+class ProjectManagerController extends BackendController
 {
     /**
      * @var JobcardRepository
@@ -116,7 +116,7 @@ class ProjectController extends BackendController
      * @param  \App\ProjectManager  $project_manager
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectManager $project_manager, UpdateProjectRequest $request)
+    public function update(ProjectManager $project_manager, UpdateProjectManagerRequest $request)
     {
         $project_manager->fill(
             $request->only('name','description')
@@ -135,6 +135,7 @@ class ProjectController extends BackendController
      */
     public function destroy(ProjectManager $project_manager, Request $request)
     {
+
         $this->project_manager->destroy($project_manager);
 
         return $this->redirectResponse($request, __('alerts.backend.project_managers.deleted'));
