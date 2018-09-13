@@ -101,6 +101,17 @@ return [
             'bulk_promoted'  => 'Selected labour rates promoted',
         ],
 
+        'materials_rates' => [
+            'created'        => 'Material Rate created',
+            'updated'        => 'Material Rate updated',
+            'deleted'        => 'Material Rate deleted',
+            'bulk_destroyed' => 'Selected material rates deleted',
+            'bulk_published' => 'Selected material rates published',
+            'bulk_pending'   => 'Selected material rates are awaiting moderation',
+            'bulk_pinned'    => 'Selected material rates pinned',
+            'bulk_promoted'  => 'Selected material rates promoted',
+        ],
+
         'actions' => [
             'invalid' => 'Invalid action',
         ],

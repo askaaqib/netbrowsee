@@ -1176,10 +1176,39 @@ export default {
                         "meta_description": "Labour Rate's summary."
                     },
                     "actions": {
-                        "destroy": "Delete selected labour Rates",
-                        "publish": "Publish selected labour Rates",
-                        "pin": "Pin selected labour Rates",
-                        "promote": "Promote selected labour Rates"
+                        "destroy": "Delete selected labour rates",
+                        "publish": "Publish selected labour rates",
+                        "pin": "Pin selected labour rates",
+                        "promote": "Promote selected labour rates"
+                    }
+                },
+                "materials_rates": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Material Rates",
+                        "index": "Material Rates list",
+                        "create": "Create Material Rates",
+                        "edit": "Edit Material Rates",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of Material Rate's title by default.",
+                        "meta_description": "If leave empty, description will be that of Material Rate's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Material Rate's title.",
+                        "meta_description": "Material Rate's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected material rates",
+                        "publish": "Publish selected material rates",
+                        "pin": "Pin selected material rates",
+                        "promote": "Promote selected material rates"
                     }
                 }
             },
@@ -1310,6 +1339,16 @@ export default {
                     "bulk_pending": "Selected labour rates are awaiting moderation",
                     "bulk_pinned": "Selected labour rates pinned",
                     "bulk_promoted": "Selected labour rates promoted"
+                },
+                "materials_rates": {
+                    "created": "Material Rate created",
+                    "updated": "Material Rate updated",
+                    "deleted": "Material Rate deleted",
+                    "bulk_destroyed": "Selected material rates deleted",
+                    "bulk_published": "Selected material rates published",
+                    "bulk_pending": "Selected material rates are awaiting moderation",
+                    "bulk_pinned": "Selected material rates pinned",
+                    "bulk_promoted": "Selected material rates promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -1750,6 +1789,11 @@ export default {
             },
             "labour_rates": {
                 "create": "Create Labour Rate",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "materials_rates": {
+                "create": "Create Material Rate",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             }

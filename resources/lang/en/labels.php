@@ -406,10 +406,44 @@ return [
             ],
 
             'actions' => [
-                'destroy' => 'Delete selected labour Rates',
-                'publish' => 'Publish selected labour Rates',
-                'pin'     => 'Pin selected labour Rates',
-                'promote' => 'Promote selected labour Rates',
+                'destroy' => 'Delete selected labour rates',
+                'publish' => 'Publish selected labour rates',
+                'pin'     => 'Pin selected labour rates',
+                'promote' => 'Promote selected labour rates',
+            ],
+        ],
+
+        'materials_rates' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Material Rates',
+                'index'       => 'Material Rates list',
+                'create'      => 'Create Material Rates',
+                'edit'        => 'Edit Material Rates',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Material Rate\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Material Rate\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Material Rate\'s title.',
+                'meta_description' => 'Material Rate\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected material rates',
+                'publish' => 'Publish selected material rates',
+                'pin'     => 'Pin selected material rates',
+                'promote' => 'Promote selected material rates',
             ],
         ],
     ],

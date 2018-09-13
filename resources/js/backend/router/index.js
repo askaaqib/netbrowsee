@@ -17,6 +17,8 @@ import ProjectManagerList from '../views/ProjectManagerList'
 import ProjectManagerForm from '../views/ProjectManagerForm'
 import LabourRateList from '../views/LabourRateList'
 import LabourRateForm from '../views/LabourRateForm'
+import MaterialRateList from '../views/MaterialRateList'
+import MaterialRateForm from '../views/MaterialRateForm'
 import FormSettingForm from '../views/FormSettingForm'
 import FormSettingList from '../views/FormSettingList'
 import FormSubmissionShow from '../views/FormSubmissionShow'
@@ -254,7 +256,44 @@ export function createRouter (base, i18n) {
               }
             ]
           },
-
+          {
+            path: 'materials_rates',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.materials_rates.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'materials_rates',
+                component: MaterialRateList,
+                meta: {
+                  label: i18n.t('labels.backend.materials_rates.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'materials_rates_create',
+                component: MaterialRateForm,
+                meta: {
+                  label: i18n.t('labels.backend.materials_rates.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'materials_rates_edit',
+                component: MaterialRateForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.materials_rates.titles.edit')
+                }
+              }
+            ]
+          },
           {
             path: 'form-submissions',
             component: {

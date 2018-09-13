@@ -40,6 +40,12 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       access: app.blogEnabled && app.user.can('view own project managers')
     },
     {
+      name: i18n.t('labels.backend.materials_rates.titles.main'),
+      url: '/materials_rates',
+      icon: 'fe fe-list',
+      access: app.blogEnabled && app.user.can('view own project managers')
+    },
+    {
       name: i18n.t('labels.backend.posts.titles.main'),
       url: '/posts',
       icon: 'fe fe-book',
