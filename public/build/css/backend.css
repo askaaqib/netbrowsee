@@ -5224,7 +5224,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::before {
   position: absolute;
-  top: 0.20312rem;
+  top: 0.20313rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -5240,7 +5240,7 @@ input[type="button"].btn-block {
 
 .custom-control-label::after {
   position: absolute;
-  top: 0.20312rem;
+  top: 0.20313rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -6904,7 +6904,7 @@ input[type="button"].btn-block {
   display: flex;
   height: 1rem;
   overflow: hidden;
-  font-size: 0.70312rem;
+  font-size: 0.70313rem;
   background-color: #f8f9fa;
   border-radius: 3px;
 }
@@ -18158,7 +18158,7 @@ body {
 }
 
 .text-value-lg {
-  font-size: 1.64062rem;
+  font-size: 1.64063rem;
   font-weight: 600;
 }
 
@@ -18948,7 +18948,7 @@ a.tag-addon:hover {
   font-family: "feather";
   src: url(/build/fonts/feather-webfont.eot?cc5143b2b877ad1f2a9d7ddde2e55dee);
   /* IE9*/
-  src: url(/build/fonts/feather-webfont.eot?cc5143b2b877ad1f2a9d7ddde2e55dee) format("embedded-opentype"), url(/build/fonts/feather-webfont.woff?2cf523cd335b115a5678b068b56c3011) format("woff"), url(/build/fonts/feather-webfont.ttf?b8e9cbc7ac23b572497cd2115bcf71c6) format("truetype"), url(/build/fonts/feather-webfont.svg?4a878d5b85f694202ec0ccd16510be9c) format("svg");
+  src: url(/build/fonts/feather-webfont.eot?cc5143b2b877ad1f2a9d7ddde2e55dee) format("embedded-opentype"), url(/build/fonts/feather-webfont.woff?2cf523cd335b115a5678b068b56c3011) format("woff"), url(/build/fonts/feather-webfont.ttf?b8e9cbc7ac23b572497cd2115bcf71c6) format("truetype"), url(/build/fonts/feather-webfont.svg?68bee8ffe37eb3cbfc76f1d1a17b0d49) format("svg");
   /* iOS 4.1- */
 }
 

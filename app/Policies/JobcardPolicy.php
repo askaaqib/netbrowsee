@@ -6,7 +6,7 @@ use App\Models\Jobcard;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PostPolicy
+class JobcardPolicy
 {
     use HandlesAuthorization;
 
@@ -41,15 +41,8 @@ class PostPolicy
      * @internal param \App\Models\User $user
      */
     public function update(User $authenticatedUser, Jobcard $jobcard) {
-        if ($authenticatedUser->can('edit jobcards')) {
-            return true;
-        }
 
-        if ($authenticatedUser->can('edit own jobcards')) {
-            return $authenticatedUser->id === $jobcard->user_id;
-        }
-
-        return false;
+        return true;
     }
 
     /**
