@@ -16,7 +16,7 @@ class EloquentMaterialRateRepository extends EloquentBaseRepository implements M
     /**
      * EloquentUserRepository constructor.
      *
-     * @param MaterialRate $materials_rate
+     * @param MaterialRate $materials_rates
      */
     public function __construct(
         MaterialRate $materials_rate
@@ -25,7 +25,7 @@ class EloquentMaterialRateRepository extends EloquentBaseRepository implements M
     }
 
     /**
-     * @param MaterialRate                               $materials_rate
+     * @param MaterialRate                               $materials_rates
      * @param array                              $input
      * @param \Illuminate\Http\UploadedFile|null $image
      *
@@ -47,7 +47,7 @@ class EloquentMaterialRateRepository extends EloquentBaseRepository implements M
     }
 
     /**
-     * @param MaterialRate $materials_rate
+     * @param MaterialRate $materials_rates
      *
      * @throws \Exception
      *

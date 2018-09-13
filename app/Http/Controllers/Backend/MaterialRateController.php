@@ -16,12 +16,12 @@ class MaterialRateController extends BackendController
     /**
      * @var MaterialRateRepository
      */
-    protected $materials_rates;
+    protected $materials_rate;
 
-    public function __construct(MaterialRateRepository $materials_rates)
+    public function __construct(MaterialRateRepository $materials_rate)
     {
         //dd($jobcards);
-        $this->materials_rates = $materials_rates;
+        $this->materials_rate = $materials_rate;
     }
     
     /**
@@ -37,7 +37,7 @@ class MaterialRateController extends BackendController
     {
 
         /** @var Builder $query */
-        $query = $this->materials_rates->query();
+        $query = $this->materials_rate->query();
         
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
             'name',
@@ -78,11 +78,11 @@ class MaterialRateController extends BackendController
     public function store(StoreMaterialRateRequest $request)
     {
         //dd($request->all());    
-        $materials_rates = $this->materials_rates->make(
+        $materials_rate = $this->materials_rate->make(
             $request->only('name','rate')
         ); 
         
-       $this->materials_rates->save($materials_rates, $request->input());
+       $this->materials_rate->save($materials_rate, $request->input());
 
        return $this->redirectResponse($request, __('alerts.backend.materials_rates.created'));
     }
@@ -104,7 +104,7 @@ class MaterialRateController extends BackendController
      * @param  \App\MaterialRate  $materials_rates
      * @return \Illuminate\Http\Response
      */
-    public function edit(MaterialRate $materials_rates)
+    public function edit(MaterialRate $materials_rate)
     {
         //
     }
@@ -113,16 +113,16 @@ class MaterialRateController extends BackendController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MaterialRate  $materials_rates
+     * @param  \App\MaterialRate  $materials_rate
      * @return \Illuminate\Http\Response
      */
-    public function update(MaterialRate $materials_rates, UpdateMaterialRateRequest $request)
+    public function update(MaterialRate $materials_rate, UpdateMaterialRateRequest $request)
     {
-        $materials_rates->fill(
+        $materials_rate->fill(
             $request->only('name','rate')
         );
         
-        $this->materials_rates->save($materials_rates, $request->input());
+        $this->materials_rate->save($materials_rate, $request->input());
            
         return $this->redirectResponse($request, __('alerts.backend.materials_rates.updated'));
     }
@@ -130,13 +130,13 @@ class MaterialRateController extends BackendController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MaterialRate  $materials_rates
+     * @param  \App\MaterialRate  $materials_rate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MaterialRate $materials_rates, Request $request)
+    public function destroy(MaterialRate $materials_rate, Request $request)
     {
 
-        $this->materials_rates->destroy($materials_rates);
+        $this->materials_rate->destroy($materials_rate);
 
         return $this->redirectResponse($request, __('alerts.backend.materials_rates.deleted'));
     }
@@ -153,7 +153,7 @@ class MaterialRateController extends BackendController
         
         switch ($action) {
             case 'destroy':                
-                    $this->materials_rates->batchDestroy($ids);
+                    $this->materials_rate->batchDestroy($ids);
                     return $this->redirectResponse($request, __('alerts.backend.materials_rates.bulk_destroyed'));
                 break;
         }

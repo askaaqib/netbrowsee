@@ -32,7 +32,7 @@ Route::get('labour_rates/{labour_rate}/show', 'LabourRateController@show')->name
 Route::get('labour_rates/search', 'LabourRateController@search')->name('labour_rates.search');
 Route::resource('labour_rates', 'LabourRateController', ['only' => ['store', 'update', 'destroy'],]);
 
-/* Labour Rates Routes */
+/* Material Rates Routes */
 Route::post('materials_rates/batch_action', 'MaterialRateController@batchAction')->name('materials_rates.batch_action');
 Route::get('materials_rates/{materials_rate}/show', 'MaterialRateController@show')->name('materials_rates.show');
 Route::get('materials_rates/search', 'MaterialRateController@search')->name('materials_rates.search');

@@ -87,7 +87,7 @@ export default {
       return this.$refs.datatable.refresh()
     },
     onDelete (id) {
-      this.$refs.datasource.deleteRow({ materials_rates: id })
+      this.$refs.datasource.deleteRow({ materials_rate: id })
     }
   }
 }
