@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreJobcardRequest;
+use App\Http\Requests\UpdateJobcardRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\JobcardRepository;
 
@@ -16,13 +17,13 @@ class JobcardController extends BackendController
     /**
      * @var JobcardRepository
      */
-    protected $jobcards;
+    protected $jobcard;
 
     /**
      * Create a new controller instance.
      *
      *
-     * @param \App\Repositories\Contracts\JobcardRepository $jobcards
+     * @param \App\Repositories\Contracts\JobcardRepository $jobcard
      */
     public function __construct(JobcardRepository $jobcard)
     {
@@ -154,16 +155,24 @@ class JobcardController extends BackendController
         //
     }
 
-    /**
-     * Update the specified resource in storage.
+     /**
+     * @param Jobcard              $jobcard
+     * @param UpdateJobcardRequest $request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Jobcard  $jobcard
-     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     *
+     * @return mixed
      */
-    public function update(Request $request, Jobcard $jobcard)
+    public function update(Jobcard $jobcard, UpdateJobcardRequest $request)
     {
-        //
+        
+        $jobcard->fill(
+            $request->only('jobcard_num')
+        );
+        
+        $this->jobcard->saveAndPublish($jobcard, $request->input());
+           
+        return $this->redirectResponse($request, __('alerts.backend.jobcards.updated'));
     }
 
     /**
@@ -172,8 +181,30 @@ class JobcardController extends BackendController
      * @param  \App\Jobcard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jobcard $jobcard)
+    public function destroy(Jobcard $jobcard, Request $request)
     {
-        //
+        $this->jobcard->destroy($jobcard);
+
+        return $this->redirectResponse($request, __('alerts.backend.jobcards.deleted'));
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
+    public function batchAction(Request $request)
+    {
+        $action = $request->get('action');
+        $ids = $request->get('ids');
+        
+        switch ($action) {
+            case 'destroy':                
+                    $this->jobcard->batchDestroy($ids);
+                    return $this->redirectResponse($request, __('alerts.backend.jobcards.bulk_destroyed'));
+                break;
+        }
+
+        return $this->redirectResponse($request, __('alerts.backend.actions.invalid'), 'error');
     }
 }

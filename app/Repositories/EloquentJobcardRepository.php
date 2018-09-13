@@ -107,7 +107,9 @@ class EloquentJobcardRepository extends EloquentBaseRepository implements Jobcar
     private function save(Jobcard $jobcard, array $input)
     {
         if ($jobcard->exists) {
+            
             if (! Gate::check('update', $jobcard)) {
+                
                 throw new GeneralException(__('exceptions.backend.jobcards.save'));
             }
         } else {
@@ -166,7 +168,20 @@ class EloquentJobcardRepository extends EloquentBaseRepository implements Jobcar
      */
     public function batchDestroy(array $ids)
     {
-        
+        DB::transaction(function () use ($ids) {
+            $query = $this->batchQuery($ids);            
+
+            /** @var Jobcard[] $jobcards */
+            $jobcards = $query->get();
+
+            foreach ($jobcards as $jobcard) {
+                $this->destroy($jobcard);
+            }
+
+            return true;
+        });
+
+        return true;
     }
 
     /**

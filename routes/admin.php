@@ -5,12 +5,25 @@ Route::get('routes/search', 'AjaxController@routesSearch')->name('routes.search'
 Route::get('tags/search', 'AjaxController@tagsSearch')->name('tags.search');
 Route::post('images/upload', 'AjaxController@imageUpload')->name('images.upload');
 
+/* JobCard Routes */
+Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');
 Route::get('jobcards/{jobcard}/show', 'JobcardController@show')->name('jobcards.show');
 Route::get('jobcards/search', 'JobcardController@search')->name('jobcards.search');
 Route::get('jobcards/latest', 'JobcardController@getLastestJobcards')->name('jobcards.latest');
-Route::resource('jobcards', 'JobcardController', [
-                'only' => ['store', 'update', 'destroy'],
-            ]);
+Route::resource('jobcards', 'JobcardController', ['only' => ['store', 'update', 'destroy'],]);
+
+/* Project Routes */
+Route::post('projects/batch_action', 'ProjectController@batchAction')->name('projects.batch_action');
+Route::get('projects/{project}/show', 'ProjectController@show')->name('projects.show');
+Route::get('projects/search', 'ProjectController@search')->name('projects.search');
+Route::get('projects/latest', 'ProjectController@getLastestprojects')->name('projects.latest');
+Route::resource('projects', 'ProjectController', ['only' => ['store', 'update', 'destroy'],]);
+
+/* Project Manager Routes */
+Route::post('project_managers/batch_action', 'ProjectManagerController@batchAction')->name('project_managers.batch_action');
+Route::get('project_managers/{project_manager}/show', 'ProjectManagerController@show')->name('project_managers.show');
+Route::get('project_managers/search', 'ProjectManagerController@search')->name('project_managers.search');
+Route::resource('project_managers', 'ProjectManagerController', ['only' => ['store', 'update', 'destroy'],]);
 
 Route::group(
     ['middleware' => ['can:view form_settings']],

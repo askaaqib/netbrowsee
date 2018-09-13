@@ -293,14 +293,14 @@ return [
             ],
 
             'descriptions' => [
-                'meta_title'       => 'If leave empty, title will be that of article\' title by default.',
-                'meta_description' => 'If leave empty, description will be that of article\'s summary by default.',
+                'meta_title'       => 'If leave empty, title will be that of jobcard\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of jobcard\'s summary by default.',
             ],
 
             'placeholders' => [
                 'body'             => 'Write your content...',
-                'meta_title'       => 'Article\'s title.',
-                'meta_description' => 'Article\'s summary.',
+                'meta_title'       => 'Jobcard\'s title.',
+                'meta_description' => 'Jobcard\'s summary.',
             ],
 
             'actions' => [
@@ -308,6 +308,74 @@ return [
                 'publish' => 'Publish selected jobcards',
                 'pin'     => 'Pin selected jobcards',
                 'promote' => 'Promote selected jobcards',
+            ],
+        ],
+
+        'projects' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Projects',
+                'index'       => 'Project list',
+                'create'      => 'Create Project',
+                'edit'        => 'Edit Project',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of project\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of project\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Projects\'s title.',
+                'meta_description' => 'Projects\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected projects',
+                'publish' => 'Publish selected projects',
+                'pin'     => 'Pin selected projects',
+                'promote' => 'Promote selected projects',
+            ],
+        ],
+
+        'project_managers' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Project Managers',
+                'index'       => 'Project Managers list',
+                'create'      => 'Create Project Managers',
+                'edit'        => 'Edit Project Managers',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Project Manager\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Project Manager\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Projects Manager\'s title.',
+                'meta_description' => 'Projects Manager\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected project managers',
+                'publish' => 'Publish selected project managers',
+                'pin'     => 'Pin selected project managers',
+                'promote' => 'Promote selected project managers',
             ],
         ],
     ],
