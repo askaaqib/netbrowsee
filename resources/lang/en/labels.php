@@ -311,39 +311,6 @@ return [
             ],
         ],
 
-        'quotes' => [
-          'statuses' => [
-              'draft'     => 'Draft',
-              'pending'   => 'Pending',
-              'published' => 'Published',
-          ],
-
-          'titles' => [
-              'main'        => 'Quotes',
-              'index'       => 'Quotes list',
-              'create'      => 'Create Quotes',
-              'edit'        => 'Edit Quotes',
-              'publication' => 'Publication options',
-          ],
-
-          'descriptions' => [
-              'meta_title'       => 'If leave empty, title will be that of article\' title by default.',
-              'meta_description' => 'If leave empty, description will be that of article\'s summary by default.',
-          ],
-
-          'placeholders' => [
-              'body'             => 'Write your content...',
-              'meta_title'       => 'Article\'s title.',
-              'meta_description' => 'Article\'s summary.',
-          ],
-
-          'actions' => [
-              'destroy' => 'Delete selected Quotes',
-              'publish' => 'Publish selected Quotes',
-              'pin'     => 'Pin selected Quotes',
-              'promote' => 'Promote selected Quotes',
-          ],
-      ],
         'projects' => [
             'statuses' => [
                 'draft'     => 'Draft',
