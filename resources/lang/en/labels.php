@@ -446,6 +446,40 @@ return [
                 'promote' => 'Promote selected material rates',
             ],
         ],
+
+        'vat' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Vat',
+                'index'       => 'Vat list',
+                'create'      => 'Create Vat',
+                'edit'        => 'Edit Vats',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Vat\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Vat\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Vat\'s title.',
+                'meta_description' => 'Vat\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected vats',
+                'publish' => 'Publish selected vats',
+                'pin'     => 'Pin selected vats',
+                'promote' => 'Promote selected vats',
+            ],
+        ],
     ],
 
     'frontend' => [

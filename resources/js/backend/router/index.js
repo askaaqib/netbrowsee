@@ -19,6 +19,8 @@ import LabourRateList from '../views/LabourRateList'
 import LabourRateForm from '../views/LabourRateForm'
 import MaterialRateList from '../views/MaterialRateList'
 import MaterialRateForm from '../views/MaterialRateForm'
+import VatList from '../views/VatList'
+import VatForm from '../views/VatForm'
 import FormSettingForm from '../views/FormSettingForm'
 import FormSettingList from '../views/FormSettingList'
 import FormSubmissionShow from '../views/FormSubmissionShow'
@@ -288,6 +290,44 @@ export function createRouter (base, i18n) {
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.materials_rates.titles.edit')
+                }
+              }
+            ]
+          },
+          {
+            path: 'vat',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.vat.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'vat',
+                component: VatList,
+                meta: {
+                  label: i18n.t('labels.backend.vat.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'vat_create',
+                component: VatForm,
+                meta: {
+                  label: i18n.t('labels.backend.vat.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'vat_edit',
+                component: VatForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.vat.titles.edit')
                 }
               }
             ]

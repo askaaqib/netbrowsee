@@ -19,31 +19,37 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       name: i18n.t('labels.backend.jobcards.titles.main'),
       url: '/jobcards',
       icon: 'fe fe-book',
-      access: app.blogEnabled && app.user.can('view own jobcards')
+      access: app.user.can('view')
     },
     {
       name: i18n.t('labels.backend.projects.titles.main'),
       url: '/projects',
       icon: 'fe fe-list',
-      access: app.blogEnabled && app.user.can('view own projects')
+      access: app.user.can('view')
     },
     {
       name: i18n.t('labels.backend.project_managers.titles.main'),
       url: '/project_managers',
       icon: 'fe fe-list',
-      access: app.blogEnabled && app.user.can('view own project managers')
+      access: app.user.can('view')
     },
     {
       name: i18n.t('labels.backend.labour_rates.titles.main'),
       url: '/labour_rates',
       icon: 'fe fe-list',
-      access: app.blogEnabled && app.user.can('view own project managers')
+      access: app.user.can('view')
     },
     {
       name: i18n.t('labels.backend.materials_rates.titles.main'),
       url: '/materials_rates',
       icon: 'fe fe-list',
-      access: app.blogEnabled && app.user.can('view own project managers')
+      access: app.user.can('view')
+    },
+    {
+      name: i18n.t('labels.backend.vat.titles.main'),
+      url: '/vat',
+      icon: 'fe fe-list',
+      access: app.user.can('view')
     },
     {
       divider: true,

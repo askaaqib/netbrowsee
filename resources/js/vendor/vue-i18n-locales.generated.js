@@ -1210,6 +1210,35 @@ export default {
                         "pin": "Pin selected material rates",
                         "promote": "Promote selected material rates"
                     }
+                },
+                "vat": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Vat",
+                        "index": "Vat list",
+                        "create": "Create Vat",
+                        "edit": "Edit Vats",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of Vat's title by default.",
+                        "meta_description": "If leave empty, description will be that of Vat's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Vat's title.",
+                        "meta_description": "Vat's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected vats",
+                        "publish": "Publish selected vats",
+                        "pin": "Pin selected vats",
+                        "promote": "Promote selected vats"
+                    }
                 }
             },
             "frontend": {
@@ -1359,6 +1388,16 @@ export default {
                     "bulk_pending": "Selected material rates are awaiting moderation",
                     "bulk_pinned": "Selected material rates pinned",
                     "bulk_promoted": "Selected material rates promoted"
+                },
+                "vat": {
+                    "created": "Vat created",
+                    "updated": "Vat updated",
+                    "deleted": "Vat deleted",
+                    "bulk_destroyed": "Selected vat deleted",
+                    "bulk_published": "Selected vat published",
+                    "bulk_pending": "Selected vat are awaiting moderation",
+                    "bulk_pinned": "Selected vat pinned",
+                    "bulk_promoted": "Selected vat promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -1820,6 +1859,11 @@ export default {
             },
             "materials_rates": {
                 "create": "Create Material Rate",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "vat": {
+                "create": "Create Vat",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             }

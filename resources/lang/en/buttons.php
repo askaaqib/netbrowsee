@@ -78,4 +78,10 @@ return [
         'save_and_publish' => 'Save and publish',
         'save_as_draft'    => 'Save as draft',
     ],
+
+    'vat' => [
+        'create'           => 'Create Vat',
+        'save_and_publish' => 'Save and publish',
+        'save_as_draft'    => 'Save as draft',
+    ],
 ];

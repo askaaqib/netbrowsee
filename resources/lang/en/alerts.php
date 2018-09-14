@@ -122,6 +122,17 @@ return [
             'bulk_promoted'  => 'Selected material rates promoted',
         ],
 
+        'vat' => [
+            'created'        => 'Vat created',
+            'updated'        => 'Vat updated',
+            'deleted'        => 'Vat deleted',
+            'bulk_destroyed' => 'Selected vat deleted',
+            'bulk_published' => 'Selected vat published',
+            'bulk_pending'   => 'Selected vat are awaiting moderation',
+            'bulk_pinned'    => 'Selected vat pinned',
+            'bulk_promoted'  => 'Selected vat promoted',
+        ],
+
         'actions' => [
             'invalid' => 'Invalid action',
         ],
