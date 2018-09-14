@@ -1268,6 +1268,35 @@ export default {
                         "pin": "Pin selected reports",
                         "promote": "Promote selected reports"
                     }
+                },
+                "invoices": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Invoice",
+                        "index": "Invoice list",
+                        "create": "Create Invoice",
+                        "edit": "Edit Invoices",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of Invoice's title by default.",
+                        "meta_description": "If leave empty, description will be that of Invoice's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Invoice's title.",
+                        "meta_description": "Invoice's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected invoices",
+                        "publish": "Publish selected invoices",
+                        "pin": "Pin selected invoices",
+                        "promote": "Promote selected invoices"
+                    }
                 }
             },
             "frontend": {
@@ -1437,6 +1466,16 @@ export default {
                     "bulk_pending": "Selected reports are awaiting moderation",
                     "bulk_pinned": "Selected reports pinned",
                     "bulk_promoted": "Selected reports promoted"
+                },
+                "invoices": {
+                    "created": "Invoice created",
+                    "updated": "Invoice updated",
+                    "deleted": "Invoice deleted",
+                    "bulk_destroyed": "Selected invoices deleted",
+                    "bulk_published": "Selected invoices published",
+                    "bulk_pending": "Selected invoices are awaiting moderation",
+                    "bulk_pinned": "Selected invoices pinned",
+                    "bulk_promoted": "Selected invoices promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -1841,6 +1880,14 @@ export default {
                 "vat_collected": "Vat Collected",
                 "profit_loss": "Profit Loss",
                 "jobcard": "Jobcard"
+            },
+            "invoices": {
+                "description": "Description",
+                "quantity": "Quantity",
+                "amount": "Amount",
+                "net_amount": "Net Amount",
+                "vat_amount": "Vat Amount",
+                "total_amount": "Total Amount"
             }
         },
         "buttons": {
@@ -1917,6 +1964,11 @@ export default {
             },
             "reports": {
                 "create": "Create Report",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "invoices": {
+                "create": "Create Invoice",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             }

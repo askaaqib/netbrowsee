@@ -223,4 +223,13 @@ return [
       'profit_loss'=> 'Profit Loss',
       'jobcard' => 'Jobcard'                      
     ],
+
+    'invoices' => [
+      'description'=> 'Description',
+      'quantity'=> 'Quantity',
+      'amount'=> 'Amount',
+      'net_amount'=> 'Net Amount',
+      'vat_amount'=> 'Vat Amount',
+      'total_amount'=> 'Total Amount',               
+    ],
 ];

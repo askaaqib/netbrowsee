@@ -38,17 +38,23 @@ Route::get('materials_rates/{materials_rate}/show', 'MaterialRateController@show
 Route::get('materials_rates/search', 'MaterialRateController@search')->name('materials_rates.search');
 Route::resource('materials_rates', 'MaterialRateController', ['only' => ['store', 'update', 'destroy'],]);
 
-/* Material Rates Routes */
+/* Vat Routes */
 Route::post('vat/batch_action', 'VatController@batchAction')->name('vat.batch_action');
 Route::get('vat/{vat}/show', 'VatController@show')->name('vat.show');
 Route::get('vat/search', 'VatController@search')->name('vat.search');
 Route::resource('vat', 'VatController', ['only' => ['store', 'update', 'destroy'],]);
 
-/* Material Rates Routes */
+/* Reports Routes */
 Route::post('reports/batch_action', 'ReportsController@batchAction')->name('reports.batch_action');
 Route::get('reports/{report}/show', 'ReportsController@show')->name('reports.show');
 Route::get('reports/search', 'ReportsController@search')->name('reports.search');
 Route::resource('reports', 'ReportsController', ['only' => ['store', 'update', 'destroy'],]);
+
+/* Invoices Routes */
+Route::post('invoices/batch_action', 'InvoicesController@batchAction')->name('invoices.batch_action');
+Route::get('invoices/{invoice}/show', 'InvoicesController@show')->name('invoices.show');
+Route::get('invoices/search', 'InvoicesController@search')->name('invoices.search');
+Route::resource('invoices', 'InvoicesController', ['only' => ['store', 'update', 'destroy'],]);
 
 /* Quotes Routes */
 Route::get('quotes/{quotes}/show', 'QuotesController@show')->name('quotes.show');

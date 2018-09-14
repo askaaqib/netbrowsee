@@ -23,6 +23,8 @@ import VatList from '../views/VatList'
 import VatForm from '../views/VatForm'
 import ReportsList from '../views/ReportsList'
 import ReportsForm from '../views/ReportsForm'
+import InvoicesList from '../views/InvoicesList'
+import InvoicesForm from '../views/InvoicesForm'
 import FormSettingForm from '../views/FormSettingForm'
 import FormSettingList from '../views/FormSettingList'
 import FormSubmissionShow from '../views/FormSubmissionShow'
@@ -550,6 +552,44 @@ export function createRouter (base, i18n) {
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.reports.titles.edit')
+                }
+              }
+            ]
+          },
+          {
+            path: 'invoices',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.invoices.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'invoices',
+                component: InvoicesList,
+                meta: {
+                  label: i18n.t('labels.backend.invoices.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'invoices_create',
+                component: InvoicesForm,
+                meta: {
+                  label: i18n.t('labels.backend.invoices.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'invoices_edit',
+                component: InvoicesForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.invoices.titles.edit')
                 }
               }
             ]

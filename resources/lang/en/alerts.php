@@ -144,6 +144,17 @@ return [
             'bulk_promoted'  => 'Selected reports promoted',
         ],
 
+        'invoices' => [
+            'created'        => 'Invoice created',
+            'updated'        => 'Invoice updated',
+            'deleted'        => 'Invoice deleted',
+            'bulk_destroyed' => 'Selected invoices deleted',
+            'bulk_published' => 'Selected invoices published',
+            'bulk_pending'   => 'Selected invoices are awaiting moderation',
+            'bulk_pinned'    => 'Selected invoices pinned',
+            'bulk_promoted'  => 'Selected invoices promoted',
+        ],
+
         'actions' => [
             'invalid' => 'Invalid action',
         ],

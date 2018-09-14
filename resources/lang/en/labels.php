@@ -514,6 +514,40 @@ return [
                 'promote' => 'Promote selected reports',
             ],
         ],
+
+        'invoices' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Invoice',
+                'index'       => 'Invoice list',
+                'create'      => 'Create Invoice',
+                'edit'        => 'Edit Invoices',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Invoice\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Invoice\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Invoice\'s title.',
+                'meta_description' => 'Invoice\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected invoices',
+                'publish' => 'Publish selected invoices',
+                'pin'     => 'Pin selected invoices',
+                'promote' => 'Promote selected invoices',
+            ],
+        ],
     ],
 
     'frontend' => [

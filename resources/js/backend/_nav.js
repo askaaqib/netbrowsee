@@ -101,6 +101,21 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       url: '/reports',
       icon: 'fe fe-bar-chart-2',
       access: app.user.can('view')
+    },
+    {
+      divider: true,
+      access: true
+    },
+    {
+      title: true,
+      name: 'Invoices Management',
+      access: app.blogEnabled && app.user.can('view')
+    },
+    {
+      name: 'Invoices',
+      url: '/invoices',
+      icon: 'fe fe-book',
+      access: app.user.can('view')
     }
   ]
 }

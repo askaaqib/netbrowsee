@@ -21,6 +21,7 @@ use App\Repositories\EloquentRoleRepository;
 use App\Repositories\EloquentUserRepository;
 use App\Repositories\EloquentVatRepository;
 use App\Repositories\EloquentReportsRepository;
+use App\Repositories\EloquentInvoicesRepository;
 use App\Repositories\Contracts\TagRepository;
 use App\Repositories\Contracts\MetaRepository;
 use App\Repositories\Contracts\PostRepository;
@@ -34,6 +35,7 @@ use App\Repositories\Contracts\RoleRepository;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Contracts\VatRepository;
 use App\Repositories\Contracts\ReportsRepository;
+use App\Repositories\Contracts\InvoicesRepository;
 use App\Repositories\EloquentAccountRepository;
 use App\Repositories\Contracts\AccountRepository;
 use App\Repositories\EloquentFormSettingRepository;
@@ -152,6 +154,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ReportsRepository::class,
             EloquentReportsRepository::class
+        );
+
+        $this->app->bind(
+            InvoicesRepository::class,
+            EloquentInvoicesRepository::class
         );
 
         $this->app->bind(
