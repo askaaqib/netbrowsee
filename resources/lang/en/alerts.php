@@ -133,6 +133,17 @@ return [
             'bulk_promoted'  => 'Selected vat promoted',
         ],
 
+        'reports' => [
+            'created'        => 'Report created',
+            'updated'        => 'Report updated',
+            'deleted'        => 'Report deleted',
+            'bulk_destroyed' => 'Selected reports deleted',
+            'bulk_published' => 'Selected reports published',
+            'bulk_pending'   => 'Selected reports are awaiting moderation',
+            'bulk_pinned'    => 'Selected reports pinned',
+            'bulk_promoted'  => 'Selected reports promoted',
+        ],
+
         'actions' => [
             'invalid' => 'Invalid action',
         ],

@@ -212,5 +212,15 @@ return [
       'total_amount'              => 'Total Amount',
       'quotation_date'           => 'Quotation Date',
       
-  ],
+    ],
+
+    'reports' => [
+      'description'=> 'Description',
+      'status'=> 'Status',
+      'expenses'=> 'Expenses',
+      'amount'=> 'Amount',
+      'vat_collected'=> 'Vat Collected',
+      'profit_loss'=> 'Profit Loss',
+      'jobcard' => 'Jobcard'                      
+    ],
 ];

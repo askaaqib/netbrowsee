@@ -21,6 +21,8 @@ import MaterialRateList from '../views/MaterialRateList'
 import MaterialRateForm from '../views/MaterialRateForm'
 import VatList from '../views/VatList'
 import VatForm from '../views/VatForm'
+import ReportsList from '../views/ReportsList'
+import ReportsForm from '../views/ReportsForm'
 import FormSettingForm from '../views/FormSettingForm'
 import FormSettingList from '../views/FormSettingList'
 import FormSubmissionShow from '../views/FormSubmissionShow'
@@ -510,6 +512,44 @@ export function createRouter (base, i18n) {
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.quotes.titles.edit')
+                }
+              }
+            ]
+          },
+          {
+            path: 'reports',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.reports.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'reports',
+                component: ReportsList,
+                meta: {
+                  label: i18n.t('labels.backend.reports.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'reports_create',
+                component: ReportsForm,
+                meta: {
+                  label: i18n.t('labels.backend.reports.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'reports_edit',
+                component: ReportsForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.reports.titles.edit')
                 }
               }
             ]

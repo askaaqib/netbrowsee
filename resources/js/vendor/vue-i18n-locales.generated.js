@@ -1239,6 +1239,35 @@ export default {
                         "pin": "Pin selected vats",
                         "promote": "Promote selected vats"
                     }
+                },
+                "reports": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Report",
+                        "index": "Report list",
+                        "create": "Create Report",
+                        "edit": "Edit Reports",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of Report's title by default.",
+                        "meta_description": "If leave empty, description will be that of Report's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Report's title.",
+                        "meta_description": "Report's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected reports",
+                        "publish": "Publish selected reports",
+                        "pin": "Pin selected reports",
+                        "promote": "Promote selected reports"
+                    }
                 }
             },
             "frontend": {
@@ -1398,6 +1427,16 @@ export default {
                     "bulk_pending": "Selected vat are awaiting moderation",
                     "bulk_pinned": "Selected vat pinned",
                     "bulk_promoted": "Selected vat promoted"
+                },
+                "reports": {
+                    "created": "Report created",
+                    "updated": "Report updated",
+                    "deleted": "Report deleted",
+                    "bulk_destroyed": "Selected reports deleted",
+                    "bulk_published": "Selected reports published",
+                    "bulk_pending": "Selected reports are awaiting moderation",
+                    "bulk_pinned": "Selected reports pinned",
+                    "bulk_promoted": "Selected reports promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -1793,6 +1832,15 @@ export default {
                 "net_amount": "Net Amount",
                 "total_amount": "Total Amount",
                 "quotation_date": "Quotation Date"
+            },
+            "reports": {
+                "description": "Description",
+                "status": "Status",
+                "expenses": "Expenses",
+                "amount": "Amount",
+                "vat_collected": "Vat Collected",
+                "profit_loss": "Profit Loss",
+                "jobcard": "Jobcard"
             }
         },
         "buttons": {
@@ -1864,6 +1912,11 @@ export default {
             },
             "vat": {
                 "create": "Create Vat",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "reports": {
+                "create": "Create Report",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             }

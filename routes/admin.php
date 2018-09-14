@@ -44,6 +44,13 @@ Route::get('vat/{vat}/show', 'VatController@show')->name('vat.show');
 Route::get('vat/search', 'VatController@search')->name('vat.search');
 Route::resource('vat', 'VatController', ['only' => ['store', 'update', 'destroy'],]);
 
+/* Material Rates Routes */
+Route::post('reports/batch_action', 'ReportsController@batchAction')->name('reports.batch_action');
+Route::get('reports/{report}/show', 'ReportsController@show')->name('reports.show');
+Route::get('reports/search', 'ReportsController@search')->name('reports.search');
+Route::resource('reports', 'ReportsController', ['only' => ['store', 'update', 'destroy'],]);
+
+/* Quotes Routes */
 Route::get('quotes/{quotes}/show', 'QuotesController@show')->name('quotes.show');
 Route::get('quotes/search', 'QuotesController@search')->name('quotes.search');
 Route::get('quotes/latest', 'QuotesController@getLastestquotes')->name('quotes.latest');

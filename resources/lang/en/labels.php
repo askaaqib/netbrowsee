@@ -480,6 +480,40 @@ return [
                 'promote' => 'Promote selected vats',
             ],
         ],
+
+        'reports' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Report',
+                'index'       => 'Report list',
+                'create'      => 'Create Report',
+                'edit'        => 'Edit Reports',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Report\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Report\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Report\'s title.',
+                'meta_description' => 'Report\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected reports',
+                'publish' => 'Publish selected reports',
+                'pin'     => 'Pin selected reports',
+                'promote' => 'Promote selected reports',
+            ],
+        ],
     ],
 
     'frontend' => [
