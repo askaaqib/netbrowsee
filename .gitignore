@@ -15,7 +15,6 @@ yarn-error.log
 .phpunit.result.cache
 composer-lock.json
 package-lock.json
-/public/build/js/backend.js
 /public/build/manifest-backend.json
 /public/build/js/backend.js
 /public/build/js/frontend.js
