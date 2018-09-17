@@ -4,6 +4,9 @@ Route::get('index/search', 'AjaxController@search')->name('search');
 Route::get('routes/search', 'AjaxController@routesSearch')->name('routes.search');
 Route::get('tags/search', 'AjaxController@tagsSearch')->name('tags.search');
 Route::post('images/upload', 'AjaxController@imageUpload')->name('images.upload');
+Route::get('labours/getids', 'AjaxController@getLabourRates')->name('labours.getids');
+Route::get('materials/getids', 'AjaxController@getMaterialRates')->name('materials.getids');
+Route::get('vats/getids', 'AjaxController@getVatRates')->name('vats.getids');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');

@@ -211,6 +211,9 @@ return [
       'net_amount'                => 'Net Amount',
       'total_amount'              => 'Total Amount',
       'quotation_date'           => 'Quotation Date',
+      'labour_rates'           => 'Labour Rates',
+      'material_rates'           => 'Material Rates',
+      'vat_rates'           => 'Vat Rates',
       
     ],
 

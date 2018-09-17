@@ -1899,7 +1899,10 @@ export default {
                 "vat_amount": "Vat Amount",
                 "net_amount": "Net Amount",
                 "total_amount": "Total Amount",
-                "quotation_date": "Quotation Date"
+                "quotation_date": "Quotation Date",
+                "labour_rates": "Labour Rates",
+                "material_rates": "Material Rates",
+                "vat_rates": "Vat Rates"
             },
             "reports": {
                 "description": "Description",

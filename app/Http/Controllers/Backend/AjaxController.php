@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\Contracts\TagRepository;
+use App\Repositories\Contracts\LabourRateRepository;
+use App\Repositories\Contracts\MaterialRateRepository;
+use App\Repositories\Contracts\VatRepository;
 use App\Repositories\Contracts\PostRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 
@@ -98,6 +101,63 @@ class AjaxController extends Controller
             'items' => $this->tags->query()
                 ->where("name->{$locale}", 'like', "%$query%")
                 ->pluck('name'),
+        ];
+    }
+
+    /**
+     * Search labour.
+     *
+     * @param Request $request
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    public function getLabourRates(Request $request, LabourRateRepository $labour)
+    {
+
+        return [
+            'ids' => $labour->query()
+                ->where('id' ,'>' ,0)
+                ->pluck('rate')
+        ];
+    }
+
+    /**
+     * Search material.
+     *
+     * @param Request $request
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    public function getMaterialRates(Request $request, MaterialRateRepository $material)
+    {
+
+        return [
+            'ids' => $material->query()
+                ->where('id' ,'>' ,0)
+                ->pluck('rate')
+        ];
+    }
+
+    /**
+     * Search vat.
+     *
+     * @param Request $request
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    public function getVatRates(Request $request, VatRepository $vat)
+    {
+
+        return [
+            'ids' => $vat->query()
+                ->where('id' ,'>' ,0)
+                ->pluck('rate')
         ];
     }
 
