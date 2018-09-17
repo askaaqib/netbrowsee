@@ -202,9 +202,9 @@ return [
     ],
 
     'quotes' => [
-      'quotes_num'                => 'Quote Number',
+      'quotation_number'                => 'Quote Number',
       'project_num'               => 'Project Number',
-      'quotes_name'               => 'Quotes Name',
+      'quotation_name'               => 'Quotes Name',
       'travelling_time'           => 'Travelling Time',
       'travelling_km'             => 'Travelling KM',
       'vat_amount'                => 'Vat Amount',

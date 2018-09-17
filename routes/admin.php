@@ -57,7 +57,8 @@ Route::get('invoices/search', 'InvoicesController@search')->name('invoices.searc
 Route::resource('invoices', 'InvoicesController', ['only' => ['store', 'update', 'destroy'],]);
 
 /* Quotes Routes */
-Route::get('quotes/{quotes}/show', 'QuotesController@show')->name('quotes.show');
+Route::post('quotes/batch_action', 'QuotesController@batchAction')->name('quotes.batch_action');
+Route::get('quotes/{quote}/show', 'QuotesController@show')->name('quotes.show');
 Route::get('quotes/search', 'QuotesController@search')->name('quotes.search');
 Route::get('quotes/latest', 'QuotesController@getLastestquotes')->name('quotes.latest');
 Route::resource('quotes', 'QuotesController', [

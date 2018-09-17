@@ -33,13 +33,19 @@
           <template slot="checkbox" slot-scope="row">
             <b-form-checkbox :value="row.item.id" v-model="selected"></b-form-checkbox>
           </template>
-          <template slot-scope="row">
-            <span v-text="row.item.id"></span>
+          <template slot="name" slot-scope="row">
+            <span v-text="row.item.name"></span>
+          </template>
+          <template slot="description" slot-scope="row">
+            <span v-text="row.item.description"></span>
+          </template>
+          <template slot="quotes.created_at" slot-scope="row">
+            {{ row.item.created_at }}
+          </template>
+          <template slot="quotes.updated_at" slot-scope="row">
+            {{ row.item.updated_at }}
           </template>
           <template slot="actions" slot-scope="row">
-            <b-button size="sm" variant="success" target="_blank" v-b-tooltip.hover :title="$t('buttons.preview')" class="mr-1">
-              <i class="fe fe-eye"></i>
-            </b-button>
             <b-button v-if="row.item.id" size="sm" variant="primary" :to="`/quotes/${row.item.id}/edit`" v-b-tooltip.hover :title="$t('buttons.edit')" class="mr-1">
               <i class="fe fe-edit"></i>
             </b-button>
@@ -62,14 +68,14 @@ export default {
       selected: [],
       fields: [
         { key: 'checkbox' },
-        { key: 'quotation_number', label: this.$t('validation.quotes.quotes_num'), sortable: true },
+        { key: 'quotation_number', label: this.$t('validation.quotes.quotation_number'), sortable: true },
+        { key: 'quotation_name', label: this.$t('validation.quotes.quotation_name'), sortable: true },
         { key: 'quotes.created_at', label: this.$t('labels.created_at'), 'class': 'text-center', sortable: true },
         { key: 'quotes.updated_at', label: this.$t('labels.updated_at'), 'class': 'text-center', sortable: true },
         { key: 'actions', label: this.$t('labels.actions'), 'class': 'nowrap' }
       ],
       actions: {
-        destroy: this.$t('labels.backend.quotes.actions.destroy'),
-        publish: this.$t('labels.backend.quotes.actions.publish')
+        destroy: this.$t('labels.backend.quotes.actions.destroy')
       }
     }
   },
@@ -81,7 +87,7 @@ export default {
       return this.$refs.datatable.refresh()
     },
     onDelete (id) {
-      this.$refs.datasource.deleteRow({ post: id })
+      this.$refs.datasource.deleteRow({ quote: id })
     }
   }
 }

@@ -3,11 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Quotes;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Gate;
-use Spatie\MediaLibrary\Models\Media;
 use App\Repositories\Contracts\QuotesRepository;
 
 /**
@@ -18,102 +16,28 @@ class EloquentQuotesRepository extends EloquentBaseRepository implements QuotesR
     /**
      * EloquentUserRepository constructor.
      *
-     * @param Quotes $quotes
+     * @param Quotes $quote
      */
     public function __construct(
-        Quotes $quotes
+        Quotes $quote
     ) {
-        parent::__construct($quotes);
+        parent::__construct($quote);
     }
 
     /**
-     * @return mixed
-     */
-    public function published()
-    {
-       
-    }
-
-    /**
-     * @param Tag $tag
+     * @param Quotes                               $quote
+     * @param array                              $input
+     * @param \Illuminate\Http\UploadedFile|null $image
+     *
+     * @throws \App\Exceptions\GeneralException|\Exception|\Throwable
      *
      * @return mixed
      */
-    public function publishedByTag(Tag $tag)
-    {
-    }
-
-    /**
-     * @param \App\Models\User $user
-     *
-     * @return mixed
-     */
-    public function publishedByOwner(User $user)
+    public function save(Quotes $quote, array $input)
     {
         
-    }
-
-    /**
-     * @param string $slug
-     *
-     * @return mixed
-     */
-    public function findBySlug($slug)
-    {
-        
-    }
-
-    /**
-     * @param Quotes                               
-     * @param array                              $input
-     * @param \Illuminate\Http\UploadedFile|null $image
-     *
-     * @throws \App\Exceptions\GeneralException|\Exception|\Throwable
-     *
-     * @return mixed
-     */
-    public function saveAndPublish(Quotes $quotes, array $input)
-    {
-        return $this->save($quotes, $input);
-    }
-
-    /**
-     * @param quotes                               $quotes
-     * @param array                              $input
-     * @param \Illuminate\Http\UploadedFile|null $image
-     *
-     * @throws \App\Exceptions\GeneralException|\Exception|\Throwable
-     *
-     * @return mixed
-     */
-    public function saveAsDraft(Quotes $quotes, array $input)
-    {
-
-        return $this->save($quotes, $input);
-    }
-
-    /**
-     * @param Quotes                               $Quotes
-     * @param array                              $input
-     * @param \Illuminate\Http\UploadedFile|null $image
-     *
-     * @throws \App\Exceptions\GeneralException|\Exception|\Throwable
-     *
-     * @return mixed
-     */
-    private function save(Quotes $quotes, array $input)
-    {
-        if ($quotes->exists) {
-            if (! Gate::check('update', $quotes)) {
-                throw new GeneralException(__('exceptions.backend.quotes.save'));
-            }
-        } else {
-            //$quotes->user_id = auth()->id();
-        }
-
-        DB::transaction(function () use ($quotes, $input) {
-
-            if (! $quotes->save()) {
+        DB::transaction(function () use ($quote, $input) {
+            if (! $quote->save()) {
                 throw new GeneralException(__('exceptions.backend.quotes.save'));
             }           
             return true;
@@ -123,15 +47,15 @@ class EloquentQuotesRepository extends EloquentBaseRepository implements QuotesR
     }
 
     /**
-     * @param quotes $quotes
+     * @param Quotes $quote
      *
      * @throws \Exception
      *
      * @return mixed
      */
-    public function destroy(Quotes $quotes)
+    public function destroy(Quotes $quote)
     {
-        if (! $quotes->delete()) {
+        if (! $quote->delete()) {
             throw new GeneralException(__('exceptions.backend.quotes.delete'));
         }
 
@@ -159,45 +83,20 @@ class EloquentQuotesRepository extends EloquentBaseRepository implements QuotesR
      */
     public function batchDestroy(array $ids)
     {
-        
+        DB::transaction(function () use ($ids) {
+            $query = $this->batchQuery($ids);            
+
+            /** @var Quotes[] $projects */
+            $quotes = $query->get();
+
+            foreach ($quotes as $quote) {
+                $this->destroy($quote);
+            }
+
+            return true;
+        });
+
+        return true;
     }
 
-    /**
-     * @param array $ids
-     *
-     * @throws \Throwable
-     * @throws \Exception
-     *
-     * @return mixed
-     */
-    public function batchPublish(array $ids)
-    {
-       
-    }
-
-    /**
-     * @param array $ids
-     *
-     * @throws \Throwable
-     * @throws \Exception
-     *
-     * @return mixed
-     */
-    public function batchPin(array $ids)
-    {
-        
-    }
-
-    /**
-     * @param array $ids
-     *
-     * @throws \Throwable
-     * @throws \Exception
-     *
-     * @return mixed
-     */
-    public function batchPromote(array $ids)
-    {
-        
-    }
 }

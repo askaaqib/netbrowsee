@@ -3,52 +3,21 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\Quotes;
-use App\Models\User;
 
 /**
- * Interface QuotesRepository.
+ * Interface ProjectQuotesRepository.
  */
 interface QuotesRepository extends BaseRepository
 {
-    /**
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function published();
+
+    public function save(Quotes $quote, array $input);
 
     /**
-     * @param \App\Models\User $user
-     *
-     * @return mixed
-     *
-     * @internal param \App\Models\Tag $tag
-     */
-    public function publishedByOwner(User $user);
-
-
-    /**
-     * @param \App\Models\Quotes              $Quotes
-     * @param array                         $input
-     * @param \Illuminate\Http\UploadedFile $image
+     * @param Quotes $quote
      *
      * @return mixed
      */
-    public function saveAndPublish(Quotes $Quotes, array $input);
-
-    /**
-     * @param Quotes                       $Quotes
-     * @param array                         $input
-     * @param \Illuminate\Http\UploadedFile $image
-     *
-     * @return mixed
-     */
-    public function saveAsDraft(Quotes $Quotes, array $input);
-
-    /**
-     * @param Quotes $Quotes
-     *
-     * @return mixed
-     */
-    public function destroy(Quotes $Quotes);
+    public function destroy(Quotes $quote);
 
     /**
      * @param array $ids
@@ -56,11 +25,4 @@ interface QuotesRepository extends BaseRepository
      * @return mixed
      */
     public function batchDestroy(array $ids);
-
-    /**
-     * @param array $ids
-     *
-     * @return mixed
-     */
-    public function batchPublish(array $ids);
 }

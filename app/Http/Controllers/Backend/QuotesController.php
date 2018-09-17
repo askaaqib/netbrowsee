@@ -7,29 +7,23 @@ use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreQuotesRequest;
+use App\Http\Requests\UpdateQuotesRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\QuotesRepository;
-
 
 class QuotesController extends BackendController
 {
     /**
-     * @var QuotesRepository
+     * @var JobcardRepository
      */
-    protected $quotes;
+    protected $quote;
 
-    /**
-     * Create a new controller instance.
-     *
-     *
-     * @param \App\Repositories\Contracts\QuotesRepository $quotes
-     */
-    public function __construct(QuotesRepository $quotes)
+    public function __construct(QuotesRepository $quote)
     {
-        //dd($quotes);
-        $this->quotes = $quotes;
+        //dd($jobcards);
+        $this->quote = $quote;
     }
-
+    
     /**
      * Show the application dashboard.
      *
@@ -43,21 +37,25 @@ class QuotesController extends BackendController
     {
 
         /** @var Builder $query */
-        $query = $this->quotes->query();
+        $query = $this->quote->query();
         
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
             'quotation_number',
+            'quotation_name',
         ]);
 
         if ($request->get('exportData')) {
             return $requestSearchQuery->export([
                 'quotation_number',
                 'quotation_name',
+                'quotes.created_at',
+                'quotes.updated_at',
             ],
                 [
-                    __('validation.quotes.quotes_num'),
-                    __('validation.quotes.name'),
-
+                    __('validation.attributes.quotation_number'),
+                    __('validation.attributes.quotation_name'),
+                    __('labels.created_at'),
+                    __('labels.updated_at'),
                 ],
                 'quotes');
         }
@@ -66,72 +64,47 @@ class QuotesController extends BackendController
             'quotes.id',
             'quotation_number',
             'quotation_name',
-            'travelling_time',
-            'travelling_km',
-            'vat_amount',
-            'net_amount',
-            'total_amount',
             'quotes.created_at',
             'quotes.updated_at',
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * @param StoreQuotesRequest $request
-     *
-     * @return mixed
      */
     public function store(StoreQuotesRequest $request)
     {
-        
         //dd($request->all());    
-        $quotes = $this->quotes->make(
+        $quote = $this->quote->make(
             $request->all()
         ); 
         
-        $this->quotes->saveAndPublish($quotes, $request->input());
-        
-        return $this->redirectResponse($request, __('alerts.backend.quotes.created'));
-    }
+       $this->quote->save($quote, $request->input());
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function getLastestquotes()
-    {
-        $query = $this->quotes->query();        
-
-        return $query->orderByDesc('created_at')->limit(10)->get();
+       return $this->redirectResponse($request, __('alerts.backend.quotes.created'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\quotes  $quotes
+     * @param  \App\Quotes  $quote
      * @return \Illuminate\Http\Response
      */
-    public function show(quotes $quotes)
+    public function show(Quotes $quote)
     {
-        return $quotes;
+       return $quote;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\quotes  $quotes
+     * @param  \App\Quotes  $quote
      * @return \Illuminate\Http\Response
      */
-    public function edit(quotes $quotes)
+    public function edit(Quotes $quote)
     {
         //
     }
@@ -140,22 +113,51 @@ class QuotesController extends BackendController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\quotes  $quotes
+     * @param  \App\Quotes  $quote
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, quotes $quotes)
+    public function update(Quotes $quote, UpdateQuotesRequest $request)
     {
-        //
+        $quote->fill(
+            $request->all()
+        );
+        
+        $this->quote->save($quote, $request->input());
+           
+        return $this->redirectResponse($request, __('alerts.backend.quotes.updated'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\quotes  $quotes
+     * @param  \App\Quotes  $quote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(quotes $quotes)
+    public function destroy(Quotes $quote, Request $request)
     {
-        //
+
+        $this->quote->destroy($quote);
+
+        return $this->redirectResponse($request, __('alerts.backend.quotes.deleted'));
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
+    public function batchAction(Request $request)
+    {
+        $action = $request->get('action');
+        $ids = $request->get('ids');
+        
+        switch ($action) {
+            case 'destroy':                
+                    $this->quote->batchDestroy($ids);
+                    return $this->redirectResponse($request, __('alerts.backend.quotes.bulk_destroyed'));
+                break;
+        }
+
+        return $this->redirectResponse($request, __('alerts.backend.actions.invalid'), 'error');
     }
 }

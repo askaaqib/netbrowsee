@@ -548,6 +548,39 @@ return [
                 'promote' => 'Promote selected invoices',
             ],
         ],
+        'quotes' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Quote',
+                'index'       => 'Quote list',
+                'create'      => 'Create Quote',
+                'edit'        => 'Edit quotes',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Quote\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Quote\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Quote\'s title.',
+                'meta_description' => 'Quote\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected quotes',
+                'publish' => 'Publish selected quotes',
+                'pin'     => 'Pin selected quotes',
+                'promote' => 'Promote selected quotes',
+            ],
+        ],
     ],
 
     'frontend' => [

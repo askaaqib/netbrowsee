@@ -33,8 +33,8 @@ import UserForm from '../views/UserForm'
 import UserList from '../views/UserList'
 import RoleForm from '../views/RoleForm'
 import RoleList from '../views/RoleList'
-import quotesForm from '../views/quotesForm'
-import quotesList from '../views/quotesList'
+import QuotesForm from '../views/QuotesForm'
+import QuotesList from '../views/QuotesList'
 
 Vue.use(Router)
 
@@ -494,7 +494,7 @@ export function createRouter (base, i18n) {
               {
                 path: '/',
                 name: 'quotes',
-                component: quotesList,
+                component: QuotesList,
                 meta: {
                   label: i18n.t('labels.backend.quotes.titles.index')
                 }
@@ -502,7 +502,7 @@ export function createRouter (base, i18n) {
               {
                 path: 'create',
                 name: 'quotes_create',
-                component: quotesForm,
+                component: QuotesForm,
                 meta: {
                   label: i18n.t('labels.backend.quotes.titles.create')
                 }
@@ -510,7 +510,7 @@ export function createRouter (base, i18n) {
               {
                 path: ':id/edit',
                 name: 'quotes_edit',
-                component: quotesForm,
+                component: QuotesForm,
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.quotes.titles.edit')
