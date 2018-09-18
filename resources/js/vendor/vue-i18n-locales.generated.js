@@ -1879,16 +1879,18 @@ export default {
                 "facility_name": "Facility Name",
                 "district": "District",
                 "sub_district": "Sub District",
-                "project_manager": "Project Manager",
+                "projects": "Projects",
                 "labour_paid": "Labour Paid",
                 "travelling_paid": "Travelling Paid",
                 "materials_paid": "Materials Paid",
                 "quoted_amount": "Quoted Amount",
                 "status": "Status",
-                "assigned_to": "Assigned to",
+                "assigned_to": "Assign to",
                 "before_pictures": "Before Pictures",
-                "during_after_pictures": "During & After Pictures",
-                "upload_jobcard": "Upload Jobcard"
+                "during_pictures": "During Pictures",
+                "after_pictures": "After Pictures",
+                "upload_jobcard": "Upload Jobcard",
+                "quotations": "Quotation"
             },
             "quotes": {
                 "quotation_number": "Quote Number",
@@ -1899,7 +1901,10 @@ export default {
                 "vat_amount": "Vat Amount",
                 "net_amount": "Net Amount",
                 "total_amount": "Total Amount",
-                "quotation_date": "Quotation Date"
+                "quotation_date": "Quotation Date",
+                "labour_rates": "Labour Rates",
+                "material_rates": "Material Rates",
+                "vat_rates": "Vat Rates"
             },
             "reports": {
                 "description": "Description",
@@ -1916,7 +1921,10 @@ export default {
                 "amount": "Amount",
                 "net_amount": "Net Amount",
                 "vat_amount": "Vat Amount",
-                "total_amount": "Total Amount"
+                "total_amount": "Total Amount",
+                "materials_rates_id": "Materials Paid",
+                "vat_id": "Vat Rates",
+                "quotations_id": "Quotation"
             }
         },
         "buttons": {

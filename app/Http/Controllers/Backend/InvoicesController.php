@@ -93,14 +93,14 @@ class InvoicesController extends BackendController
      */
     public function store(StoreInvoicesRequest $request)
     {
-        $request->request->add(['vat_id' => '4','materials_rates_id' => '6' , 'quotations_id' => '3' ]);  
-        //dd($request->all());    
-        $invoice = $this->invoice->make(
-            $request->all()
-        ); 
+        $data = $request->input();
+        $data['vat_id'] = $request->vat_id['id'];
+        $data['materials_rates_id'] = $request->materials_rates_id['id'];
+        $data['quotations_id'] = $request->quotations_id['id'];
+        $invoice = $this->invoice->make($data); 
        
        //dd($request->input());     
-       $this->invoice->save($invoice, $request->input());
+       $this->invoice->save($invoice, $data);
 
        return $this->redirectResponse($request, __('alerts.backend.invoices.created'));
     }
@@ -135,12 +135,14 @@ class InvoicesController extends BackendController
      * @return \Illuminate\Http\Response
      */
     public function update(Invoices $invoice, UpdateInvoicesRequest $request)
-    {
-        $invoice->fill(
-            $request->all()
-        );
+    {   
+        $data = $request->input();
+        $data['vat_id'] = $request->vat_id['id'];
+        $data['materials_rates_id'] = $request->materials_rates_id['id'];
+        $data['quotations_id'] = $request->quotations_id['id'];
+        $invoice->fill($data);
         
-        $this->invoice->save($invoice, $request->input());
+        $this->invoice->save($invoice, $data);
            
         return $this->redirectResponse($request, __('alerts.backend.invoices.updated'));
     }

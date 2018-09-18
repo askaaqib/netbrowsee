@@ -77,7 +77,8 @@ class QuotesController extends BackendController
      */
     public function store(StoreQuotesRequest $request)
     {
-        //dd($request->all());    
+        //dd($request->all());
+        $request->request->add(['client_id' => auth()->id()]);      
         $quote = $this->quote->make(
             $request->all()
         ); 
@@ -117,12 +118,13 @@ class QuotesController extends BackendController
      * @return \Illuminate\Http\Response
      */
     public function update(Quotes $quote, UpdateQuotesRequest $request)
-    {
+    {   
+        $request->request->add(['client_id' => auth()->id()]); 
         $quote->fill(
             $request->all()
         );
         
-        $this->quote->save($quote, $request->input());
+        $this->quote->save($quote, $request->all());
            
         return $this->redirectResponse($request, __('alerts.backend.quotes.updated'));
     }

@@ -25,6 +25,23 @@ class Jobcard extends Model
      */
     protected $fillable = [
         'jobcard_num',
+        'description',
+        'problem_type',
+        'priority',
+        'facility_name',
+        'district',
+        'sub_district',
+        'travelling_paid',
+        'quoted_amount',
+        'status',
+        'contractor_id',
+        'before_pictures',
+        'during_pictures',
+        'after_pictures',
+        'projects_id',
+        'labour_rates_id',
+        'materials_rates_id',
+        'quotations_id',
     ];
 
     protected $table = 'jobcard';

@@ -108,6 +108,63 @@
               ></b-form-input>
             </b-form-group>
 
+            <b-form-group
+              :label="$t('validation.invoices.vat_id')"
+              label-for="vat_id"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('vat_id')"
+            >
+              <v-select
+                id="vat_id"
+                name="vat_id"
+                v-model="model.vat_id"
+                :options="vats"
+                placeholder="Select Vat"
+                label="name"
+                @search-change="getVats"
+              >
+              </v-select>
+            </b-form-group>
+
+            <b-form-group
+              :label="$t('validation.invoices.materials_rates_id')"
+              label-for="materials_rates_id"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('materials_rates_id')"
+            >
+              <v-select
+                id="materials_rates_id"
+                name="materials_rates_id"
+                v-model="model.materials_rates_id"
+                :options="materials_rates"
+                placeholder="Select Materials Paid"
+                label="name"
+                @search-change="getMaterials"
+              >
+              </v-select>
+            </b-form-group>
+
+            <b-form-group
+              :label="$t('validation.jobcards.quotations')"
+              label-for="quotations_id"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('quotations_id')"
+            >
+              <v-select
+                id="quotations_id"
+                name="quotations_id"
+                v-model="model.quotations_id"
+                :options="quotations"
+                placeholder="Select Quotations"
+                label="quotation_name"
+                @search-change="getQuotations"
+              >
+              </v-select>
+            </b-form-group>
+
             <b-row slot="footer">
               <b-col md>
                 <b-button to="/invoices" exact variant="danger" size="md">
@@ -131,6 +188,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import form from '../mixins/form'
 
 export default {
@@ -146,14 +204,42 @@ export default {
       modelName: 'invoice',
       resourceRoute: 'invoices',
       listPath: '/invoices',
+      materials_rates: [],
+      quotations: [],
+      vats: [],
       model: {
         description: null,
         quantity: null,
         amount: null,
         net_amount: null,
         vat_amount: null,
-        total_amount: null
+        total_amount: null,
+        materials_rates_id: [],
+        quotations_id: [],
+        vat_id: []
       }
+    }
+  },
+  created: function () {
+    this.getMaterials()
+    this.getQuotations()
+    this.getVats()
+  },
+  methods: {
+    async getMaterials () {
+      let { data } = await axios.get(this.$app.route('admin.materials.getdata'), {})
+
+      this.materials_rates = data
+    },
+    async getQuotations () {
+      let { data } = await axios.get(this.$app.route('admin.quotations.getdata'), {})
+
+      this.quotations = data
+    },
+    async getVats () {
+      let { data } = await axios.get(this.$app.route('admin.vats.getdata'), {})
+
+      this.vats = data
     }
   }
 }

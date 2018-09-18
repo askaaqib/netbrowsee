@@ -37,6 +37,7 @@ class EloquentQuotesRepository extends EloquentBaseRepository implements QuotesR
     {
         
         DB::transaction(function () use ($quote, $input) {
+            
             if (! $quote->save()) {
                 throw new GeneralException(__('exceptions.backend.quotes.save'));
             }           

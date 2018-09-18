@@ -93,14 +93,13 @@ class ReportsController extends BackendController
      */
     public function store(StoreReportsRequest $request)
     {
-        $request->request->add(['jobcard_id' => '12']);  
-        //dd($request->all());    
-        $report = $this->report->make(
-            $request->all()
-        ); 
+          
+        $data = $request->all();
+        $data['jobcard_id'] = $request->jobcard_id['id'];    
+        $report = $this->report->make($data); 
        
        //dd($request->input());     
-       $this->report->save($report, $request->input());
+       $this->report->save($report, $data);
 
        return $this->redirectResponse($request, __('alerts.backend.reports.created'));
     }
@@ -135,12 +134,12 @@ class ReportsController extends BackendController
      * @return \Illuminate\Http\Response
      */
     public function update(Reports $report, UpdateReportsRequest $request)
-    {
-        $report->fill(
-            $request->all()
-        );
+    {   
+        $data = $request->input();
+        $data['jobcard_id'] = $request->jobcard_id['id'];
+        $report->fill($data);
         
-        $this->report->save($report, $request->input());
+        $this->report->save($report, $data);
            
         return $this->redirectResponse($request, __('alerts.backend.reports.updated'));
     }

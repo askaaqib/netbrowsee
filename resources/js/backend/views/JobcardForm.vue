@@ -125,37 +125,41 @@
             </b-form-group>
 
             <b-form-group
-              :label="$t('validation.jobcards.project_manager')"
-              label-for="project_manager"
+              :label="$t('validation.jobcards.projects')"
+              label-for="projects"
               horizontal
               :label-cols="2"
-              :feedback="feedback('project_manager')"
+              :feedback="feedback('projects_id')"
             >
-              <b-form-input
-                id="project_manager"
-                name="project_manager"
-                required
-                :placeholder="$t('validation.jobcards.project_manager')"
-                v-model="model.project_manager"
-                :state="state('project_manager')"
-              ></b-form-input>
+              <v-select
+                id="projects_id"
+                name="projects_id"
+                v-model="model.projects_id"
+                :options="projects"
+                placeholder="Select Projects"
+                label="name"
+                @search-change="getProjects"
+              >
+              </v-select>
             </b-form-group>
 
             <b-form-group
               :label="$t('validation.jobcards.labour_paid')"
-              label-for="labour_paid"
+              label-for="labour_rates_id"
               horizontal
               :label-cols="2"
-              :feedback="feedback('labour_paid')"
+              :feedback="feedback('labour_rates_id')"
             >
-              <b-form-input
-                id="labour_paid"
-                name="labour_paid"
-                required
-                :placeholder="$t('validation.jobcards.labour_paid')"
-                v-model="model.labour_paid"
-                :state="state('labour_paid')"
-              ></b-form-input>
+              <v-select
+                id="labour_rates_id"
+                name="labour_rates_id"
+                v-model="model.labour_rates_id"
+                :options="labour_rates"
+                placeholder="Select Labour Paid"
+                label="name"
+                @search-change="getLabours"
+              >
+              </v-select>
             </b-form-group>
 
             <b-form-group
@@ -177,19 +181,21 @@
 
             <b-form-group
               :label="$t('validation.jobcards.materials_paid')"
-              label-for="materials_paid"
+              label-for="materials_rates_id"
               horizontal
               :label-cols="2"
-              :feedback="feedback('materials_paid')"
+              :feedback="feedback('materials_rates_id')"
             >
-              <b-form-input
-                id="materials_paid"
-                name="materials_paid"
-                required
-                :placeholder="$t('validation.jobcards.materials_paid')"
-                v-model="model.materials_paid"
-                :state="state('materials_paid')"
-              ></b-form-input>
+              <v-select
+                id="materials_rates_id"
+                name="materials_rates_id"
+                v-model="model.materials_rates_id"
+                :options="materials_rates"
+                placeholder="Select Materials Paid"
+                label="name"
+                @search-change="getMaterials"
+              >
+              </v-select>
             </b-form-group>
 
             <b-form-group
@@ -233,14 +239,16 @@
               :label-cols="2"
               :feedback="feedback('assigned_to')"
             >
-              <b-form-input
+              <v-select
                 id="assigned_to"
                 name="assigned_to"
-                required
-                :placeholder="$t('validation.jobcards.assigned_to')"
-                v-model="model.assigned_to"
-                :state="state('assigned_to')"
-              ></b-form-input>
+                v-model="model.contractor_id"
+                :options="assigned_to"
+                placeholder="Select to Assign"
+                label="name"
+                @search-change="getUsers"
+              >
+              </v-select>
             </b-form-group>
 
             <b-form-group
@@ -261,20 +269,56 @@
             </b-form-group>
 
             <b-form-group
-              :label="$t('validation.jobcards.during_after_pictures')"
-              label-for="during_after_pictures"
+              :label="$t('validation.jobcards.during_pictures')"
+              label-for="during_pictures"
               horizontal
               :label-cols="2"
-              :feedback="feedback('during_after_pictures')"
+              :feedback="feedback('during_pictures')"
             >
               <b-form-input
-                id="during_after_pictures"
-                name="during_after_pictures"
+                id="during_pictures"
+                name="during_pictures"
                 required
-                :placeholder="$t('validation.jobcards.during_after_pictures')"
-                v-model="model.during_after_pictures"
-                :state="state('during_after_pictures')"
+                :placeholder="$t('validation.jobcards.during_pictures')"
+                v-model="model.during_pictures"
+                :state="state('during_pictures')"
               ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              :label="$t('validation.jobcards.after_pictures')"
+              label-for="after_pictures"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('after_pictures')"
+            >
+              <b-form-input
+                id="after_pictures"
+                name="after_pictures"
+                required
+                :placeholder="$t('validation.jobcards.after_pictures')"
+                v-model="model.after_pictures"
+                :state="state('after_pictures')"
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
+              :label="$t('validation.jobcards.quotations')"
+              label-for="quotations_id"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('quotations_id')"
+            >
+              <v-select
+                id="quotations_id"
+                name="quotations_id"
+                v-model="model.quotations_id"
+                :options="quotations"
+                placeholder="Select Quotations"
+                label="quotation_name"
+                @search-change="getQuotations"
+              >
+              </v-select>
             </b-form-group>
 
             <b-row slot="footer">
@@ -304,6 +348,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import form from '../mixins/form'
 
 export default {
@@ -319,7 +364,11 @@ export default {
       modelName: 'jobcard',
       resourceRoute: 'jobcards',
       listPath: '/jobcards',
-      tags: [],
+      labour_rates: [],
+      projects: [],
+      materials_rates: [],
+      assigned_to: [],
+      quotations: [],
       model: {
         jobcard_num: null,
         description: null,
@@ -328,15 +377,52 @@ export default {
         facility_name: null,
         district: null,
         sub_district: null,
-        project_manager: null,
-        labour_paid: null,
-        materials_paid: null,
+        projects_id: [],
+        labour_rates_id: [],
+        travelling_paid: null,
+        materials_rates_id: [],
+        contractor_id: [],
         quoted_amount: null,
         status: null,
-        assigned_to: null,
         before_pictures: null,
-        during_after_pictures: null
+        during_pictures: null,
+        after_pictures: null,
+        quotations_id: null
       }
+    }
+  },
+  created: function () {
+    this.getLabours()
+    this.getMaterials()
+    this.getProjects()
+    this.getUsers()
+    this.getQuotations()
+  },
+  methods: {
+    async getLabours () {
+      let { data } = await axios.get(this.$app.route('admin.labours.getdata'), {})
+
+      this.labour_rates = data
+    },
+    async getMaterials () {
+      let { data } = await axios.get(this.$app.route('admin.materials.getdata'), {})
+
+      this.materials_rates = data
+    },
+    async getProjects () {
+      let { data } = await axios.get(this.$app.route('admin.projects.getdata'), {})
+
+      this.projects = data
+    },
+    async getUsers () {
+      let { data } = await axios.get(this.$app.route('admin.users.getdata'), {})
+
+      this.assigned_to = data
+    },
+    async getQuotations () {
+      let { data } = await axios.get(this.$app.route('admin.quotations.getdata'), {})
+
+      this.quotations = data
     }
   }
 }
