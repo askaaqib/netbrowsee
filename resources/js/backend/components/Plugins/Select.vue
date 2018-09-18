@@ -35,11 +35,11 @@ export default {
   mixins: [formStateMixin],
   props: {
     value: {
-      type: [Array, Object],
+      type: [Array, Object, Number, String],
       default: () => []
     },
     options: {
-      type: Array,
+      type: [Array, Object],
       required: true
     },
     id: {

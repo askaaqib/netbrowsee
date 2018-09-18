@@ -30,6 +30,9 @@ class StoreInvoicesRequest extends FormRequest
             'net_amount' => 'required',
             'vat_amount' => 'required',
             'total_amount' => 'required',             
+            'vat_id' => 'required',             
+            'materials_rates_id' => 'required',             
+            'quotations_id' => 'required',             
         ];
     }
 }

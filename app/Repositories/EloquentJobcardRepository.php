@@ -74,6 +74,7 @@ class EloquentJobcardRepository extends EloquentBaseRepository implements Jobcar
      */
     public function saveAndPublish(Jobcard $jobcard, array $input)
     {
+                
         $jobcard->status = Jobcard::PUBLISHED;
             
         return $this->save($jobcard, $input);

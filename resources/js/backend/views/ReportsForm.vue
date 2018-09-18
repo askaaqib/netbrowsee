@@ -108,6 +108,25 @@
               ></b-form-input>
             </b-form-group>
 
+            <b-form-group
+              :label="$t('validation.reports.jobcard')"
+              label-for="jobcard_id"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('jobcard_id')"
+            >
+              <v-select
+                id="jobcard_id"
+                name="jobcard_id"
+                v-model="model.jobcard_id"
+                :options="jobcards"
+                placeholder="Select Jobcard"
+                label="jobcard_num"
+                @search-change="getJobcards"
+              >
+              </v-select>
+            </b-form-group>
+
             <b-row slot="footer">
               <b-col md>
                 <b-button to="/reports" exact variant="danger" size="md">
@@ -131,6 +150,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import form from '../mixins/form'
 
 export default {
@@ -146,14 +166,26 @@ export default {
       modelName: 'report',
       resourceRoute: 'reports',
       listPath: '/reports',
+      jobcards: [],
       model: {
         description: null,
         status: null,
         expenses: null,
         amount: null,
         vat_collected: null,
-        profit_loss: null
+        profit_loss: null,
+        jobcard_id: null
       }
+    }
+  },
+  created: function () {
+    this.getJobcards()
+  },
+  methods: {
+    async getJobcards () {
+      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {})
+
+      this.jobcards = data
     }
   }
 }

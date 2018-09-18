@@ -50,6 +50,16 @@ class JobcardController extends BackendController
             'jobcard_num',
             'description',
             'problem_type',
+            'priority',
+            'facility_name',
+            'district',
+            'sub_district',
+            'travelling_paid',
+            'quoted_amount',
+            'status',
+            'before_pictures',
+            'during_pictures',
+            'after_pictures',
         ]);
 
         if ($request->get('exportData')) {
@@ -58,6 +68,15 @@ class JobcardController extends BackendController
                 'description',
                 'problem_type',
                 'priority',
+                'facility_name',
+                'district',
+                'sub_district',
+                'travelling_paid',
+                'quoted_amount',
+                'status',
+                'before_pictures',
+                'during_pictures',
+                'after_pictures',
                 'jobcard.created_at',
                 'jobcard.updated_at',
             ],
@@ -66,6 +85,15 @@ class JobcardController extends BackendController
                     __('validation.jobcards.description'),
                     __('validation.jobcards.problem_type'),
                     __('validation.jobcards.priority'),
+                    __('validation.jobcards.facility_name'),
+                    __('validation.jobcards.district'),
+                    __('validation.jobcards.sub_district'),
+                    __('validation.jobcards.travelling_paid'),
+                    __('validation.jobcards.quoted_amount'),
+                    __('validation.jobcards.status'),
+                    __('validation.jobcards.before_pictures'),
+                    __('validation.jobcards.during_pictures'),
+                    __('validation.jobcards.after_pictures'),
                     __('labels.created_at'),
                     __('labels.updated_at'),
                 ],
@@ -109,15 +137,20 @@ class JobcardController extends BackendController
     public function store(StoreJobcardRequest $request)
     {
         
-        //dd($request->all());    
-        $jobcard = $this->jobcard->make(
-            $request->only('jobcard_num')
-        ); 
+        $data = $request->input();
+        $data['projects_id'] = $request->projects_id['id'];
+        $data['labour_rates_id'] = $request->labour_rates_id['id'];
+        $data['materials_rates_id'] = $request->materials_rates_id['id'];
+        $data['contractor_id'] = $request->contractor_id['id'];
+        $data['quotations_id'] = $request->quotations_id['id'];
         
-        if ('publish' === $request->input('status')) {
-            $this->jobcard->saveAndPublish($jobcard, $request->input());
+        //dd($data);
+        $jobcard = $this->jobcard->make($data); 
+        
+        if ('publish' === $data['status']) {
+            $this->jobcard->saveAndPublish($jobcard, $data);
         } else {
-            $this->jobcard->saveAsDraft($jobcard, $request->input());
+            $this->jobcard->saveAsDraft($jobcard, $data);
         }
 
         return $this->redirectResponse($request, __('alerts.backend.jobcards.created'));
@@ -165,12 +198,18 @@ class JobcardController extends BackendController
      */
     public function update(Jobcard $jobcard, UpdateJobcardRequest $request)
     {
+        $data = $request->input();
+        $data['projects_id'] = $request->projects_id['id'];
+        $data['labour_rates_id'] = $request->labour_rates_id['id'];
+        $data['materials_rates_id'] = $request->materials_rates_id['id'];
+        $data['contractor_id'] = $request->contractor_id['id'];
+        $data['quotations_id'] = $request->quotations_id['id'];
         
         $jobcard->fill(
-            $request->only('jobcard_num')
+            $data
         );
         
-        $this->jobcard->saveAndPublish($jobcard, $request->input());
+        $this->jobcard->saveAndPublish($jobcard, $data);
            
         return $this->redirectResponse($request, __('alerts.backend.jobcards.updated'));
     }

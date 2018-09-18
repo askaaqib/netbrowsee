@@ -10,7 +10,11 @@ use App\Repositories\Contracts\TagRepository;
 use App\Repositories\Contracts\LabourRateRepository;
 use App\Repositories\Contracts\MaterialRateRepository;
 use App\Repositories\Contracts\VatRepository;
+use App\Repositories\Contracts\ProjectRepository;
 use App\Repositories\Contracts\PostRepository;
+use App\Repositories\Contracts\UserRepository;
+use App\Repositories\Contracts\QuotesRepository;
+use App\Repositories\Contracts\JobcardRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 
 class AjaxController extends Controller
@@ -113,7 +117,7 @@ class AjaxController extends Controller
      *
      * @return array
      */
-    public function getLabourRates(Request $request, LabourRateRepository $labour)
+    public function getLabourRates(LabourRateRepository $labour)
     {
 
         return [
@@ -132,7 +136,7 @@ class AjaxController extends Controller
      *
      * @return array
      */
-    public function getMaterialRates(Request $request, MaterialRateRepository $material)
+    public function getMaterialRates(MaterialRateRepository $material)
     {
 
         return [
@@ -151,7 +155,7 @@ class AjaxController extends Controller
      *
      * @return array
      */
-    public function getVatRates(Request $request, VatRepository $vat)
+    public function getVatRates(VatRepository $vat)
     {
 
         return [
@@ -161,6 +165,78 @@ class AjaxController extends Controller
         ];
     }
 
+    /**
+     * Search Project.
+     *
+     * @param Request $request
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return array
+     */
+    public function getProjects(ProjectRepository $project)
+    {
+
+        return $project->query()
+                ->where('id' ,'>' ,0)
+                ->select('id','name')->get();
+        
+    }
+
+    public function getLabours(LabourRateRepository $labour)
+    {
+
+        return $labour->query()
+                ->where('id' ,'>' ,0)
+                ->select('id','name')->get();
+        
+    }
+
+
+    public function getMaterials(MaterialRateRepository $material)
+    {
+
+        return $material->query()
+                ->where('id' ,'>' ,0)
+                ->select('id','name')->get();
+        
+    }
+
+    public function getUsers(UserRepository $user)
+    {
+
+        return $user->query()
+                ->where('id' ,'>' ,0)
+                ->select('id','name')->get();
+        
+    }
+
+    public function getQuotations(QuotesRepository $quotes)
+    {
+
+        return $quotes->query()
+                ->where('id' ,'>' ,0)
+                ->select('id','quotation_name')->get();
+        
+    }
+
+    public function getJobcards(JobcardRepository $jobcard)
+    {
+
+        return $jobcard->query()
+                ->where('id' ,'>' ,0)
+                ->select('id','jobcard_num')->get();
+        
+    }
+
+    public function getVats(VatRepository $vat)
+    {
+
+        return $vat->query()
+                ->where('id' ,'>' ,0)
+                ->select('id','name')->get();
+        
+    }
     /**
      * @param Request $request
      *

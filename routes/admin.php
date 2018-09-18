@@ -4,9 +4,16 @@ Route::get('index/search', 'AjaxController@search')->name('search');
 Route::get('routes/search', 'AjaxController@routesSearch')->name('routes.search');
 Route::get('tags/search', 'AjaxController@tagsSearch')->name('tags.search');
 Route::post('images/upload', 'AjaxController@imageUpload')->name('images.upload');
-Route::get('labours/getids', 'AjaxController@getLabourRates')->name('labours.getids');
-Route::get('materials/getids', 'AjaxController@getMaterialRates')->name('materials.getids');
-Route::get('vats/getids', 'AjaxController@getVatRates')->name('vats.getids');
+Route::get('labours/getrates', 'AjaxController@getLabourRates')->name('labours.getids');
+Route::get('materials/getrates', 'AjaxController@getMaterialRates')->name('materials.getids');
+Route::get('vats/getrates', 'AjaxController@getVatRates')->name('vats.getids');
+Route::get('projects/getids', 'AjaxController@getProjects')->name('projects.getdata');
+Route::get('labours/info', 'AjaxController@getLabours')->name('labours.getdata');
+Route::get('materials/info', 'AjaxController@getMaterials')->name('materials.getdata');
+Route::get('users/getids', 'AjaxController@getUsers')->name('users.getdata');
+Route::get('quotations/getids', 'AjaxController@getQuotations')->name('quotations.getdata');
+Route::get('jobcards/getids', 'AjaxController@getJobcards')->name('jobcards.getdata');
+Route::get('vats/getids', 'AjaxController@getVats')->name('vats.getdata');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');
