@@ -33,8 +33,7 @@ class Quotes extends Model
         'vat_amount',
         'net_amount',
         'total_amount',
-        'client_id', 
-        
+        'client_id',
         'labour_rates_id',
         'materials_rates_id',
         'vat_id'
