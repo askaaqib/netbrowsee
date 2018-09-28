@@ -527,6 +527,7 @@ return [
                 'index'       => 'Invoice list',
                 'create'      => 'Create Invoice',
                 'edit'        => 'Edit Invoices',
+                'show'        => 'View Invoice',
                 'publication' => 'Publication options',
             ],
 

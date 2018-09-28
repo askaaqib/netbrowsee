@@ -18,6 +18,7 @@ class QuotesController extends BackendController
      */
     protected $quote;
 
+
     public function __construct(QuotesRepository $quote)
     {
         //dd($jobcards);

@@ -116,6 +116,11 @@ class InvoicesController extends BackendController
        return $invoice;
     }
 
+    public function view(Invoices $invoice)
+    {
+       return $invoice;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

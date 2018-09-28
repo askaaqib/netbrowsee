@@ -58,6 +58,9 @@
             {{ row.item.updated_at }}
           </template>
           <template slot="actions" slot-scope="row">
+            <b-button size="sm" variant="success" :to="`/invoices/${row.item.id}/view`" v-b-tooltip.hover :title="$t('buttons.preview')" class="mr-1">
+              <i class="fe fe-eye"></i>
+            </b-button>
             <b-button v-if="row.item.id" size="sm" variant="primary" :to="`/invoices/${row.item.id}/edit`" v-b-tooltip.hover :title="$t('buttons.edit')" class="mr-1">
               <i class="fe fe-edit"></i>
             </b-button>

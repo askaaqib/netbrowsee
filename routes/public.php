@@ -32,3 +32,5 @@ if (config('blog.enabled')) {
         'BlogController@owner'
     )->name('blog.owner');
 }
+
+Route::get('quotes/index', 'QuotesController@index')->name('quotes.index');

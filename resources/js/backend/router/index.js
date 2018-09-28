@@ -25,6 +25,7 @@ import ReportsList from '../views/ReportsList'
 import ReportsForm from '../views/ReportsForm'
 import InvoicesList from '../views/InvoicesList'
 import InvoicesForm from '../views/InvoicesForm'
+import InvoiceShow from '../views/InvoiceShow'
 import FormSettingForm from '../views/FormSettingForm'
 import FormSettingList from '../views/FormSettingList'
 import FormSubmissionShow from '../views/FormSubmissionShow'
@@ -581,6 +582,15 @@ export function createRouter (base, i18n) {
                 component: InvoicesForm,
                 meta: {
                   label: i18n.t('labels.backend.invoices.titles.create')
+                }
+              },
+              {
+                path: ':id/view',
+                name: 'invoices_show',
+                component: InvoiceShow,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.invoices.titles.show')
                 }
               },
               {

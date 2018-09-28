@@ -71,6 +71,7 @@ Route::post('quotes/batch_action', 'QuotesController@batchAction')->name('quotes
 Route::get('quotes/{quote}/show', 'QuotesController@show')->name('quotes.show');
 Route::get('quotes/search', 'QuotesController@search')->name('quotes.search');
 Route::get('quotes/latest', 'QuotesController@getLastestquotes')->name('quotes.latest');
+// Route::get('quotes/index', 'QuotesController@index')->name('quotes.index');
 Route::resource('quotes', 'QuotesController', [
                 'only' => ['store', 'update', 'destroy'],
             ]);

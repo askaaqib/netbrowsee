@@ -37,7 +37,8 @@ class FrontendController extends Controller
 
     public function index()
     {
-        return view('frontend.home');
+        return redirect('admin/login');
+        //return view('frontend.home');
     }
 
     /**
