@@ -3,7 +3,7 @@ import './load-client-scripts'
 // Vue & axios
 import Vue from 'vue'
 import '../axios-config'
-
+import moment from 'moment'
 import 'babel-polyfill'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
@@ -163,6 +163,7 @@ export function createApp () {
     router,
     store,
     i18n,
+    moment,
     render: (h) => h(App)
   })
 

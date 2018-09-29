@@ -28,6 +28,9 @@ export function createActions (route) {
               resolve()
             }))
       })
+    },
+    ADD_SECTION: ({ commit }) => {
+      return 'Section'
     }
   }
 }

@@ -17,6 +17,9 @@ export function createStore (route) {
         publishedPostsCount: 0,
         activeUsersCount: 0,
         formSubmissionsCount: 0
+      },
+      quotes: {
+        section: null
       }
     },
     actions,

@@ -24,18 +24,18 @@
                 <span id="id_organization_address_postcode" name="organization_address_postcode">VAT Number: 4610275366</span>
               </p>
             </address>
-            <div class="form-inline" data-original-title="" title="">
+            <div class="form-inline">
               <label class="control-label">Tel: </label>
               <span class="form-control-static">
               <span id="id_organization_tel_no" name="organization_tel_no">0430042314   Cell: 0735879015</span></span>
             </div>
-            <div class="form-inline" data-original-title="" title="">
+            <div class="form-inline">
               <label class="control-label">Email: </label>
               <span class="form-control-static"> <span id="id_organization_email" name="organization_email">judekotrading@gmail.com</span></span>
             </div>
           </b-col>
           <b-col sm="6">
-            <div id="org-img" data-original-title="" title="">
+            <div id="org-img">
               <img class="thumbnail pull-right" src="https://app.quilder.com/media/orglogos/logo1_PRbyxru.png" alt="">
             </div>
           </b-col>
@@ -46,7 +46,7 @@
           <b-col sm="6">
             <div class="well">
               <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#searchAndAddContact" data-placement="left" onclick="">
-                <span class="hidden-xs">Find Client</span>
+                <span class="hidden-xs" @click="clientModal('Helllo')">Find Client</span>
                 <span class="glyphicon glyphicon-search"></span>
               </a>
               <div class="clearfix"></div>
@@ -146,6 +146,7 @@
                   <b-form-input
                     id="quotation_date"
                     name="quotation_date"
+                    :value="today_date"
                     required
                     :placeholder="$t('validation.quotes.quotation_date')"
                     v-model="model.quotation_date"
@@ -193,25 +194,25 @@
         <!-- Quote Details Section -->
         <div class="well">
           <h5>Quote Details
-            <div class="pull-right" data-original-title="" title="">
-              <a href="#" class="btn btn-primary" title="Add a section to the job" data-toggle="modal" data-target="#sectionAddModal" data-placement="left" onclick="">
+            <div class="pull-right">
+              <b-btn variant="primary" title="Add a section to the job" v-b-modal.section-modal>
                 <span class="hidden-xs">Add Section</span>
                 <span class="glyphicon glyphicon-plus"></span>
-              </a>
+              </b-btn>
               <!-- Add labour button -->
-              <a href="#" class="btn btn-primary" title="Add labour to the job" data-toggle="modal" data-target="#labourSearchAndAddModal" data-placement="left" onclick="">
+              <b-btn variant="primary" class="btn btn-primary" title="Add labour to the job" v-b-modal.labour-modal>
                 <span class="hidden-xs">Add Labour</span>
                 <span class="glyphicon glyphicon-plus"></span>
-              </a>
+              </b-btn>
               <!-- Add job part button -->
-              <a href="#" class="btn btn-primary" title="Add a part to the job" data-toggle="modal" data-target="#partsSearchAndAddModal" data-placement="left" onclick="">
+              <b-btn variant="primary" title="Add a part to the job" v-b-modal.parts-modal>
                 <span class="hidden-xs">Add Parts</span>
                 <span class="glyphicon glyphicon-plus"></span>
-              </a>
+              </b-btn>
             </div>
           </h5>
           <br>
-          <div id="jobPartsTableDiv" data-original-title="" title="">
+          <div id="jobPartsTableDiv">
             <table class="table table-bordered table-striped table-hover" width="100%">
               <thead>
                 <tr>
@@ -233,13 +234,13 @@
         <b-row>
           <b-col sm="6">
             <div class="well">
-              <div class="user-edit" data-original-title="" title="">
-                <div class="form-group" data-original-title="" title="">
+              <div class="user-edit">
+                <div class="form-group">
                   <h3 class="payment-terms">
                     <input class="form-control large-text" id="id_terms_heading" maxlength="255" name="terms_heading" type="text" value="Bank Details">
                   </h3>
                 </div>
-                <div class="form-group" data-original-title="" title="">
+                <div class="form-group">
                   <textarea class="form-control" cols="40" id="id_terms" name="terms" placeholder="The details of your terms and conditions can be written here" rows="10">FNB Cheque Account: 62589280066</textarea>
                 </div>
               </div>
@@ -467,12 +468,177 @@
         </b-col> -->
       </b-row>
     </form>
+
+    <!-- Section Modal -->
+    <b-modal id="section-modal" title="Add Section">
+      <label>Name:</label>
+      <b-form-input
+        id="section_name"
+        name="section_name"
+      ></b-form-input>
+    </b-modal>
+    <!-- Labour Modal -->
+    <b-modal id="labour-modal">
+      <b-tabs>
+        <b-tab title="Search Saved Labour" active>
+          <form class="" role="search" action="" method="GET" id="labour-search-form">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search labour" id="txtSearchSavedLabour" name="search_term" style="width:100%;padding:6px 6px;" accept="">
+              <div class="input-group-btn">
+                <button id="btnSearchSavedLabour" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+              </div>
+            </div>
+            <br>
+          </form>
+        </b-tab>
+        <b-tab title="Add Labour">
+          <div class="modal-body">
+            <div id="labourAddSectionDropdownDiv" aria-hidden="false"></div>
+            <div id="labourAddDiv">
+              <!-- Mustache template to edit labour parts -->
+              <b-form-inline>
+                <label class="mr-sm-2">Name:</label>
+                <b-form-input
+                  id="labour_part_name_edit"
+                  name="labour_part_name_edit"
+                ></b-form-input>
+              </b-form-inline>
+              <div id="labour_part_name_edit_error"></div>
+              <b-form-inline>
+                <label class="mr-sm-2">Labour quantity:</label>
+                <b-form-input
+                  id="labour_part_quantity_edit"
+                  name="labour_part_quantity_edit"
+                  type="number"
+                ></b-form-input>
+              </b-form-inline>
+              <div id="labour_part_quantity_edit_error"></div>
+              <b-form-inline>
+                <label class="mr-sm-2">Labour Rate (ZAR):</label>
+                <b-form-input
+                  id="labour_part_sales_price_net_edit"
+                  name="labour_part_sales_price_net_edit"
+                  type="number"
+                ></b-form-input>
+                <div id="labour_part_sales_price_net_edit_error"></div>
+              </b-form-inline>
+              <br>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Net Labour price (ZAR):</b></label>
+                <span id="labour_part_total_sales_price_net_edit">0.00</span>
+              </b-form-group>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Vat Rate (%):</b></label>
+                <span id="labour_part_tax_rate_edit">0.00</span>
+              </b-form-group>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Vat amount (ZAR):</b></label>
+                <span id="labour_part_total_tax_edit">0.00</span>
+              </b-form-group>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Total (ZAR):</b></label>
+                <span id="labour_part_total_edit">0.00</span>
+              </b-form-group>
+            </div>
+          </div>
+        </b-tab>
+      </b-tabs>
+    </b-modal>
+    <!-- Parts Modal -->
+    <b-modal id="parts-modal">
+      <b-tabs>
+        <b-tab title="Supplier Parts" active>
+          <form class="" role="search" action="" method="GET" id="search-global-form">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search supplier parts" id="txtSearchSupplierParts" name="searchquery" style="width:100%;padding:6px 6px;" accept="">
+              <div class="input-group-btn">
+                <button id="btnSearchSupplierParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+              </div>
+            </div>
+            <br>
+          </form>
+          <div id="partGlobalSearchResultsDiv">
+            <!-- part search results go here -->
+          </div>
+          <!-- Error when no keyword -->
+          <div id="globalPartsSearchError" class="alert alert-danger fade in" style="display: none;">
+            <strong>Search term required for supplier parts search</strong>
+          </div>
+        </b-tab>
+        <b-tab title="Company Parts">
+          <form class="" role="search" action="" method="GET" id="part-search-form">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search parts" id="txtSearchSavedParts" name="search_term" style="width:100%;padding:6px 6px;" accept="">
+              <div class="input-group-btn">
+                <button id="btnSearchSavedParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+              </div>
+            </div>
+            <br>
+          </form>
+          <div id="partSearchResultsDiv">
+            <!-- part search results go here -->
+          </div>
+        </b-tab>
+        <b-tab title="Add Parts">
+          <div class="modal-body">
+            <div id="partAddSectionDropdownDiv" aria-hidden="false"></div>
+            <div id="partAddDiv">
+              <!-- Mustache template to edit labour parts -->
+              <b-form-inline>
+                <label class="mr-sm-2">Name:</label>
+                <b-form-input
+                  id="job_part_name_edit"
+                  name="job_part_name_edit"
+                ></b-form-input>
+              </b-form-inline>
+              <div id="job_part_name_edit_error"></div>
+              <b-form-inline>
+                <label class="mr-sm-2">Quantity:</label>
+                <b-form-input
+                  id="job_part_quantity_edit"
+                  name="job_part_quantity_edit"
+                  type="number"
+                ></b-form-input>
+              </b-form-inline>
+              <div id="job_part_quantity_edit_error"></div>
+              <b-form-inline>
+                <label class="mr-sm-2">Unit Sale Price (ZAR):</label>
+                <b-form-input
+                  id="job_part_sales_price_net_edit"
+                  name="job_part_sales_price_net_edit"
+                  type="number"
+                ></b-form-input>
+                <div id="job_part_sales_price_net_edit_error"></div>
+              </b-form-inline>
+              <br>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Net Sale price (ZAR):</b></label>
+                <span id="job_part_total_sales_price_net_edit">0.00</span>
+              </b-form-group>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Vat Rate (%):</b></label>
+                <span id="job_part_tax_rate_edit">0.00</span>
+              </b-form-group>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Vat amount (ZAR):</b></label>
+                <span id="job_part_total_tax_edit">0.00</span>
+              </b-form-group>
+              <b-form-group>
+                <label class="mr-sm-2"><b>Total (ZAR):</b></label>
+                <span id="job_part_total_edit">0.00</span>
+              </b-form-group>
+            </div>
+          </div>
+        </b-tab>
+      </b-tabs>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import form from '../mixins/form'
+import moment from 'moment'
 
 export default {
   name: 'QuotesForm',
@@ -490,6 +656,7 @@ export default {
       labour_rates: [],
       materials_rates: [],
       vat_rates: [],
+      today_date: null,
       model: {
         quotation_number: null,
         quotation_name: null,
@@ -504,12 +671,19 @@ export default {
       }
     }
   },
+  mounted: function () {
+    var d = moment().format('ddd. DD, YYYY')
+    this.today_date = d
+  },
   created: function () {
     this.getLabours()
     this.getMaterials()
     this.getVats()
   },
   methods: {
+    clientModal: function (message) {
+      alert(message)
+    },
     async getLabours () {
       let { data } = await axios.get(this.$app.route('admin.labours.getids'), {})
 
