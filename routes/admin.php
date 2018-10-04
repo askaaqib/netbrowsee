@@ -14,6 +14,8 @@ Route::get('users/getids', 'AjaxController@getUsers')->name('users.getdata');
 Route::get('quotations/getids', 'AjaxController@getQuotations')->name('quotations.getdata');
 Route::get('jobcards/getids', 'AjaxController@getJobcards')->name('jobcards.getdata');
 Route::get('vats/getids', 'AjaxController@getVats')->name('vats.getdata');
+Route::get('project_managers/getids', 'AjaxController@getProjectManagers')->name('project_managers.getdata');
+Route::get('settings/data', 'AjaxController@getSettingsData')->name('settings.getdata');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');
@@ -59,6 +61,12 @@ Route::post('reports/batch_action', 'ReportsController@batchAction')->name('repo
 Route::get('reports/{report}/show', 'ReportsController@show')->name('reports.show');
 Route::get('reports/search', 'ReportsController@search')->name('reports.search');
 Route::resource('reports', 'ReportsController', ['only' => ['store', 'update', 'destroy'],]);
+
+/* Settings Routes */
+Route::post('settings/batch_action', 'SettingsController@batchAction')->name('settings.batch_action');
+Route::get('settings/{setting}/show', 'SettingsController@show')->name('settings.show');
+Route::get('settings/search', 'SettingsController@search')->name('settings.search');
+Route::resource('settings', 'SettingsController', ['only' => ['store', 'update', 'destroy'],]);
 
 /* Invoices Routes */
 Route::post('invoices/batch_action', 'InvoicesController@batchAction')->name('invoices.batch_action');

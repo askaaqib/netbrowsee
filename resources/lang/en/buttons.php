@@ -91,6 +91,12 @@ return [
         'save_as_draft'    => 'Save as draft',
     ],
 
+    'settings' => [
+        'create'           => 'Create Setting',
+        'save_and_publish' => 'Save and publish',
+        'save_as_draft'    => 'Save as draft',
+    ],
+
     'invoices' => [
         'create'           => 'Create Invoice',
         'save_and_publish' => 'Save and publish',

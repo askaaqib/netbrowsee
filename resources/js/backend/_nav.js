@@ -116,6 +116,17 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       url: '/invoices',
       icon: 'fe fe-book',
       access: app.user.can('view')
+    },
+    {
+      title: true,
+      name: 'Settings',
+      access: app.blogEnabled && app.user.can('view')
+    },
+    {
+      name: 'Settings',
+      url: '/settings',
+      icon: 'fe fe-settings',
+      access: app.user.can('view')
     }
   ]
 }

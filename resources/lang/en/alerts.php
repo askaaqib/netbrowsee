@@ -144,6 +144,17 @@ return [
             'bulk_promoted'  => 'Selected reports promoted',
         ],
 
+        'settings' => [
+            'created'        => 'Setting created',
+            'updated'        => 'Setting updated',
+            'deleted'        => 'Setting deleted',
+            'bulk_destroyed' => 'Selected settings deleted',
+            'bulk_published' => 'Selected settings published',
+            'bulk_pending'   => 'Selected settings are awaiting moderation',
+            'bulk_pinned'    => 'Selected settings pinned',
+            'bulk_promoted'  => 'Selected settings promoted',
+        ],
+
         'invoices' => [
             'created'        => 'Invoice created',
             'updated'        => 'Invoice updated',

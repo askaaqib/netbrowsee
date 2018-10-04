@@ -229,6 +229,15 @@ return [
       'jobcard' => 'Jobcard'                      
     ],
 
+    'settings' => [
+      'company_name'=> 'Company Name',
+      'company_address'=> 'Company Address',
+      'company_logo'=> 'Company Logo',
+      'bank_account'=> 'Bank Account',
+      'quote_ref_start'=> 'Quote Reference Start',
+      'quote_vat'=> 'Quote Vat Rate',                    
+    ],
+
     'invoices' => [
       'description'=> 'Description',
       'quantity'=> 'Quantity',

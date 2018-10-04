@@ -10,12 +10,15 @@ use App\Repositories\Contracts\TagRepository;
 use App\Repositories\Contracts\LabourRateRepository;
 use App\Repositories\Contracts\MaterialRateRepository;
 use App\Repositories\Contracts\VatRepository;
+use App\Repositories\Contracts\SettingsRepository;
 use App\Repositories\Contracts\ProjectRepository;
+use App\Repositories\Contracts\ProjectManagerRepository;
 use App\Repositories\Contracts\PostRepository;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Contracts\QuotesRepository;
 use App\Repositories\Contracts\JobcardRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
+use App\Models\Settings;
 
 class AjaxController extends Controller
 {
@@ -220,12 +223,18 @@ class AjaxController extends Controller
         
     }
 
-    public function getJobcards(JobcardRepository $jobcard)
+    public function getJobcards(JobcardRepository $jobcard, Request $request)
     {
-
-        return $jobcard->query()
-                ->where('id' ,'>' ,0)
-                ->select('id','jobcard_num')->get();
+        $jobcard_id = $request->get('id');
+        if($jobcard_id){
+            return $jobcard->query()
+                ->where('id' , $jobcard_id)
+                ->select('id','jobcard_num','facility_name')->get();
+        }else{
+            return $jobcard->query()
+                ->select('id','jobcard_num')->get();  
+        }
+        
         
     }
 
@@ -237,6 +246,28 @@ class AjaxController extends Controller
                 ->select('id','name')->get();
         
     }
+
+    public function getProjectManagers(ProjectManagerRepository $project_manager, Request $request)
+    {
+        $project_id = $request->get('id');
+        if($project_id){
+            return $project_manager->query()
+                ->where('project_id' , $project_id)
+                ->select('id','name')->get();
+        }
+        else{
+            return $project_manager->query()
+                ->select('id','name')->get();
+        }
+    }
+
+    public function getSettingsData()
+    {
+        $settings = Settings::orderBy('id', 'DESC')->first();    
+        return $settings;
+       
+    }
+
     /**
      * @param Request $request
      *

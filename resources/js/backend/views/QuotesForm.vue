@@ -7,32 +7,8 @@
           <b-col sm="6">
             <address class="form-group">
               <h5>Company Address:</h5>
-              <p class="form-control-static"><span id="id_organization_address_heading" name="organization_address_heading">Shop No 2, 24B Devereaux Avenue</span></p>
-              <p class="form-control-static">
-                <span id="id_organization_address_business" name="organization_address_business">Judeko Trading and Projects</span>
-              </p>
-              <p class="form-control-static">
-                <span id="id_organization_address_street" name="organization_address_street">Vincent, East London, 5217</span>
-              </p>
-              <p class="form-control-static">
-                <span id="id_organization_address_town" name="organization_address_town">Reg. Number: 2015/345707/07</span>
-              </p>
-              <p class="form-control-static">
-                <span id="id_organization_address_region" name="organization_address_region">Tax Number: 9217883199</span>
-              </p>
-              <p class="form-control-static">
-                <span id="id_organization_address_postcode" name="organization_address_postcode">VAT Number: 4610275366</span>
-              </p>
+              <p>{{ settings.company_address }}</p>
             </address>
-            <div class="form-inline">
-              <label class="control-label">Tel: </label>
-              <span class="form-control-static">
-              <span id="id_organization_tel_no" name="organization_tel_no">0430042314   Cell: 0735879015</span></span>
-            </div>
-            <div class="form-inline">
-              <label class="control-label">Email: </label>
-              <span class="form-control-static"> <span id="id_organization_email" name="organization_email">judekotrading@gmail.com</span></span>
-            </div>
           </b-col>
           <b-col sm="6">
             <div id="org-img">
@@ -118,6 +94,71 @@
           <b-col sm="6">
             <div class="well">
               <b-form-group
+                label="Select Jobcard"
+                label-for="jobcard_no"
+                horizontal
+                :label-cols="2"
+                :feedback="feedback('jobcard_no')"
+              >
+                <b-col sm="4">
+                  <v-select
+                    id="jobcard_no"
+                    name="jobcard_no"
+                    v-model="model.jobcards"
+                    placeholder="Please Select Jobcard"
+                    :options="jobcards"
+                    :multiple="false"
+                    label="jobcard_num"
+                  >
+                  </v-select>
+                </b-col>
+              </b-form-group>
+
+              <b-form-group
+                label="Select Project"
+                label-for="project_id"
+                horizontal
+                :label-cols="2"
+                :feedback="feedback('project_id')"
+              >
+                <b-col sm="4">
+                  <v-select
+                    id="project_id"
+                    name="project_id"
+                    v-model="model.project"
+                    placeholder="Please Select Project"
+                    :options="projects"
+                    :multiple="false"
+                    label="name"
+                    :on-change="getProjectId"
+                  >
+                  </v-select>
+                </b-col>
+              </b-form-group>
+
+              <b-form-group
+                v-if="model.project"
+                label="Select Project Manager"
+                label-for="project_manager_id"
+                horizontal
+                :label-cols="2"
+                :feedback="feedback('project_manager_id')"
+              >
+                <b-col sm="4">
+                  <v-select
+                    id="project_manager_id"
+                    name="project_manager_id"
+                    v-model="model.project_manager"
+                    placeholder="Please Select Project Number"
+                    :options="project_managers"
+                    :multiple="false"
+                    label="name"
+                  >
+                  </v-select>
+                </b-col>
+              </b-form-group>
+
+              <b-form-group
                 label="Quote Name"
                 label-for="quotation_name"
                 horizontal
@@ -131,6 +172,7 @@
                     :placeholder="$t('validation.quotes.quotation_name')"
                     v-model="model.quotation_name"
                     :state="state('quotation_name')"
+                    :value="model.quotation_name"
                   ></b-form-input>
                 </b-col>
               </b-form-group>
@@ -167,10 +209,11 @@
                   <b-form-input
                     id="quotation_number"
                     name="quotation_number"
-                    required
-                    :placeholder="$t('validation.quotes.quotation_number')"
+                    placeholder="Quote Reference"
                     v-model="model.quotation_number"
+                    readonly
                     :state="state('quotation_number')"
+                    :value="randomNumber"
                   ></b-form-input>
                 </b-col>
               </b-form-group>
@@ -213,7 +256,7 @@
           </h5>
           <br>
           <div id="jobPartsTableDiv">
-            <table class="table table-bordered table-striped table-hover" width="100%">
+            <table ref="detailsTable" class="table table-bordered table-striped table-hover" width="100%">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -224,6 +267,58 @@
                 </tr>
               </thead>
               <tbody>
+                <tr v-for="(row, index) in rows" :key="index" track-by="index">
+                  <template v-if="row.section">
+                    <td>{{ index }}</td>
+                    <td colspan="3">{{ row.section }}</td>
+                    <td>
+                      <div class="pull-right">
+                        <button type="button" class="btn btn-danger btn-xs" @click="removeRow(index)">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-xs" @click="editRowSection(index)">Edit</button>
+                      </div>
+                    </td>
+                  </template>
+                  <template v-else-if="row.labour">
+                    <td>
+                      {{ row.name }}
+                    </td>
+                    <td>
+                      {{ row.quantity }}
+                    </td>
+                    <td>
+                      {{ row.net_amount }}
+                    </td>
+                    <td>
+                      {{ row.net_total }}
+                    </td>
+                    <td>
+                      <div class="pull-right">
+                        <button type="button" class="btn btn-danger btn-xs" @click="removeRow(index)">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-xs" @click="editRowLabour(index)">Edit</button>
+                      </div>
+                    </td>
+                  </template>
+                  <template v-else-if="row.parts">
+                    <td>
+                      {{ row.name }}
+                    </td>
+                    <td>
+                      {{ row.quantity }}
+                    </td>
+                    <td>
+                      {{ row.net_amount }}
+                    </td>
+                    <td>
+                      {{ row.net_total }}
+                    </td>
+                    <td>
+                      <div class="pull-right">
+                        <button type="button" class="btn btn-danger btn-xs" @click="removeRow(index)">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-xs" @click="editRowParts(index)">Edit</button>
+                      </div>
+                    </td>
+                  </template>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -237,11 +332,11 @@
               <div class="user-edit">
                 <div class="form-group">
                   <h3 class="payment-terms">
-                    <input class="form-control large-text" id="id_terms_heading" maxlength="255" name="terms_heading" type="text" value="Bank Details">
+                    <input class="form-control large-text" readonly id="id_terms_heading" maxlength="255" name="terms_heading" type="text" value="Bank Details">
                   </h3>
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control" cols="40" id="id_terms" name="terms" placeholder="The details of your terms and conditions can be written here" rows="10">FNB Cheque Account: 62589280066</textarea>
+                  <textarea class="form-control" cols="40" v-model="settings.bank_account" id="id_terms" name="terms" placeholder="The details of your terms and conditions can be written here" rows="10"></textarea>
                 </div>
               </div>
             </div>
@@ -470,15 +565,33 @@
     </form>
 
     <!-- Section Modal -->
-    <b-modal id="section-modal" title="Add Section">
+    <b-modal ref="sectionModalRef" id="section-modal" hide-footer title="Add Section">
       <label>Name:</label>
       <b-form-input
         id="section_name"
         name="section_name"
+        v-model="section_name"
       ></b-form-input>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="hideModal('sectionModalRef')">Cancel</button>
+        <button type="button" class="btn btn-secondary" @click="AddSection">Save</button>
+      </div>
     </b-modal>
-    <!-- Labour Modal -->
-    <b-modal id="labour-modal">
+    <!-- Update Section Modal -->
+    <b-modal ref="updateSectionModalRef" id="update-section-modal" hide-footer title="Edit Section">
+      <label>Name:</label>
+      <b-form-input
+        id="section_name_edit"
+        name="section_name_edit"
+        v-model="section_name_edit"
+      ></b-form-input>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="hideModal('updateSectionModalRef')">Cancel</button>
+        <button type="button" class="btn btn-secondary" @click="UpdateSection(section_edit_index)">Save</button>
+      </div>
+    </b-modal>
+    <!-- Create Labour Modal -->
+    <b-modal ref="AddLabourSection" id="labour-modal" hide-footer>
       <b-tabs>
         <b-tab title="Search Saved Labour" active>
           <form class="" role="search" action="" method="GET" id="labour-search-form">
@@ -496,141 +609,351 @@
             <div id="labourAddSectionDropdownDiv" aria-hidden="false"></div>
             <div id="labourAddDiv">
               <!-- Mustache template to edit labour parts -->
-              <b-form-inline>
+              <b-form-group>
+                <label class="mr-sm-2">Section:</label>
+                <b-form-select
+                  id="labour_part_name_edit"
+                  name="labour_part_name_edit"
+                  v-model="section_select"
+                >
+                  <option value="" selected="selected">Please Select Section</option>
+                  <template v-for="(row,index) in rows">
+                    <option v-if="row.section != null" :key="index" :value="index">
+                      {{ row.section }}
+                    </option>
+                  </template>
+                </b-form-select>
+              </b-form-group>
+              <b-form-group>
                 <label class="mr-sm-2">Name:</label>
                 <b-form-input
                   id="labour_part_name_edit"
                   name="labour_part_name_edit"
+                  v-model="labour.labour_name"
                 ></b-form-input>
-              </b-form-inline>
+              </b-form-group>
               <div id="labour_part_name_edit_error"></div>
-              <b-form-inline>
+              <b-form-group>
                 <label class="mr-sm-2">Labour quantity:</label>
                 <b-form-input
                   id="labour_part_quantity_edit"
                   name="labour_part_quantity_edit"
                   type="number"
+                  v-model="labour.labour_quantity"
+                  @change="LabourRateChange"
                 ></b-form-input>
-              </b-form-inline>
+              </b-form-group>
               <div id="labour_part_quantity_edit_error"></div>
-              <b-form-inline>
+              <b-form-group>
                 <label class="mr-sm-2">Labour Rate (ZAR):</label>
                 <b-form-input
                   id="labour_part_sales_price_net_edit"
                   name="labour_part_sales_price_net_edit"
                   type="number"
+                  v-model="labour.labour_rate_zar"
+                  @change="LabourRateChange"
                 ></b-form-input>
                 <div id="labour_part_sales_price_net_edit_error"></div>
-              </b-form-inline>
+              </b-form-group>
               <br>
               <b-form-group>
                 <label class="mr-sm-2"><b>Net Labour price (ZAR):</b></label>
-                <span id="labour_part_total_sales_price_net_edit">0.00</span>
+                <span id="labour_part_total_sales_price_net_edit">{{ labour.net_labour_price_zar }}</span>
               </b-form-group>
               <b-form-group>
                 <label class="mr-sm-2"><b>Vat Rate (%):</b></label>
-                <span id="labour_part_tax_rate_edit">0.00</span>
+                <span id="labour_part_tax_rate_edit">{{ labour.labour_vat_rate }}</span>
               </b-form-group>
               <b-form-group>
                 <label class="mr-sm-2"><b>Vat amount (ZAR):</b></label>
-                <span id="labour_part_total_tax_edit">0.00</span>
+                <span id="labour_part_total_tax_edit">{{ labour.labour_vat_amount_zar }}</span>
               </b-form-group>
               <b-form-group>
                 <label class="mr-sm-2"><b>Total (ZAR):</b></label>
-                <span id="labour_part_total_edit">0.00</span>
+                <span id="labour_part_total_edit">{{ labour.labour_total_zar }}</span>
               </b-form-group>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="hideModal('AddLabourSection')">Cancel</button>
+            <button type="button" class="btn btn-secondary" @click="AddLabour">Add</button>
           </div>
         </b-tab>
       </b-tabs>
     </b-modal>
-    <!-- Parts Modal -->
-    <b-modal id="parts-modal">
+    <!-- Update Labour Modal -->
+    <b-modal ref="updateLabourSection" id="update-labour-modal" hide-footer title="Edit Labour">
+      <div class="modal-body">
+        <div id="labourAddSectionDropdownDiv" aria-hidden="false"></div>
+        <div id="labourAddDiv">
+          <!-- Mustache template to edit labour parts -->
+          <b-form-group>
+            <label class="mr-sm-2">Section:</label>
+            <b-form-select
+              id="labour_part_name_edit"
+              name="labour_part_name_edit"
+              v-model="labour_edit.section_select_edit"
+            >
+              <option value="" selected="selected">Please Select Section</option>
+              <template v-for="(row,index) in rows">
+                <option v-if="row.section != null" :key="index" :value="index">
+                  {{ row.section }}
+                </option>
+              </template>
+            </b-form-select>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2">Name:</label>
+            <b-form-input
+              id="labour_part_name_edit"
+              name="labour_part_name_edit"
+              v-model="labour_edit.labour_name"
+            ></b-form-input>
+          </b-form-group>
+          <div id="labour_part_name_edit_error"></div>
+          <b-form-group>
+            <label class="mr-sm-2">Labour quantity:</label>
+            <b-form-input
+              id="labour_part_quantity_edit"
+              name="labour_part_quantity_edit"
+              type="number"
+              v-model="labour_edit.labour_quantity"
+              @change="LabourRateChange"
+            ></b-form-input>
+          </b-form-group>
+          <div id="labour_part_quantity_edit_error"></div>
+          <b-form-group>
+            <label class="mr-sm-2">Labour Rate (ZAR):</label>
+            <b-form-input
+              id="labour_part_sales_price_net_edit"
+              name="labour_part_sales_price_net_edit"
+              type="number"
+              v-model="labour_edit.labour_rate_zar"
+              @change="LabourRateChange"
+            ></b-form-input>
+            <div id="labour_part_sales_price_net_edit_error"></div>
+          </b-form-group>
+          <br>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Net Labour price (ZAR):</b></label>
+            <span id="labour_part_total_sales_price_net_edit">{{ labour_edit.net_labour_price_zar }}</span>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Vat Rate (%):</b></label>
+            <span id="labour_part_tax_rate_edit">{{ labour_edit.labour_vat_rate }}</span>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Vat amount (ZAR):</b></label>
+            <span id="labour_part_total_tax_edit">{{ labour_edit.labour_vat_amount_zar }}</span>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Total (ZAR):</b></label>
+            <span id="labour_part_total_edit">{{ labour_edit.labour_total_zar }}</span>
+          </b-form-group>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="hideModal('updateLabourSection')">Cancel</button>
+        <button type="button" class="btn btn-secondary" @click="UpdateLabour(labour_edit_index)">Update</button>
+      </div>
+    </b-modal>
+    <!-- Parts Modal -------- PARTS SECTION -----------  -->
+    <b-modal ref="AddPartsSection" hide-footer id="parts-modal">
       <b-tabs>
         <b-tab title="Supplier Parts" active>
-          <form class="" role="search" action="" method="GET" id="search-global-form">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search supplier parts" id="txtSearchSupplierParts" name="searchquery" style="width:100%;padding:6px 6px;" accept="">
-              <div class="input-group-btn">
-                <button id="btnSearchSupplierParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          <div class="modal-body">
+            <form class="" role="search" action="" method="GET" id="search-global-form">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search supplier parts" id="txtSearchSupplierParts" name="searchquery" style="width:100%;padding:6px 6px;" accept="">
+                <div class="input-group-btn">
+                  <button id="btnSearchSupplierParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
               </div>
+              <br>
+            </form>
+            <div id="partGlobalSearchResultsDiv">
+              <!-- part search results go here -->
             </div>
-            <br>
-          </form>
-          <div id="partGlobalSearchResultsDiv">
-            <!-- part search results go here -->
+            <!-- Error when no keyword -->
+            <div id="globalPartsSearchError" class="alert alert-danger fade in" style="display: none;">
+              <strong>Search term required for supplier parts search</strong>
+            </div>
           </div>
-          <!-- Error when no keyword -->
-          <div id="globalPartsSearchError" class="alert alert-danger fade in" style="display: none;">
-            <strong>Search term required for supplier parts search</strong>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="hideModal('AddPartsSection')">Cancel</button>
           </div>
         </b-tab>
         <b-tab title="Company Parts">
-          <form class="" role="search" action="" method="GET" id="part-search-form">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search parts" id="txtSearchSavedParts" name="search_term" style="width:100%;padding:6px 6px;" accept="">
-              <div class="input-group-btn">
-                <button id="btnSearchSavedParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          <div class="modal-body">
+            <form class="" role="search" action="" method="GET" id="part-search-form">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search parts" id="txtSearchSavedParts" name="search_term" style="width:100%;padding:6px 6px;" accept="">
+                <div class="input-group-btn">
+                  <button id="btnSearchSavedParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
               </div>
+              <br>
+            </form>
+            <div id="partSearchResultsDiv">
+              <!-- part search results go here -->
             </div>
-            <br>
-          </form>
-          <div id="partSearchResultsDiv">
-            <!-- part search results go here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="hideModal('AddPartsSection')">Cancel</button>
           </div>
         </b-tab>
         <b-tab title="Add Parts">
           <div class="modal-body">
-            <div id="partAddSectionDropdownDiv" aria-hidden="false"></div>
-            <div id="partAddDiv">
+            <div id="partsAddSectionDropdownDiv" aria-hidden="false"></div>
+            <div id="partsAddDiv">
               <!-- Mustache template to edit labour parts -->
-              <b-form-inline>
+              <b-form-group>
+                <label class="mr-sm-2">Section:</label>
+                <b-form-select
+                  id="parts_part_name_edit"
+                  name="parts_part_name_edit"
+                  v-model="section_select"
+                >
+                  <option value="" selected="selected">Please Select Section</option>
+                  <template v-for="(row,index) in rows">
+                    <option v-if="row.section != null" :key="index" :value="index">
+                      {{ row.section }}
+                    </option>
+                  </template>
+                </b-form-select>
+              </b-form-group>
+              <b-form-group>
                 <label class="mr-sm-2">Name:</label>
                 <b-form-input
-                  id="job_part_name_edit"
-                  name="job_part_name_edit"
+                  id="parts_part_name_edit"
+                  name="parts_part_name_edit"
+                  v-model="parts.parts_name"
                 ></b-form-input>
-              </b-form-inline>
-              <div id="job_part_name_edit_error"></div>
-              <b-form-inline>
+              </b-form-group>
+              <div id="parts_part_name_edit_error"></div>
+              <b-form-group>
                 <label class="mr-sm-2">Quantity:</label>
                 <b-form-input
-                  id="job_part_quantity_edit"
-                  name="job_part_quantity_edit"
+                  id="parts_part_quantity_edit"
+                  name="parts_part_quantity_edit"
                   type="number"
+                  v-model="parts.parts_quantity"
+                  @change="PartsRateChange"
                 ></b-form-input>
-              </b-form-inline>
-              <div id="job_part_quantity_edit_error"></div>
-              <b-form-inline>
+              </b-form-group>
+              <div id="parts_part_quantity_edit_error"></div>
+              <b-form-group>
                 <label class="mr-sm-2">Unit Sale Price (ZAR):</label>
                 <b-form-input
-                  id="job_part_sales_price_net_edit"
-                  name="job_part_sales_price_net_edit"
+                  id="parts_part_sales_price_net_edit"
+                  name="parts_part_sales_price_net_edit"
                   type="number"
+                  v-model="parts.parts_rate_zar"
+                  @change="PartsRateChange"
                 ></b-form-input>
-                <div id="job_part_sales_price_net_edit_error"></div>
-              </b-form-inline>
+                <div id="parts_part_sales_price_net_edit_error"></div>
+              </b-form-group>
               <br>
               <b-form-group>
                 <label class="mr-sm-2"><b>Net Sale price (ZAR):</b></label>
-                <span id="job_part_total_sales_price_net_edit">0.00</span>
+                <span id="parts_part_total_sales_price_net_edit">{{ parts.net_parts_price_zar }}</span>
               </b-form-group>
               <b-form-group>
                 <label class="mr-sm-2"><b>Vat Rate (%):</b></label>
-                <span id="job_part_tax_rate_edit">0.00</span>
+                <span id="parts_part_tax_rate_edit">{{ parts.parts_vat_rate }}</span>
               </b-form-group>
               <b-form-group>
                 <label class="mr-sm-2"><b>Vat amount (ZAR):</b></label>
-                <span id="job_part_total_tax_edit">0.00</span>
+                <span id="parts_part_total_tax_edit">{{ parts.parts_vat_amount_zar }}</span>
               </b-form-group>
               <b-form-group>
                 <label class="mr-sm-2"><b>Total (ZAR):</b></label>
-                <span id="job_part_total_edit">0.00</span>
+                <span id="parts_part_total_edit">{{ parts.parts_total_zar }}</span>
               </b-form-group>
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="hideModal('AddPartsSection')">Cancel</button>
+            <button type="button" class="btn btn-secondary" @click="AddParts">Add</button>
+          </div>
         </b-tab>
       </b-tabs>
+    </b-modal>
+    <!-- Update Parts Modal -->
+    <b-modal ref="updatePartsSection" id="update-parts-modal" hide-footer title="Edit Parts">
+      <div class="modal-body">
+        <div id="partsEditSectionDropdownDiv" aria-hidden="false"></div>
+        <div id="partsEditDiv">
+          <!-- Mustache template to edit parts -->
+          <b-form-group>
+            <label class="mr-sm-2">Section:</label>
+            <b-form-select
+              id="parts_part_name_edit"
+              name="parts_part_name_edit"
+              v-model="parts_edit.section_select_edit"
+            >
+              <option value="" selected="selected">Please Select Section</option>
+              <template v-for="(row,index) in rows">
+                <option v-if="row.section != null" :key="index" :value="index">
+                  {{ row.section }}
+                </option>
+              </template>
+            </b-form-select>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2">Name:</label>
+            <b-form-input
+              id="parts_part_name_edit"
+              name="parts_part_name_edit"
+              v-model="parts_edit.parts_name"
+            ></b-form-input>
+          </b-form-group>
+          <div id="parts_part_name_edit_error"></div>
+          <b-form-group>
+            <label class="mr-sm-2">Quantity:</label>
+            <b-form-input
+              id="parts_part_quantity_edit"
+              name="parts_part_quantity_edit"
+              type="number"
+              v-model="parts_edit.parts_quantity"
+              @change="PartsRateChange"
+            ></b-form-input>
+          </b-form-group>
+          <div id="parts_part_quantity_edit_error"></div>
+          <b-form-group>
+            <label class="mr-sm-2">Unit Sale Price (ZAR):</label>
+            <b-form-input
+              id="parts_part_sales_price_net_edit"
+              name="parts_part_sales_price_net_edit"
+              type="number"
+              v-model="parts_edit.parts_rate_zar"
+              @change="PartsRateChange"
+            ></b-form-input>
+            <div id="parts_part_sales_price_net_edit_error"></div>
+          </b-form-group>
+          <br>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Net sale price (ZAR):</b></label>
+            <span id="parts_part_total_sales_price_net_edit">{{ parts_edit.net_parts_price_zar }}</span>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Vat Rate (%):</b></label>
+            <span id="parts_part_tax_rate_edit">{{ parts_edit.parts_vat_rate }}</span>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Vat amount (ZAR):</b></label>
+            <span id="parts_part_total_tax_edit">{{ parts_edit.parts_vat_amount_zar }}</span>
+          </b-form-group>
+          <b-form-group>
+            <label class="mr-sm-2"><b>Total (ZAR):</b></label>
+            <span id="parts_part_total_edit">{{ parts_edit.parts_total_zar }}</span>
+          </b-form-group>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="hideModal('updatePartsSection')">Cancel</button>
+        <button type="button" class="btn btn-secondary" @click="UpdateParts(parts_edit_index)">Update</button>
+      </div>
     </b-modal>
   </div>
 </template>
@@ -639,9 +962,12 @@
 import axios from 'axios'
 import form from '../mixins/form'
 import moment from 'moment'
+// import bModal from 'bootstrap-vue/es/components/modal/modal'
+import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 
 export default {
   name: 'QuotesForm',
+  directives: { 'b-modal': bModalDirective },
   mixins: [form],
   data () {
     return {
@@ -650,13 +976,72 @@ export default {
         time_24hr: true,
         enableTime: true
       },
+      rows: [
+        // initial data
+      ],
       modelName: 'quote',
       resourceRoute: 'quotes',
       listPath: '/quotes',
       labour_rates: [],
       materials_rates: [],
       vat_rates: [],
+      jobcards: [],
+      projects: [],
+      project_managers: [],
       today_date: null,
+      section_name: '',
+      section_name_edit: '',
+      section_edit_index: null,
+      labour_edit_index: null,
+      parts_edit_index: null,
+      section_select: '',
+      jobcards_facility: [],
+      labour: {
+        labour_name: '',
+        labour_quantity: 0,
+        labour_rate_zar: 0,
+        net_labour_price_zar: 0.00,
+        labour_vat_rate: 15.00,
+        labour_vat_amount_zar: 0.00,
+        labour_total_zar: 0.00
+      },
+      labour_edit: {
+        section_select_edit: '',
+        labour_name: '',
+        labour_quantity: 0,
+        labour_rate_zar: 0,
+        net_labour_price_zar: 0.00,
+        labour_vat_rate: 15.00,
+        labour_vat_amount_zar: 0.00,
+        labour_total_zar: 0.00
+      },
+      parts: {
+        parts_name: '',
+        parts_quantity: 0,
+        parts_rate_zar: 0,
+        net_parts_price_zar: 0.00,
+        parts_vat_rate: 15.00,
+        parts_vat_amount_zar: 0.00,
+        parts_total_zar: 0.00
+      },
+      parts_edit: {
+        section_select_edit: '',
+        parts_name: '',
+        parts_quantity: 0,
+        parts_rate_zar: 0,
+        net_parts_price_zar: 0.00,
+        parts_vat_rate: 15.00,
+        parts_vat_amount_zar: 0.00,
+        parts_total_zar: 0.00
+      },
+      settings: {
+        company_address: null,
+        quote_vat: null,
+        company_name: null,
+        quote_ref_start: null,
+        bank_account: null,
+        company_logo: null
+      },
       model: {
         quotation_number: null,
         quotation_name: null,
@@ -667,7 +1052,39 @@ export default {
         total_amount: null,
         labour_rates: null,
         materials_rates: null,
-        vat_rates: []
+        vat_rates: [],
+        jobcards: null,
+        project: null,
+        project_manager: null
+      }
+    }
+  },
+  computed: {
+    randomNumber: function () {
+      return 'QU-001'
+    }
+  },
+  watch: {
+    'model.project': function (val, oldval) {
+      if (val) {
+        this.getProjectManagers(val.id)
+        if (oldval) {
+          if (val.name !== oldval.name) {
+            this.model.project_manager = ' '
+          }
+        }
+      }
+    },
+    'model.jobcards': function (val) {
+      if (val) {
+        this.getJobcardsFacility(val.id)
+      } else {
+        this.model.quotation_name = ''
+      }
+    },
+    'jobcards_facility': function (val) {
+      if (val) {
+        this.model.quotation_name = val.jobcard_num + '' + val.facility_name
       }
     }
   },
@@ -679,10 +1096,109 @@ export default {
     this.getLabours()
     this.getMaterials()
     this.getVats()
+    this.getJobcards()
+    this.getProjects()
+    this.getSettings()
   },
   methods: {
-    clientModal: function (message) {
-      alert(message)
+    getProjectId: function () {
+      alert('coming here')
+    },
+    addRow: function (index) {
+      try {
+        this.rows.splice(index + 1, 0, {})
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    editRowSection: function (key) {
+      this.section_name_edit = this.rows[key].section
+      this.section_edit_index = key
+      this.showModal('updateSectionModalRef')
+    },
+    removeRow: function (index) {
+      this.rows.splice(index, 1)
+    },
+    AddSection: function () {
+      this.rows.push({ section: this.section_name })
+      this.$refs.sectionModalRef.hide()
+      this.section_name = ''
+    },
+    UpdateSection: function (index) {
+      this.rows[index].section = this.section_name_edit
+      this.hideModal('updateSectionModalRef')
+    },
+    LabourRateChange: function () {
+      this.labour.net_labour_price_zar = parseInt(this.labour.labour_quantity) * parseInt(this.labour.labour_rate_zar)
+      this.labour.labour_vat_amount_zar = (this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100
+      this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
+      // On Edit LabourRate Change
+      this.labour_edit.net_labour_price_zar = parseInt(this.labour_edit.labour_quantity) * parseInt(this.labour_edit.labour_rate_zar)
+      this.labour_edit.labour_vat_amount_zar = (this.labour_edit.labour_vat_rate * this.labour_edit.net_labour_price_zar) / 100
+      this.labour_edit.labour_total_zar = this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar
+    },
+    AddLabour: function () {
+      this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+      this.hideModal('addLabourSection')
+    },
+    editRowLabour: function (key) {
+      this.labour_edit.labour_name = this.rows[key].name
+      this.labour_edit.labour_quantity = this.rows[key].quantity
+      this.labour_edit.labour_rate_zar = this.rows[key].net_amount
+      this.labour_edit.net_labour_price_zar = this.rows[key].net_total
+      this.labour_edit.labour_vat_rate = this.rows[key].labour_vat_rate
+      this.labour_edit.labour_vat_amount_zar = this.rows[key].labour_vat_amount_zar
+      this.labour_edit.labour_total_zar = this.rows[key].labour_total_zar
+      this.labour_edit.section_select_edit = this.rows[key].parent_section
+      this.labour_edit_index = key
+      this.showModal('updateLabourSection')
+    },
+    UpdateLabour: function (index) {
+      this.rows[index].parent_section = this.labour_edit.section_select_edit
+      this.rows[index].name = this.labour_edit.labour_name
+      this.rows[index].quantity = this.labour_edit.labour_quantity
+      this.rows[index].net_amount = this.labour_edit.labour_rate_zar
+      this.rows[index].net_total = this.labour_edit.net_labour_price_zar
+      this.rows[index].labour_vat_rate = this.labour_edit.labour_vat_rate
+      this.rows[index].labour_vat_amount_zar = this.labour_edit.labour_vat_amount_zar
+      this.rows[index].labour_total_zar = this.labour_edit.labour_total_zar
+      this.hideModal('updateLabourSection')
+    },
+    PartsRateChange: function () {
+      this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
+      this.parts.parts_vat_amount_zar = (this.parts.parts_vat_rate * this.parts.net_parts_price_zar) / 100
+      this.parts.parts_total_zar = this.parts.net_parts_price_zar + this.parts.parts_vat_amount_zar
+      // On Edit PartsRate Change
+      this.parts_edit.net_parts_price_zar = parseInt(this.parts_edit.parts_quantity) * parseInt(this.parts_edit.parts_rate_zar)
+      this.parts_edit.parts_vat_amount_zar = (this.parts_edit.parts_vat_rate * this.parts_edit.net_parts_price_zar) / 100
+      this.parts_edit.parts_total_zar = this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar
+    },
+    AddParts: function () {
+      this.rows.splice(this.section_select + 1, 0, { parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
+      this.hideModal('addPartsSection')
+    },
+    editRowParts: function (key) {
+      this.parts_edit.parts_name = this.rows[key].name
+      this.parts_edit.parts_quantity = this.rows[key].quantity
+      this.parts_edit.parts_rate_zar = this.rows[key].net_amount
+      this.parts_edit.net_parts_price_zar = this.rows[key].net_total
+      this.parts_edit.parts_vat_rate = this.rows[key].parts_vat_rate
+      this.parts_edit.parts_vat_amount_zar = this.rows[key].parts_vat_amount_zar
+      this.parts_edit.parts_total_zar = this.rows[key].parts_total_zar
+      this.parts_edit.section_select_edit = this.rows[key].parent_section
+      this.parts_edit_index = key
+      this.showModal('updatePartsSection')
+    },
+    UpdateParts: function (index) {
+      this.rows[index].parent_section = this.parts_edit.section_select_edit
+      this.rows[index].name = this.parts_edit.parts_name
+      this.rows[index].quantity = this.parts_edit.parts_quantity
+      this.rows[index].net_amount = this.parts_edit.parts_rate_zar
+      this.rows[index].net_total = this.parts_edit.net_parts_price_zar
+      this.rows[index].parts_vat_rate = this.parts_edit.parts_vat_rate
+      this.rows[index].parts_vat_amount_zar = this.parts_edit.parts_vat_amount_zar
+      this.rows[index].parts_total_zar = this.parts_edit.parts_total_zar
+      this.hideModal('updatePartsSection')
     },
     async getLabours () {
       let { data } = await axios.get(this.$app.route('admin.labours.getids'), {})
@@ -698,6 +1214,72 @@ export default {
       let { data } = await axios.get(this.$app.route('admin.vats.getids'), {})
 
       this.vat_rates = data.ids
+    },
+    async getJobcards () {
+      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {})
+
+      this.jobcards = data
+    },
+    async getProjects () {
+      let { data } = await axios.get(this.$app.route('admin.projects.getdata'), {})
+
+      this.projects = data
+    },
+    async getProjectManagers ($id = 0) {
+      let { data } = await axios.get(this.$app.route('admin.project_managers.getdata'), { params: { id: $id } })
+
+      this.project_managers = data
+    },
+    async getJobcardsFacility ($id = 0) {
+      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), { params: { id: $id } })
+      if (data) {
+        this.jobcards_facility = data[0]
+      } else {
+        this.jobcards_facility = ''
+      }
+      // console.log(data, this.jobcards_facility)
+    },
+    async getSettings () {
+      let { data } = await axios.get(this.$app.route('admin.settings.getdata'), {})
+      this.settings.company_name = data.company_name
+      this.settings.company_address = data.company_address
+      this.settings.company_logo = data.company_logo
+      this.settings.bank_account = data.bank_account
+      this.settings.quote_ref_start = data.quote_ref_start
+      this.settings.quote_vat = data.quote_vat
+    },
+    showModal (ModalRef) {
+      // console.log(this.$refs.sectionModalRef)
+      if (ModalRef === 'updateSectionModalRef') {
+        this.$refs.updateSectionModalRef.show()
+      }
+      if (ModalRef === 'updateLabourSection') {
+        this.$refs.updateLabourSection.show()
+      }
+      if (ModalRef === 'updatePartsSection') {
+        this.$refs.updatePartsSection.show()
+      }
+    },
+    hideModal (ModalRef) {
+      // console.log(this.$refs.sectionModalRef)
+      if (ModalRef === 'sectionModalRef') {
+        this.$refs.sectionModalRef.hide()
+      }
+      if (ModalRef === 'updateSectionModalRef') {
+        this.$refs.updateSectionModalRef.hide()
+      }
+      if (ModalRef === 'addLabourSection') {
+        this.$refs.AddLabourSection.hide()
+      }
+      if (ModalRef === 'updateLabourSection') {
+        this.$refs.updateLabourSection.hide()
+      }
+      if (ModalRef === 'addPartsSection') {
+        this.$refs.AddPartsSection.hide()
+      }
+      if (ModalRef === 'updatePartsSection') {
+        this.$refs.updatePartsSection.hide()
+      }
     }
   }
 }

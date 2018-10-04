@@ -23,7 +23,7 @@ class StoreReportsRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+         return [
             'description'   => 'required',            
             'status'        => 'required',            
             'expenses'      => 'required',            

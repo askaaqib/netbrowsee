@@ -515,6 +515,40 @@ return [
             ],
         ],
 
+        'settings' => [
+            'statuses' => [
+                'draft'     => 'Draft',
+                'pending'   => 'Pending',
+                'published' => 'Published',
+            ],
+
+            'titles' => [
+                'main'        => 'Setting',
+                'index'       => 'Setting list',
+                'create'      => 'Create Setting',
+                'edit'        => 'Edit Settings',
+                'publication' => 'Publication options',
+            ],
+
+            'descriptions' => [
+                'meta_title'       => 'If leave empty, title will be that of Setting\'s title by default.',
+                'meta_description' => 'If leave empty, description will be that of Setting\'s summary by default.',
+            ],
+
+            'placeholders' => [
+                'body'             => 'Write your content...',
+                'meta_title'       => 'Setting\'s title.',
+                'meta_description' => 'Setting\'s summary.',
+            ],
+
+            'actions' => [
+                'destroy' => 'Delete selected settings',
+                'publish' => 'Publish selected settings',
+                'pin'     => 'Pin selected settings',
+                'promote' => 'Promote selected settings',
+            ],
+        ],
+
         'invoices' => [
             'statuses' => [
                 'draft'     => 'Draft',

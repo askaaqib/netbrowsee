@@ -1269,6 +1269,35 @@ export default {
                         "promote": "Promote selected reports"
                     }
                 },
+                "settings": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Setting",
+                        "index": "Setting list",
+                        "create": "Create Setting",
+                        "edit": "Edit Settings",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of Setting's title by default.",
+                        "meta_description": "If leave empty, description will be that of Setting's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Setting's title.",
+                        "meta_description": "Setting's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected settings",
+                        "publish": "Publish selected settings",
+                        "pin": "Pin selected settings",
+                        "promote": "Promote selected settings"
+                    }
+                },
                 "invoices": {
                     "statuses": {
                         "draft": "Draft",
@@ -1496,6 +1525,16 @@ export default {
                     "bulk_pending": "Selected reports are awaiting moderation",
                     "bulk_pinned": "Selected reports pinned",
                     "bulk_promoted": "Selected reports promoted"
+                },
+                "settings": {
+                    "created": "Setting created",
+                    "updated": "Setting updated",
+                    "deleted": "Setting deleted",
+                    "bulk_destroyed": "Selected settings deleted",
+                    "bulk_published": "Selected settings published",
+                    "bulk_pending": "Selected settings are awaiting moderation",
+                    "bulk_pinned": "Selected settings pinned",
+                    "bulk_promoted": "Selected settings promoted"
                 },
                 "invoices": {
                     "created": "Invoice created",
@@ -1916,6 +1955,14 @@ export default {
                 "profit_loss": "Profit Loss",
                 "jobcard": "Jobcard"
             },
+            "settings": {
+                "company_name": "Company Name",
+                "company_address": "Company Address",
+                "company_logo": "Company Logo",
+                "bank_account": "Bank Account",
+                "quote_ref_start": "Quote Reference Start",
+                "quote_vat": "Quote Vat Rate"
+            },
             "invoices": {
                 "description": "Description",
                 "quantity": "Quantity",
@@ -2002,6 +2049,11 @@ export default {
             },
             "reports": {
                 "create": "Create Report",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "settings": {
+                "create": "Create Setting",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             },
