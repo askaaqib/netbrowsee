@@ -6,13 +6,13 @@
         <b-row>
           <b-col sm="6">
             <address class="form-group">
-              <h5>Company Address:</h5>
+              <h5 v-if="settings.company_address">Company Address:</h5>
               <p>{{ settings.company_address }}</p>
             </address>
           </b-col>
           <b-col sm="6">
             <div id="org-img">
-              <img class="thumbnail pull-right" src="https://app.quilder.com/media/orglogos/logo1_PRbyxru.png" alt="">
+              <img v-if="settings.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ settings.company_logo" alt="">
             </div>
           </b-col>
         </b-row>
@@ -21,10 +21,10 @@
         <b-row>
           <b-col sm="6">
             <div class="well">
-              <a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#searchAndAddContact" data-placement="left" onclick="">
+              <b-btn variant="primary" class="pull-right" title="Find Client" v-b-modal.client-modal>
                 <span class="hidden-xs" @click="clientModal('Helllo')">Find Client</span>
                 <span class="glyphicon glyphicon-search"></span>
-              </a>
+              </b-btn>
               <div class="clearfix"></div>
 
               <div id="contactFields">
@@ -213,7 +213,7 @@
                     v-model="model.quotation_number"
                     readonly
                     :state="state('quotation_number')"
-                    :value="randomNumber"
+                    :value="quotation_reference"
                   ></b-form-input>
                 </b-col>
               </b-form-group>
@@ -269,8 +269,8 @@
               <tbody>
                 <tr v-for="(row, index) in rows" :key="index" track-by="index">
                   <template v-if="row.section">
-                    <td>{{ index }}</td>
-                    <td colspan="3">{{ row.section }}</td>
+                    <!-- <td>{{ index }}</td> -->
+                    <td colspan="4"><h3>{{ row.section }}</h3></td>
                     <td>
                       <div class="pull-right">
                         <button type="button" class="btn btn-danger btn-xs" @click="removeRow(index)">Delete</button>
@@ -348,14 +348,14 @@
                   <th class="vertical-th">Total Net Amount</th>
                   <td>
                     ZAR
-                    <input class="form-control" id="id_total_net" name="total_net" readonly type="text" value="0.00">
+                    <input class="form-control" id="id_total_net" name="total_net" readonly type="text" v-model="quotes.quotesNetTotal">
                   </td>
                 </tr>
                 <tr>
                   <th class="vertical-th">Total VAT Amount</th>
                   <td>
                     ZAR
-                    <input class="form-control pull-right" id="id_total_tax" name="total_tax" readonly type="text" value="0.00">
+                    <input class="form-control pull-right" id="id_total_tax" name="total_tax" readonly type="text" v-model="quotes.quotesVatTotal">
                   </td>
                 </tr>
                 <tr>
@@ -364,7 +364,7 @@
                   </th>
                   <td>
                     ZAR
-                    <input class="form-control pull-right" id="id_job_total" name="job_total" readonly type="text" value="0.00">
+                    <input class="form-control pull-right" id="id_job_total" name="job_total" readonly type="text" v-model="quotes.quotesTotal">
                   </td>
                 </tr>
               </tbody>
@@ -563,7 +563,23 @@
         </b-col> -->
       </b-row>
     </form>
-
+    <!-- Find Client Modal -->
+    <b-modal ref="clientSearchModalRef" id="client-modal" hide-footer title="Find Client">
+      <b-input-group>
+        <b-form-input
+          id="search_client"
+          name="search_client"
+          v-model="clients.search_client"
+          placeholder="Search clients"
+        ></b-form-input>
+        <b-input-group-append>
+          <b-btn variant="success" @click="searchClient"><i class="fe fe-search fe-lg"></i></b-btn>
+        </b-input-group-append>
+      </b-input-group>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="hideModal('clientSearchModalRef')">Cancel</button>
+      </div>
+    </b-modal>
     <!-- Section Modal -->
     <b-modal ref="sectionModalRef" id="section-modal" hide-footer title="Add Section">
       <label>Name:</label>
@@ -592,24 +608,49 @@
     </b-modal>
     <!-- Create Labour Modal -->
     <b-modal ref="AddLabourSection" id="labour-modal" hide-footer>
-      <b-tabs>
-        <b-tab title="Search Saved Labour" active>
-          <form class="" role="search" action="" method="GET" id="labour-search-form">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search labour" id="txtSearchSavedLabour" name="search_term" style="width:100%;padding:6px 6px;" accept="">
-              <div class="input-group-btn">
-                <button id="btnSearchSavedLabour" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+      <b-tabs v-model="labourTabIndex">
+        <b-tab ref="searchSavedLabour" title="Search Saved Labour" active>
+          <b-input-group>
+            <b-form-input
+              id="search_labour"
+              name="search_labour"
+              v-model="labour_search.search_labour"
+              placeholder="Search labour"
+            ></b-form-input>
+            <b-input-group-append>
+              <b-btn variant="success" @click="searchSavedLabour"><i class="fe fe-search"></i></b-btn>
+            </b-input-group-append>
+          </b-input-group>
+          <ul v-if="!labour_search.labour_info_get.error" class="grid">
+            <li v-for="(labourr,index) in labour_search.labour_info_get" :key="labourr.id">
+              <div class="part-list">
+                <input type="hidden" :class="'part_json_' +labourr.id" v-model="labour_search.labour_searched_data">
+                <h4 class="part-name">{{ labourr.name }}</h4>
+                <div v-if="labourr.description" class="description">
+                  <h5>Description:</h5>
+                  <p>{{ labourr.description }} </p>
+                </div>
+                <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedLabour(index)">Select<i class="fe fe-check"></i></b-btn>
+                <div class="total-price">
+                  <h4 class="h-total-price">Total Price:</h4>
+                  <span class="labour-total-price">ZAR{{ labourr.rate }}</span>
+                </div>
               </div>
-            </div>
-            <br>
-          </form>
+            </li>
+          </ul>
+          <div v-if="labour_search.labour_info_get.error" class="mt-2">
+            <b-alert show variant="danger">{{ labour_search.labour_info_get.error }}</b-alert>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="hideModal('addLabourSection')">Cancel</button>
+          </div>
         </b-tab>
-        <b-tab title="Add Labour">
+        <b-tab ref="addLabourTab" title="Add Labour">
           <div class="modal-body">
             <div id="labourAddSectionDropdownDiv" aria-hidden="false"></div>
             <div id="labourAddDiv">
               <!-- Mustache template to edit labour parts -->
-              <b-form-group>
+              <b-form-group v-if="sectionStatus">
                 <label class="mr-sm-2">Section:</label>
                 <b-form-select
                   id="labour_part_name_edit"
@@ -675,7 +716,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="hideModal('AddLabourSection')">Cancel</button>
+            <button type="button" class="btn btn-primary" @click="hideModal('addLabourSection')">Cancel</button>
             <button type="button" class="btn btn-secondary" @click="AddLabour">Add</button>
           </div>
         </b-tab>
@@ -761,53 +802,47 @@
     <b-modal ref="AddPartsSection" hide-footer id="parts-modal">
       <b-tabs>
         <b-tab title="Supplier Parts" active>
-          <div class="modal-body">
-            <form class="" role="search" action="" method="GET" id="search-global-form">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search supplier parts" id="txtSearchSupplierParts" name="searchquery" style="width:100%;padding:6px 6px;" accept="">
-                <div class="input-group-btn">
-                  <button id="btnSearchSupplierParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                </div>
-              </div>
-              <br>
-            </form>
-            <div id="partGlobalSearchResultsDiv">
-              <!-- part search results go here -->
-            </div>
-            <!-- Error when no keyword -->
-            <div id="globalPartsSearchError" class="alert alert-danger fade in" style="display: none;">
-              <strong>Search term required for supplier parts search</strong>
-            </div>
+          <div class="model-body">
+            <b-input-group>
+              <b-form-input
+                id="search_supplier_parts"
+                name="search_supplier_parts"
+                v-model="parts.search_supplier_parts"
+                placeholder="Search supplier parts"
+              ></b-form-input>
+              <b-input-group-append>
+                <b-btn variant="success" @click="searchSupplierParts"><i class="fe fe-search"></i></b-btn>
+              </b-input-group-append>
+            </b-input-group>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="hideModal('AddPartsSection')">Cancel</button>
+            <button type="button" class="btn btn-primary" @click="hideModal('addPartsSection')">Cancel</button>
           </div>
         </b-tab>
         <b-tab title="Company Parts">
-          <div class="modal-body">
-            <form class="" role="search" action="" method="GET" id="part-search-form">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search parts" id="txtSearchSavedParts" name="search_term" style="width:100%;padding:6px 6px;" accept="">
-                <div class="input-group-btn">
-                  <button id="btnSearchSavedParts" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                </div>
-              </div>
-              <br>
-            </form>
-            <div id="partSearchResultsDiv">
-              <!-- part search results go here -->
-            </div>
+          <div class="model-body">
+            <b-input-group>
+              <b-form-input
+                id="search_company_parts"
+                name="search_company_parts"
+                v-model="parts.search_company_parts"
+                placeholder="Search company parts"
+              ></b-form-input>
+              <b-input-group-append>
+                <b-btn variant="success" @click="searchCompanyParts"><i class="fe fe-search"></i></b-btn>
+              </b-input-group-append>
+            </b-input-group>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="hideModal('AddPartsSection')">Cancel</button>
+            <button type="button" class="btn btn-primary" @click="hideModal('addPartsSection')">Cancel</button>
           </div>
         </b-tab>
         <b-tab title="Add Parts">
           <div class="modal-body">
             <div id="partsAddSectionDropdownDiv" aria-hidden="false"></div>
             <div id="partsAddDiv">
-              <!-- Mustache template to edit labour parts -->
-              <b-form-group>
+              <!-- Mustache template to edit suplier/company parts -->
+              <b-form-group v-if="sectionStatus">
                 <label class="mr-sm-2">Section:</label>
                 <b-form-select
                   id="parts_part_name_edit"
@@ -873,7 +908,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="hideModal('AddPartsSection')">Cancel</button>
+            <button type="button" class="btn btn-primary" @click="hideModal('addPartsSection')">Cancel</button>
             <button type="button" class="btn btn-secondary" @click="AddParts">Add</button>
           </div>
         </b-tab>
@@ -996,6 +1031,10 @@ export default {
       parts_edit_index: null,
       section_select: '',
       jobcards_facility: [],
+      last_quote_ref: null,
+      quotation_reference: null,
+      labourTabIndex: 0,
+      sectionStatus: null,
       labour: {
         labour_name: '',
         labour_quantity: 0,
@@ -1014,6 +1053,11 @@ export default {
         labour_vat_rate: 15.00,
         labour_vat_amount_zar: 0.00,
         labour_total_zar: 0.00
+      },
+      labour_search: {
+        search_labour: '',
+        labour_info_get: [],
+        labour_searched_data: []
       },
       parts: {
         parts_name: '',
@@ -1042,6 +1086,9 @@ export default {
         bank_account: null,
         company_logo: null
       },
+      clients: {
+        search_client: null
+      },
       model: {
         quotation_number: null,
         quotation_name: null,
@@ -1055,7 +1102,13 @@ export default {
         vat_rates: [],
         jobcards: null,
         project: null,
-        project_manager: null
+        project_manager: null,
+        general_vat_rate: 15.00
+      },
+      quotes: {
+        quotesNetTotal: 0.00,
+        quotesVatTotal: 0.00,
+        quotesTotal: 0.00
       }
     }
   },
@@ -1086,6 +1139,31 @@ export default {
       if (val) {
         this.model.quotation_name = val.jobcard_num + '' + val.facility_name
       }
+    },
+    'last_quote_ref': function (val) {
+      if (val) {
+        this.quotation_reference = parseInt(val) + 1
+      } else {
+        // check value quote ref start from settings
+        if (this.settings.quote_ref_start) {
+          this.quotation_reference = this.settings.quote_ref_start + 1
+        } else {
+          alert('Please Add Quote Reference Start From Settings')
+          this.$router.push('/settings')
+        }
+      }
+    },
+    'rows': function (val) {
+      this.quotes.quotesNetTotal = 0
+      this.quotes.quotesVatTotal = 0
+      val.forEach((item) => {
+        if (item.labour || item.parts) {
+          this.quotes.quotesNetTotal += item.net_total
+          this.quotes.quotesVatTotal += this.settings.quote_vat * item.net_total / 100
+        }
+      })
+      this.quotes.quotesTotal = this.quotes.quotesNetTotal + this.quotes.quotesVatTotal
+      console.log('updated', val)
     }
   },
   mounted: function () {
@@ -1099,6 +1177,7 @@ export default {
     this.getJobcards()
     this.getProjects()
     this.getSettings()
+    this.getQuotesReference()
   },
   methods: {
     getProjectId: function () {
@@ -1120,9 +1199,20 @@ export default {
       this.rows.splice(index, 1)
     },
     AddSection: function () {
-      this.rows.push({ section: this.section_name })
-      this.$refs.sectionModalRef.hide()
-      this.section_name = ''
+      if (!this.section_name) {
+        alert('please enter section name')
+        return false
+      }
+      if (this.sectionStatus) {
+        this.rows.push({ section: this.section_name })
+        this.$refs.sectionModalRef.hide()
+        this.section_name = ''
+      } else {
+        this.rows.unshift({ section: this.section_name })
+        this.$refs.sectionModalRef.hide()
+        this.section_name = ''
+        this.sectionStatus = 1
+      }
     },
     UpdateSection: function (index) {
       this.rows[index].section = this.section_name_edit
@@ -1163,6 +1253,10 @@ export default {
       this.rows[index].labour_vat_amount_zar = this.labour_edit.labour_vat_amount_zar
       this.rows[index].labour_total_zar = this.labour_edit.labour_total_zar
       this.hideModal('updateLabourSection')
+      var previousRows = this.rows
+      this.rows = []
+      this.rows = previousRows
+      console.log(this.rows)
     },
     PartsRateChange: function () {
       this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
@@ -1200,9 +1294,40 @@ export default {
       this.rows[index].parts_total_zar = this.parts_edit.parts_total_zar
       this.hideModal('updatePartsSection')
     },
-    async getLabours () {
-      let { data } = await axios.get(this.$app.route('admin.labours.getids'), {})
+    searchClient: function () {
+      console.log('Search Client')
+    },
+    searchSavedLabour: function () {
+      this.searchLabour(this.labour_search.search_labour)
+    },
+    selectSearchedLabour: function (index) {
+      this.labourTabIndex += 1
+      this.labour.labour_name = this.labour_search.labour_info_get[index].name
+      this.labour.labour_quantity = 1
+      this.labour.labour_rate_zar = this.labour_search.labour_info_get[index].rate
+      this.labour.labour_vat_rate = this.settings.quote_vat
 
+      this.labour.net_labour_price_zar = parseInt(this.labour.labour_quantity) * parseInt(this.labour.labour_rate_zar)
+      this.labour.labour_vat_amount_zar = (this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100
+      this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
+    },
+    searchSupplierParts: function () {
+      console.log('Search Supplier Parts')
+    },
+    searchCompanyParts: function () {
+      console.log('Search Company Parts')
+    },
+    async searchLabour ($q) {
+      let { data } = await axios.get(this.$app.route('admin.labours.searchlabour'), { params: { q: $q } })
+      if (data.length > 0) {
+        this.labour_search.labour_info_get = data
+        this.labour_search.labour_searched_data = { id: data.id, name: data.name, description: data.description, vat_rate: 15, rate: data.rate }
+      } else {
+        this.labour_search.labour_info_get = { error: 'No Labour Found' }
+      }
+    },
+    async getLabours ($q = 0) {
+      let { data } = await axios.get(this.$app.route('admin.labours.getids'), {})
       this.labour_rates = data.ids
     },
     async getMaterials () {
@@ -1237,7 +1362,6 @@ export default {
       } else {
         this.jobcards_facility = ''
       }
-      // console.log(data, this.jobcards_facility)
     },
     async getSettings () {
       let { data } = await axios.get(this.$app.route('admin.settings.getdata'), {})
@@ -1247,9 +1371,19 @@ export default {
       this.settings.bank_account = data.bank_account
       this.settings.quote_ref_start = data.quote_ref_start
       this.settings.quote_vat = data.quote_vat
+      // Assign the general/settings vat rate value to labour and parts vat rate
+      if (data.quote_vat) {
+        this.labour.labour_vat_rate = data.quote_vat
+        this.labour_edit.labour_vat_rate = data.quote_vat
+        this.parts.parts_vat_rate = data.quote_vat
+        this.parts_edit.parts_vat_rate = data.quote_vat
+      }
+    },
+    async getQuotesReference () {
+      let { data } = await axios.get(this.$app.route('admin.quotations.getreference'), {})
+      this.last_quote_ref = data.quotation_number
     },
     showModal (ModalRef) {
-      // console.log(this.$refs.sectionModalRef)
       if (ModalRef === 'updateSectionModalRef') {
         this.$refs.updateSectionModalRef.show()
       }
@@ -1261,7 +1395,6 @@ export default {
       }
     },
     hideModal (ModalRef) {
-      // console.log(this.$refs.sectionModalRef)
       if (ModalRef === 'sectionModalRef') {
         this.$refs.sectionModalRef.hide()
       }
@@ -1279,6 +1412,9 @@ export default {
       }
       if (ModalRef === 'updatePartsSection') {
         this.$refs.updatePartsSection.hide()
+      }
+      if (ModalRef === 'clientSearchModalRef') {
+        this.$refs.clientSearchModalRef.hide()
       }
     }
   }

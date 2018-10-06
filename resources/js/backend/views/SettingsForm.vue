@@ -32,6 +32,7 @@
                 id="company_address"
                 name="company_address"
                 :placeholder="$t('validation.settings.company_address')"
+                rows="5"
                 v-model="model.company_address"
                 :state="state('company_address')"
               ></b-form-textarea>
@@ -76,17 +77,32 @@
               :label-cols="2"
               :feedback="feedback('quote_vat')"
             >
-              <b-form-input
+              <v-select
                 id="quote_vat"
                 name="quote_vat"
-                :placeholder="$t('validation.settings.quote_vat')"
+                placeholder="Please Select Vat Rates"
                 v-model="model.quote_vat"
                 :state="state('quote_vat')"
-              ></b-form-input>
+                :options="vat_rates"
+              ></v-select>
             </b-form-group>
 
-            <b-form-group>
-              <input type="file" @change="onFileSelected">
+            <b-form-group
+              :label="$t('validation.settings.company_logo')"
+              label-for="company_logo"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('company_logo')"
+            >
+              <template v-if="model.company_logo">
+                <b-form-file v-if="model.company_logo" placeholder="Change Logo..." @change="onFileSelected"></b-form-file>
+                <div class="company-logo">
+                  <img :src="'/uploads/'+ model.company_logo">
+                </div>
+              </template>
+              <template v-if="!model.company_logo">
+                <b-form-file v-if="!model.company_logo" placeholder="Select Logo..." @change="onFileSelected"></b-form-file>
+              </template>
             </b-form-group>
 
             <b-row slot="footer">
@@ -112,6 +128,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import settingsform from '../mixins/settingsform'
 
 export default {
@@ -129,6 +146,7 @@ export default {
       listPath: '/settings',
       jobcards: [],
       selectedLogo: {},
+      vat_rates: [],
       model: {
         company_name: null,
         company_address: null,
@@ -140,11 +158,19 @@ export default {
       }
     }
   },
+  created () {
+    this.getVats()
+  },
   methods: {
     onFileSelected: function (event) {
       this.selectedLogo = event.target.files[0]
       this.model.new_company_logo = event.target.files[0].name
       console.log(this.selectedLogo)
+    },
+    async getVats () {
+      let { data } = await axios.get(this.$app.route('admin.vats.getids'), {})
+
+      this.vat_rates = data.ids
     }
   }
 }

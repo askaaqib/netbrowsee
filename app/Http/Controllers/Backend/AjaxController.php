@@ -19,6 +19,7 @@ use App\Repositories\Contracts\QuotesRepository;
 use App\Repositories\Contracts\JobcardRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 use App\Models\Settings;
+use App\Models\Quotes;
 
 class AjaxController extends Controller
 {
@@ -186,13 +187,25 @@ class AjaxController extends Controller
         
     }
 
+    public function searchLabours(LabourRateRepository $labour, Request $request){
+        $search = $request->get('q');
+        if ($search) {
+            return $labour->query()
+                ->where('name' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('rate' ,'LIKE' ,'%'. $search .'%')
+                ->get();
+        } else {
+            return $labour->query()
+                ->where('id' ,'>' ,0)
+                ->get();    
+        }
+    }
+
     public function getLabours(LabourRateRepository $labour)
     {
-
         return $labour->query()
-                ->where('id' ,'>' ,0)
-                ->select('id','name')->get();
-        
+        ->where('id' ,'>' ,0)
+        ->select('id','name')->get();    
     }
 
 
@@ -268,6 +281,12 @@ class AjaxController extends Controller
        
     }
 
+    public function getQuotationsRecentReference()
+    {
+        $quote = Quotes::orderBy('id', 'DESC')->first();       
+        return $quote;
+       
+    }
     /**
      * @param Request $request
      *

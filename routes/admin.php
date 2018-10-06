@@ -9,6 +9,7 @@ Route::get('materials/getrates', 'AjaxController@getMaterialRates')->name('mater
 Route::get('vats/getrates', 'AjaxController@getVatRates')->name('vats.getids');
 Route::get('projects/getids', 'AjaxController@getProjects')->name('projects.getdata');
 Route::get('labours/info', 'AjaxController@getLabours')->name('labours.getdata');
+Route::get('labours/search', 'AjaxController@searchLabours')->name('labours.searchlabour');
 Route::get('materials/info', 'AjaxController@getMaterials')->name('materials.getdata');
 Route::get('users/getids', 'AjaxController@getUsers')->name('users.getdata');
 Route::get('quotations/getids', 'AjaxController@getQuotations')->name('quotations.getdata');
@@ -16,6 +17,7 @@ Route::get('jobcards/getids', 'AjaxController@getJobcards')->name('jobcards.getd
 Route::get('vats/getids', 'AjaxController@getVats')->name('vats.getdata');
 Route::get('project_managers/getids', 'AjaxController@getProjectManagers')->name('project_managers.getdata');
 Route::get('settings/data', 'AjaxController@getSettingsData')->name('settings.getdata');
+Route::get('quotations/lastref', 'AjaxController@getQuotationsRecentReference')->name('quotations.getreference');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');

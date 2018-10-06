@@ -46,7 +46,7 @@ export default {
       let action = this.isNew ? this.$app.route(
         `admin.${this.resourceRoute}.store`) : this.$app.route(
         `admin.${this.resourceRoute}.update`, { [this.modelName]: this.id })
-      console.log(action)
+
       let formData = this.$app.objectToFormData(this.model)
 
       if (!this.isNew) {
