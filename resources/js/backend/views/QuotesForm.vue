@@ -75,6 +75,7 @@
                       id="client_email"
                       name="client_email"
                       placeholder="Email"
+                      v-model="client_email"
                     ></b-form-input>
                   </b-form-group>
                 </b-col>
@@ -554,7 +555,7 @@
       </b-row>
     </form>
     <!-- Find Client Modal -->
-    <b-modal ref="clientSearchModalRef" id="client-modal" hide-footer title="Find Client">
+    <b-modal ref="clientSearchModalRef" id="client-modal" hide-footer title="Find Client" size="lg">
       <b-input-group>
         <b-form-input
           id="search_client"
@@ -566,17 +567,15 @@
           <b-btn variant="success" @click="searchClient"><i class="fe fe-search fe-lg"></i></b-btn>
         </b-input-group-append>
       </b-input-group>
-      <div class="modal-body client-content">
+      <div class="modal-body search-content">
         <ul v-if="!client_search.client_info_get.error" class="row grid">
           <li v-for="(client,index) in client_search.client_info_get" :key="client.id" class="col-sm-6">
             <div class="user-list">
-              <div>
-                <input type="hidden" :class="'part_json_' +client.id" v-model="client_search.client_searched_data">
-                <h4>{{ client.name }}</h4>
-                <p>{{ client.email }}</p>
-              </div>
-              <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedClient(index)">Select<i class="fe fe-check"></i></b-btn>
-              <div class="clearbox"></div>
+              <input type="hidden" :class="'part_json_' +client.id" v-model="client_search.client_searched_data">
+              <h4>{{ client.name }}</h4>
+              <p>{{ client.email }}</p>
+              <b-btn variant="outline-primary" size="sm" class="pull-right select-client" @click="selectSearchedClient(index)">Select<i class="fe fe-check"></i></b-btn>
+              <div class="clearfix"></div>
             </div>
           </li>
         </ul>
@@ -629,25 +628,27 @@
               <b-btn variant="success" @click="searchSavedLabour"><i class="fe fe-search"></i></b-btn>
             </b-input-group-append>
           </b-input-group>
-          <ul v-if="!labour_search.labour_info_get.error" class="grid">
-            <li v-for="(labourr,index) in labour_search.labour_info_get" :key="labourr.id">
-              <div class="part-list">
-                <input type="hidden" :class="'part_json_' +labourr.id" v-model="labour_search.labour_searched_data">
-                <h4 class="part-name">{{ labourr.name }}</h4>
-                <div v-if="labourr.description" class="description">
-                  <h5>Description:</h5>
-                  <p>{{ labourr.description }} </p>
+          <div class="model-body search-content">
+            <ul v-if="!labour_search.labour_info_get.error" class="grid">
+              <li v-for="(labourr,index) in labour_search.labour_info_get" :key="labourr.id">
+                <div class="part-list">
+                  <input type="hidden" :class="'part_json_' +labourr.id" v-model="labour_search.labour_searched_data">
+                  <h4 class="part-name">{{ labourr.name }}</h4>
+                  <div v-if="labourr.description" class="description">
+                    <h5>Description:</h5>
+                    <p>{{ labourr.description }} </p>
+                  </div>
+                  <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedLabour(index)">Select<i class="fe fe-check"></i></b-btn>
+                  <div class="total-price">
+                    <h4 class="h-total-price">Total Price:</h4>
+                    <span class="labour-total-price">ZAR{{ labourr.rate }}</span>
+                  </div>
                 </div>
-                <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedLabour(index)">Select<i class="fe fe-check"></i></b-btn>
-                <div class="total-price">
-                  <h4 class="h-total-price">Total Price:</h4>
-                  <span class="labour-total-price">ZAR{{ labourr.rate }}</span>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <div v-if="labour_search.labour_info_get.error" class="mt-2">
-            <b-alert show variant="danger">{{ labour_search.labour_info_get.error }}</b-alert>
+              </li>
+            </ul>
+            <div v-if="labour_search.labour_info_get.error" class="mt-2">
+              <b-alert show variant="danger">{{ labour_search.labour_info_get.error }}</b-alert>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" @click="hideModal('addLabourSection')">Cancel</button>
@@ -1039,6 +1040,7 @@ export default {
       quotation_reference: null,
       labourTabIndex: 0,
       sectionStatus: null,
+      client_email: null,
       client_search: {
         search_client: null,
         client_info_get: [],
@@ -1249,6 +1251,7 @@ export default {
     },
     selectSearchedClient: function (index) {
       this.model.client_name = this.client_search.client_info_get[index].name
+      this.client_email = this.client_search.client_info_get[index].email
       this.hideModal('clientSearchModalRef')
     },
     AddSection: function () {
