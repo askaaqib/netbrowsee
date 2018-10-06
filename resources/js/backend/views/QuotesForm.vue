@@ -21,9 +21,8 @@
         <b-row>
           <b-col sm="6">
             <div class="well">
-              <b-btn variant="primary" class="pull-right" title="Find Client" v-b-modal.client-modal>
-                <span class="hidden-xs" @click="clientModal('Helllo')">Find Client</span>
-                <span class="glyphicon glyphicon-search"></span>
+              <b-btn variant="primary" class="pull-right search-modal-btn" title="Find Client" v-b-modal.client-modal>
+                <span class="hidden-xs">Find Client<i class="fe fe-search"></i></span>
               </b-btn>
               <div class="clearfix"></div>
 
@@ -32,20 +31,11 @@
                 <div class="form-inline">
                   <b-col sm="4">
                     <b-form-input
-                      id="client_first_name"
-                      name="client_first_name"
-                      placeholder="Client first name"
-                      v-model="model.client_first_name"
-                      :state="state('client_first_name')"
-                    ></b-form-input>
-                  </b-col>
-                  <b-col sm="4">
-                    <b-form-input
-                      id="client_last_name"
-                      name="client_last_name"
-                      placeholder="Client last name"
-                      v-model="model.client_last_name"
-                      :state="state('client_last_name')"
+                      id="client_name"
+                      name="client_name"
+                      placeholder="Client name"
+                      v-model="model.client_name"
+                      :state="state('client_name')"
                     ></b-form-input>
                   </b-col>
                 </div>
@@ -273,8 +263,8 @@
                     <td colspan="4"><h3>{{ row.section }}</h3></td>
                     <td>
                       <div class="pull-right">
-                        <button type="button" class="btn btn-danger btn-xs" @click="removeRow(index)">Delete</button>
-                        <button type="button" class="btn btn-secondary btn-xs" @click="editRowSection(index)">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowSection(index)">Edit</button>
                       </div>
                     </td>
                   </template>
@@ -293,8 +283,8 @@
                     </td>
                     <td>
                       <div class="pull-right">
-                        <button type="button" class="btn btn-danger btn-xs" @click="removeRow(index)">Delete</button>
-                        <button type="button" class="btn btn-secondary btn-xs" @click="editRowLabour(index)">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowLabour(index)">Edit</button>
                       </div>
                     </td>
                   </template>
@@ -313,8 +303,8 @@
                     </td>
                     <td>
                       <div class="pull-right">
-                        <button type="button" class="btn btn-danger btn-xs" @click="removeRow(index)">Delete</button>
-                        <button type="button" class="btn btn-secondary btn-xs" @click="editRowParts(index)">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowParts(index)">Edit</button>
                       </div>
                     </td>
                   </template>
@@ -569,13 +559,31 @@
         <b-form-input
           id="search_client"
           name="search_client"
-          v-model="clients.search_client"
+          v-model="client_search.search_client"
           placeholder="Search clients"
         ></b-form-input>
         <b-input-group-append>
           <b-btn variant="success" @click="searchClient"><i class="fe fe-search fe-lg"></i></b-btn>
         </b-input-group-append>
       </b-input-group>
+      <div class="modal-body client-content">
+        <ul v-if="!client_search.client_info_get.error" class="row grid">
+          <li v-for="(client,index) in client_search.client_info_get" :key="client.id" class="col-sm-6">
+            <div class="user-list">
+              <div>
+                <input type="hidden" :class="'part_json_' +client.id" v-model="client_search.client_searched_data">
+                <h4>{{ client.name }}</h4>
+                <p>{{ client.email }}</p>
+              </div>
+              <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedClient(index)">Select<i class="fe fe-check"></i></b-btn>
+              <div class="clearbox"></div>
+            </div>
+          </li>
+        </ul>
+        <div v-if="client_search.client_info_get.error" class="mt-2">
+          <b-alert show variant="danger">{{ client_search.client_info_get.error }}</b-alert>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" @click="hideModal('clientSearchModalRef')">Cancel</button>
       </div>
@@ -657,7 +665,6 @@
                   name="labour_part_name_edit"
                   v-model="section_select"
                 >
-                  <option value="" selected="selected">Please Select Section</option>
                   <template v-for="(row,index) in rows">
                     <option v-if="row.section != null" :key="index" :value="index">
                       {{ row.section }}
@@ -728,14 +735,13 @@
         <div id="labourAddSectionDropdownDiv" aria-hidden="false"></div>
         <div id="labourAddDiv">
           <!-- Mustache template to edit labour parts -->
-          <b-form-group>
+          <b-form-group v-if="sectionStatus">
             <label class="mr-sm-2">Section:</label>
             <b-form-select
               id="labour_part_name_edit"
               name="labour_part_name_edit"
               v-model="labour_edit.section_select_edit"
             >
-              <option value="" selected="selected">Please Select Section</option>
               <template v-for="(row,index) in rows">
                 <option v-if="row.section != null" :key="index" :value="index">
                   {{ row.section }}
@@ -849,7 +855,6 @@
                   name="parts_part_name_edit"
                   v-model="section_select"
                 >
-                  <option value="" selected="selected">Please Select Section</option>
                   <template v-for="(row,index) in rows">
                     <option v-if="row.section != null" :key="index" :value="index">
                       {{ row.section }}
@@ -920,14 +925,13 @@
         <div id="partsEditSectionDropdownDiv" aria-hidden="false"></div>
         <div id="partsEditDiv">
           <!-- Mustache template to edit parts -->
-          <b-form-group>
+          <b-form-group v-if="sectionStatus">
             <label class="mr-sm-2">Section:</label>
             <b-form-select
               id="parts_part_name_edit"
               name="parts_part_name_edit"
               v-model="parts_edit.section_select_edit"
             >
-              <option value="" selected="selected">Please Select Section</option>
               <template v-for="(row,index) in rows">
                 <option v-if="row.section != null" :key="index" :value="index">
                   {{ row.section }}
@@ -997,8 +1001,8 @@
 import axios from 'axios'
 import form from '../mixins/form'
 import moment from 'moment'
-// import bModal from 'bootstrap-vue/es/components/modal/modal'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
+import swal from 'sweetalert2'
 
 export default {
   name: 'QuotesForm',
@@ -1029,12 +1033,17 @@ export default {
       section_edit_index: null,
       labour_edit_index: null,
       parts_edit_index: null,
-      section_select: '',
+      section_select: 0,
       jobcards_facility: [],
       last_quote_ref: null,
       quotation_reference: null,
       labourTabIndex: 0,
       sectionStatus: null,
+      client_search: {
+        search_client: null,
+        client_info_get: [],
+        client_searched_data: []
+      },
       labour: {
         labour_name: '',
         labour_quantity: 0,
@@ -1086,9 +1095,6 @@ export default {
         bank_account: null,
         company_logo: null
       },
-      clients: {
-        search_client: null
-      },
       model: {
         quotation_number: null,
         quotation_name: null,
@@ -1103,7 +1109,8 @@ export default {
         jobcards: null,
         project: null,
         project_manager: null,
-        general_vat_rate: 15.00
+        general_vat_rate: 15.00,
+        client_name: null
       },
       quotes: {
         quotesNetTotal: 0.00,
@@ -1162,8 +1169,11 @@ export default {
           this.quotes.quotesVatTotal += this.settings.quote_vat * item.net_total / 100
         }
       })
+
+      if (val.length === 0) {
+        this.sectionStatus = null
+      }
       this.quotes.quotesTotal = this.quotes.quotesNetTotal + this.quotes.quotesVatTotal
-      console.log('updated', val)
     }
   },
   mounted: function () {
@@ -1196,7 +1206,50 @@ export default {
       this.showModal('updateSectionModalRef')
     },
     removeRow: function (index) {
-      this.rows.splice(index, 1)
+      if (this.rows[index].section) {
+        var noChildSection = 0
+        this.rows.map((currentValue, index1, arr) => {
+          // Check if Section have values in it
+          if (!currentValue.section && currentValue.parent_section === index) {
+            swal({
+              title: 'Delete Section',
+              text: 'Deleting a section will delete all parts within that section. Are you sure?',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#ccc',
+              confirmButtonText: 'Delete Section'
+            }).then((result) => {
+              if (result.value) {
+                this.rows.map((currentValue, index2, arr) => {
+                  if (!currentValue.section && currentValue.parent_section === index) {
+                    this.rows.splice(index1, 1)
+                  }
+                })
+                this.rows.splice(index, 1)
+              } else {
+                return false
+              }
+            })
+            noChildSection = 1
+          }
+        })
+        if (noChildSection === 0) {
+          this.rows.splice(index, 1)
+        }
+      } else {
+        this.rows.splice(index, 1)
+      }
+    },
+    searchClient: function () {
+      this.searchClientClick(this.client_search.search_client)
+    },
+    searchSavedLabour: function () {
+      this.searchLabour(this.labour_search.search_labour)
+    },
+    selectSearchedClient: function (index) {
+      this.model.client_name = this.client_search.client_info_get[index].name
+      this.hideModal('clientSearchModalRef')
     },
     AddSection: function () {
       if (!this.section_name) {
@@ -1228,7 +1281,11 @@ export default {
       this.labour_edit.labour_total_zar = this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar
     },
     AddLabour: function () {
-      this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+      if (this.section_select) {
+        this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+      } else {
+        this.rows.push({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+      }
       this.hideModal('addLabourSection')
     },
     editRowLabour: function (key) {
@@ -1256,7 +1313,6 @@ export default {
       var previousRows = this.rows
       this.rows = []
       this.rows = previousRows
-      console.log(this.rows)
     },
     PartsRateChange: function () {
       this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
@@ -1268,7 +1324,11 @@ export default {
       this.parts_edit.parts_total_zar = this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar
     },
     AddParts: function () {
-      this.rows.splice(this.section_select + 1, 0, { parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
+      if (this.section_select) {
+        this.rows.splice(this.section_select + 1, 0, { parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
+      } else {
+        this.rows.push({ parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
+      }
       this.hideModal('addPartsSection')
     },
     editRowParts: function (key) {
@@ -1293,12 +1353,9 @@ export default {
       this.rows[index].parts_vat_amount_zar = this.parts_edit.parts_vat_amount_zar
       this.rows[index].parts_total_zar = this.parts_edit.parts_total_zar
       this.hideModal('updatePartsSection')
-    },
-    searchClient: function () {
-      console.log('Search Client')
-    },
-    searchSavedLabour: function () {
-      this.searchLabour(this.labour_search.search_labour)
+      var previousRows = this.rows
+      this.rows = []
+      this.rows = previousRows
     },
     selectSearchedLabour: function (index) {
       this.labourTabIndex += 1
@@ -1316,6 +1373,15 @@ export default {
     },
     searchCompanyParts: function () {
       console.log('Search Company Parts')
+    },
+    async searchClientClick ($q) {
+      let { data } = await axios.get(this.$app.route('admin.clients.searchclients'), { params: { q: $q } })
+      if (data.length > 0) {
+        this.client_search.client_info_get = data
+        this.client_search.client_searched_data = { id: data.id, name: data.name, email: data.email }
+      } else {
+        this.client_search.client_info_get = { error: 'No Client Found' }
+      }
     },
     async searchLabour ($q) {
       let { data } = await axios.get(this.$app.route('admin.labours.searchlabour'), { params: { q: $q } })

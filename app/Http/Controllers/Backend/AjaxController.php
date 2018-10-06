@@ -20,6 +20,7 @@ use App\Repositories\Contracts\JobcardRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 use App\Models\Settings;
 use App\Models\Quotes;
+use App\Models\User;
 
 class AjaxController extends Controller
 {
@@ -198,6 +199,22 @@ class AjaxController extends Controller
             return $labour->query()
                 ->where('id' ,'>' ,0)
                 ->get();    
+        }
+    }
+
+    public function searchClients(UserRepository $user, Request $request){
+        $search = $request->get('q');
+        if ($search) {
+            return $users = User::whereHas('roles', function($q){
+                $q->where('name', 'redactor');
+            })
+            ->where('name','LIKE', '%'. $search . '%')
+            ->orwhere('email','LIKE', '%'. $search . '%')
+            ->get();
+        } else {
+            return $users = User::with('roles')
+            ->select('id','name','email')
+            ->get();  
         }
     }
 

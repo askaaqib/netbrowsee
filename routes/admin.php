@@ -18,6 +18,7 @@ Route::get('vats/getids', 'AjaxController@getVats')->name('vats.getdata');
 Route::get('project_managers/getids', 'AjaxController@getProjectManagers')->name('project_managers.getdata');
 Route::get('settings/data', 'AjaxController@getSettingsData')->name('settings.getdata');
 Route::get('quotations/lastref', 'AjaxController@getQuotationsRecentReference')->name('quotations.getreference');
+Route::get('clients/search', 'AjaxController@searchClients')->name('clients.searchclients');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');
