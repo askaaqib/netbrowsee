@@ -576,6 +576,9 @@
               name="labour_part_name_edit"
               v-model="labour_edit.section_select_edit"
             >
+              <option value="null">
+                No Section
+              </option>
               <template v-for="(row,index) in rows">
                 <option v-if="row.section != null" :key="index" :value="index">
                   {{ row.section }}
@@ -689,6 +692,9 @@
                   name="parts_part_name_edit"
                   v-model="section_select"
                 >
+                  <option value="null">
+                    No Section
+                  </option>
                   <template v-for="(row,index) in rows">
                     <option v-if="row.section != null" :key="index" :value="index">
                       {{ row.section }}
@@ -766,6 +772,9 @@
               name="parts_part_name_edit"
               v-model="parts_edit.section_select_edit"
             >
+              <option value="null">
+                No Section
+              </option>
               <template v-for="(row,index) in rows">
                 <option v-if="row.section != null" :key="index" :value="index">
                   {{ row.section }}
@@ -1057,7 +1066,6 @@ export default {
       if (this.rows[index].section) {
         var noChildSection = 0
         this.rows.map((currentValue, index1, arr) => {
-          console.log(currentValue.section, currentValue.parent_section, index)
           // Check if Section have values in it
           if (!currentValue.section && currentValue.parent_section === index) {
             swal({
@@ -1133,7 +1141,6 @@ export default {
         this.rows.unshift({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
       }
       this.hideModal('addLabourSection')
-      console.log(this.rows)
     },
     editRowLabour: function (key) {
       this.labour_edit.labour_name = this.rows[key].name
@@ -1174,11 +1181,10 @@ export default {
       this.parts_edit.parts_total_zar = this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar
     },
     AddParts: function () {
-      if (this.section_select) {
+      if (this.section_select !== 'null') {
         this.rows.splice(this.section_select + 1, 0, { parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
       } else {
         this.rows.splice(0, 0, { parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
-        console.log(this.rows)
       }
       this.hideModal('addPartsSection')
     },
@@ -1203,6 +1209,9 @@ export default {
       this.rows[index].parts_vat_rate = this.parts_edit.parts_vat_rate
       this.rows[index].parts_vat_amount_zar = this.parts_edit.parts_vat_amount_zar
       this.rows[index].parts_total_zar = this.parts_edit.parts_total_zar
+      var updateRow = this.rows[index]
+      this.rows.splice(index, 1)
+      this.rows.splice(updateRow.parent_section + 1, 0, updateRow)
       this.hideModal('updatePartsSection')
       var previousRows = this.rows
       this.rows = []
@@ -1314,18 +1323,21 @@ export default {
     hideModal (ModalRef) {
       if (ModalRef === 'sectionModalRef') {
         this.$refs.sectionModalRef.hide()
+        this.emptySectionText()
       }
       if (ModalRef === 'updateSectionModalRef') {
         this.$refs.updateSectionModalRef.hide()
       }
       if (ModalRef === 'addLabourSection') {
         this.$refs.AddLabourSection.hide()
+        this.emptyLabourText()
       }
       if (ModalRef === 'updateLabourSection') {
         this.$refs.updateLabourSection.hide()
       }
       if (ModalRef === 'addPartsSection') {
         this.$refs.AddPartsSection.hide()
+        this.emptyPartsText()
       }
       if (ModalRef === 'updatePartsSection') {
         this.$refs.updatePartsSection.hide()
@@ -1333,6 +1345,27 @@ export default {
       if (ModalRef === 'clientSearchModalRef') {
         this.$refs.clientSearchModalRef.hide()
       }
+    },
+    emptySectionText: function () {
+      this.section_name = ''
+    },
+    emptyLabourText: function () {
+      this.labour.labour_name = ''
+      this.labour.labour_quantity = 0
+      this.labour.labour_rate_zar = 0
+      this.labour.labour_vat_rate = 15.00
+      this.labour.labour_vat_amount_zar = 0.00
+      this.labour.net_labour_price_zar = 0.00
+      this.labour.labour_total_zar = 0.00
+    },
+    emptyPartsText: function () {
+      this.parts.parts_name = ''
+      this.parts.parts_quantity = 0
+      this.parts.parts_rate_zar = 0.00
+      this.parts.parts_vat_rate = 15.00
+      this.parts.parts_vat_amount_zar = 0.00
+      this.parts.net_parts_price_zar = 0.00
+      this.parts.parts_total_zar = 0.00
     }
   }
 }
