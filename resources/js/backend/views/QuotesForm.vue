@@ -217,6 +217,7 @@
         <div class="well">
           <h5>Description of Work</h5>
           <b-form-textarea
+            v-model="model.quotes_description"
             id="quotation_description"
             name="quotation_description"
             rows="6"
@@ -382,177 +383,6 @@
         </b-row>
         <!-- Footer Section Ends -->
       </b-card>
-      <b-row>
-        <!-- <b-col sm="8">
-          <b-card>
-            <b-form-group
-              :label="$t('validation.quotes.quotation_name')"
-              label-for="quotation_name"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('quotation_name')"
-            >
-              <b-form-input
-                id="quotation_name"
-                name="quotation_name"
-                :placeholder="$t('validation.quotes.quotation_name')"
-                v-model="model.quotation_name"
-                :state="state('quotation_name')"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.travelling_time')"
-              label-for="travelling_time"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('travelling_time')"
-            >
-              <b-form-input
-                id="travelling_time"
-                name="travelling_time"
-                :placeholder="$t('validation.quotes.travelling_time')"
-                v-model="model.travelling_time"
-                :state="state('travelling_time')"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.travelling_km')"
-              label-for="travelling_km"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('travelling_km')"
-            >
-              <b-form-input
-                id="travelling_km"
-                name="travelling_km"
-                :placeholder="$t('validation.quotes.travelling_km')"
-                v-model="model.travelling_km"
-                :state="state('travelling_km')"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.vat_amount')"
-              label-for="vat_amount"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('vat_amount')"
-            >
-              <b-form-input
-                id="vat_amount"
-                name="vat_amount"
-                :placeholder="$t('validation.quotes.vat_amount')"
-                v-model="model.vat_amount"
-                :state="state('vat_amount')"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.net_amount')"
-              label-for="net_amount"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('net_amount')"
-            >
-              <b-form-input
-                id="net_amount"
-                name="net_amount"
-                :placeholder="$t('validation.quotes.net_amount')"
-                v-model="model.net_amount"
-                :state="state('net_amount')"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.total_amount')"
-              label-for="total_amount"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('total_amount')"
-            >
-              <b-form-input
-                id="total_amount"
-                name="total_amount"
-                :placeholder="$t('validation.quotes.total_amount')"
-                v-model="model.total_amount"
-                :state="state('total_amount')"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.labour_rates')"
-              label-for="labour_rates"
-              horizontal
-              :label-cols="2"
-            >
-              <v-select
-                id="labour_rates"
-                name="labour_rates"
-                v-model="model.labour_rates"
-                :placeholder="$t('validation.quotes.labour_rates')"
-                :options="labour_rates"
-                :multiple="false"
-                @search-change="getLabours"
-              >
-              </v-select>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.material_rates')"
-              label-for="materials_rates"
-              horizontal
-              :label-cols="2"
-            >
-              <v-select
-                id="materials_rates"
-                name="materials_rates"
-                v-model="model.materials_rates"
-                :placeholder="$t('validation.quotes.material_rates')"
-                :options="materials_rates"
-                :multiple="false"
-                @search-change="getMaterials"
-              >
-              </v-select>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.quotes.vat_rates')"
-              label-for="vat_rates"
-              horizontal
-              :label-cols="2"
-            >
-              <v-select
-                id="vat_rates"
-                name="vat_rates"
-                v-model="model.vat_rates"
-                :placeholder="$t('validation.quotes.vat_rates')"
-                :options="vat_rates"
-                :multiple="false"
-                @search-change="getVats"
-              >
-              </v-select>
-            </b-form-group>
-
-            <b-row slot="footer">
-              <b-col md>
-                <b-button to="/quotes" exact variant="danger" size="md">
-                  {{ $t('buttons.back') }}
-                </b-button>
-              </b-col>
-              <b-col md>
-                <b-dropdown right split :text="$t('buttons.quotes.save_and_publish')" class="float-right"
-                            variant="success" size="sm" @click="onSubmit()"
-                            :disabled="pending"
-                            v-if="isNew || this.$app.user.can('edit quotes') || this.$app.user.can('edit own quotes')"
-                >
-                </b-dropdown>
-              </b-col>
-            </b-row>
-          </b-card>
-        </b-col> -->
-      </b-row>
     </form>
     <!-- Find Client Modal -->
     <b-modal ref="clientSearchModalRef" id="client-modal" hide-footer title="Find Client" size="lg">
@@ -666,6 +496,9 @@
                   name="labour_part_name_edit"
                   v-model="section_select"
                 >
+                  <option value="null">
+                    No Section
+                  </option>
                   <template v-for="(row,index) in rows">
                     <option v-if="row.section != null" :key="index" :value="index">
                       {{ row.section }}
@@ -1034,7 +867,7 @@ export default {
       section_edit_index: null,
       labour_edit_index: null,
       parts_edit_index: null,
-      section_select: 0,
+      section_select: 'null',
       jobcards_facility: [],
       last_quote_ref: null,
       quotation_reference: null,
@@ -1112,7 +945,8 @@ export default {
         project: null,
         project_manager: null,
         general_vat_rate: 15.00,
-        client_name: null
+        client_name: null,
+        quotes_description: null
       },
       quotes: {
         quotesNetTotal: 0.00,
@@ -1165,10 +999,22 @@ export default {
     'rows': function (val) {
       this.quotes.quotesNetTotal = 0
       this.quotes.quotesVatTotal = 0
-      val.forEach((item) => {
+      var saveVal = 'empty'
+      val.forEach((item, index) => {
         if (item.labour || item.parts) {
           this.quotes.quotesNetTotal += item.net_total
           this.quotes.quotesVatTotal += this.settings.quote_vat * item.net_total / 100
+        }
+        if (item.section) {
+          saveVal = index
+          this.sectionStatus = 1
+        } else {
+          if (saveVal !== 'empty') {
+            item.parent_section = saveVal
+          }
+          if (saveVal === 'empty') {
+            this.sectionStatus = null
+          }
         }
       })
 
@@ -1199,7 +1045,7 @@ export default {
       try {
         this.rows.splice(index + 1, 0, {})
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
     },
     editRowSection: function (key) {
@@ -1211,6 +1057,7 @@ export default {
       if (this.rows[index].section) {
         var noChildSection = 0
         this.rows.map((currentValue, index1, arr) => {
+          console.log(currentValue.section, currentValue.parent_section, index)
           // Check if Section have values in it
           if (!currentValue.section && currentValue.parent_section === index) {
             swal({
@@ -1223,11 +1070,13 @@ export default {
               confirmButtonText: 'Delete Section'
             }).then((result) => {
               if (result.value) {
-                this.rows.map((currentValue, index2, arr) => {
-                  if (!currentValue.section && currentValue.parent_section === index) {
-                    this.rows.splice(index1, 1)
+                for (var i = this.rows.length - 1; i >= index; i--) {
+                  if ('parent_section' in this.rows[i]) {
+                    if (this.rows[i].parent_section === index) {
+                      this.rows.splice(i, 1)
+                    }
                   }
-                })
+                }
                 this.rows.splice(index, 1)
               } else {
                 return false
@@ -1259,16 +1108,10 @@ export default {
         alert('please enter section name')
         return false
       }
-      if (this.sectionStatus) {
-        this.rows.push({ section: this.section_name })
-        this.$refs.sectionModalRef.hide()
-        this.section_name = ''
-      } else {
-        this.rows.unshift({ section: this.section_name })
-        this.$refs.sectionModalRef.hide()
-        this.section_name = ''
-        this.sectionStatus = 1
-      }
+      this.rows.push({ section: this.section_name })
+      this.$refs.sectionModalRef.hide()
+      this.section_name = ''
+      // this.sectionStatus = 1
     },
     UpdateSection: function (index) {
       this.rows[index].section = this.section_name_edit
@@ -1284,12 +1127,13 @@ export default {
       this.labour_edit.labour_total_zar = this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar
     },
     AddLabour: function () {
-      if (this.section_select) {
+      if (this.section_select !== 'null') {
         this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
       } else {
-        this.rows.push({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+        this.rows.unshift({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
       }
       this.hideModal('addLabourSection')
+      console.log(this.rows)
     },
     editRowLabour: function (key) {
       this.labour_edit.labour_name = this.rows[key].name
@@ -1312,6 +1156,9 @@ export default {
       this.rows[index].labour_vat_rate = this.labour_edit.labour_vat_rate
       this.rows[index].labour_vat_amount_zar = this.labour_edit.labour_vat_amount_zar
       this.rows[index].labour_total_zar = this.labour_edit.labour_total_zar
+      var updateRow = this.rows[index]
+      this.rows.splice(index, 1)
+      this.rows.splice(updateRow.parent_section + 1, 0, updateRow)
       this.hideModal('updateLabourSection')
       var previousRows = this.rows
       this.rows = []
@@ -1330,7 +1177,8 @@ export default {
       if (this.section_select) {
         this.rows.splice(this.section_select + 1, 0, { parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
       } else {
-        this.rows.push({ parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
+        this.rows.splice(0, 0, { parts: this.parts.parts_name, parent_section: this.section_select, name: this.parts.parts_name, quantity: this.parts.parts_quantity, net_amount: this.parts.parts_rate_zar, net_total: this.parts.net_parts_price_zar, parts_vat_rate: this.parts.parts_vat_rate, parts_vat_amount_zar: this.parts.parts_vat_amount_zar, parts_total_zar: this.parts.parts_total_zar })
+        console.log(this.rows)
       }
       this.hideModal('addPartsSection')
     },
@@ -1372,10 +1220,10 @@ export default {
       this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
     },
     searchSupplierParts: function () {
-      console.log('Search Supplier Parts')
+      // console.log('Search Supplier Parts')
     },
     searchCompanyParts: function () {
-      console.log('Search Company Parts')
+      // console.log('Search Company Parts')
     },
     async searchClientClick ($q) {
       let { data } = await axios.get(this.$app.route('admin.clients.searchclients'), { params: { q: $q } })
