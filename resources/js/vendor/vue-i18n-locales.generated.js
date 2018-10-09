@@ -1339,6 +1339,7 @@ export default {
                         "index": "Quote list",
                         "create": "Create Quote",
                         "edit": "Edit quotes",
+                        "show": "View Quote",
                         "publication": "Publication options"
                     },
                     "descriptions": {
@@ -1961,6 +1962,7 @@ export default {
                 "company_logo": "Company Logo",
                 "bank_account": "Bank Account",
                 "quote_ref_start": "Quote Reference Start",
+                "quote_ref_alphabet": "Quote Reference Start Digit",
                 "quote_vat": "Quote Vat Rate"
             },
             "invoices": {

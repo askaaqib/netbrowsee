@@ -55,6 +55,22 @@
             </b-form-group>
 
             <b-form-group
+              :label="$t('validation.settings.quote_ref_alphabet')"
+              label-for="quote_ref_alphabet"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('quote_ref_alphabet')"
+            >
+              <b-form-input
+                id="quote_ref_alphabet"
+                name="quote_ref_alphabet"
+                :placeholder="$t('validation.settings.quote_ref_alphabet')"
+                v-model="model.quote_ref_alphabet"
+                :state="state('quote_ref_alphabet')"
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
               :label="$t('validation.settings.quote_ref_start')"
               label-for="quote_ref_start"
               horizontal
@@ -154,6 +170,7 @@ export default {
         company_logo: null,
         bank_account: null,
         quote_ref_start: null,
+        quote_ref_alphabet: null,
         quote_vat: null
       }
     }

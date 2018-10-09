@@ -212,7 +212,9 @@ class AjaxController extends Controller
             ->orwhere('email','LIKE', '%'. $search . '%')
             ->get();
         } else {
-            return $users = User::with('roles')
+            return $users = User::whereHas('roles', function($q){
+                $q->where('name', 'redactor');
+            })
             ->select('id','name','email')
             ->get();  
         }
@@ -262,7 +264,7 @@ class AjaxController extends Controller
                 ->select('id','jobcard_num','facility_name')->get();
         }else{
             return $jobcard->query()
-                ->select('id','jobcard_num')->get();  
+                ->select('jobcard_num','id')->get();  
         }
         
         

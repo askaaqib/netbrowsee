@@ -19,7 +19,6 @@ export default {
         let { data } = await axios.get(this.$app.route(`admin.${this.resourceRoute}.show`, {
           [this.modelName]: this.id
         }))
-
         Object.keys(data).forEach((key) => {
           if (key in this.model) {
             this.model[key] = data[key]

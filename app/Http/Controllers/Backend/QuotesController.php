@@ -43,6 +43,7 @@ class QuotesController extends BackendController
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
             'quotation_number',
             'quotation_name',
+            'quotation_digit',
         ]);
 
         if ($request->get('exportData')) {
@@ -65,6 +66,7 @@ class QuotesController extends BackendController
             'quotes.id',
             'quotation_number',
             'quotation_name',
+            'quotation_digit',
             'quotes.created_at',
             'quotes.updated_at',
         ]);
@@ -78,13 +80,12 @@ class QuotesController extends BackendController
      */
     public function store(StoreQuotesRequest $request)
     {
-        //dd($request->all());
-        $request->request->add(['client_id' => auth()->id()]);      
-        $quote = $this->quote->make(
-            $request->all()
-        ); 
+        $data = $request->all();
+        // dd($data);
+        $data['rows'] = json_encode($request->rows);
+        $quote = $this->quote->make($data); 
         
-       $this->quote->save($quote, $request->input());
+       $this->quote->save($quote, $data);
 
        return $this->redirectResponse($request, __('alerts.backend.quotes.created'));
     }
@@ -111,6 +112,16 @@ class QuotesController extends BackendController
         //
     }
 
+    public function view(Quotes $quote)
+    {
+       return $quote;
+    }
+    
+    public function printPdf(Quotes $quote)
+    {
+       return $quote;
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -120,12 +131,12 @@ class QuotesController extends BackendController
      */
     public function update(Quotes $quote, UpdateQuotesRequest $request)
     {   
-        $request->request->add(['client_id' => auth()->id()]); 
-        $quote->fill(
-            $request->all()
-        );
+        $data = $request->all();
+        // dd($data);
+        $data['rows'] = json_encode($request->rows);
+        $quote->fill($data);
         
-        $this->quote->save($quote, $request->all());
+        $this->quote->save($quote, $data);
            
         return $this->redirectResponse($request, __('alerts.backend.quotes.updated'));
     }

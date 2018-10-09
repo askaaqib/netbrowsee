@@ -1,297 +1,77 @@
 <template>
-  <div>
-    <form @submit.prevent="onSubmit" class="quotes-form">
+  <div id="quotes-view" class="container">
+    <div class="quotes-form">
       <b-card>
-        <h3 class="card-title" slot="header">{{ isNew ? $t('labels.backend.quotes.titles.create') : $t('labels.backend.quotes.titles.edit') }}</h3>
+        <h3 class="card-title" slot="header">Completed Quote</h3>
         <b-row>
-          <b-col sm="6">
-            <address class="form-group">
-              <template v-if="settings.company_address">
-                <h5>Company Address:</h5>
-                <p>{{ settings.company_address }}</p>
-              </template>
-              <template v-else-if="model.company_logo">
-                <h5>Company Address:</h5>
+          <b-col class="col-md-12">
+            <b-btn class="btn-show pull-right" variant="secondary" @click="print('viewport')">Print<i class="fe fe-printer fe-lg"></i></b-btn>
+            <b-btn class="btn-show pull-right" variant="secondary" @click="downloadPdf">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+          </b-col>
+        </b-row>
+        <!-- ViewPort  Starts -->
+        <div id="viewport" class="table-responsive">
+          <b-row>
+            <b-col sm="6">
+              <address class="form-group">
+                <h5 v-if="model.company_address">Company Address:</h5>
                 <p>{{ model.company_address }}</p>
-              </template>
-            </address>
-          </b-col>
-          <b-col sm="6">
-            <div id="org-img">
-              <template v-if="settings.company_logo">
-                <img class="thumbnail pull-right card-img-top" :src="'/uploads/'+ settings.company_logo" alt="">
-              </template>
-              <template v-else-if="model.company_logo">
-                <img class="thumbnail pull-right card-img-top" :src="'/uploads/'+ model.company_logo" alt="">
-              </template>
-            </div>
-          </b-col>
-        </b-row>
-        <hr>
-        <!-- Client Details Section Starts -->
-        <b-row>
-          <b-col sm="6">
-            <div class="well">
-              <b-btn variant="primary" class="pull-right search-modal-btn" title="Find Client" v-b-modal.client-modal>
-                <span class="hidden-xs">Find Client<i class="fe fe-search"></i></span>
-              </b-btn>
-              <div class="clearfix"></div>
-
-              <div id="contactFields">
-                <b-col><h5>Quote For:</h5></b-col>
-                <div class="form-inline">
-                  <b-col sm="4">
-                    <b-form-input
-                      id="client_name"
-                      name="client_name"
-                      placeholder="Client name"
-                      v-model="model.client_name"
-                      :state="state('client_name')"
-                    ></b-form-input>
-                  </b-col>
-                </div>
-                <b-col sm="8">
-                  <fieldset class="fieldset">
-                    <legend>Address details</legend>
-                    <b-form-input
-                      id="client_address_business"
-                      name="client_address_business"
-                      placeholder="Client business"
-                    ></b-form-input>
-                    <b-form-input
-                      id="client_address_street"
-                      name="client_address_street"
-                      placeholder="Street"
-                    ></b-form-input>
-                    <b-form-input
-                      id="client_address_town"
-                      name="client_address_town"
-                      placeholder="Town"
-                    ></b-form-input>
-                    <b-form-input
-                      id="client_address_region"
-                      name="client_address_region"
-                      placeholder="Region"
-                    ></b-form-input>
-                    <b-form-input
-                      id="client_address_postcode"
-                      name="client_address_postcode"
-                      placeholder="Postcode"
-                    ></b-form-input>
-                  </fieldset>
-                </b-col>
-                <b-col sm="8">
-                  <b-form-group>
-                    <b-form-input
-                      id="client_email"
-                      name="client_email"
-                      placeholder="Email"
-                      v-model="model.client_email"
-                    ></b-form-input>
-                  </b-form-group>
-                </b-col>
+              </address>
+            </b-col>
+            <b-col sm="6">
+              <div id="org-img">
+                <img v-if="model.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ model.company_logo" alt="">
               </div>
-            </div>
-          </b-col>
-          <b-col sm="6">
-            <div class="well">
-              <b-form-group
-                label="Select Jobcard"
-                label-for="jobcard_no"
-                horizontal
-                :label-cols="2"
-                :feedback="feedback('jobcard_no')"
-              >
-                <b-col sm="4">
+            </b-col>
+          </b-row>
+          <hr>
+          <!-- Client Details Section Starts -->
+          <b-row>
+            <b-col sm="6">
+              <b-col sm="8">
+                <div class="well" style="border:1px solid #CCCCCC">
+                  <address class="form-group">
+                    <label class="control-label"><b>Quote for:</b></label>
+                    <p class="form-control-static">{{ model.client_email }}</p>
+                  </address>
+                <!-- /right -->
+                </div>
+              </b-col>
+            </b-col>
+            <b-col sm="6">
+              <div class="well" style="border:1px solid #CCCCCC">
+                <div class="align-right">
                   <div class="form-group">
-                    <select class="form-control" v-model="model.jobcard_id">
-                      <option value="">Please Select Jobcards</option>
-                      <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
-                        {{ option.jobcard_num }}
-                      </option>
-                    </select>
+                    <label class="control-label"><b>Quote name: </b></label> <span class="form-control-static">{{ model.quotation_name }}</span>
                   </div>
-                  <!-- <v-select
-                    id="jobcard_no"
-                    name="jobcard_no"
-                    v-model="model.jobcard_id"
-                    placeholder="Please Select Jobcard"
-                    :options="jobcards"
-                    :multiple="false"
-                    value="id"
-                    label="id"
-                  >
-                  </v-select> -->
-                </b-col>
-              </b-form-group>
-
-              <b-form-group
-                label="Select Project"
-                label-for="project_id"
-                horizontal
-                :label-cols="2"
-                :feedback="feedback('project_id')"
-              >
-                <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.project_id">
-                      <option value="">Please Select Projects</option>
-                      <option v-for="(option, index) in projects" :key="index" :value="option.id">
-                        {{ option.name }}
-                      </option>
-                    </select>
+                  <div class="form-group" data-original-title="" title="">
+                    <label class="control-label"><b>Quote date: </b></label> <span class="form-control-static">{{ model.quotation_date }}</span>
                   </div>
-                  <!-- <v-select
-                    id="project_id"
-                    name="project_id"
-                    v-model="model.project_id"
-                    placeholder="Please Select Project"
-                    :options="projects"
-                    :multiple="false"
-                    label="name"
-                    :on-change="getProjectId"
-                  >
-                  </v-select> -->
-                </b-col>
-              </b-form-group>
-
-              <b-form-group
-                v-if="model.project_id"
-                label="Select Project Manager"
-                label-for="project_manager_id"
-                horizontal
-                :label-cols="2"
-                :feedback="feedback('project_manager_id')"
-              >
-                <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.project_managers_id">
-                      <option value="" selected="selected">Please Select Project Managers</option>
-                      <option v-for="(option, index) in project_managers" :key="index" :value="option.id">
-                        {{ option.name }}
-                      </option>
-                    </select>
+                  <div class="form-group" data-original-title="" title="">
+                    <label class="control-label"><b>Quote reference: </b></label> <span class="form-control-static">QU-{{ model.quotation_number }}</span>
                   </div>
-                  <!-- <v-select
-                    id="project_manager_id"
-                    name="project_manager_id"
-                    v-model="model.project_managers_id"
-                    placeholder="Please Select Project Number"
-                    :options="project_managers"
-                    :multiple="false"
-                    label="name"
-                  >
-                  </v-select> -->
-                </b-col>
-              </b-form-group>
-
-              <b-form-group
-                label="Quote Name"
-                label-for="quotation_name"
-                horizontal
-                :label-cols="2"
-                :feedback="feedback('quotation_name')"
-              >
-                <b-col sm="4">
-                  <b-form-input
-                    id="quotation_name"
-                    name="quotation_name"
-                    :placeholder="$t('validation.quotes.quotation_name')"
-                    v-model="model.quotation_name"
-                    :state="state('quotation_name')"
-                    :value="model.quotation_name"
-                  ></b-form-input>
-                </b-col>
-              </b-form-group>
-
-              <b-form-group
-                label="Quote Date"
-                label-for="quotation_date"
-                horizontal
-                :label-cols="2"
-                :feedback="feedback('quotation_date')"
-              >
-                <b-col sm="4">
-                  <b-form-input
-                    id="quotation_date"
-                    name="quotation_date"
-                    :value="today_date"
-                    required
-                    :placeholder="$t('validation.quotes.quotation_date')"
-                    v-model="model.quotation_date"
-                    readonly
-                    :state="state('quotation_date')"
-                  ></b-form-input>
-                </b-col>
-              </b-form-group>
-
-              <b-form-group
-                label="Quote Reference"
-                label-for="quotation_number"
-                horizontal
-                :label-cols="2"
-                :feedback="feedback('quotation_number')"
-              >
-                <b-col sm="4">
-                  <b-form-input
-                    id="quotation_number"
-                    name="quotation_number"
-                    placeholder="Quote Reference"
-                    v-model="quotation_reference"
-                    readonly
-                    :state="state('quotation_number')"
-                    :value="quotation_reference"
-                  ></b-form-input>
-                </b-col>
-              </b-form-group>
-            </div>
-          </b-col>
-        </b-row>
-        <!-- Client Details Section End -->
-        <hr>
-        <!-- Description Section -->
-        <div class="well">
-          <h5>Description of Work</h5>
-          <b-form-textarea
-            v-model="model.quotation_description"
-            id="quotation_description"
-            name="quotation_description"
-            rows="6"
-            placeholder="Fill in details of the job"
-          ></b-form-textarea>
-        </div>
-        <!-- Description Section Ends -->
-        <hr>
-        <!-- Quote Details Section -->
-        <div class="well">
-          <h5>Quote Details
-            <div class="pull-right">
-              <b-btn variant="primary" title="Add a section to the job" @click="showModal('sectionModalRef')">
-                <span class="hidden-xs">Add Section</span>
-                <span class="glyphicon glyphicon-plus"></span>
-              </b-btn>
-              <!-- Add labour button -->
-              <b-btn variant="primary" class="btn btn-primary" title="Add labour to the job" @click="showModal('AddLabourSection')">
-                <span class="hidden-xs">Add Labour</span>
-                <span class="glyphicon glyphicon-plus"></span>
-              </b-btn>
-              <!-- Add job part button -->
-              <b-btn variant="primary" title="Add a part to the job" @click="showModal('AddPartsSection')">
-                <span class="hidden-xs">Add Parts</span>
-                <span class="glyphicon glyphicon-plus"></span>
-              </b-btn>
-            </div>
-          </h5>
+                </div>
+              <!-- /right -->
+              </div>
+            </b-col>
+          </b-row>
+          <!-- Client Details Section End -->
+          <hr>
+          <!-- Description Section -->
+          <h3 style="color:#303030">Description Of Work</h3>
+          <p>{{ model.quotation_description }}</p>
+          <!-- Description Section Ends -->
+          <hr>
+          <!-- Quote Details Section -->
           <br>
-          <div id="jobPartsTableDiv">
+          <div id="jobPartsTableDivShow">
             <table ref="detailsTable" class="table table-bordered table-striped table-hover" width="100%">
-              <thead>
+              <thead class="thead-show">
                 <tr>
                   <th>Name</th>
-                  <th style="text-align:right">Quantity</th>
+                  <th>Quantity</th>
                   <th>Net Amount</th>
-                  <th style="text-align:right">Net Total</th>
-                  <th style="text-align:right">Actions</th>
+                  <th>Net Total</th>
                 </tr>
               </thead>
               <tbody>
@@ -299,12 +79,6 @@
                   <template v-if="row.section">
                     <!-- <td>{{ index }}</td> -->
                     <td colspan="4"><h3>{{ row.section }}</h3></td>
-                    <td>
-                      <div class="pull-right">
-                        <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
-                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowSection(index)">Edit</button>
-                      </div>
-                    </td>
                   </template>
                   <template v-else-if="row.labour">
                     <td>
@@ -318,12 +92,6 @@
                     </td>
                     <td>
                       {{ row.net_total }}
-                    </td>
-                    <td>
-                      <div class="pull-right">
-                        <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
-                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowLabour(index)">Edit</button>
-                      </div>
                     </td>
                   </template>
                   <template v-else-if="row.parts">
@@ -339,87 +107,54 @@
                     <td>
                       {{ row.net_total }}
                     </td>
-                    <td>
-                      <div class="pull-right">
-                        <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
-                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowParts(index)">Edit</button>
-                      </div>
-                    </td>
                   </template>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
-        <!-- Quote Details Section Ends -->
-        <hr>
-        <!-- Bank Details & Total Amount Section  -->
-        <b-row>
-          <b-col sm="6">
-            <div class="well">
-              <div class="user-edit">
-                <div class="form-group">
-                  <h3 class="payment-terms">
-                    <input class="form-control large-text" readonly id="id_terms_heading" maxlength="255" name="terms_heading" type="text" value="Bank Details">
-                  </h3>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" cols="40" v-model="model.bank_account" id="id_terms" name="terms" placeholder="The details of your terms and conditions can be written here" rows="10"></textarea>
-                </div>
-              </div>
+          <!-- Quote Details Section Ends -->
+          <hr>
+          <!-- Bank Details & Total Amount Section  -->
+          <div class="row">
+            <!-- Terms and conditions -->
+            <div class="col-sm-6">
+              <h3 class="payment-terms" style="color:#303030">Bank Details</h3>
+              FNB Cheque Account: 62589280066
             </div>
-          </b-col>
-          <b-col sm="6">
-            <table id="table-invoice-total" class="form-inline table table-striped">
-              <tbody>
-                <tr>
-                  <th class="vertical-th">Total Net Amount</th>
-                  <td>
-                    ZAR
-                    <input class="form-control" id="id_total_net" name="total_net" readonly type="text" v-model="quotes.quotesNetTotal">
-                  </td>
-                </tr>
-                <tr>
-                  <th class="vertical-th">Total VAT Amount</th>
-                  <td>
-                    ZAR
-                    <input class="form-control pull-right" id="id_total_tax" name="total_tax" readonly type="text" v-model="quotes.quotesVatTotal">
-                  </td>
-                </tr>
-                <tr>
-                  <th class="vertical-th">
-                    Quote Total
-                  </th>
-                  <td>
-                    ZAR
-                    <input class="form-control pull-right" id="id_job_total" name="job_total" readonly type="text" v-model="quotes.quotesTotal">
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </b-col>
-          <b-col>
-          </b-col>
-        </b-row>
-        <!-- Bank Details & Total Amount Section Ends -->
+            <!-- Totals -->
+            <div class="col-sm-6 align-right">
+              <table id="table-invoice-total" class="table table-striped table-hover">
+                <tbody>
+                  <tr>
+                    <th class="verticle-th">Total Net Amount</th>
+                    <td>ZAR{{ model.net_amount }}</td>
+                  </tr>
+                  <tr>
+                    <th class="verticle-th">Total VAT Amount</th>
+                    <td>ZAR{{ model.vat_amount }}</td>
+                  </tr>
+                  <tr>
+                    <th class="verticle-th">Total</th>
+                    <td>ZAR{{ model.total_amount }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /col6 -->
+          </div>
+          <!-- Bank Details & Total Amount Section Ends -->
+        </div>
+        <!-- ViewPort  Ends -->
         <b-row slot="footer">
           <b-col md>
             <b-button to="/quotes" exact variant="danger" size="md">
               {{ $t('buttons.back') }}
             </b-button>
           </b-col>
-          <b-col md>
-            <b-dropdown right split :text="$t('buttons.quotes.save_and_publish')" class="float-right"
-                        variant="success" size="sm" @click="onSubmit()"
-                        :disabled="pending"
-                        v-if="isNew || this.$app.user.can('edit quotes') || this.$app.user.can('edit own quotes')"
-            >
-            </b-dropdown>
-          </b-col>
         </b-row>
         <!-- Footer Section Ends -->
       </b-card>
-    </form>
+    </div>
     <!-- Find Client Modal -->
     <b-modal ref="clientSearchModalRef" id="client-modal" hide-footer title="Find Client" size="lg">
       <b-input-group>
@@ -918,7 +653,6 @@ export default {
       labourTabIndex: 0,
       sectionStatus: null,
       rowsRemember: null,
-      quotation_reference: null,
       client_search: {
         search_client: null,
         client_info_get: [],
@@ -972,13 +706,11 @@ export default {
         quote_vat: null,
         company_name: null,
         quote_ref_start: null,
-        quote_ref_alphabet: null,
         bank_account: null,
         company_logo: null
       },
       model: {
         quotation_number: null,
-        quotation_digit: null,
         quotation_name: null,
         travelling_time: null,
         travelling_km: null,
@@ -996,9 +728,10 @@ export default {
         client_email: null,
         quotation_description: null,
         rows: [],
-        bank_account: null,
+        quotation_date: null,
         company_address: null,
-        company_logo: null
+        company_logo: null,
+        bank_account: null
       },
       quotes: {
         quotesNetTotal: 0.00,
@@ -1040,17 +773,15 @@ export default {
       }
     },
     'last_quote_ref': function (val) {
-      if (this.isNew) {
-        if (val) {
-          this.model.quotation_number = parseInt(val) + 1
+      if (val) {
+        this.model.quotation_number = parseInt(val) + 1
+      } else {
+        // check value quote ref start from settings
+        if (this.settings.quote_ref_start) {
+          this.model.quotation_number = this.settings.quote_ref_start + 1
         } else {
-          // check value quote ref start from settings
-          if (this.settings.quote_ref_start) {
-            this.model.quotation_number = this.settings.quote_ref_start + 1
-          } else {
-            alert('Please Add Quote Reference Start From Settings')
-            this.$router.push('/settings')
-          }
+          alert('Please Add Quote Reference Start From Settings')
+          this.$router.push('/settings')
         }
       }
     },
@@ -1127,25 +858,6 @@ export default {
       if (val === '') {
         this.errors.labour_name = 'Name cannot be empty'
       }
-    },
-    'model.quotation_number': function (val) {
-      if (val) {
-        if (!this.isNew) {
-          this.quotation_reference = this.model.quotation_digit + '-' + val
-        } else {
-          this.quotation_reference = this.settings.quote_ref_alphabet + '-' + val
-        }
-      }
-    },
-    'settings': {
-      handler (val) {
-        this.model.vat_rates = val.quote_vat
-        this.model.quotation_digit = val.quote_ref_alphabet
-        this.model.company_address = val.company_address
-        this.model.company_logo = val.company_logo
-        this.model.bank_account = val.bank_account
-      },
-      deep: true
     }
   },
   mounted: function () {
@@ -1158,9 +870,7 @@ export default {
     this.getVats()
     this.getJobcards()
     this.getProjects()
-    if (this.isNew) {
-      this.getSettings()
-    }
+    this.getSettings()
     this.getQuotesReference()
   },
   methods: {
@@ -1426,8 +1136,7 @@ export default {
       this.settings.company_logo = data.company_logo
       this.settings.bank_account = data.bank_account
       this.settings.quote_ref_start = data.quote_ref_start
-      this.settings.quote_ref_alphabet = data.quote_ref_alphabet
-      this.settings.quote_vat = data.quote_vat
+      this.model.vat_rates = this.settings.quote_vat = data.quote_vat
       // Assign the general/settings vat rate value to labour and parts vat rate
       if (data.quote_vat) {
         this.labour.labour_vat_rate = data.quote_vat
@@ -1512,6 +1221,17 @@ export default {
       this.parts.net_parts_price_zar = 0.00
       this.parts.parts_total_zar = 0.00
       this.errors.parts_name = ''
+    },
+    print: function (div) {
+      // var divToPrint = document.getElementById(div)
+      // var newWin = window.open()
+      // newWin.document.write(divToPrint.innerHTML)
+      // newWin.location.reload()
+      // newWin.focus()
+      // newWin.print()
+      // newWin.close()
+      var printWindow = window.open('/admin/quotes/3/printpdf ', 'popupWindow', 'width=600,height=600,scrollbars=yes')
+      printWindow.print()
     }
   }
 }

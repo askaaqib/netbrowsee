@@ -595,6 +595,7 @@ return [
                 'index'       => 'Quote list',
                 'create'      => 'Create Quote',
                 'edit'        => 'Edit quotes',
+                'show'        => 'View Quote',
                 'publication' => 'Publication options',
             ],
 

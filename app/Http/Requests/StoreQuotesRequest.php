@@ -24,13 +24,6 @@ class StoreQuotesRequest extends FormRequest
     public function rules()
     {
         return [
-            'quotation_number'          =>        'required',
-            'quotation_name'         =>        'required',
-            'travelling_time'     =>        'required',
-            'travelling_km'       =>        'required',
-            'vat_amount'          =>        'required',
-            'net_amount'          =>        'required',
-            'total_amount'        =>        'required'
         ];
     }
 }

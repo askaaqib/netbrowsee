@@ -27,16 +27,25 @@ class Quotes extends Model
 
     protected $fillable = [
         'quotation_number',
-        'quotation_name',
+        'quotation_name',        
+        'quotation_description',
         'travelling_time',
         'travelling_km',
         'vat_amount',
         'net_amount',
         'total_amount',
-        'client_id',
         'labour_rates',
         'materials_rates',
-        'vat_rates'
+        'vat_rates',
+        'client_email',
+        'project_id',
+        'project_managers_id',
+        'jobcard_id',
+        'rows',
+        'company_address',
+        'company_logo',
+        'bank_account',
+        'quotation_digit'
     ];
 
 

@@ -33,11 +33,11 @@
           <template slot="checkbox" slot-scope="row">
             <b-form-checkbox :value="row.item.id" v-model="selected"></b-form-checkbox>
           </template>
-          <template slot="name" slot-scope="row">
-            <span v-text="row.item.name"></span>
+          <template slot="quotation_number" slot-scope="row">
+            <span v-text="row.item.quotation_digit"></span>-<span v-text="row.item.quotation_number"></span>
           </template>
-          <template slot="description" slot-scope="row">
-            <span v-text="row.item.description"></span>
+          <template slot="quotation_name" slot-scope="row">
+            <span v-text="row.item.quotation_name"></span>
           </template>
           <template slot="quotes.created_at" slot-scope="row">
             {{ row.item.created_at }}
@@ -46,6 +46,9 @@
             {{ row.item.updated_at }}
           </template>
           <template slot="actions" slot-scope="row">
+            <b-button size="sm" variant="success" :to="`/quotes/${row.item.id}/view`" v-b-tooltip.hover :title="$t('buttons.preview')" class="mr-1">
+              <i class="fe fe-eye"></i>
+            </b-button>
             <b-button v-if="row.item.id" size="sm" variant="primary" :to="`/quotes/${row.item.id}/edit`" v-b-tooltip.hover :title="$t('buttons.edit')" class="mr-1">
               <i class="fe fe-edit"></i>
             </b-button>

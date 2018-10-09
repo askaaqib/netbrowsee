@@ -18,6 +18,7 @@ class Settings extends Model
             'company_logo',            
             'bank_account',            
             'quote_ref_start',            
+            'quote_ref_alphabet',            
             'quote_vat', 
 	];
 

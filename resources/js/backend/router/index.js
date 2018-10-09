@@ -38,6 +38,8 @@ import RoleForm from '../views/RoleForm'
 import RoleList from '../views/RoleList'
 import QuotesForm from '../views/QuotesForm'
 import QuotesList from '../views/QuotesList'
+import QuotesShow from '../views/QuotesShow'
+import QuotesPdf from '../views/QuotesPdf'
 
 Vue.use(Router)
 
@@ -508,6 +510,24 @@ export function createRouter (base, i18n) {
                 component: QuotesForm,
                 meta: {
                   label: i18n.t('labels.backend.quotes.titles.create')
+                }
+              },
+              {
+                path: ':id/view',
+                name: 'quotes_show',
+                component: QuotesShow,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.quotes.titles.show')
+                }
+              },
+              {
+                path: ':id/printpdf',
+                name: 'quotes_printpdf',
+                component: QuotesPdf,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.quotes.titles.show')
                 }
               },
               {
