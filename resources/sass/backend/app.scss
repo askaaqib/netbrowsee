@@ -213,6 +213,19 @@ form.quotes-form .table>thead>tr>th {
 .btn-show {
   margin-left:10px; 
 }
+form.invoices-form .table > thead > tr > th {
+    background: #24b37e;
+    text-shadow: -1px -1px 0 #1C8A61;
+    color: #fff;
+}
+.btn-invoices {
+  background: #24b37e;
+  text-shadow: -1px -1px 0 #1C8A61;
+  color: #fff;
+}
+.invoices-form .well {
+  border: 3px dotted #24b37e;
+}
 // ::-webkit-scrollbar {
 //     width: 12px;
 // }
