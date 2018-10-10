@@ -19,7 +19,8 @@ class Settings extends Model
             'bank_account',            
             'quote_ref_start',            
             'quote_ref_alphabet',            
-            'quote_vat', 
+			'quote_vat',
+			'invoice_ref_start'
 	];
 
    	protected $table = 'settings';

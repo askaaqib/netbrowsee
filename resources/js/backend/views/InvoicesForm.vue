@@ -1065,7 +1065,7 @@ export default {
             this.invoices.invoicesVatTotal += this.model.vat_rates * item.net_total / 100
           } else {
             this.invoices.invoicesNetTotal += parseInt(item.net_total)
-            this.invoices.invoicesVatTotal += this.settings.Invoice_vat * item.net_total / 100
+            this.invoices.invoicesVatTotal += parseInt(this.settings.Invoice_vat) * item.net_total / 100
           }
         }
         if (item.section) {
@@ -1425,15 +1425,15 @@ export default {
       this.settings.company_address = data.company_address
       this.settings.company_logo = data.company_logo
       this.settings.bank_account = data.bank_account
-      this.settings.Invoice_ref_start = data.Invoice_ref_start
-      this.settings.Invoice_ref_alphabet = data.Invoice_ref_alphabet
-      this.settings.Invoice_vat = data.Invoice_vat
+      this.settings.Invoice_ref_start = data.invoice_ref_start
+      this.settings.Invoice_ref_alphabet = data.quote_ref_alphabet
+      this.settings.Invoice_vat = data.quote_vat
       // Assign the general/settings vat rate value to labour and parts vat rate
       if (data.Invoice_vat) {
-        this.labour.labour_vat_rate = data.Invoice_vat
-        this.labour_edit.labour_vat_rate = data.Invoice_vat
-        this.parts.parts_vat_rate = data.Invoice_vat
-        this.parts_edit.parts_vat_rate = data.Invoice_vat
+        this.labour.labour_vat_rate = data.quote_vat
+        this.labour_edit.labour_vat_rate = data.quote_vat
+        this.parts.parts_vat_rate = data.quote_vat
+        this.parts_edit.parts_vat_rate = data.quote_vat
       }
     },
     async getInvoicesReference () {

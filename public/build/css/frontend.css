@@ -2575,11 +2575,6 @@ pre code {
   opacity: 1;
 }
 
-.form-control:-ms-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
@@ -11223,7 +11218,7 @@ body.swal2-toast-column .swal2-toast .swal2-input {
   font-size: 1em;
 }
 
-body.swal2-toast-column .swal2-toast .swal2-validationerror {
+body.swal2-toast-column .swal2-toast .swal2-validation-message {
   font-size: 1em;
 }
 
@@ -11950,6 +11945,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-actions {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -12016,7 +12013,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-styled {
-  margin: 0 .3125em;
+  margin: .3125em;
   padding: .625em 2em;
   font-weight: 500;
   -webkit-box-shadow: none;
@@ -12176,12 +12173,6 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   color: #cccccc;
 }
 
-.swal2-popup .swal2-input:-ms-input-placeholder,
-.swal2-popup .swal2-file:-ms-input-placeholder,
-.swal2-popup .swal2-textarea:-ms-input-placeholder {
-  color: #cccccc;
-}
-
 .swal2-popup .swal2-input::-ms-input-placeholder,
 .swal2-popup .swal2-file::-ms-input-placeholder,
 .swal2-popup .swal2-textarea::-ms-input-placeholder {
@@ -12260,7 +12251,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   margin: 0 .4em;
 }
 
-.swal2-popup .swal2-validationerror {
+.swal2-popup .swal2-validation-message {
   display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -12276,7 +12267,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   overflow: hidden;
 }
 
-.swal2-popup .swal2-validationerror::before {
+.swal2-popup .swal2-validation-message::before {
   display: inline-block;
   width: 1.5em;
   min-width: 1.5em;
@@ -12601,6 +12592,20 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+@media print {
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    overflow-y: scroll !important;
+  }
+
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) > [aria-hidden='true'] {
+    display: none;
+  }
+
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container {
+    position: initial !important;
   }
 }
 

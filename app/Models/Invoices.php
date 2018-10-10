@@ -13,15 +13,22 @@ class Invoices extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-	    	'description',
-            'quantity',
-            'amount',
-            'net_amount',
-            'vat_amount',
-            'total_amount',
-            'vat_id',
-            'materials_rates_id',
-            'quotations_id',
+			"invoice_number",
+			"invoice_digit",
+			"invoice_name",
+			"vat_amount",
+			"net_amount",
+			"total_amount",
+			"vat_rates",
+			"jobcard_id",
+			"project_id",
+			"project_managers_id",
+			"client_email",
+			"invoice_description",
+			"rows",
+			"bank_account" ,
+			"company_address",
+			"company_logo" 
 	];
 
    	protected $table = 'invoices';

@@ -23,12 +23,14 @@ class UpdateSettingsRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'company_name'   => 'required',            
             'company_address'        => 'required',            
             'bank_account'      => 'required',            
-            'quote_ref_start'        => 'required',            
-            'quote_vat' => 'required',         
+            'quote_ref_start'        => 'required|integer|min:1|digits_between: 0,9',            
+            'quote_vat' => 'required',
+            'invoice_ref_start' => 'required|integer|min:1|digits_between: 0,9'        
         ];
     }
 }

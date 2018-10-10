@@ -33,23 +33,12 @@
           <template slot="checkbox" slot-scope="row">
             <b-form-checkbox :value="row.item.id" v-model="selected"></b-form-checkbox>
           </template>
-          <template slot="description" slot-scope="row">
-            <span v-text="row.item.description"></span>
+          <template slot="invoice_name" slot-scope="row">
+            <span v-text="row.item.invoice_name"></span>
           </template>
-          <template slot="status" slot-scope="row">
-            <span v-text="row.item.status"></span>
-          </template>
-          <template slot="expenses" slot-scope="row">
-            <span v-text="row.item.expenses"></span>
-          </template>
-          <template slot="amount" slot-scope="row">
-            <span v-text="row.item.amount"></span>
-          </template>
-          <template slot="vat_collected" slot-scope="row">
-            <span v-text="row.item.vat_collected"></span>
-          </template>
-          <template slot="profit_loss" slot-scope="row">
-            <span v-text="row.item.profit_loss"></span>
+          <template slot="invoice_reference" slot-scope="row">
+            <span v-text="row.item.invoice_digit"></span>-
+            <span v-text="row.item.invoice_number"></span>
           </template>
           <template slot="invoices.created_at" slot-scope="row">
             {{ row.item.created_at }}
@@ -83,9 +72,9 @@ export default {
       selected: [],
       fields: [
         { key: 'checkbox' },
-        { key: 'description', label: this.$t('validation.invoices.description'), sortable: true },
-        { key: 'quantity', label: this.$t('validation.invoices.quantity'), sortable: true },
-        { key: 'amount', label: this.$t('validation.invoices.amount'), sortable: true },
+        { key: 'invoice_reference', label: this.$t('validation.invoices.invoice_reference'), sortable: false },
+        { key: 'invoice_name', label: this.$t('validation.invoices.invoice_name'), sortable: true },
+        { key: 'client_email', label: this.$t('validation.invoices.client_email'), sortable: true },
         { key: 'net_amount', label: this.$t('validation.invoices.net_amount'), sortable: true },
         { key: 'vat_amount', label: this.$t('validation.invoices.vat_amount'), sortable: true },
         { key: 'total_amount', label: this.$t('validation.invoices.total_amount'), sortable: true },

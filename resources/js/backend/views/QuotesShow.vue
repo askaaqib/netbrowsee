@@ -6,7 +6,7 @@
         <b-row>
           <b-col class="col-md-12">
             <b-btn class="btn-show pull-right" variant="secondary" @click="print('viewport')">Print<i class="fe fe-printer fe-lg"></i></b-btn>
-            <b-btn class="btn-show pull-right" variant="secondary" @click="downloadPdf">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+            <b-btn class="btn-show pull-right" variant="secondary">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
           </b-col>
         </b-row>
         <!-- ViewPort  Starts -->
@@ -617,6 +617,7 @@ import form from '../mixins/form'
 import moment from 'moment'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import swal from 'sweetalert2'
+import JSPDF from 'jspdf'
 
 export default {
   name: 'QuotesForm',
@@ -874,6 +875,22 @@ export default {
     this.getQuotesReference()
   },
   methods: {
+    downloadjspdf: function () {
+      // Landscape export, 2×4 inches
+      var doc = new JSPDF({
+        orientation: 'landscape',
+        unit: 'in',
+        format: [4, 2]
+      })
+      var source = window.document.getElementById('quotes-view')
+      doc.fromHTML(
+        source,
+        15,
+        15
+      )
+      console.log(doc)
+      // doc.save('dataurlnewwindow.pdf')
+    },
     getProjectId: function () {
       alert('coming here')
     },

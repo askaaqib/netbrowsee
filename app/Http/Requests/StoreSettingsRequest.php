@@ -27,8 +27,9 @@ class StoreSettingsRequest extends FormRequest
             'company_name'   => 'required',            
             'company_address'        => 'required',            
             'bank_account'      => 'required',            
-            'quote_ref_start'        => 'required',            
-            'quote_vat' => 'required',         
+            'quote_ref_start'        => 'required|min:1',            
+            'quote_vat' => 'required',
+            'invoice_ref_start' => 'required|min:1'       
         ];
     }
 }

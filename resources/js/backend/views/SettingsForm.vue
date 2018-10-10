@@ -87,6 +87,22 @@
             </b-form-group>
 
             <b-form-group
+              :label="$t('validation.settings.invoice_ref_start')"
+              label-for="invoice_ref_start"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('invoice_ref_start')"
+            >
+              <b-form-input
+                id="invoice_ref_start"
+                name="invoice_ref_start"
+                :placeholder="$t('validation.settings.invoice_ref_start')"
+                v-model="model.invoice_ref_start"
+                :state="state('invoice_ref_start')"
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
               :label="$t('validation.settings.quote_vat')"
               label-for="quote_vat"
               horizontal
@@ -171,7 +187,8 @@ export default {
         bank_account: null,
         quote_ref_start: null,
         quote_ref_alphabet: null,
-        quote_vat: null
+        quote_vat: null,
+        invoice_ref_start: null
       }
     }
   },
