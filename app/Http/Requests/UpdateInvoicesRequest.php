@@ -24,16 +24,8 @@ class UpdateInvoicesRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'description' => 'required',
-            // 'quantity' => 'required',
-            // 'amount' => 'required',
-            // 'net_amount' => 'required',
-            // 'vat_amount' => 'required',
-            // 'total_amount' => 'required',
-            // 'vat_id' => 'required',
-            // 'materials_rates_id' => 'required',
-            // 'quotations_id' => 'required',
-
+            'jobcard_id' => 'required',
+            'invoice_name' => 'required'
         ];
     }
 }

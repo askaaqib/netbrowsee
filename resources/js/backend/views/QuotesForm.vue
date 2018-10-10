@@ -96,33 +96,18 @@
           <b-col sm="6">
             <div class="well">
               <b-form-group
-                label="Select Jobcard"
-                label-for="jobcard_no"
+                :label="$t('validation.quotes.jobcard_id')"
+                label-for="jobcard_id"
                 horizontal
                 :label-cols="2"
-                :feedback="feedback('jobcard_no')"
+                :feedback="feedback('jobcard_id')"
               >
-                <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.jobcard_id">
-                      <option value="">Please Select Jobcards</option>
-                      <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
-                        {{ option.jobcard_num }}
-                      </option>
-                    </select>
-                  </div>
-                  <!-- <v-select
-                    id="jobcard_no"
-                    name="jobcard_no"
-                    v-model="model.jobcard_id"
-                    placeholder="Please Select Jobcard"
-                    :options="jobcards"
-                    :multiple="false"
-                    value="id"
-                    label="id"
-                  >
-                  </v-select> -->
-                </b-col>
+                <b-select class="col-sm-4" v-model="model.jobcard_id" :state="state('jobcard_id')">
+                  <option value="">Please Select Jobcards</option>
+                  <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
+                    {{ option.jobcard_num }}
+                  </option>
+                </b-select>
               </b-form-group>
 
               <b-form-group
@@ -132,27 +117,12 @@
                 :label-cols="2"
                 :feedback="feedback('project_id')"
               >
-                <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.project_id">
-                      <option value="">Please Select Projects</option>
-                      <option v-for="(option, index) in projects" :key="index" :value="option.id">
-                        {{ option.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <!-- <v-select
-                    id="project_id"
-                    name="project_id"
-                    v-model="model.project_id"
-                    placeholder="Please Select Project"
-                    :options="projects"
-                    :multiple="false"
-                    label="name"
-                    :on-change="getProjectId"
-                  >
-                  </v-select> -->
-                </b-col>
+                <b-select class="col-sm-4" v-model="model.project_id" :state="state('project_id')">
+                  <option value="">Please Select Projects</option>
+                  <option v-for="(option, index) in projects" :key="index" :value="option.id">
+                    {{ option.name }}
+                  </option>
+                </b-select>
               </b-form-group>
 
               <b-form-group
@@ -163,45 +133,30 @@
                 :label-cols="2"
                 :feedback="feedback('project_manager_id')"
               >
-                <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.project_managers_id">
-                      <option value="" selected="selected">Please Select Project Managers</option>
-                      <option v-for="(option, index) in project_managers" :key="index" :value="option.id">
-                        {{ option.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <!-- <v-select
-                    id="project_manager_id"
-                    name="project_manager_id"
-                    v-model="model.project_managers_id"
-                    placeholder="Please Select Project Number"
-                    :options="project_managers"
-                    :multiple="false"
-                    label="name"
-                  >
-                  </v-select> -->
-                </b-col>
+                <b-select class="col-sm-4" v-model="model.project_managers_id" :state="state('project_manager_id')">
+                  <option value="">Please Select Project Managers</option>
+                  <option v-for="(option, index) in project_managers" :key="index" :value="option.id">
+                    {{ option.name }}
+                  </option>
+                </b-select>
               </b-form-group>
 
               <b-form-group
-                label="Quote Name"
+                :label="$t('validation.quotes.quotation_name')"
                 label-for="quotation_name"
                 horizontal
                 :label-cols="2"
                 :feedback="feedback('quotation_name')"
               >
-                <b-col sm="4">
-                  <b-form-input
-                    id="quotation_name"
-                    name="quotation_name"
-                    :placeholder="$t('validation.quotes.quotation_name')"
-                    v-model="model.quotation_name"
-                    :state="state('quotation_name')"
-                    :value="model.quotation_name"
-                  ></b-form-input>
-                </b-col>
+                <b-form-input
+                  id="quotation_name"
+                  name="quotation_name"
+                  class="col-sm-4"
+                  :placeholder="$t('validation.quotes.quotation_name')"
+                  v-model="model.quotation_name"
+                  :state="state('quotation_name')"
+                  :value="model.quotation_name"
+                ></b-form-input>
               </b-form-group>
 
               <b-form-group
@@ -211,18 +166,17 @@
                 :label-cols="2"
                 :feedback="feedback('quotation_date')"
               >
-                <b-col sm="4">
-                  <b-form-input
-                    id="quotation_date"
-                    name="quotation_date"
-                    :value="today_date"
-                    required
-                    :placeholder="$t('validation.quotes.quotation_date')"
-                    v-model="model.quotation_date"
-                    readonly
-                    :state="state('quotation_date')"
-                  ></b-form-input>
-                </b-col>
+                <b-form-input
+                  id="quotation_date"
+                  name="quotation_date"
+                  :value="model.quotation_date"
+                  class="col-sm-4"
+                  required
+                  :placeholder="$t('validation.quotes.quotation_date')"
+                  v-model="model.quotation_date"
+                  readonly
+                  :state="state('quotation_date')"
+                ></b-form-input>
               </b-form-group>
 
               <b-form-group
@@ -232,17 +186,16 @@
                 :label-cols="2"
                 :feedback="feedback('quotation_number')"
               >
-                <b-col sm="4">
-                  <b-form-input
-                    id="quotation_number"
-                    name="quotation_number"
-                    placeholder="Quote Reference"
-                    v-model="quotation_reference"
-                    readonly
-                    :state="state('quotation_number')"
-                    :value="quotation_reference"
-                  ></b-form-input>
-                </b-col>
+                <b-form-input
+                  id="quotation_number"
+                  name="quotation_number"
+                  class="col-sm-4"
+                  placeholder="Quote Reference"
+                  v-model="quotation_reference"
+                  readonly
+                  :state="state('quotation_number')"
+                  :value="quotation_reference"
+                ></b-form-input>
               </b-form-group>
             </div>
           </b-col>
@@ -988,9 +941,9 @@ export default {
         labour_rates: null,
         materials_rates: null,
         vat_rates: null,
-        jobcard_id: null,
-        project_id: null,
-        project_managers_id: null,
+        jobcard_id: '',
+        project_id: '',
+        project_managers_id: '',
         general_vat_rate: 15.00,
         client_name: null,
         client_email: null,
@@ -998,7 +951,8 @@ export default {
         rows: [],
         bank_account: null,
         company_address: null,
-        company_logo: null
+        company_logo: null,
+        quotation_date: null
       },
       quotes: {
         quotesNetTotal: 0.00,
@@ -1149,8 +1103,10 @@ export default {
     }
   },
   mounted: function () {
-    var d = moment().format('ddd. DD, YYYY')
-    this.today_date = d
+    if (this.isNew) {
+      var d = moment().format('ddd. DD, YYYY')
+      this.model.quotation_date = d
+    }
   },
   created: function () {
     this.getLabours()

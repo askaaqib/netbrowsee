@@ -66,7 +66,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'SettingsList',
   data () {
@@ -86,6 +85,9 @@ export default {
         destroy: this.$t('labels.backend.settings.actions.destroy')
       }
     }
+  },
+  mounted: function () {
+    this.$router.push('/settings/create')
   },
   methods: {
     dataLoadProvider (ctx) {

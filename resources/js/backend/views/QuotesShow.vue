@@ -715,9 +715,9 @@ export default {
         quotation_name: null,
         travelling_time: null,
         travelling_km: null,
-        vat_amount: null,
-        net_amount: null,
-        total_amount: null,
+        vat_amount: 0.00,
+        net_amount: 0.00,
+        total_amount: 0.00,
         labour_rates: null,
         materials_rates: null,
         vat_rates: null,
@@ -787,8 +787,8 @@ export default {
       }
     },
     'rows': function (val) {
-      this.quotes.quotesNetTotal = 0
-      this.quotes.quotesVatTotal = 0
+      this.quotes.quotesNetTotal = 0.00
+      this.quotes.quotesVatTotal = 0.00
       var saveVal = 'empty'
       val.forEach((item, index) => {
         if (item.labour || item.parts) {

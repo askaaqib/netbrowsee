@@ -204,7 +204,7 @@ return [
     ],
 
     'quotes' => [
-      'quotation_number'                => 'Quote Number',
+      'quotation_number'          => 'Quote Number',
       'project_num'               => 'Project Number',
       'quotation_name'               => 'Quotes Name',
       'travelling_time'           => 'Travelling Time',
@@ -216,6 +216,7 @@ return [
       'labour_rates'           => 'Labour Rates',
       'material_rates'           => 'Material Rates',
       'vat_rates'           => 'Vat Rates',
+      'jobcard_id'          => 'Jobcard'
       
     ],
 
@@ -253,6 +254,7 @@ return [
       'invoice_name' => 'Name',
       'invoice_reference' => 'Reference No',
       'client_email' => 'Client Email',
-      'invoice_date' => 'Invoice Date'             
+      'invoice_date' => 'Invoice Date',
+      'jobcard_id'          => 'Jobcard'             
     ],
 ];

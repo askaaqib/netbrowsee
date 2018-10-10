@@ -62,6 +62,7 @@ export default {
 
         this.$app.noty[data.status](data.message)
         if (this.listPath) {
+          location.reload()
           router.push(this.listPath)
         }
       } catch (e) {

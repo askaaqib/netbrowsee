@@ -96,31 +96,18 @@
           <b-col sm="6">
             <div class="well">
               <b-form-group
-                label="Select Jobcard"
+                :label="$t('validation.invoices.jobcard_id')"
                 label-for="jobcard_id"
                 horizontal
                 :label-cols="2"
                 :feedback="feedback('jobcard_id')"
               >
-                <b-col sm="4">
-                  <b-form-select v-model="model.jobcard_id">
-                    <option value="">Please Select Jobcards</option>
-                    <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
-                      {{ option.jobcard_num }}
-                    </option>
-                  </b-form-select>
-                  <!-- <v-select
-                    id="jobcard_no"
-                    name="jobcard_no"
-                    v-model="model.jobcard_id"
-                    placeholder="Please Select Jobcard"
-                    :options="jobcards"
-                    :multiple="false"
-                    value="id"
-                    label="id"
-                  >
-                  </v-select> -->
-                </b-col>
+                <b-select class="col-sm-4" v-model="model.jobcard_id" :state="state('jobcard_id')">
+                  <option value="">Please Select Jobcards</option>
+                  <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
+                    {{ option.jobcard_num }}
+                  </option>
+                </b-select>
               </b-form-group>
 
               <b-form-group
@@ -130,27 +117,12 @@
                 :label-cols="2"
                 :feedback="feedback('project_id')"
               >
-                <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.project_id">
-                      <option value="">Please Select Projects</option>
-                      <option v-for="(option, index) in projects" :key="index" :value="option.id">
-                        {{ option.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <!-- <v-select
-                    id="project_id"
-                    name="project_id"
-                    v-model="model.project_id"
-                    placeholder="Please Select Project"
-                    :options="projects"
-                    :multiple="false"
-                    label="name"
-                    :on-change="getProjectId"
-                  >
-                  </v-select> -->
-                </b-col>
+                <b-select class="col-sm-4" v-model="model.project_id" :state="state('project_id')">
+                  <option value="">Please Select Projects</option>
+                  <option v-for="(option, index) in projects" :key="index" :value="option.id">
+                    {{ option.name }}
+                  </option>
+                </b-select>
               </b-form-group>
 
               <b-form-group
@@ -161,26 +133,12 @@
                 :label-cols="2"
                 :feedback="feedback('project_manager_id')"
               >
-                <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.project_managers_id">
-                      <option value="" selected="selected">Please Select Project Managers</option>
-                      <option v-for="(option, index) in project_managers" :key="index" :value="option.id">
-                        {{ option.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <!-- <v-select
-                    id="project_manager_id"
-                    name="project_manager_id"
-                    v-model="model.project_managers_id"
-                    placeholder="Please Select Project Number"
-                    :options="project_managers"
-                    :multiple="false"
-                    label="name"
-                  >
-                  </v-select> -->
-                </b-col>
+                <b-select class="col-sm-4" v-model="model.project_managers_id" :state="state('project_manager_id')">
+                  <option value="">Please Select Project Managers</option>
+                  <option v-for="(option, index) in project_managers" :key="index" :value="option.id">
+                    {{ option.name }}
+                  </option>
+                </b-select>
               </b-form-group>
 
               <b-form-group
@@ -190,16 +148,15 @@
                 :label-cols="2"
                 :feedback="feedback('invoice_name')"
               >
-                <b-col sm="4">
-                  <b-form-input
-                    id="invoice_name"
-                    name="invoice_name"
-                    :placeholder="$t('validation.invoices.invoice_name')"
-                    v-model="model.invoice_name"
-                    :state="state('invoice_name')"
-                    :value="model.invoice_name"
-                  ></b-form-input>
-                </b-col>
+                <b-form-input
+                  id="invoice_name"
+                  name="invoice_name"
+                  class="col-sm-4"
+                  :placeholder="$t('validation.invoices.invoice_name')"
+                  v-model="model.invoice_name"
+                  :state="state('invoice_name')"
+                  :value="model.invoice_name"
+                ></b-form-input>
               </b-form-group>
 
               <b-form-group
@@ -213,7 +170,7 @@
                   <b-form-input
                     id="invoice_date"
                     name="invoice_date"
-                    :value="today_date"
+                    :value="model.invoice_date"
                     required
                     :placeholder="$t('validation.invoices.invoice_date')"
                     v-model="model.invoice_date"
@@ -904,7 +861,6 @@ export default {
       jobcards: [],
       projects: [],
       project_managers: [],
-      today_date: null,
       section_name: '',
       section_name_edit: '',
       section_edit_index: null,
@@ -986,9 +942,9 @@ export default {
         labour_rates: null,
         materials_rates: null,
         vat_rates: null,
-        jobcard_id: null,
-        project_id: null,
-        project_managers_id: null,
+        jobcard_id: '',
+        project_id: '',
+        project_managers_id: '',
         general_vat_rate: 15.00,
         client_name: null,
         client_email: null,
@@ -996,7 +952,8 @@ export default {
         rows: [],
         bank_account: null,
         company_address: null,
-        company_logo: null
+        company_logo: null,
+        invoice_date: null
       },
       invoices: {
         invoicesNetTotal: 0.00,
@@ -1047,7 +1004,7 @@ export default {
             this.model.invoice_number = this.settings.Invoice_ref_start + 1
           } else {
             alert('Please Add Invoice Reference Start From Settings')
-            this.$router.push('/settings')
+            this.$router.push('/settings/create')
           }
         }
       }
@@ -1147,8 +1104,10 @@ export default {
     }
   },
   mounted: function () {
-    var d = moment().format('ddd. DD, YYYY')
-    this.today_date = d
+    if (this.isNew) {
+      var d = moment().format('ddd. DD, YYYY')
+      this.model.invoice_date = d
+    }
   },
   created: function () {
     this.getLabours()

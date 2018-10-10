@@ -175,10 +175,11 @@ export default {
       },
       modelName: 'setting',
       resourceRoute: 'settings',
-      listPath: '/settings',
+      listPath: '/settings/create',
       jobcards: [],
       selectedLogo: {},
       vat_rates: [],
+      edit_id: 'null',
       model: {
         company_name: null,
         company_address: null,
@@ -192,10 +193,24 @@ export default {
       }
     }
   },
+  watch: {
+    'edit_id': function (val) {
+      if (val !== 'null') {
+        this.$router.push('/settings/' + this.edit_id + '/edit')
+      }
+    }
+  },
   created () {
     this.getVats()
+    this.getSettings()
   },
   methods: {
+    async getSettings () {
+      let { data } = await axios.get(this.$app.route('admin.settings.getdata'))
+      if (data) {
+        this.edit_id = data.id
+      }
+    },
     onFileSelected: function (event) {
       this.selectedLogo = event.target.files[0]
       this.model.new_company_logo = event.target.files[0].name

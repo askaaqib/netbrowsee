@@ -23,7 +23,7 @@ import VatList from '../views/VatList'
 import VatForm from '../views/VatForm'
 import ReportsList from '../views/ReportsList'
 import ReportsForm from '../views/ReportsForm'
-import SettingsList from '../views/SettingsList'
+// import SettingsList from '../views/SettingsList'
 import SettingsForm from '../views/SettingsForm'
 import InvoicesList from '../views/InvoicesList'
 import InvoicesForm from '../views/InvoicesForm'
@@ -593,7 +593,7 @@ export function createRouter (base, i18n) {
               {
                 path: '/',
                 name: 'settings',
-                component: SettingsList,
+                component: SettingsForm,
                 meta: {
                   label: i18n.t('labels.backend.settings.titles.index')
                 }

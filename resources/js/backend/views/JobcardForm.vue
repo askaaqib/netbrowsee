@@ -131,16 +131,12 @@
               :label-cols="2"
               :feedback="feedback('projects_id')"
             >
-              <v-select
-                id="projects_id"
-                name="projects_id"
-                v-model="model.projects_id"
-                :options="projects"
-                placeholder="Select Projects"
-                label="name"
-                @search-change="getProjects"
-              >
-              </v-select>
+              <b-select v-model="model.projects_id" :state="state('projects_id')">
+                <option value="">Please Select Projects</option>
+                <option v-for="(option, index) in projects" :key="index" :value="option.id">
+                  {{ option.name }}
+                </option>
+              </b-select>
             </b-form-group>
 
             <b-form-group
@@ -150,16 +146,12 @@
               :label-cols="2"
               :feedback="feedback('labour_rates_id')"
             >
-              <v-select
-                id="labour_rates_id"
-                name="labour_rates_id"
-                v-model="model.labour_rates_id"
-                :options="labour_rates"
-                placeholder="Select Labour Paid"
-                label="name"
-                @search-change="getLabours"
-              >
-              </v-select>
+              <b-select v-model="model.labour_rates_id" :state="state('labour_rates_id')">
+                <option value="">Please Select Labour Rates</option>
+                <option v-for="(option, index) in labour_rates" :key="index" :value="option.id">
+                  {{ option.name }}
+                </option>
+              </b-select>
             </b-form-group>
 
             <b-form-group
@@ -186,16 +178,12 @@
               :label-cols="2"
               :feedback="feedback('materials_rates_id')"
             >
-              <v-select
-                id="materials_rates_id"
-                name="materials_rates_id"
-                v-model="model.materials_rates_id"
-                :options="materials_rates"
-                placeholder="Select Materials Paid"
-                label="name"
-                @search-change="getMaterials"
-              >
-              </v-select>
+              <b-select v-model="model.materials_rates_id" :state="state('materials_rates_id')">
+                <option value="">Please Select Labour Rates</option>
+                <option v-for="(option, index) in materials_rates" :key="index" :value="option.id">
+                  {{ option.name }}
+                </option>
+              </b-select>
             </b-form-group>
 
             <b-form-group
@@ -234,21 +222,17 @@
 
             <b-form-group
               :label="$t('validation.jobcards.assigned_to')"
-              label-for="assigned_to"
+              label-for="contractor_id"
               horizontal
               :label-cols="2"
-              :feedback="feedback('assigned_to')"
+              :feedback="feedback('contractor_id')"
             >
-              <v-select
-                id="assigned_to"
-                name="assigned_to"
-                v-model="model.contractor_id"
-                :options="assigned_to"
-                placeholder="Select to Assign"
-                label="name"
-                @search-change="getUsers"
-              >
-              </v-select>
+              <b-select v-model="model.contractor_id" :state="state('contractor_id')">
+                <option value="">Please Select User to assign</option>
+                <option v-for="(option, index) in assigned_to" :key="index" :value="option.id">
+                  {{ option.name }}
+                </option>
+              </b-select>
             </b-form-group>
 
             <b-form-group
@@ -300,25 +284,6 @@
                 v-model="model.after_pictures"
                 :state="state('after_pictures')"
               ></b-form-input>
-            </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.jobcards.quotations')"
-              label-for="quotations_id"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('quotations_id')"
-            >
-              <v-select
-                id="quotations_id"
-                name="quotations_id"
-                v-model="model.quotations_id"
-                :options="quotations"
-                placeholder="Select Quotations"
-                label="quotation_name"
-                @search-change="getQuotations"
-              >
-              </v-select>
             </b-form-group>
 
             <b-row slot="footer">
@@ -377,17 +342,16 @@ export default {
         facility_name: null,
         district: null,
         sub_district: null,
-        projects_id: [],
-        labour_rates_id: [],
+        projects_id: '',
+        labour_rates_id: '',
         travelling_paid: null,
-        materials_rates_id: [],
-        contractor_id: [],
+        materials_rates_id: '',
+        contractor_id: '',
         quoted_amount: null,
         status: null,
         before_pictures: null,
         during_pictures: null,
-        after_pictures: null,
-        quotations_id: null
+        after_pictures: null
       }
     }
   },

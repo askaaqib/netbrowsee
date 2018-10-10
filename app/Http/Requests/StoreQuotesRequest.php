@@ -24,6 +24,8 @@ class StoreQuotesRequest extends FormRequest
     public function rules()
     {
         return [
+            'jobcard_id' => 'required',
+            'quotation_name' => 'required',
         ];
     }
 }

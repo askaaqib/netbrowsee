@@ -1945,7 +1945,8 @@ export default {
                 "quotation_date": "Quotation Date",
                 "labour_rates": "Labour Rates",
                 "material_rates": "Material Rates",
-                "vat_rates": "Vat Rates"
+                "vat_rates": "Vat Rates",
+                "jobcard_id": "Jobcard"
             },
             "reports": {
                 "description": "Description",
@@ -1979,7 +1980,8 @@ export default {
                 "invoice_name": "Name",
                 "invoice_reference": "Reference No",
                 "client_email": "Client Email",
-                "invoice_date": "Invoice Date"
+                "invoice_date": "Invoice Date",
+                "jobcard_id": "Jobcard"
             }
         },
         "buttons": {
