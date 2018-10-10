@@ -97,20 +97,18 @@
             <div class="well">
               <b-form-group
                 label="Select Jobcard"
-                label-for="jobcard_no"
+                label-for="jobcard_id"
                 horizontal
                 :label-cols="2"
-                :feedback="feedback('jobcard_no')"
+                :feedback="feedback('jobcard_id')"
               >
                 <b-col sm="4">
-                  <div class="form-group">
-                    <select class="form-control" v-model="model.jobcard_id">
-                      <option value="">Please Select Jobcards</option>
-                      <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
-                        {{ option.jobcard_num }}
-                      </option>
-                    </select>
-                  </div>
+                  <b-form-select v-model="model.jobcard_id">
+                    <option value="">Please Select Jobcards</option>
+                    <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
+                      {{ option.jobcard_num }}
+                    </option>
+                  </b-form-select>
                   <!-- <v-select
                     id="jobcard_no"
                     name="jobcard_no"
@@ -897,7 +895,7 @@ export default {
       rows: [
         // initial data
       ],
-      modelName: 'Invoice',
+      modelName: 'invoice',
       resourceRoute: 'invoices',
       listPath: '/invoices',
       labour_rates: [],
@@ -1429,7 +1427,7 @@ export default {
       this.settings.Invoice_ref_alphabet = data.quote_ref_alphabet
       this.settings.Invoice_vat = data.quote_vat
       // Assign the general/settings vat rate value to labour and parts vat rate
-      if (data.Invoice_vat) {
+      if (data.quote_vat) {
         this.labour.labour_vat_rate = data.quote_vat
         this.labour_edit.labour_vat_rate = data.quote_vat
         this.parts.parts_vat_rate = data.quote_vat

@@ -105,9 +105,7 @@ class InvoicesController extends BackendController
         //dd($request->all());
         $data = $request->all();
         $data['rows'] = json_encode($request->rows);
-        // $data['vat_id'] = $request->vat_id['id'];
-        // $data['materials_rates_id'] = $request->materials_rates_id['id'];
-        // $data['quotations_id'] = $request->quotations_id['id'];
+       
         $invoice = $this->invoice->make($data); 
        
        //dd($request->input());     
@@ -152,10 +150,8 @@ class InvoicesController extends BackendController
      */
     public function update(Invoices $invoice, UpdateInvoicesRequest $request)
     {   
-        $data = $request->input();
-        $data['vat_id'] = $request->vat_id['id'];
-        $data['materials_rates_id'] = $request->materials_rates_id['id'];
-        $data['quotations_id'] = $request->quotations_id['id'];
+        $data = $request->all();
+        $data['rows'] = json_encode($request->rows);
         $invoice->fill($data);
         
         $this->invoice->save($invoice, $data);

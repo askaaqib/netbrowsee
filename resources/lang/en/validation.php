@@ -252,6 +252,7 @@ return [
       'quotations_id'=>'Quotation',
       'invoice_name' => 'Name',
       'invoice_reference' => 'Reference No',
-      'client_email' => 'Client Email'             
+      'client_email' => 'Client Email',
+      'invoice_date' => 'Invoice Date'             
     ],
 ];

@@ -226,6 +226,10 @@ form.invoices-form .table > thead > tr > th {
 .invoices-form .well {
   border: 3px dotted #24b37e;
 }
+#Invoices-view #viewport {
+  overflow: hidden;
+  margin-top: 30px;
+}
 // ::-webkit-scrollbar {
 //     width: 12px;
 // }

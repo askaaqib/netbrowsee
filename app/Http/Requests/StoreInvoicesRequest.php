@@ -24,6 +24,7 @@ class StoreInvoicesRequest extends FormRequest
     public function rules()
     {
         return [
+            'jobcard_id' => 'required'
             // 'description' => 'required',
             // 'quantity' => 'required',
             // 'amount' => 'required',

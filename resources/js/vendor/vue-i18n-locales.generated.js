@@ -1,313 +1,43 @@
 export default {
     "ar": {
+        "passwords": {
+            "password": "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل ومطابقة لتأكيدها.",
+            "reset": "لقد تم إعادة تعيين كلمة مرورك!",
+            "sent": "قمنا بإرسال رابط إعادة تعيين كلمة مرورك إلى بريدك الإلكتروني!",
+            "token": "رمز إعادة تعيين كلمة المرور هذا غير صالح.",
+            "user": "لم نستطع إيجاد مستخدم ينتمي إليه هذا البريد الإلكتروني."
+        },
+        "auth": {
+            "failed": "البيانات المدخلة لا تتطابق مع قاعدة بياناتنا.",
+            "throttle": "تم تجريب عدد كبير من محاولات الدخول. يرجى المحاولة مجدداً بعد {seconds} ثانية."
+        },
+        "mails": {
+            "layout": {
+                "hello": "مرحباً !",
+                "regards": "تحيات",
+                "trouble": "إذا واجهت أي مشكلة بالضغط على الزر {action}، يرجى نسخ ولصق الرابط أدناه في المتصفح الخاص بك :",
+                "all_rights_reserved": "جميع الحقوق محفوظة."
+            },
+            "password_reset": {
+                "subject": "إعادة تعيين كلمة المرور",
+                "intro": "تم إرسال هذا البريد الإلكتروني لأننا تلقينا طلب إعادة تعيين كلمة المرور للحساب الخاص بك",
+                "action": "إعادة تعيين كلمة المرور",
+                "outro": "إذا لم تطلب إعادة تعيين كلمة المرور، فلا داعي لاتخاذ أي إجراء"
+            },
+            "contact": {
+                "subject": "رسالة إتصال جديدة",
+                "new_contact": "لقد تلقيت رسالة إتصال جديدة. معلومات الإرسال :"
+            },
+            "alert": {
+                "subject": "خطأ في [{app_name}]",
+                "message": "لقد واجهت خطأ غير متوقع من طرف الخادم بالرسالة التالية : {message}.",
+                "trace": "تفاصيل التقفي :"
+            }
+        },
         "forms": {
             "contact": {
                 "display_name": "إستمارة الإتصال"
             }
-        },
-        "exceptions": {
-            "general": "خطأ في الخادم",
-            "unauthorized": "إجراء غير مسموح",
-            "backend": {
-                "users": {
-                    "create": "خطأ في إنشاء المستخدم",
-                    "update": "خطأ في تعديل المستخدم",
-                    "delete": "خطأ في حذف المستخدم",
-                    "first_user_cannot_be_edited": "لا يمكن تعديل معلومات المستخدم كامل الصلاحيات",
-                    "first_user_cannot_be_disabled": "لا يمكن تعطيل حساب المستخدم كامل الصلاحيات",
-                    "first_user_cannot_be_destroyed": "لا يمكن حذف حساب المستخدم كامل الصلاحيات",
-                    "first_user_cannot_be_impersonated": "لا يمكن إنتحال شخصية المستخدم كامل الصلاحيات",
-                    "cannot_set_superior_roles": "لا يمكنك الحصول على أدوار تفوق الدور الخاص بك"
-                },
-                "roles": {
-                    "create": "خطأ في إنشاء الدور",
-                    "update": "خطأ في تعديل الدور",
-                    "delete": "خطأ في حذف الدور"
-                },
-                "metas": {
-                    "create": "خطأ في إنشاء المعلومة الوصفية",
-                    "update": "خطأ في تعديل المعلومة الوصفية",
-                    "delete": "خطأ في حذف المعلومة الوصفية",
-                    "already_exist": " يوجد معلومات وصفية لهذا الرابط منشأ مسبقاً"
-                },
-                "form_submissions": {
-                    "create": "خطأ في إنشاء المرسَل",
-                    "delete": "خطأ في حذف المرسَل"
-                },
-                "form_settings": {
-                    "create": "خطا في إنشاء إعداد الإستمارة",
-                    "update": "خطا في تعديل إعداد الإستمارة",
-                    "delete": "خطا في حذف إعداد الإستمارة",
-                    "already_exist": "يوجد إعداد مرتبط بهذه الإستمارة منشأ مسبقاً"
-                },
-                "redirections": {
-                    "create": "خطأ في إنشاء قاعدة التوجيه",
-                    "update": "خطأ في تعديل قاعدة التوجيه",
-                    "delete": "خطأ في حذف قاعدة التوجيه",
-                    "already_exist": " يوجد قاعدة توجيه لهذا المسار منشأة مسبقاً"
-                },
-                "posts": {
-                    "create": "خطأ في إنشاء المقالة",
-                    "update": "خطأ في تعديل المقالة",
-                    "save": "خطأ في حفظ المقالة",
-                    "delete": "خطأ في حذف المقالة"
-                }
-            },
-            "frontend": {
-                "user": {
-                    "email_taken": "عنوان البريد المدخل موجود مسبقاً.",
-                    "password_mismatch": "لا يوجد تطابق مع كلمة المرور القديمة.",
-                    "delete_account": "خطأ في حذف الحساب.",
-                    "updating_disabled": "تعديل معلومات الحساب غير مفعل."
-                },
-                "auth": {
-                    "registration_disabled": "عملية التسجيل غير مفعلة."
-                }
-            }
-        },
-        "routes": {
-            "home": "الرئيسية",
-            "about": "حول",
-            "contact": "اتصل-بنا",
-            "contact-sent": "تم-الإرسال",
-            "legal-mentions": "إشارات-قانونية",
-            "redactors": "blog\/redactors\/{user}"
-        },
-        "validation": {
-            "accepted": "يجب قبول الحقل {attribute}.",
-            "active_url": "الحقل {attribute} لا يُمثّل رابطًا صحيحًا.",
-            "after": "يجب على الحقل {attribute} أن يكون تاريخًا لاحقًا للتاريخ {date}.",
-            "after_or_equal": "يجب على الحقل {attribute} أن يكون تاريخًا مساوٍ أو لاحقًا للتاريخ {date}.",
-            "alpha": "يجب أن لا يحتوي الحقل {attribute} سوى على حروف.",
-            "alpha_dash": "يجب أن لا يحتوي الحقل {attribute} على حروف، أرقام ومطّات.",
-            "alpha_num": "يجب أن يحتوي {attribute} على حروف وأرقام فقط.",
-            "array": "يجب أن يكون الحقل {attribute} ًمصفوفة.",
-            "before": "يجب على الحقل {attribute} أن يكون تاريخًا سابقًا للتاريخ {date}.",
-            "before_or_equal": "يجب على الحقل {attribute} أن يكون تاريخًا سابقًا أو مساوٍ للتاريخ {date}.",
-            "between": {
-                "numeric": "يجب أن تكون قيمة {attribute} محصورة ما بين {min} و {max}.",
-                "file": "يجب أن يكون حجم الملف {attribute} محصورًا ما بين {min} و {max} كيلوبايت.",
-                "string": "يجب أن يكون عدد حروف النّص {attribute} محصورًا ما بين {min} و {max}.",
-                "array": "يجب أن يحتوي {attribute} على عدد من العناصر محصورًا ما بين {min} و {max}."
-            },
-            "boolean": "يجب أن تكون قيمة الحقل {attribute} إما true أو false.",
-            "confirmed": "حقل التأكيد غير مُطابق للحقل {attribute}.",
-            "date": "الحقل {attribute} ليس تاريخًا صحيحاً.",
-            "date_format": "لا يتوافق الحقل {attribute} مع الشكل {format}.",
-            "different": "يجب أن يكون الحقلان {attribute} و {other} مُختلفان.",
-            "digits": "يجب أن يحتوي الحقل {attribute} على {digits} رقمًا\/أرقام.",
-            "digits_between": "يجب أن يحتوي الحقل {attribute} ما بين {min} و {max} رقمًا\/أرقام.",
-            "dimensions": " أبعاد الصورة {attribute} غير صالحة.",
-            "distinct": "للحقل {attribute} قيمة مُكرّرة.",
-            "email": "يجب أن يكون {attribute} عنوان بريد إلكتروني صحيح البُنية.",
-            "exists": "الحقل {attribute} لاغٍ.",
-            "file": "الحقل {attribute} يجب أن يكون ملف.",
-            "filled": "الحقل {attribute} إجباري.",
-            "image": "يجب أن يكون الحقل {attribute} صورة.",
-            "in": "الحقل {attribute} لاغٍ.",
-            "in_array": "الحقل {attribute} غير موجود في {other}.",
-            "integer": "يجب أن يكون الحقل {attribute} عدد صحيح.",
-            "ip": "يجب أن يكون الحقل {attribute} عنوان IP ذي بُنية صحيحة.",
-            "ipv4": "يجب أن يكون الحقل {attribute} عنوان IPv4 ذي بُنية صحيحة.",
-            "ipv6": "يجب أن يكون الحقل {attribute} عنوان IPv6 ذي بُنية صحيحة.",
-            "json": "يجب أن يكون الحقل {attribute} نصآ من نوع JSON.",
-            "max": {
-                "numeric": "يجب أن تكون قيمة الحقل {attribute} أصغر من {max}.",
-                "file": "يجب أن يكون حجم الملف {attribute} أصغر من {max} كيلوبايت.",
-                "string": "يجب أن لا يتجاوز طول النّص {attribute} {max} حروفٍ\/حرفًا.",
-                "array": "يجب أن لا يحتوي الحقل {attribute} على أكثر من {max} عناصر\/عنصر."
-            },
-            "mimes": "يجب أن يكون الحقل ملفًا من نوع : {values}.",
-            "mimetypes": "يجب أن يكون الحقل ملفًا من نوع : {values}.",
-            "min": {
-                "numeric": "يجب أن تكون قيمة الحقل {attribute} أكبر من {min}.",
-                "file": "يجب أن يكون حجم الملف {attribute} أكبر من {min} كيلوبايت.",
-                "string": "يجب أن يكون طول النص {attribute} أكبر من {min} حروفٍ\/حرفًا.",
-                "array": "يجب أن يحتوي الحقل {attribute} على الأقل على {min} عُنصرًا\/عناصر."
-            },
-            "not_in": "الحقل {attribute} لاغٍ.",
-            "numeric": "يجب على الحقل {attribute} أن يكون رقماً.",
-            "present": "الحقل {attribute} يجب أن يكون موجوداً.",
-            "regex": "صيغة الحقل {attribute} غير صحيحة.",
-            "required": "الحقل {attribute} مطلوب.",
-            "required_if": "الحقل {attribute} مطلوب في حال ما إذا كان {other} يساوي {value}.",
-            "required_unless": "الحقل {attribute} مطلوب في حال ما لم يكن {other} يساوي {values}.",
-            "required_with": "الحقل {attribute} مطلوب إذا توفّر {values}.",
-            "required_with_all": "الحقل {attribute} مطلوب إذا توفّر {values}.",
-            "required_without": "الحقل {attribute} مطلوب إذا لم يتوفّر {values}.",
-            "required_without_all": "الحقل {attribute} مطلوب إذا لم يتوفّر {values}.",
-            "same": "يجب أن يتطابق الحقل {attribute} مع {other}",
-            "size": {
-                "numeric": "يجب أن تكون قيمة {attribute} أكبر من {size}.",
-                "file": "يجب أن يكون حجم الملف {attribute} أكبر من {size} كيلو بايت.",
-                "string": "يجب أن يحتوي النص {attribute} عن ما لا يقل عن  {size} حرفٍ\/أحرف.",
-                "array": "يجب أن يحتوي الحقل {attribute} عن ما لا يقل عن{min} عنصرٍ\/عناصر."
-            },
-            "string": "يجب أن يكون الحقل {attribute} نصآ.",
-            "timezone": "يجب أن يكون {attribute} نطاقًا زمنيًا صحيحًا",
-            "unique": "قيمة الحقل {attribute} مُستخدمة من قبل.",
-            "uploaded": "فشل في تحميل {attribute}.",
-            "url": "صيغة الرابط {attribute} غير صحيحة.",
-            "custom": {
-                "attribute-name": {
-                    "rule-name": "custom-message"
-                }
-            },
-            "attributes": {
-                "name": "الاسم",
-                "display_name": "اسم العرض",
-                "username": "اسم المستخدم",
-                "email": "عنوان البريد الإلكتروني",
-                "first_name": "الاسم الأول",
-                "last_name": "الاسم الأخير",
-                "password": "كلمة المرور",
-                "password_confirmation": "تأكيد كلمة المرور",
-                "old_password": "كلمة المرور القديمة",
-                "new_password": "كلمة المرور الجديدة",
-                "new_password_confirmation": "تأكيد كلمة المرور الجديدة",
-                "postal_code": "الرمز البريدي",
-                "city": "المدينة",
-                "country": "الدولة",
-                "address": "العنوان",
-                "phone": "الهاتف",
-                "mobile": "المحمول",
-                "age": "العمر",
-                "sex": "الجنس",
-                "gender": "الجنس",
-                "day": "اليوم",
-                "month": "الشهر",
-                "year": "السنة",
-                "hour": "الساعة",
-                "minute": "الدقيقة",
-                "second": "الثانية",
-                "title": "العنوان",
-                "content": "المحتوى",
-                "description": "الوصف",
-                "summary": "الملخص",
-                "excerpt": "مقتطفات",
-                "date": "التاريخ",
-                "time": "الوقت",
-                "available": "متوفر",
-                "size": "الحجم",
-                "roles": "الأدوار",
-                "permissions": "الصلاحيات",
-                "active": "فعال",
-                "message": "رسالة",
-                "g-recaptcha-response": "رمز حماية Captcha",
-                "locale": "تعريب",
-                "route": "توجيه",
-                "url": "اسم الرابط المستعار",
-                "form_type": "نوع الإستمارة",
-                "form_data": "معلومات الإستمارة",
-                "recipients": "المستلمين",
-                "source_path": "المسار الأصلي",
-                "target_path": "المسار الهدف",
-                "redirect_type": "نوع التوجيه",
-                "timezone": "نطاق زمني",
-                "order": "ترتيب العرض",
-                "image": "صورة",
-                "status": "حالة",
-                "pinned": "مثبت",
-                "promoted": "مُرقّى",
-                "body": "جسم",
-                "tags": "وسوم",
-                "published_at": "منشور في",
-                "unpublished_at": "إيقاف النشر في",
-                "metable_type": "كيان"
-            }
-        },
-        "buttons": {
-            "cancel": "إلغاء",
-            "save": "حفظ",
-            "close": "إغلاق",
-            "create": "إنشاء",
-            "delete": "حذف",
-            "confirm": "تأكيد",
-            "show": "عرض",
-            "edit": "تعديل",
-            "update": "تحديث",
-            "view": "مشاهدة",
-            "preview": "معاينة",
-            "back": "تراجع",
-            "send": "إرسال",
-            "login-as": "تسجيل الدخول كـ {name}",
-            "apply": "تطبيق",
-            "users": {
-                "create": "إنشاء مستخدم"
-            },
-            "roles": {
-                "create": "إنشاء دور"
-            },
-            "metas": {
-                "create": "إنشاء معلومة وصفية"
-            },
-            "form_settings": {
-                "create": "إنشاء إعداد"
-            },
-            "redirections": {
-                "create": "إنشاء قاعدة توجيه",
-                "import": "إستيراد CSV"
-            },
-            "posts": {
-                "create": "إنشاء مقالة",
-                "save_and_publish": "حفظ ونشر",
-                "save_as_draft": "حفظ كمسودة"
-            }
-        },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "تم إنشاء المستخدم",
-                    "updated": "تم تعديل المستخدم",
-                    "deleted": "تم حذف المستخدم",
-                    "bulk_destroyed": "تم حذف المستخدمين المختارين",
-                    "bulk_enabled": "تم تفعيل المستخدمين المختارين",
-                    "bulk_disabled": "تم تعطيل المستخدمين المختارين"
-                },
-                "roles": {
-                    "created": "تم إنشاء الدور",
-                    "updated": "تم تعديل الدور",
-                    "deleted": "تم حذف الدور"
-                },
-                "metas": {
-                    "created": "تم إنشاء البيانات الوصفية",
-                    "updated": "تم تعديل البيانات الوصفية",
-                    "deleted": "تم حذف البيانات الوصفية",
-                    "bulk_destroyed": "تم حذف البيانات الوصفية المختارة"
-                },
-                "form_submissions": {
-                    "deleted": "تم حذف المرسَل",
-                    "bulk_destroyed": "تم حذف المرسَلات المختارة"
-                },
-                "form_settings": {
-                    "created": "تم إنشاء إعداد الإستمارة",
-                    "updated": "تم تعديل إعداد الإستمارة",
-                    "deleted": "تم حذف إعداد الإستمارة"
-                },
-                "redirections": {
-                    "created": "تم إنشاء قاعدة التوجيه",
-                    "updated": "تم تعديل قاعدة التوجيه",
-                    "deleted": "تم حذف قاعدة التوجيه",
-                    "bulk_destroyed": "تم حذف قواعد التوجيه المختارة",
-                    "bulk_enabled": "تم تفعيل قواعد التوجيه المختارة",
-                    "bulk_disabled": "تم تعطيل قواعد التوجيه المختارة",
-                    "file_imported": "تم إستيراد الملف بنجاح"
-                },
-                "posts": {
-                    "created": "تم إنشاء المقالة",
-                    "updated": "تم تعديل المقالة",
-                    "deleted": "تم حذف المقالة",
-                    "bulk_destroyed": "تم حذف المقالات المختارة",
-                    "bulk_published": "تم نشر المقالات المختارة",
-                    "bulk_pending": "المقالات المختارة قيد المراجعة",
-                    "bulk_pinned": "تم تثبيت المقالات المختارة",
-                    "bulk_promoted": "تم ترقية المقالات المختارة"
-                },
-                "actions": {
-                    "invalid": "إجراء غير صالح"
-                }
-            },
-            "frontend": []
         },
         "labels": {
             "language": "اللغة",
@@ -575,43 +305,85 @@ export default {
                 }
             }
         },
-        "auth": {
-            "failed": "البيانات المدخلة لا تتطابق مع قاعدة بياناتنا.",
-            "throttle": "تم تجريب عدد كبير من محاولات الدخول. يرجى المحاولة مجدداً بعد {seconds} ثانية."
-        },
         "pagination": {
             "previous": "&laquo; السابق",
             "next": "التالي &raquo;"
         },
-        "passwords": {
-            "password": "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل ومطابقة لتأكيدها.",
-            "reset": "لقد تم إعادة تعيين كلمة مرورك!",
-            "sent": "قمنا بإرسال رابط إعادة تعيين كلمة مرورك إلى بريدك الإلكتروني!",
-            "token": "رمز إعادة تعيين كلمة المرور هذا غير صالح.",
-            "user": "لم نستطع إيجاد مستخدم ينتمي إليه هذا البريد الإلكتروني."
+        "routes": {
+            "home": "الرئيسية",
+            "about": "حول",
+            "contact": "اتصل-بنا",
+            "contact-sent": "تم-الإرسال",
+            "legal-mentions": "إشارات-قانونية",
+            "redactors": "blog\/redactors\/{user}"
         },
-        "mails": {
-            "layout": {
-                "hello": "مرحباً !",
-                "regards": "تحيات",
-                "trouble": "إذا واجهت أي مشكلة بالضغط على الزر {action}، يرجى نسخ ولصق الرابط أدناه في المتصفح الخاص بك :",
-                "all_rights_reserved": "جميع الحقوق محفوظة."
+        "logs": {
+            "backend": {
+                "users": {
+                    "created": "تم إنشاء المستخدم {user}",
+                    "updated": "تم تعديل المستخدم {user}",
+                    "deleted": "تم حذف المستخدم {user}"
+                },
+                "form_submissions": {
+                    "created": "تم إنشاء المرسَل {form_submission}"
+                }
             },
-            "password_reset": {
-                "subject": "إعادة تعيين كلمة المرور",
-                "intro": "تم إرسال هذا البريد الإلكتروني لأننا تلقينا طلب إعادة تعيين كلمة المرور للحساب الخاص بك",
-                "action": "إعادة تعيين كلمة المرور",
-                "outro": "إذا لم تطلب إعادة تعيين كلمة المرور، فلا داعي لاتخاذ أي إجراء"
+            "frontend": []
+        },
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "تم إنشاء المستخدم",
+                    "updated": "تم تعديل المستخدم",
+                    "deleted": "تم حذف المستخدم",
+                    "bulk_destroyed": "تم حذف المستخدمين المختارين",
+                    "bulk_enabled": "تم تفعيل المستخدمين المختارين",
+                    "bulk_disabled": "تم تعطيل المستخدمين المختارين"
+                },
+                "roles": {
+                    "created": "تم إنشاء الدور",
+                    "updated": "تم تعديل الدور",
+                    "deleted": "تم حذف الدور"
+                },
+                "metas": {
+                    "created": "تم إنشاء البيانات الوصفية",
+                    "updated": "تم تعديل البيانات الوصفية",
+                    "deleted": "تم حذف البيانات الوصفية",
+                    "bulk_destroyed": "تم حذف البيانات الوصفية المختارة"
+                },
+                "form_submissions": {
+                    "deleted": "تم حذف المرسَل",
+                    "bulk_destroyed": "تم حذف المرسَلات المختارة"
+                },
+                "form_settings": {
+                    "created": "تم إنشاء إعداد الإستمارة",
+                    "updated": "تم تعديل إعداد الإستمارة",
+                    "deleted": "تم حذف إعداد الإستمارة"
+                },
+                "redirections": {
+                    "created": "تم إنشاء قاعدة التوجيه",
+                    "updated": "تم تعديل قاعدة التوجيه",
+                    "deleted": "تم حذف قاعدة التوجيه",
+                    "bulk_destroyed": "تم حذف قواعد التوجيه المختارة",
+                    "bulk_enabled": "تم تفعيل قواعد التوجيه المختارة",
+                    "bulk_disabled": "تم تعطيل قواعد التوجيه المختارة",
+                    "file_imported": "تم إستيراد الملف بنجاح"
+                },
+                "posts": {
+                    "created": "تم إنشاء المقالة",
+                    "updated": "تم تعديل المقالة",
+                    "deleted": "تم حذف المقالة",
+                    "bulk_destroyed": "تم حذف المقالات المختارة",
+                    "bulk_published": "تم نشر المقالات المختارة",
+                    "bulk_pending": "المقالات المختارة قيد المراجعة",
+                    "bulk_pinned": "تم تثبيت المقالات المختارة",
+                    "bulk_promoted": "تم ترقية المقالات المختارة"
+                },
+                "actions": {
+                    "invalid": "إجراء غير صالح"
+                }
             },
-            "contact": {
-                "subject": "رسالة إتصال جديدة",
-                "new_contact": "لقد تلقيت رسالة إتصال جديدة. معلومات الإرسال :"
-            },
-            "alert": {
-                "subject": "خطأ في [{app_name}]",
-                "message": "لقد واجهت خطأ غير متوقع من طرف الخادم بالرسالة التالية : {message}.",
-                "trace": "تفاصيل التقفي :"
-            }
+            "frontend": []
         },
         "permissions": {
             "categories": {
@@ -767,540 +539,290 @@ export default {
                 "description": "قادر على أخذ صلاحيات مستخدم أخر، خاص بحالات التجريب."
             }
         },
-        "logs": {
-            "backend": {
-                "users": {
-                    "created": "تم إنشاء المستخدم {user}",
-                    "updated": "تم تعديل المستخدم {user}",
-                    "deleted": "تم حذف المستخدم {user}"
-                },
-                "form_submissions": {
-                    "created": "تم إنشاء المرسَل {form_submission}"
-                }
-            },
-            "frontend": []
-        }
-    },
-    "en": {
-        "forms": {
-            "contact": {
-                "display_name": "Contact form"
-            }
-        },
         "exceptions": {
-            "general": "Server exception",
-            "unauthorized": "Action not allowed",
+            "general": "خطأ في الخادم",
+            "unauthorized": "إجراء غير مسموح",
             "backend": {
                 "users": {
-                    "create": "Error on user creation",
-                    "update": "Error on user updating",
-                    "delete": "Error on user deletion",
-                    "first_user_cannot_be_edited": "You cannot edit super admin user",
-                    "first_user_cannot_be_disabled": "Super admin user cannot be disabled",
-                    "first_user_cannot_be_destroyed": "Super admin user cannot be deleted",
-                    "first_user_cannot_be_impersonated": "Super admin user cannot be impersonated",
-                    "cannot_set_superior_roles": "You cannot attribute roles superior to yours"
+                    "create": "خطأ في إنشاء المستخدم",
+                    "update": "خطأ في تعديل المستخدم",
+                    "delete": "خطأ في حذف المستخدم",
+                    "first_user_cannot_be_edited": "لا يمكن تعديل معلومات المستخدم كامل الصلاحيات",
+                    "first_user_cannot_be_disabled": "لا يمكن تعطيل حساب المستخدم كامل الصلاحيات",
+                    "first_user_cannot_be_destroyed": "لا يمكن حذف حساب المستخدم كامل الصلاحيات",
+                    "first_user_cannot_be_impersonated": "لا يمكن إنتحال شخصية المستخدم كامل الصلاحيات",
+                    "cannot_set_superior_roles": "لا يمكنك الحصول على أدوار تفوق الدور الخاص بك"
                 },
                 "roles": {
-                    "create": "Error on role creation",
-                    "update": "Error on role updating",
-                    "delete": "Error on role deletion"
+                    "create": "خطأ في إنشاء الدور",
+                    "update": "خطأ في تعديل الدور",
+                    "delete": "خطأ في حذف الدور"
                 },
                 "metas": {
-                    "create": "Error on meta creation",
-                    "update": "Error on meta updating",
-                    "delete": "Error on meta deletion",
-                    "already_exist": "There is already a meta for this locale route"
+                    "create": "خطأ في إنشاء المعلومة الوصفية",
+                    "update": "خطأ في تعديل المعلومة الوصفية",
+                    "delete": "خطأ في حذف المعلومة الوصفية",
+                    "already_exist": " يوجد معلومات وصفية لهذا الرابط منشأ مسبقاً"
                 },
                 "form_submissions": {
-                    "create": "Error on submission creation",
-                    "delete": "Error on submission deletion"
+                    "create": "خطأ في إنشاء المرسَل",
+                    "delete": "خطأ في حذف المرسَل"
                 },
                 "form_settings": {
-                    "create": "Error on form setting creation",
-                    "update": "Error on form setting updating",
-                    "delete": "Error on form setting deletion",
-                    "already_exist": "There is already a setting linked to this form"
+                    "create": "خطا في إنشاء إعداد الإستمارة",
+                    "update": "خطا في تعديل إعداد الإستمارة",
+                    "delete": "خطا في حذف إعداد الإستمارة",
+                    "already_exist": "يوجد إعداد مرتبط بهذه الإستمارة منشأ مسبقاً"
                 },
                 "redirections": {
-                    "create": "Error on redirection creation",
-                    "update": "Error on redirection updating",
-                    "delete": "Error on redirection deletion",
-                    "already_exist": "There is already a redirection for this path"
+                    "create": "خطأ في إنشاء قاعدة التوجيه",
+                    "update": "خطأ في تعديل قاعدة التوجيه",
+                    "delete": "خطأ في حذف قاعدة التوجيه",
+                    "already_exist": " يوجد قاعدة توجيه لهذا المسار منشأة مسبقاً"
                 },
                 "posts": {
-                    "create": "Error on post creation",
-                    "update": "Error on post updating",
-                    "save": "Error on post saving",
-                    "delete": "Error on post deletion"
+                    "create": "خطأ في إنشاء المقالة",
+                    "update": "خطأ في تعديل المقالة",
+                    "save": "خطأ في حفظ المقالة",
+                    "delete": "خطأ في حذف المقالة"
                 }
             },
             "frontend": {
                 "user": {
-                    "email_taken": "That e-mail address is already taken.",
-                    "password_mismatch": "That is not your old password.",
-                    "delete_account": "Error on account deletion.",
-                    "updating_disabled": "Account editing is disabled."
+                    "email_taken": "عنوان البريد المدخل موجود مسبقاً.",
+                    "password_mismatch": "لا يوجد تطابق مع كلمة المرور القديمة.",
+                    "delete_account": "خطأ في حذف الحساب.",
+                    "updating_disabled": "تعديل معلومات الحساب غير مفعل."
                 },
                 "auth": {
-                    "registration_disabled": "Registration is disabled."
+                    "registration_disabled": "عملية التسجيل غير مفعلة."
                 }
             }
         },
-        "routes": {
-            "home": "home",
-            "about": "about",
-            "contact": "contact",
-            "contact-sent": "contact-sent",
-            "legal-mentions": "legal-mentions",
-            "redactors": "blog\/redactors\/{user}"
-        },
         "validation": {
-            "accepted": "The {attribute} must be accepted.",
-            "active_url": "The {attribute} is not a valid URL.",
-            "after": "The {attribute} must be a date after {date}.",
-            "after_or_equal": "The {attribute} must be a date after or equal to {date}.",
-            "alpha": "The {attribute} may only contain letters.",
-            "alpha_dash": "The {attribute} may only contain letters, numbers, and dashes.",
-            "alpha_num": "The {attribute} may only contain letters and numbers.",
-            "array": "The {attribute} must be an array.",
-            "before": "The {attribute} must be a date before {date}.",
-            "before_or_equal": "The {attribute} must be a date before or equal to {date}.",
+            "accepted": "يجب قبول الحقل {attribute}.",
+            "active_url": "الحقل {attribute} لا يُمثّل رابطًا صحيحًا.",
+            "after": "يجب على الحقل {attribute} أن يكون تاريخًا لاحقًا للتاريخ {date}.",
+            "after_or_equal": "يجب على الحقل {attribute} أن يكون تاريخًا مساوٍ أو لاحقًا للتاريخ {date}.",
+            "alpha": "يجب أن لا يحتوي الحقل {attribute} سوى على حروف.",
+            "alpha_dash": "يجب أن لا يحتوي الحقل {attribute} على حروف، أرقام ومطّات.",
+            "alpha_num": "يجب أن يحتوي {attribute} على حروف وأرقام فقط.",
+            "array": "يجب أن يكون الحقل {attribute} ًمصفوفة.",
+            "before": "يجب على الحقل {attribute} أن يكون تاريخًا سابقًا للتاريخ {date}.",
+            "before_or_equal": "يجب على الحقل {attribute} أن يكون تاريخًا سابقًا أو مساوٍ للتاريخ {date}.",
             "between": {
-                "numeric": "The {attribute} must be between {min} and {max}.",
-                "file": "The {attribute} must be between {min} and {max} kilobytes.",
-                "string": "The {attribute} must be between {min} and {max} characters.",
-                "array": "The {attribute} must have between {min} and {max} items."
+                "numeric": "يجب أن تكون قيمة {attribute} محصورة ما بين {min} و {max}.",
+                "file": "يجب أن يكون حجم الملف {attribute} محصورًا ما بين {min} و {max} كيلوبايت.",
+                "string": "يجب أن يكون عدد حروف النّص {attribute} محصورًا ما بين {min} و {max}.",
+                "array": "يجب أن يحتوي {attribute} على عدد من العناصر محصورًا ما بين {min} و {max}."
             },
-            "boolean": "The {attribute} field must be true or false.",
-            "confirmed": "The {attribute} confirmation does not match.",
-            "date": "The {attribute} is not a valid date.",
-            "date_format": "The {attribute} does not match the format {format}.",
-            "different": "The {attribute} and {other} must be different.",
-            "digits": "The {attribute} must be {digits} digits.",
-            "digits_between": "The {attribute} must be between {min} and {max} digits.",
-            "dimensions": "The {attribute} has invalid image dimensions.",
-            "distinct": "The {attribute} field has a duplicate value.",
-            "email": "The {attribute} must be a valid email address.",
-            "exists": "The selected {attribute} is invalid.",
-            "file": "The {attribute} must be a file.",
-            "filled": "The {attribute} field must have a value.",
-            "image": "The {attribute} must be an image.",
-            "in": "The selected {attribute} is invalid.",
-            "in_array": "The {attribute} field does not exist in {other}.",
-            "integer": "The {attribute} must be an integer.",
-            "ip": "The {attribute} must be a valid IP address.",
-            "ipv4": "The {attribute} must be a valid IPv4 address.",
-            "ipv6": "The {attribute} must be a valid IPv6 address.",
-            "json": "The {attribute} must be a valid JSON string.",
+            "boolean": "يجب أن تكون قيمة الحقل {attribute} إما true أو false.",
+            "confirmed": "حقل التأكيد غير مُطابق للحقل {attribute}.",
+            "date": "الحقل {attribute} ليس تاريخًا صحيحاً.",
+            "date_format": "لا يتوافق الحقل {attribute} مع الشكل {format}.",
+            "different": "يجب أن يكون الحقلان {attribute} و {other} مُختلفان.",
+            "digits": "يجب أن يحتوي الحقل {attribute} على {digits} رقمًا\/أرقام.",
+            "digits_between": "يجب أن يحتوي الحقل {attribute} ما بين {min} و {max} رقمًا\/أرقام.",
+            "dimensions": " أبعاد الصورة {attribute} غير صالحة.",
+            "distinct": "للحقل {attribute} قيمة مُكرّرة.",
+            "email": "يجب أن يكون {attribute} عنوان بريد إلكتروني صحيح البُنية.",
+            "exists": "الحقل {attribute} لاغٍ.",
+            "file": "الحقل {attribute} يجب أن يكون ملف.",
+            "filled": "الحقل {attribute} إجباري.",
+            "image": "يجب أن يكون الحقل {attribute} صورة.",
+            "in": "الحقل {attribute} لاغٍ.",
+            "in_array": "الحقل {attribute} غير موجود في {other}.",
+            "integer": "يجب أن يكون الحقل {attribute} عدد صحيح.",
+            "ip": "يجب أن يكون الحقل {attribute} عنوان IP ذي بُنية صحيحة.",
+            "ipv4": "يجب أن يكون الحقل {attribute} عنوان IPv4 ذي بُنية صحيحة.",
+            "ipv6": "يجب أن يكون الحقل {attribute} عنوان IPv6 ذي بُنية صحيحة.",
+            "json": "يجب أن يكون الحقل {attribute} نصآ من نوع JSON.",
             "max": {
-                "numeric": "The {attribute} may not be greater than {max}.",
-                "file": "The {attribute} may not be greater than {max} kilobytes.",
-                "string": "The {attribute} may not be greater than {max} characters.",
-                "array": "The {attribute} may not have more than {max} items."
+                "numeric": "يجب أن تكون قيمة الحقل {attribute} أصغر من {max}.",
+                "file": "يجب أن يكون حجم الملف {attribute} أصغر من {max} كيلوبايت.",
+                "string": "يجب أن لا يتجاوز طول النّص {attribute} {max} حروفٍ\/حرفًا.",
+                "array": "يجب أن لا يحتوي الحقل {attribute} على أكثر من {max} عناصر\/عنصر."
             },
-            "mimes": "The {attribute} must be a file of type: {values}.",
-            "mimetypes": "The {attribute} must be a file of type: {values}.",
+            "mimes": "يجب أن يكون الحقل ملفًا من نوع : {values}.",
+            "mimetypes": "يجب أن يكون الحقل ملفًا من نوع : {values}.",
             "min": {
-                "numeric": "The {attribute} must be at least {min}.",
-                "file": "The {attribute} must be at least {min} kilobytes.",
-                "string": "The {attribute} must be at least {min} characters.",
-                "array": "The {attribute} must have at least {min} items."
+                "numeric": "يجب أن تكون قيمة الحقل {attribute} أكبر من {min}.",
+                "file": "يجب أن يكون حجم الملف {attribute} أكبر من {min} كيلوبايت.",
+                "string": "يجب أن يكون طول النص {attribute} أكبر من {min} حروفٍ\/حرفًا.",
+                "array": "يجب أن يحتوي الحقل {attribute} على الأقل على {min} عُنصرًا\/عناصر."
             },
-            "not_in": "The selected {attribute} is invalid.",
-            "not_regex": "The {attribute} format is invalid.",
-            "numeric": "The {attribute} must be a number.",
-            "present": "The {attribute} field must be present.",
-            "regex": "The {attribute} format is invalid.",
-            "required": "The {attribute} field is required.",
-            "required_if": "The {attribute} field is required when {other} is {value}.",
-            "required_unless": "The {attribute} field is required unless {other} is in {values}.",
-            "required_with": "The {attribute} field is required when {values} is present.",
-            "required_with_all": "The {attribute} field is required when {values} is present.",
-            "required_without": "The {attribute} field is required when {values} is not present.",
-            "required_without_all": "The {attribute} field is required when none of {values} are present.",
-            "same": "The {attribute} and {other} must match.",
+            "not_in": "الحقل {attribute} لاغٍ.",
+            "numeric": "يجب على الحقل {attribute} أن يكون رقماً.",
+            "present": "الحقل {attribute} يجب أن يكون موجوداً.",
+            "regex": "صيغة الحقل {attribute} غير صحيحة.",
+            "required": "الحقل {attribute} مطلوب.",
+            "required_if": "الحقل {attribute} مطلوب في حال ما إذا كان {other} يساوي {value}.",
+            "required_unless": "الحقل {attribute} مطلوب في حال ما لم يكن {other} يساوي {values}.",
+            "required_with": "الحقل {attribute} مطلوب إذا توفّر {values}.",
+            "required_with_all": "الحقل {attribute} مطلوب إذا توفّر {values}.",
+            "required_without": "الحقل {attribute} مطلوب إذا لم يتوفّر {values}.",
+            "required_without_all": "الحقل {attribute} مطلوب إذا لم يتوفّر {values}.",
+            "same": "يجب أن يتطابق الحقل {attribute} مع {other}",
             "size": {
-                "numeric": "The {attribute} must be {size}.",
-                "file": "The {attribute} must be {size} kilobytes.",
-                "string": "The {attribute} must be {size} characters.",
-                "array": "The {attribute} must contain {size} items."
+                "numeric": "يجب أن تكون قيمة {attribute} أكبر من {size}.",
+                "file": "يجب أن يكون حجم الملف {attribute} أكبر من {size} كيلو بايت.",
+                "string": "يجب أن يحتوي النص {attribute} عن ما لا يقل عن  {size} حرفٍ\/أحرف.",
+                "array": "يجب أن يحتوي الحقل {attribute} عن ما لا يقل عن{min} عنصرٍ\/عناصر."
             },
-            "string": "The {attribute} must be a string.",
-            "timezone": "The {attribute} must be a valid zone.",
-            "unique": "The {attribute} has already been taken.",
-            "uploaded": "The {attribute} failed to upload.",
-            "url": "The {attribute} format is invalid.",
+            "string": "يجب أن يكون الحقل {attribute} نصآ.",
+            "timezone": "يجب أن يكون {attribute} نطاقًا زمنيًا صحيحًا",
+            "unique": "قيمة الحقل {attribute} مُستخدمة من قبل.",
+            "uploaded": "فشل في تحميل {attribute}.",
+            "url": "صيغة الرابط {attribute} غير صحيحة.",
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message"
                 }
             },
             "attributes": {
-                "name": "Name",
-                "display_name": "Display name",
-                "username": "Pseudo",
-                "email": "Email",
-                "first_name": "Firstname",
-                "last_name": "Lastname",
-                "password": "Password",
-                "password_confirmation": "Confirm password",
-                "old_password": "Old password",
-                "new_password": "New password",
-                "new_password_confirmation": "Confirm new password",
-                "postal_code": "Postal code",
-                "city": "City",
-                "country": "Country",
-                "address": "Address",
-                "phone": "Phone",
-                "mobile": "Mobile",
-                "age": "Age",
-                "sex": "Sex",
-                "gender": "Gender",
-                "day": "Day",
-                "month": "Month",
-                "year": "Year",
-                "hour": "Hour",
-                "minute": "Minute",
-                "second": "Second",
-                "title": "Title123",
-                "content": "Content",
-                "description": "Description",
-                "summary": "Summary",
-                "excerpt": "Excerpt",
-                "date": "Date",
-                "time": "Time",
-                "available": "Available",
-                "size": "Size",
-                "roles": "Roles",
-                "permissions": "Permissions",
-                "active": "Active",
-                "message": "Message",
-                "g-recaptcha-response": "Captcha",
-                "locale": "Localization",
-                "route": "Route",
-                "url": "URL alias",
-                "form_type": "Form type",
-                "form_data": "Form data",
-                "recipients": "Recipients",
-                "source_path": "Original path",
-                "target_path": "Target path",
-                "redirect_type": "Redirect type",
-                "timezone": "Timezone",
-                "order": "Display order",
-                "image": "Image",
-                "status": "Status",
-                "pinned": "Pinned",
-                "promoted": "Promoted",
-                "body": "Body",
-                "tags": "Tags",
-                "published_at": "Publish at",
-                "unpublished_at": "Unpublish at",
-                "metable_type": "Entity",
-                "rate": "Rate"
-            },
-            "jobcards": {
-                "jobcard_num": "Jobcard Number",
-                "project_num": "Project Number",
-                "description": "Description",
-                "problem_type": "Problem Type",
-                "priority": "Priority",
-                "facility_name": "Facility Name",
-                "district": "District",
-                "sub_district": "Sub District",
-                "projects": "Projects",
-                "labour_paid": "Labour Paid",
-                "travelling_paid": "Travelling Paid",
-                "materials_paid": "Materials Paid",
-                "quoted_amount": "Quoted Amount",
-                "status": "Status",
-                "assigned_to": "Assign to",
-                "before_pictures": "Before Pictures",
-                "during_pictures": "During Pictures",
-                "after_pictures": "After Pictures",
-                "upload_jobcard": "Upload Jobcard",
-                "quotations": "Quotation"
-            },
-            "quotes": {
-                "quotation_number": "Quote Number",
-                "project_num": "Project Number",
-                "quotation_name": "Quotes Name",
-                "travelling_time": "Travelling Time",
-                "travelling_km": "Travelling KM",
-                "vat_amount": "Vat Amount",
-                "net_amount": "Net Amount",
-                "total_amount": "Total Amount",
-                "quotation_date": "Quotation Date",
-                "labour_rates": "Labour Rates",
-                "material_rates": "Material Rates",
-                "vat_rates": "Vat Rates"
-            },
-            "reports": {
-                "description": "Description",
-                "status": "Status",
-                "expenses": "Expenses",
-                "amount": "Amount",
-                "vat_collected": "Vat Collected",
-                "profit_loss": "Profit Loss",
-                "jobcard": "Jobcard"
-            },
-            "settings": {
-                "company_name": "Company Name",
-                "company_address": "Company Address",
-                "company_logo": "Company Logo",
-                "bank_account": "Bank Account",
-                "quote_ref_start": "Quote Reference Start",
-                "quote_ref_alphabet": "Reference Start Characters",
-                "quote_vat": "Quote Vat Rate",
-                "invoice_ref_start": "Invoice Reference Start"
-            },
-            "invoices": {
-                "description": "Description",
-                "quantity": "Quantity",
-                "amount": "Amount",
-                "net_amount": "Net Amount",
-                "vat_amount": "Vat Amount",
-                "total_amount": "Total Amount",
-                "materials_rates_id": "Materials Paid",
-                "vat_id": "Vat Rates",
-                "quotations_id": "Quotation",
-                "invoice_name": "Name",
-                "invoice_reference": "Reference No",
-                "client_email": "Client Email"
+                "name": "الاسم",
+                "display_name": "اسم العرض",
+                "username": "اسم المستخدم",
+                "email": "عنوان البريد الإلكتروني",
+                "first_name": "الاسم الأول",
+                "last_name": "الاسم الأخير",
+                "password": "كلمة المرور",
+                "password_confirmation": "تأكيد كلمة المرور",
+                "old_password": "كلمة المرور القديمة",
+                "new_password": "كلمة المرور الجديدة",
+                "new_password_confirmation": "تأكيد كلمة المرور الجديدة",
+                "postal_code": "الرمز البريدي",
+                "city": "المدينة",
+                "country": "الدولة",
+                "address": "العنوان",
+                "phone": "الهاتف",
+                "mobile": "المحمول",
+                "age": "العمر",
+                "sex": "الجنس",
+                "gender": "الجنس",
+                "day": "اليوم",
+                "month": "الشهر",
+                "year": "السنة",
+                "hour": "الساعة",
+                "minute": "الدقيقة",
+                "second": "الثانية",
+                "title": "العنوان",
+                "content": "المحتوى",
+                "description": "الوصف",
+                "summary": "الملخص",
+                "excerpt": "مقتطفات",
+                "date": "التاريخ",
+                "time": "الوقت",
+                "available": "متوفر",
+                "size": "الحجم",
+                "roles": "الأدوار",
+                "permissions": "الصلاحيات",
+                "active": "فعال",
+                "message": "رسالة",
+                "g-recaptcha-response": "رمز حماية Captcha",
+                "locale": "تعريب",
+                "route": "توجيه",
+                "url": "اسم الرابط المستعار",
+                "form_type": "نوع الإستمارة",
+                "form_data": "معلومات الإستمارة",
+                "recipients": "المستلمين",
+                "source_path": "المسار الأصلي",
+                "target_path": "المسار الهدف",
+                "redirect_type": "نوع التوجيه",
+                "timezone": "نطاق زمني",
+                "order": "ترتيب العرض",
+                "image": "صورة",
+                "status": "حالة",
+                "pinned": "مثبت",
+                "promoted": "مُرقّى",
+                "body": "جسم",
+                "tags": "وسوم",
+                "published_at": "منشور في",
+                "unpublished_at": "إيقاف النشر في",
+                "metable_type": "كيان"
             }
         },
         "buttons": {
-            "cancel": "Cancel",
-            "save": "Save",
-            "close": "Close",
-            "create": "Create",
-            "delete": "Delete",
-            "confirm": "Confirm",
-            "show": "Show",
-            "edit": "Edit",
-            "update": "Update",
-            "view": "View",
-            "preview": "Preview",
-            "back": "Back",
-            "send": "Send",
-            "login-as": "Login as {name}",
-            "apply": "Apply",
+            "cancel": "إلغاء",
+            "save": "حفظ",
+            "close": "إغلاق",
+            "create": "إنشاء",
+            "delete": "حذف",
+            "confirm": "تأكيد",
+            "show": "عرض",
+            "edit": "تعديل",
+            "update": "تحديث",
+            "view": "مشاهدة",
+            "preview": "معاينة",
+            "back": "تراجع",
+            "send": "إرسال",
+            "login-as": "تسجيل الدخول كـ {name}",
+            "apply": "تطبيق",
             "users": {
-                "create": "Create user"
+                "create": "إنشاء مستخدم"
             },
             "roles": {
-                "create": "Create role"
+                "create": "إنشاء دور"
             },
             "metas": {
-                "create": "Create meta"
+                "create": "إنشاء معلومة وصفية"
             },
             "form_settings": {
-                "create": "Create setting"
+                "create": "إنشاء إعداد"
             },
             "redirections": {
-                "create": "Create redirection",
-                "import": "Import CSV"
+                "create": "إنشاء قاعدة توجيه",
+                "import": "إستيراد CSV"
             },
             "posts": {
-                "create": "Create post",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "jobcards": {
-                "create": "Create jobcard",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "quotes": {
-                "create": "Create Quotes",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "projects": {
-                "create": "Create Project",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "project_managers": {
-                "create": "Create Project Manager",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "labour_rates": {
-                "create": "Create Labour Rate",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "materials_rates": {
-                "create": "Create Material Rate",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "vat": {
-                "create": "Create Vat",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "reports": {
-                "create": "Create Report",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "settings": {
-                "create": "Create Setting",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
-            },
-            "invoices": {
-                "create": "Create Invoice",
-                "save_and_publish": "Save and publish",
-                "save_as_draft": "Save as draft"
+                "create": "إنشاء مقالة",
+                "save_and_publish": "حفظ ونشر",
+                "save_as_draft": "حفظ كمسودة"
+            }
+        }
+    },
+    "en": {
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds.",
+            "socialite": {
+                "unacceptable": "{provider} is not an acceptable login type."
             }
         },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "User created",
-                    "updated": "User updated",
-                    "deleted": "User deleted",
-                    "bulk_destroyed": "Selected users deleted",
-                    "bulk_enabled": "Selected users enabled",
-                    "bulk_disabled": "Selected users disabled"
-                },
-                "roles": {
-                    "created": "Role created",
-                    "updated": "Role updated",
-                    "deleted": "Role deleted"
-                },
-                "metas": {
-                    "created": "Meta created",
-                    "updated": "Meta updated",
-                    "deleted": "Meta deleted",
-                    "bulk_destroyed": "Selected metas deleted"
-                },
-                "form_submissions": {
-                    "deleted": "Submission deleted",
-                    "bulk_destroyed": "Selected submissions deleted"
-                },
-                "form_settings": {
-                    "created": "Form setting created",
-                    "updated": "Form setting updated",
-                    "deleted": "Form setting deleted"
-                },
-                "redirections": {
-                    "created": "Redirection created",
-                    "updated": "Redirection updated",
-                    "deleted": "Redirection deleted",
-                    "bulk_destroyed": "Selected redirections deleted",
-                    "bulk_enabled": "Selected redirections enabled",
-                    "bulk_disabled": "Selected redirections disabled",
-                    "file_imported": "File successfully imported"
-                },
-                "posts": {
-                    "created": "Post created",
-                    "updated": "Post updated",
-                    "deleted": "Post deleted",
-                    "bulk_destroyed": "Selected posts deleted",
-                    "bulk_published": "Selected posts published",
-                    "bulk_pending": "Selected posts are awaiting moderation",
-                    "bulk_pinned": "Selected posts pinned",
-                    "bulk_promoted": "Selected posts promoted"
-                },
-                "jobcards": {
-                    "created": "Jobcard created",
-                    "updated": "Jobcard updated",
-                    "deleted": "Jobcard deleted",
-                    "bulk_destroyed": "Selected jobcards deleted",
-                    "bulk_published": "Selected jobcards published",
-                    "bulk_pending": "Selected jobcards are awaiting moderation",
-                    "bulk_pinned": "Selected jobcards pinned",
-                    "bulk_promoted": "Selected jobcards promoted"
-                },
-                "quotes": {
-                    "created": "Quotes created",
-                    "updated": "Quotes updated",
-                    "deleted": "Quotes deleted",
-                    "bulk_destroyed": "Selected Quotes deleted",
-                    "bulk_published": "Selected Quotes published",
-                    "bulk_pending": "Selected Quotes are awaiting moderation",
-                    "bulk_pinned": "Selected Quotes pinned",
-                    "bulk_promoted": "Selected Quotes promoted"
-                },
-                "projects": {
-                    "created": "Project created",
-                    "updated": "Project updated",
-                    "deleted": "Project deleted",
-                    "bulk_destroyed": "Selected projects deleted",
-                    "bulk_published": "Selected projects published",
-                    "bulk_pending": "Selected projects are awaiting moderation",
-                    "bulk_pinned": "Selected projects pinned",
-                    "bulk_promoted": "Selected projects promoted"
-                },
-                "labour_rates": {
-                    "created": "Labour Rate created",
-                    "updated": "Labour Rate updated",
-                    "deleted": "Labour Rate deleted",
-                    "bulk_destroyed": "Selected labour rates deleted",
-                    "bulk_published": "Selected labour rates published",
-                    "bulk_pending": "Selected labour rates are awaiting moderation",
-                    "bulk_pinned": "Selected labour rates pinned",
-                    "bulk_promoted": "Selected labour rates promoted"
-                },
-                "materials_rates": {
-                    "created": "Material Rate created",
-                    "updated": "Material Rate updated",
-                    "deleted": "Material Rate deleted",
-                    "bulk_destroyed": "Selected material rates deleted",
-                    "bulk_published": "Selected material rates published",
-                    "bulk_pending": "Selected material rates are awaiting moderation",
-                    "bulk_pinned": "Selected material rates pinned",
-                    "bulk_promoted": "Selected material rates promoted"
-                },
-                "vat": {
-                    "created": "Vat created",
-                    "updated": "Vat updated",
-                    "deleted": "Vat deleted",
-                    "bulk_destroyed": "Selected vat deleted",
-                    "bulk_published": "Selected vat published",
-                    "bulk_pending": "Selected vat are awaiting moderation",
-                    "bulk_pinned": "Selected vat pinned",
-                    "bulk_promoted": "Selected vat promoted"
-                },
-                "reports": {
-                    "created": "Report created",
-                    "updated": "Report updated",
-                    "deleted": "Report deleted",
-                    "bulk_destroyed": "Selected reports deleted",
-                    "bulk_published": "Selected reports published",
-                    "bulk_pending": "Selected reports are awaiting moderation",
-                    "bulk_pinned": "Selected reports pinned",
-                    "bulk_promoted": "Selected reports promoted"
-                },
-                "settings": {
-                    "created": "Setting created",
-                    "updated": "Setting updated",
-                    "deleted": "Setting deleted",
-                    "bulk_destroyed": "Selected settings deleted",
-                    "bulk_published": "Selected settings published",
-                    "bulk_pending": "Selected settings are awaiting moderation",
-                    "bulk_pinned": "Selected settings pinned",
-                    "bulk_promoted": "Selected settings promoted"
-                },
-                "invoices": {
-                    "created": "Invoice created",
-                    "updated": "Invoice updated",
-                    "deleted": "Invoice deleted",
-                    "bulk_destroyed": "Selected invoices deleted",
-                    "bulk_published": "Selected invoices published",
-                    "bulk_pending": "Selected invoices are awaiting moderation",
-                    "bulk_pinned": "Selected invoices pinned",
-                    "bulk_promoted": "Selected invoices promoted"
-                },
-                "actions": {
-                    "invalid": "Invalid action"
-                }
+        "mails": {
+            "layout": {
+                "hello": "Hello !",
+                "regards": "Regards",
+                "trouble": "If you’re having trouble clicking the {action} button, copy and paste the URL below into your web browser :",
+                "all_rights_reserved": "All rights reserved."
             },
-            "frontend": []
+            "password_reset": {
+                "subject": "Password reset",
+                "intro": "You are receiving this email because we received a password reset request for your account.",
+                "action": "Reset Password",
+                "outro": "If you did not request a password reset, no further action is required."
+            },
+            "contact": {
+                "subject": "New contact message",
+                "new_contact": "You've got a new contact message. Submission detail :"
+            },
+            "alert": {
+                "subject": "[{app_name}] Exception error",
+                "message": "You've got unexpected server exception error which message is : {message}.",
+                "trace": "All trace detail :"
+            }
+        },
+        "forms": {
+            "contact": {
+                "display_name": "Contact form"
+            }
         },
         "labels": {
             "language": "Language",
@@ -1861,46 +1383,175 @@ export default {
                 }
             }
         },
-        "auth": {
-            "failed": "These credentials do not match our records.",
-            "throttle": "Too many login attempts. Please try again in {seconds} seconds.",
-            "socialite": {
-                "unacceptable": "{provider} is not an acceptable login type."
-            }
-        },
         "pagination": {
             "previous": "&laquo; Previous",
             "next": "Next &raquo;"
         },
-        "passwords": {
-            "password": "Passwords must be at least six characters and match the confirmation.",
-            "reset": "Your password has been reset!",
-            "sent": "We have e-mailed your password reset link!",
-            "token": "This password reset token is invalid.",
-            "user": "We can't find a user with that e-mail address."
+        "routes": {
+            "home": "home",
+            "about": "about",
+            "contact": "contact",
+            "contact-sent": "contact-sent",
+            "legal-mentions": "legal-mentions",
+            "redactors": "blog\/redactors\/{user}"
         },
-        "mails": {
-            "layout": {
-                "hello": "Hello !",
-                "regards": "Regards",
-                "trouble": "If you’re having trouble clicking the {action} button, copy and paste the URL below into your web browser :",
-                "all_rights_reserved": "All rights reserved."
+        "logs": {
+            "backend": {
+                "users": {
+                    "created": "User ID {user} created",
+                    "updated": "User ID {user} updated",
+                    "deleted": "User ID {user} deleted"
+                },
+                "form_submissions": {
+                    "created": "Form submission ID {form_submission} created"
+                }
             },
-            "password_reset": {
-                "subject": "Password reset",
-                "intro": "You are receiving this email because we received a password reset request for your account.",
-                "action": "Reset Password",
-                "outro": "If you did not request a password reset, no further action is required."
+            "frontend": []
+        },
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "User created",
+                    "updated": "User updated",
+                    "deleted": "User deleted",
+                    "bulk_destroyed": "Selected users deleted",
+                    "bulk_enabled": "Selected users enabled",
+                    "bulk_disabled": "Selected users disabled"
+                },
+                "roles": {
+                    "created": "Role created",
+                    "updated": "Role updated",
+                    "deleted": "Role deleted"
+                },
+                "metas": {
+                    "created": "Meta created",
+                    "updated": "Meta updated",
+                    "deleted": "Meta deleted",
+                    "bulk_destroyed": "Selected metas deleted"
+                },
+                "form_submissions": {
+                    "deleted": "Submission deleted",
+                    "bulk_destroyed": "Selected submissions deleted"
+                },
+                "form_settings": {
+                    "created": "Form setting created",
+                    "updated": "Form setting updated",
+                    "deleted": "Form setting deleted"
+                },
+                "redirections": {
+                    "created": "Redirection created",
+                    "updated": "Redirection updated",
+                    "deleted": "Redirection deleted",
+                    "bulk_destroyed": "Selected redirections deleted",
+                    "bulk_enabled": "Selected redirections enabled",
+                    "bulk_disabled": "Selected redirections disabled",
+                    "file_imported": "File successfully imported"
+                },
+                "posts": {
+                    "created": "Post created",
+                    "updated": "Post updated",
+                    "deleted": "Post deleted",
+                    "bulk_destroyed": "Selected posts deleted",
+                    "bulk_published": "Selected posts published",
+                    "bulk_pending": "Selected posts are awaiting moderation",
+                    "bulk_pinned": "Selected posts pinned",
+                    "bulk_promoted": "Selected posts promoted"
+                },
+                "jobcards": {
+                    "created": "Jobcard created",
+                    "updated": "Jobcard updated",
+                    "deleted": "Jobcard deleted",
+                    "bulk_destroyed": "Selected jobcards deleted",
+                    "bulk_published": "Selected jobcards published",
+                    "bulk_pending": "Selected jobcards are awaiting moderation",
+                    "bulk_pinned": "Selected jobcards pinned",
+                    "bulk_promoted": "Selected jobcards promoted"
+                },
+                "quotes": {
+                    "created": "Quotes created",
+                    "updated": "Quotes updated",
+                    "deleted": "Quotes deleted",
+                    "bulk_destroyed": "Selected Quotes deleted",
+                    "bulk_published": "Selected Quotes published",
+                    "bulk_pending": "Selected Quotes are awaiting moderation",
+                    "bulk_pinned": "Selected Quotes pinned",
+                    "bulk_promoted": "Selected Quotes promoted"
+                },
+                "projects": {
+                    "created": "Project created",
+                    "updated": "Project updated",
+                    "deleted": "Project deleted",
+                    "bulk_destroyed": "Selected projects deleted",
+                    "bulk_published": "Selected projects published",
+                    "bulk_pending": "Selected projects are awaiting moderation",
+                    "bulk_pinned": "Selected projects pinned",
+                    "bulk_promoted": "Selected projects promoted"
+                },
+                "labour_rates": {
+                    "created": "Labour Rate created",
+                    "updated": "Labour Rate updated",
+                    "deleted": "Labour Rate deleted",
+                    "bulk_destroyed": "Selected labour rates deleted",
+                    "bulk_published": "Selected labour rates published",
+                    "bulk_pending": "Selected labour rates are awaiting moderation",
+                    "bulk_pinned": "Selected labour rates pinned",
+                    "bulk_promoted": "Selected labour rates promoted"
+                },
+                "materials_rates": {
+                    "created": "Material Rate created",
+                    "updated": "Material Rate updated",
+                    "deleted": "Material Rate deleted",
+                    "bulk_destroyed": "Selected material rates deleted",
+                    "bulk_published": "Selected material rates published",
+                    "bulk_pending": "Selected material rates are awaiting moderation",
+                    "bulk_pinned": "Selected material rates pinned",
+                    "bulk_promoted": "Selected material rates promoted"
+                },
+                "vat": {
+                    "created": "Vat created",
+                    "updated": "Vat updated",
+                    "deleted": "Vat deleted",
+                    "bulk_destroyed": "Selected vat deleted",
+                    "bulk_published": "Selected vat published",
+                    "bulk_pending": "Selected vat are awaiting moderation",
+                    "bulk_pinned": "Selected vat pinned",
+                    "bulk_promoted": "Selected vat promoted"
+                },
+                "reports": {
+                    "created": "Report created",
+                    "updated": "Report updated",
+                    "deleted": "Report deleted",
+                    "bulk_destroyed": "Selected reports deleted",
+                    "bulk_published": "Selected reports published",
+                    "bulk_pending": "Selected reports are awaiting moderation",
+                    "bulk_pinned": "Selected reports pinned",
+                    "bulk_promoted": "Selected reports promoted"
+                },
+                "settings": {
+                    "created": "Setting created",
+                    "updated": "Setting updated",
+                    "deleted": "Setting deleted",
+                    "bulk_destroyed": "Selected settings deleted",
+                    "bulk_published": "Selected settings published",
+                    "bulk_pending": "Selected settings are awaiting moderation",
+                    "bulk_pinned": "Selected settings pinned",
+                    "bulk_promoted": "Selected settings promoted"
+                },
+                "invoices": {
+                    "created": "Invoice created",
+                    "updated": "Invoice updated",
+                    "deleted": "Invoice deleted",
+                    "bulk_destroyed": "Selected invoices deleted",
+                    "bulk_published": "Selected invoices published",
+                    "bulk_pending": "Selected invoices are awaiting moderation",
+                    "bulk_pinned": "Selected invoices pinned",
+                    "bulk_promoted": "Selected invoices promoted"
+                },
+                "actions": {
+                    "invalid": "Invalid action"
+                }
             },
-            "contact": {
-                "subject": "New contact message",
-                "new_contact": "You've got a new contact message. Submission detail :"
-            },
-            "alert": {
-                "subject": "[{app_name}] Exception error",
-                "message": "You've got unexpected server exception error which message is : {message}.",
-                "trace": "All trace detail :"
-            }
+            "frontend": []
         },
         "permissions": {
             "categories": {
@@ -2056,330 +1707,409 @@ export default {
                 "description": "Can take ownership of others user identities. Useful for tests."
             }
         },
-        "logs": {
-            "backend": {
-                "users": {
-                    "created": "User ID {user} created",
-                    "updated": "User ID {user} updated",
-                    "deleted": "User ID {user} deleted"
-                },
-                "form_submissions": {
-                    "created": "Form submission ID {form_submission} created"
-                }
-            },
-            "frontend": []
-        }
-    },
-    "es": {
-        "forms": {
-            "contact": {
-                "display_name": "Formulario de contacto"
-            }
-        },
         "exceptions": {
-            "general": "Excepción del servidor",
-            "unauthorized": "Acción no permitida",
+            "general": "Server exception",
+            "unauthorized": "Action not allowed",
             "backend": {
                 "users": {
-                    "create": "Error en la creación del usuario",
-                    "update": "Error en la actualización del usuario",
-                    "delete": "Error en la eliminación del usuario",
-                    "first_user_cannot_be_edited": "No puedes editar el usuario súper administrador",
-                    "first_user_cannot_be_disabled": "El usuario súper administrador no puede ser deshabilitado",
-                    "first_user_cannot_be_destroyed": "El usuario súper administrador no puede ser eliminado",
-                    "first_user_cannot_be_impersonated": "El usuario Super administrador no puede ser suplantado",
-                    "cannot_set_superior_roles": "No puedes atribuir roles superiores a los tuyos"
+                    "create": "Error on user creation",
+                    "update": "Error on user updating",
+                    "delete": "Error on user deletion",
+                    "first_user_cannot_be_edited": "You cannot edit super admin user",
+                    "first_user_cannot_be_disabled": "Super admin user cannot be disabled",
+                    "first_user_cannot_be_destroyed": "Super admin user cannot be deleted",
+                    "first_user_cannot_be_impersonated": "Super admin user cannot be impersonated",
+                    "cannot_set_superior_roles": "You cannot attribute roles superior to yours"
                 },
                 "roles": {
-                    "create": "Error en la creación de roles",
-                    "update": "Error en la actualización de roles",
-                    "delete": "Error en la eliminación de roles"
+                    "create": "Error on role creation",
+                    "update": "Error on role updating",
+                    "delete": "Error on role deletion"
                 },
                 "metas": {
-                    "create": "Error en la creación de la meta",
-                    "update": "Error en la actualización de la meta",
-                    "delete": "Error en la eliminación de la meta",
-                    "already_exist": "Ya hay una meta para esta ruta de configuración regional"
+                    "create": "Error on meta creation",
+                    "update": "Error on meta updating",
+                    "delete": "Error on meta deletion",
+                    "already_exist": "There is already a meta for this locale route"
                 },
                 "form_submissions": {
-                    "create": "Error en la creación de la solicitud",
-                    "delete": "Error en la eliminación de la solicitud"
+                    "create": "Error on submission creation",
+                    "delete": "Error on submission deletion"
                 },
                 "form_settings": {
-                    "create": "Error en la creación de configuración de formulario",
-                    "update": "Error en la actualización de configuración del formulario",
-                    "delete": "Error en la eliminación de configuración del formulario",
-                    "already_exist": "Ya hay una configuración vinculada a este formulario"
+                    "create": "Error on form setting creation",
+                    "update": "Error on form setting updating",
+                    "delete": "Error on form setting deletion",
+                    "already_exist": "There is already a setting linked to this form"
                 },
                 "redirections": {
-                    "create": "Error en la creación de la redirección",
-                    "update": "Error en la actualización de la redirección",
-                    "delete": "Error en la eliminación de la redirección",
-                    "already_exist": "Ya hay una redirección para este camino"
+                    "create": "Error on redirection creation",
+                    "update": "Error on redirection updating",
+                    "delete": "Error on redirection deletion",
+                    "already_exist": "There is already a redirection for this path"
                 },
                 "posts": {
-                    "create": "Error en la creación del articulo",
-                    "update": "Error en la actualización del articulo",
-                    "save": "Error en la salvado del articulo",
-                    "delete": "Error en la eliminación del articulo"
+                    "create": "Error on post creation",
+                    "update": "Error on post updating",
+                    "save": "Error on post saving",
+                    "delete": "Error on post deletion"
                 }
             },
             "frontend": {
                 "user": {
-                    "email_taken": "Esa dirección de correo electrónico ya está es uso.",
-                    "password_mismatch": "Esa no es tu contraseña anterior.",
-                    "delete_account": "Error al eliminar la cuenta.",
-                    "updating_disabled": "La edición de cuenta está deshabilitada."
+                    "email_taken": "That e-mail address is already taken.",
+                    "password_mismatch": "That is not your old password.",
+                    "delete_account": "Error on account deletion.",
+                    "updating_disabled": "Account editing is disabled."
                 },
                 "auth": {
-                    "registration_disabled": "El registro está desactivado."
+                    "registration_disabled": "Registration is disabled."
                 }
             }
         },
-        "routes": {
-            "home": "inicio",
-            "about": "acerca",
-            "contact": "contacto",
-            "contact-sent": "envio-contacto",
-            "legal-mentions": "menciones-legales",
-            "redactors": "blog\/redactores\/{user}"
-        },
         "validation": {
-            "accepted": "{attribute} debe ser aceptado.",
-            "active_url": "{attribute} no es una URL válida.",
-            "after": "{attribute} debe ser una fecha posterior a {date}.",
-            "after_or_equal": "{attribute} debe ser una fecha posterior o igual a {date}.",
-            "alpha": "{attribute} sólo debe contener letras.",
-            "alpha_dash": "{attribute} sólo debe contener letras, números y guiones.",
-            "alpha_num": "{attribute} sólo debe contener letras y números.",
-            "array": "{attribute} debe ser un conjunto.",
-            "before": "{attribute} debe ser una fecha anterior a {date}.",
-            "before_or_equal": "{attribute} debe ser una fecha anterior o igual a {date}.",
+            "accepted": "The {attribute} must be accepted.",
+            "active_url": "The {attribute} is not a valid URL.",
+            "after": "The {attribute} must be a date after {date}.",
+            "after_or_equal": "The {attribute} must be a date after or equal to {date}.",
+            "alpha": "The {attribute} may only contain letters.",
+            "alpha_dash": "The {attribute} may only contain letters, numbers, and dashes.",
+            "alpha_num": "The {attribute} may only contain letters and numbers.",
+            "array": "The {attribute} must be an array.",
+            "before": "The {attribute} must be a date before {date}.",
+            "before_or_equal": "The {attribute} must be a date before or equal to {date}.",
             "between": {
-                "numeric": "{attribute} tiene que estar entre {min} - {max}.",
-                "file": "{attribute} debe pesar entre {min} - {max} kilobytes.",
-                "string": "{attribute} tiene que tener entre {min} - {max} caracteres.",
-                "array": "{attribute} tiene que tener entre {min} - {max} ítems."
+                "numeric": "The {attribute} must be between {min} and {max}.",
+                "file": "The {attribute} must be between {min} and {max} kilobytes.",
+                "string": "The {attribute} must be between {min} and {max} characters.",
+                "array": "The {attribute} must have between {min} and {max} items."
             },
-            "boolean": "El campo {attribute} debe tener un valor verdadero o falso.",
-            "confirmed": "La confirmación de {attribute} no coincide.",
-            "date": "{attribute} no es una fecha válida.",
-            "date_format": "{attribute} no corresponde al formato {format}.",
-            "different": "{attribute} y {other} deben ser diferentes.",
-            "digits": "{attribute} debe tener {digits} dígitos.",
-            "digits_between": "{attribute} debe tener entre {min} y {max} dígitos.",
-            "dimensions": "Las dimensiones de la imagen {attribute} no son válidas.",
-            "distinct": "El campo {attribute} contiene un valor duplicado.",
-            "email": "{attribute} no es un correo válido",
-            "exists": "{attribute} es inválido.",
-            "file": "El campo {attribute} debe ser un archivo.",
-            "filled": "El campo {attribute} es obligatorio.",
-            "image": "{attribute} debe ser una imagen.",
-            "in": "{attribute} es inválido.",
-            "in_array": "El campo {attribute} no existe en {other}.",
-            "integer": "{attribute} debe ser un número entero.",
-            "ip": "{attribute} debe ser una dirección IP válida.",
-            "ipv4": "{attribute} debe ser un dirección IPv4 válida",
-            "ipv6": "{attribute} debe ser un dirección IPv6 válida.",
-            "json": "El campo {attribute} debe tener una cadena JSON válida.",
+            "boolean": "The {attribute} field must be true or false.",
+            "confirmed": "The {attribute} confirmation does not match.",
+            "date": "The {attribute} is not a valid date.",
+            "date_format": "The {attribute} does not match the format {format}.",
+            "different": "The {attribute} and {other} must be different.",
+            "digits": "The {attribute} must be {digits} digits.",
+            "digits_between": "The {attribute} must be between {min} and {max} digits.",
+            "dimensions": "The {attribute} has invalid image dimensions.",
+            "distinct": "The {attribute} field has a duplicate value.",
+            "email": "The {attribute} must be a valid email address.",
+            "exists": "The selected {attribute} is invalid.",
+            "file": "The {attribute} must be a file.",
+            "filled": "The {attribute} field must have a value.",
+            "image": "The {attribute} must be an image.",
+            "in": "The selected {attribute} is invalid.",
+            "in_array": "The {attribute} field does not exist in {other}.",
+            "integer": "The {attribute} must be an integer.",
+            "ip": "The {attribute} must be a valid IP address.",
+            "ipv4": "The {attribute} must be a valid IPv4 address.",
+            "ipv6": "The {attribute} must be a valid IPv6 address.",
+            "json": "The {attribute} must be a valid JSON string.",
             "max": {
-                "numeric": "{attribute} no debe ser mayor a {max}.",
-                "file": "{attribute} no debe ser mayor que {max} kilobytes.",
-                "string": "{attribute} no debe ser mayor que {max} caracteres.",
-                "array": "{attribute} no debe tener más de {max} elementos."
+                "numeric": "The {attribute} may not be greater than {max}.",
+                "file": "The {attribute} may not be greater than {max} kilobytes.",
+                "string": "The {attribute} may not be greater than {max} characters.",
+                "array": "The {attribute} may not have more than {max} items."
             },
-            "mimes": "{attribute} debe ser un archivo con formato: {values}.",
-            "mimetypes": "{attribute} debe ser un archivo con formato: {values}.",
+            "mimes": "The {attribute} must be a file of type: {values}.",
+            "mimetypes": "The {attribute} must be a file of type: {values}.",
             "min": {
-                "numeric": "El tamaño de {attribute} debe ser de al menos {min}.",
-                "file": "El tamaño de {attribute} debe ser de al menos {min} kilobytes.",
-                "string": "{attribute} debe contener al menos {min} caracteres.",
-                "array": "{attribute} debe tener al menos {min} elementos."
+                "numeric": "The {attribute} must be at least {min}.",
+                "file": "The {attribute} must be at least {min} kilobytes.",
+                "string": "The {attribute} must be at least {min} characters.",
+                "array": "The {attribute} must have at least {min} items."
             },
-            "not_in": "{attribute} es inválido.",
-            "not_regex": "El formato del campo {attribute} no es válido.",
-            "numeric": "{attribute} debe ser numérico.",
-            "present": "El campo {attribute} debe estar presente.",
-            "regex": "El formato de {attribute} es inválido.",
-            "required": "El campo {attribute} es obligatorio.",
-            "required_if": "El campo {attribute} es obligatorio cuando {other} es {value}.",
-            "required_unless": "El campo {attribute} es obligatorio a menos que {other} esté en {values}.",
-            "required_with": "El campo {attribute} es obligatorio cuando {values} está presente.",
-            "required_with_all": "El campo {attribute} es obligatorio cuando {values} está presente.",
-            "required_without": "El campo {attribute} es obligatorio cuando {values} no está presente.",
-            "required_without_all": "El campo {attribute} es obligatorio cuando ninguno de {values} estén presentes.",
-            "same": "{attribute} y {other} deben coincidir.",
+            "not_in": "The selected {attribute} is invalid.",
+            "not_regex": "The {attribute} format is invalid.",
+            "numeric": "The {attribute} must be a number.",
+            "present": "The {attribute} field must be present.",
+            "regex": "The {attribute} format is invalid.",
+            "required": "The {attribute} field is required.",
+            "required_if": "The {attribute} field is required when {other} is {value}.",
+            "required_unless": "The {attribute} field is required unless {other} is in {values}.",
+            "required_with": "The {attribute} field is required when {values} is present.",
+            "required_with_all": "The {attribute} field is required when {values} is present.",
+            "required_without": "The {attribute} field is required when {values} is not present.",
+            "required_without_all": "The {attribute} field is required when none of {values} are present.",
+            "same": "The {attribute} and {other} must match.",
             "size": {
-                "numeric": "El tamaño de {attribute} debe ser {size}.",
-                "file": "El tamaño de {attribute} debe ser {size} kilobytes.",
-                "string": "{attribute} debe contener {size} caracteres.",
-                "array": "{attribute} debe contener {size} elementos."
+                "numeric": "The {attribute} must be {size}.",
+                "file": "The {attribute} must be {size} kilobytes.",
+                "string": "The {attribute} must be {size} characters.",
+                "array": "The {attribute} must contain {size} items."
             },
-            "string": "El campo {attribute} debe ser una cadena de caracteres.",
-            "timezone": "El {attribute} debe ser una zona válida.",
-            "unique": "{attribute} ya ha sido registrado.",
-            "uploaded": "Subir {attribute} ha fallado.",
-            "url": "El formato {attribute} es inválido.",
+            "string": "The {attribute} must be a string.",
+            "timezone": "The {attribute} must be a valid zone.",
+            "unique": "The {attribute} has already been taken.",
+            "uploaded": "The {attribute} failed to upload.",
+            "url": "The {attribute} format is invalid.",
             "custom": {
                 "attribute-name": {
-                    "rule-name": "mensaje personalizado"
+                    "rule-name": "custom-message"
                 }
             },
             "attributes": {
-                "name": "Nombre",
-                "display_name": "Nombre para mostrar",
-                "username": "Seudo",
+                "name": "Name",
+                "display_name": "Display name",
+                "username": "Pseudo",
                 "email": "Email",
-                "first_name": "Nombre",
-                "last_name": "Apellidos",
-                "password": "Contraseña",
-                "password_confirmation": "Confirmar contraseña",
-                "old_password": "Contraseña anterior",
-                "new_password": "Nueva contraseña",
-                "new_password_confirmation": "Confirmar nueva contraseña",
-                "postal_code": "código postal",
-                "city": "Ciudad",
-                "country": "País",
-                "address": "Dirección",
-                "phone": "Teléfono",
-                "mobile": "Móvil",
-                "age": "Años",
-                "sex": "Sexo",
-                "gender": "Género",
-                "day": "Día",
-                "month": "Mes",
-                "year": "Año",
-                "hour": "Hora",
-                "minute": "Minuto",
-                "second": "Segundo",
-                "title": "Título",
-                "content": "Contenido",
-                "description": "Descripción",
-                "summary": "Resumen",
-                "excerpt": "Extracto",
-                "date": "Fecha",
-                "time": "Hora",
-                "available": "Disponible",
-                "size": "Tamaño",
+                "first_name": "Firstname",
+                "last_name": "Lastname",
+                "password": "Password",
+                "password_confirmation": "Confirm password",
+                "old_password": "Old password",
+                "new_password": "New password",
+                "new_password_confirmation": "Confirm new password",
+                "postal_code": "Postal code",
+                "city": "City",
+                "country": "Country",
+                "address": "Address",
+                "phone": "Phone",
+                "mobile": "Mobile",
+                "age": "Age",
+                "sex": "Sex",
+                "gender": "Gender",
+                "day": "Day",
+                "month": "Month",
+                "year": "Year",
+                "hour": "Hour",
+                "minute": "Minute",
+                "second": "Second",
+                "title": "Title123",
+                "content": "Content",
+                "description": "Description",
+                "summary": "Summary",
+                "excerpt": "Excerpt",
+                "date": "Date",
+                "time": "Time",
+                "available": "Available",
+                "size": "Size",
                 "roles": "Roles",
-                "permissions": "Permisos",
-                "active": "Activo",
-                "message": "Mensaje",
+                "permissions": "Permissions",
+                "active": "Active",
+                "message": "Message",
                 "g-recaptcha-response": "Captcha",
-                "locale": "Localización",
-                "route": "Ruta",
+                "locale": "Localization",
+                "route": "Route",
                 "url": "URL alias",
-                "form_type": "Tipo de formulario",
-                "form_data": "Datos de formulario",
-                "recipients": "Destinatarios",
-                "source_path": "Ruta original",
-                "target_path": "Ruta de destino",
-                "redirect_type": "Redirigir tipo",
-                "timezone": "Zona horaria",
-                "order": "Orden de visualización",
-                "image": "Imagen",
-                "status": "Estado",
-                "pinned": "Fijado",
-                "promoted": "Promovido",
-                "body": "Cuerpo",
-                "tags": "Etiquetas",
-                "published_at": "Publicar en",
-                "unpublished_at": "Anular publicación en",
-                "metable_type": "Entidad"
+                "form_type": "Form type",
+                "form_data": "Form data",
+                "recipients": "Recipients",
+                "source_path": "Original path",
+                "target_path": "Target path",
+                "redirect_type": "Redirect type",
+                "timezone": "Timezone",
+                "order": "Display order",
+                "image": "Image",
+                "status": "Status",
+                "pinned": "Pinned",
+                "promoted": "Promoted",
+                "body": "Body",
+                "tags": "Tags",
+                "published_at": "Publish at",
+                "unpublished_at": "Unpublish at",
+                "metable_type": "Entity",
+                "rate": "Rate"
+            },
+            "jobcards": {
+                "jobcard_num": "Jobcard Number",
+                "project_num": "Project Number",
+                "description": "Description",
+                "problem_type": "Problem Type",
+                "priority": "Priority",
+                "facility_name": "Facility Name",
+                "district": "District",
+                "sub_district": "Sub District",
+                "projects": "Projects",
+                "labour_paid": "Labour Paid",
+                "travelling_paid": "Travelling Paid",
+                "materials_paid": "Materials Paid",
+                "quoted_amount": "Quoted Amount",
+                "status": "Status",
+                "assigned_to": "Assign to",
+                "before_pictures": "Before Pictures",
+                "during_pictures": "During Pictures",
+                "after_pictures": "After Pictures",
+                "upload_jobcard": "Upload Jobcard",
+                "quotations": "Quotation"
+            },
+            "quotes": {
+                "quotation_number": "Quote Number",
+                "project_num": "Project Number",
+                "quotation_name": "Quotes Name",
+                "travelling_time": "Travelling Time",
+                "travelling_km": "Travelling KM",
+                "vat_amount": "Vat Amount",
+                "net_amount": "Net Amount",
+                "total_amount": "Total Amount",
+                "quotation_date": "Quotation Date",
+                "labour_rates": "Labour Rates",
+                "material_rates": "Material Rates",
+                "vat_rates": "Vat Rates"
+            },
+            "reports": {
+                "description": "Description",
+                "status": "Status",
+                "expenses": "Expenses",
+                "amount": "Amount",
+                "vat_collected": "Vat Collected",
+                "profit_loss": "Profit Loss",
+                "jobcard": "Jobcard"
+            },
+            "settings": {
+                "company_name": "Company Name",
+                "company_address": "Company Address",
+                "company_logo": "Company Logo",
+                "bank_account": "Bank Account",
+                "quote_ref_start": "Quote Reference Start",
+                "quote_ref_alphabet": "Reference Start Characters",
+                "quote_vat": "Quote Vat Rate",
+                "invoice_ref_start": "Invoice Reference Start"
+            },
+            "invoices": {
+                "description": "Description",
+                "quantity": "Quantity",
+                "amount": "Amount",
+                "net_amount": "Net Amount",
+                "vat_amount": "Vat Amount",
+                "total_amount": "Total Amount",
+                "materials_rates_id": "Materials Paid",
+                "vat_id": "Vat Rates",
+                "quotations_id": "Quotation",
+                "invoice_name": "Name",
+                "invoice_reference": "Reference No",
+                "client_email": "Client Email",
+                "invoice_date": "Invoice Date"
             }
         },
         "buttons": {
-            "cancel": "Cancelar",
-            "save": "Salvar",
-            "close": "Cerrar",
-            "create": "Crear",
-            "delete": "Borrar",
-            "confirm": "Confirmar",
-            "show": "Mostrar",
-            "edit": "Editar",
-            "update": "Actualizar",
-            "view": "Ver",
-            "preview": "Previsualizar",
-            "back": "Atras",
-            "send": "Enviar",
-            "login-as": "Iniciar como {name}",
-            "apply": "Aplicar",
+            "cancel": "Cancel",
+            "save": "Save",
+            "close": "Close",
+            "create": "Create",
+            "delete": "Delete",
+            "confirm": "Confirm",
+            "show": "Show",
+            "edit": "Edit",
+            "update": "Update",
+            "view": "View",
+            "preview": "Preview",
+            "back": "Back",
+            "send": "Send",
+            "login-as": "Login as {name}",
+            "apply": "Apply",
             "users": {
-                "create": "Crear usuario"
+                "create": "Create user"
             },
             "roles": {
-                "create": "Crear rol"
+                "create": "Create role"
             },
             "metas": {
-                "create": "Crear meta"
+                "create": "Create meta"
             },
             "form_settings": {
-                "create": "Crear configuración"
+                "create": "Create setting"
             },
             "redirections": {
-                "create": "Crear redirección",
-                "import": "Importar CSV"
+                "create": "Create redirection",
+                "import": "Import CSV"
             },
             "posts": {
-                "create": "Crear publicación",
-                "save_and_publish": "Guardar y publicar",
-                "save_as_draft": "Guardar como borrador"
+                "create": "Create post",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "jobcards": {
+                "create": "Create jobcard",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "quotes": {
+                "create": "Create Quotes",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "projects": {
+                "create": "Create Project",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "project_managers": {
+                "create": "Create Project Manager",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "labour_rates": {
+                "create": "Create Labour Rate",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "materials_rates": {
+                "create": "Create Material Rate",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "vat": {
+                "create": "Create Vat",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "reports": {
+                "create": "Create Report",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "settings": {
+                "create": "Create Setting",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "invoices": {
+                "create": "Create Invoice",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            }
+        }
+    },
+    "es": {
+        "passwords": {
+            "password": "Las contraseñas deben coincidir y contener al menos 6 caracteres",
+            "reset": "¡Tu contraseña ha sido restablecida!",
+            "sent": "¡Te hemos enviado por correo el enlace para restablecer tu contraseña!",
+            "token": "El token de recuperación de contraseña es inválido.",
+            "user": "No podemos encontrar ningún usuario con ese correo electrónico."
+        },
+        "auth": {
+            "failed": "Estas credenciales no coinciden con nuestros registros.",
+            "throttle": "Demasiados intentos de inicio de sesión. "
+        },
+        "mails": {
+            "layout": {
+                "hello": "Hola !",
+                "regards": "Saludos",
+                "trouble": "Si tiene problemas para hacer clic en botón {action}, copie y pegue la siguiente URL en su navegador web :",
+                "all_rights_reserved": "Todos los derechos reservados."
+            },
+            "password_reset": {
+                "subject": "Restablecimiento de contraseña",
+                "intro": "Recibió este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.",
+                "action": "Restablecer la contraseña",
+                "outro": "Si no solicitó un restablecimiento de contraseña, no se requiere ninguna acción adicional."
+            },
+            "contact": {
+                "subject": "Nuevo mensaje de contacto",
+                "new_contact": "Tienes un nuevo mensaje de contacto. Detalle de presentación :"
+            },
+            "alert": {
+                "subject": "[{app_name}] Error de excepción",
+                "message": "Tienes un error de excepción del servidor inesperado, que es el mensaje : {message}.",
+                "trace": "Todos los detalles de rastreo :"
             }
         },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "Usuario creado",
-                    "updated": "Usuario actualizado",
-                    "deleted": "Usuario eliminado",
-                    "bulk_destroyed": "Usuarios seleccionados eliminados",
-                    "bulk_enabled": "Usuarios seleccionados habilitados",
-                    "bulk_disabled": "Usuarios seleccionados deshabilitados"
-                },
-                "roles": {
-                    "created": "Rol creado",
-                    "updated": "Rol actualizado",
-                    "deleted": "Rol eliminado"
-                },
-                "metas": {
-                    "created": "Meta creado",
-                    "updated": "Meta actualizado",
-                    "deleted": "Meta eliminado",
-                    "bulk_destroyed": "Metas seleccionadas eliminadas"
-                },
-                "form_submissions": {
-                    "deleted": "Solicitud eliminada",
-                    "bulk_destroyed": "Solicitudes seleccionadas eliminadas"
-                },
-                "form_settings": {
-                    "created": "Configuración de formulario creada",
-                    "updated": "Configuración de formulario actualizada",
-                    "deleted": "Configuración de formulario eliminada"
-                },
-                "redirections": {
-                    "created": "Redirección creada",
-                    "updated": "Redirección actualizada",
-                    "deleted": "Redirección eliminada",
-                    "bulk_destroyed": "Redirecciones seleccionadas eliminadas",
-                    "bulk_enabled": "Redirecciones seleccionadas habilitadas",
-                    "bulk_disabled": "Redirecciones seleccionadas deshabilitadas",
-                    "file_imported": "Archivo importado con éxito"
-                },
-                "posts": {
-                    "created": "Articulo creado",
-                    "updated": "Articulo actualizado",
-                    "deleted": "Articulo eliminado",
-                    "bulk_destroyed": "Artículos seleccionados eliminados",
-                    "bulk_published": "Artículos seleccionados publicados",
-                    "bulk_pending": "Los artículos seleccionados esperan moderación",
-                    "bulk_pinned": "Los artículos seleccionados fijadas",
-                    "bulk_promoted": "Los artículos seleccionados promocionados"
-                },
-                "actions": {
-                    "invalid": "Acción no válida"
-                }
-            },
-            "frontend": []
+        "forms": {
+            "contact": {
+                "display_name": "Formulario de contacto"
+            }
         },
         "labels": {
             "language": "Idioma",
@@ -2648,43 +2378,85 @@ export default {
                 }
             }
         },
-        "auth": {
-            "failed": "Estas credenciales no coinciden con nuestros registros.",
-            "throttle": "Demasiados intentos de inicio de sesión. "
-        },
         "pagination": {
             "previous": "&laquo; Anterior",
             "next": "Siguiente &raquo;"
         },
-        "passwords": {
-            "password": "Las contraseñas deben coincidir y contener al menos 6 caracteres",
-            "reset": "¡Tu contraseña ha sido restablecida!",
-            "sent": "¡Te hemos enviado por correo el enlace para restablecer tu contraseña!",
-            "token": "El token de recuperación de contraseña es inválido.",
-            "user": "No podemos encontrar ningún usuario con ese correo electrónico."
+        "routes": {
+            "home": "inicio",
+            "about": "acerca",
+            "contact": "contacto",
+            "contact-sent": "envio-contacto",
+            "legal-mentions": "menciones-legales",
+            "redactors": "blog\/redactores\/{user}"
         },
-        "mails": {
-            "layout": {
-                "hello": "Hola !",
-                "regards": "Saludos",
-                "trouble": "Si tiene problemas para hacer clic en botón {action}, copie y pegue la siguiente URL en su navegador web :",
-                "all_rights_reserved": "Todos los derechos reservados."
+        "logs": {
+            "backend": {
+                "users": {
+                    "created": "Usuario ID {user} creado",
+                    "updated": "Usuario ID {user} actualizado",
+                    "deleted": "Usuario ID {user} borrado"
+                },
+                "form_submissions": {
+                    "created": "ID de formulario de solicitud {form_submission} creado"
+                }
             },
-            "password_reset": {
-                "subject": "Restablecimiento de contraseña",
-                "intro": "Recibió este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.",
-                "action": "Restablecer la contraseña",
-                "outro": "Si no solicitó un restablecimiento de contraseña, no se requiere ninguna acción adicional."
+            "frontend": []
+        },
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "Usuario creado",
+                    "updated": "Usuario actualizado",
+                    "deleted": "Usuario eliminado",
+                    "bulk_destroyed": "Usuarios seleccionados eliminados",
+                    "bulk_enabled": "Usuarios seleccionados habilitados",
+                    "bulk_disabled": "Usuarios seleccionados deshabilitados"
+                },
+                "roles": {
+                    "created": "Rol creado",
+                    "updated": "Rol actualizado",
+                    "deleted": "Rol eliminado"
+                },
+                "metas": {
+                    "created": "Meta creado",
+                    "updated": "Meta actualizado",
+                    "deleted": "Meta eliminado",
+                    "bulk_destroyed": "Metas seleccionadas eliminadas"
+                },
+                "form_submissions": {
+                    "deleted": "Solicitud eliminada",
+                    "bulk_destroyed": "Solicitudes seleccionadas eliminadas"
+                },
+                "form_settings": {
+                    "created": "Configuración de formulario creada",
+                    "updated": "Configuración de formulario actualizada",
+                    "deleted": "Configuración de formulario eliminada"
+                },
+                "redirections": {
+                    "created": "Redirección creada",
+                    "updated": "Redirección actualizada",
+                    "deleted": "Redirección eliminada",
+                    "bulk_destroyed": "Redirecciones seleccionadas eliminadas",
+                    "bulk_enabled": "Redirecciones seleccionadas habilitadas",
+                    "bulk_disabled": "Redirecciones seleccionadas deshabilitadas",
+                    "file_imported": "Archivo importado con éxito"
+                },
+                "posts": {
+                    "created": "Articulo creado",
+                    "updated": "Articulo actualizado",
+                    "deleted": "Articulo eliminado",
+                    "bulk_destroyed": "Artículos seleccionados eliminados",
+                    "bulk_published": "Artículos seleccionados publicados",
+                    "bulk_pending": "Los artículos seleccionados esperan moderación",
+                    "bulk_pinned": "Los artículos seleccionados fijadas",
+                    "bulk_promoted": "Los artículos seleccionados promocionados"
+                },
+                "actions": {
+                    "invalid": "Acción no válida"
+                }
             },
-            "contact": {
-                "subject": "Nuevo mensaje de contacto",
-                "new_contact": "Tienes un nuevo mensaje de contacto. Detalle de presentación :"
-            },
-            "alert": {
-                "subject": "[{app_name}] Error de excepción",
-                "message": "Tienes un error de excepción del servidor inesperado, que es el mensaje : {message}.",
-                "trace": "Todos los detalles de rastreo :"
-            }
+            "frontend": []
         },
         "permissions": {
             "categories": {
@@ -2840,330 +2612,291 @@ export default {
                 "description": "Puede tomar posesión de otras identidades de usuario. Útil para las pruebas."
             }
         },
-        "logs": {
-            "backend": {
-                "users": {
-                    "created": "Usuario ID {user} creado",
-                    "updated": "Usuario ID {user} actualizado",
-                    "deleted": "Usuario ID {user} borrado"
-                },
-                "form_submissions": {
-                    "created": "ID de formulario de solicitud {form_submission} creado"
-                }
-            },
-            "frontend": []
-        }
-    },
-    "fr": {
-        "forms": {
-            "contact": {
-                "display_name": "Formulaire de contact"
-            }
-        },
         "exceptions": {
-            "general": "Erreur serveur",
-            "unauthorized": "Action non autorisée",
+            "general": "Excepción del servidor",
+            "unauthorized": "Acción no permitida",
             "backend": {
                 "users": {
-                    "create": "Erreur lors de la création de l'utilisateur",
-                    "update": "Erreur lors de la mise à jour de l'utilisateur",
-                    "delete": "Erreur lors de la suppression de l'utilisateur",
-                    "first_user_cannot_be_edited": "Vous ne pouvez pas éditer l'utilisateur super admin",
-                    "first_user_cannot_be_disabled": "L'utilisateur super admin ne peut pas être désactivé",
-                    "first_user_cannot_be_destroyed": "L'utilisateur super admin ne peut pas être supprimé",
-                    "first_user_cannot_be_impersonated": "L'utilisateur super admin ne peut pas être usurpé",
-                    "cannot_set_superior_roles": "Vous ne pouvez pas attribuer de rôle supérieur au vôtre"
+                    "create": "Error en la creación del usuario",
+                    "update": "Error en la actualización del usuario",
+                    "delete": "Error en la eliminación del usuario",
+                    "first_user_cannot_be_edited": "No puedes editar el usuario súper administrador",
+                    "first_user_cannot_be_disabled": "El usuario súper administrador no puede ser deshabilitado",
+                    "first_user_cannot_be_destroyed": "El usuario súper administrador no puede ser eliminado",
+                    "first_user_cannot_be_impersonated": "El usuario Super administrador no puede ser suplantado",
+                    "cannot_set_superior_roles": "No puedes atribuir roles superiores a los tuyos"
                 },
                 "roles": {
-                    "create": "Erreur lors de la création du rôle",
-                    "update": "Erreur lors de la mise à jour du rôle",
-                    "delete": "Erreur lors de la suppression du rôle"
+                    "create": "Error en la creación de roles",
+                    "update": "Error en la actualización de roles",
+                    "delete": "Error en la eliminación de roles"
                 },
                 "metas": {
-                    "create": "Erreur lors de la création de la meta",
-                    "update": "Erreur lors de la mise à jour de la meta",
-                    "delete": "Erreur lors de la suppression de la meta",
-                    "already_exist": "Il existe déjà une meta pour cette route"
+                    "create": "Error en la creación de la meta",
+                    "update": "Error en la actualización de la meta",
+                    "delete": "Error en la eliminación de la meta",
+                    "already_exist": "Ya hay una meta para esta ruta de configuración regional"
                 },
                 "form_submissions": {
-                    "create": "Erreur lors de la création de la soumission",
-                    "delete": "Erreur lors de la suppression de la soumission"
+                    "create": "Error en la creación de la solicitud",
+                    "delete": "Error en la eliminación de la solicitud"
                 },
                 "form_settings": {
-                    "create": "Erreur lors de la création du paramètre de formulaire",
-                    "update": "Erreur lors de la mise à jour du paramètre de formulaire",
-                    "delete": "Erreur lors de la suppression du paramètre de formulaire",
-                    "already_exist": "Il existe déjà un paramétrage pour ce formulaire"
+                    "create": "Error en la creación de configuración de formulario",
+                    "update": "Error en la actualización de configuración del formulario",
+                    "delete": "Error en la eliminación de configuración del formulario",
+                    "already_exist": "Ya hay una configuración vinculada a este formulario"
                 },
                 "redirections": {
-                    "create": "Erreur lors de la création de la redirection",
-                    "update": "Erreur lors de la mise à jour de la redirection",
-                    "delete": "Erreur lors de la suppression de la redirection",
-                    "already_exist": "Il existe déjà une redirection pour ce chemin"
+                    "create": "Error en la creación de la redirección",
+                    "update": "Error en la actualización de la redirección",
+                    "delete": "Error en la eliminación de la redirección",
+                    "already_exist": "Ya hay una redirección para este camino"
                 },
                 "posts": {
-                    "create": "Erreur lors de la création de l'article",
-                    "update": "Erreur lors de la mise à jour de l'article",
-                    "save": "Erreur lors de l'enregistrement de l'article",
-                    "delete": "Erreur lors de la suppression de l'article"
+                    "create": "Error en la creación del articulo",
+                    "update": "Error en la actualización del articulo",
+                    "save": "Error en la salvado del articulo",
+                    "delete": "Error en la eliminación del articulo"
                 }
             },
             "frontend": {
                 "user": {
-                    "email_taken": "Cet email est déjà utilisé par un compte existant.",
-                    "password_mismatch": "L'ancien mot de passe est incorrect.",
-                    "delete_account": "Erreur lors de la suppression de votre compte.",
-                    "updating_disabled": "La modification de compte est désactivée."
+                    "email_taken": "Esa dirección de correo electrónico ya está es uso.",
+                    "password_mismatch": "Esa no es tu contraseña anterior.",
+                    "delete_account": "Error al eliminar la cuenta.",
+                    "updating_disabled": "La edición de cuenta está deshabilitada."
                 },
                 "auth": {
-                    "registration_disabled": "L'enregistrement d'utilisateurs est désactivé."
+                    "registration_disabled": "El registro está desactivado."
                 }
             }
         },
-        "routes": {
-            "home": "accueil",
-            "about": "qui-sommes-nous",
-            "contact": "demande-de-contact",
-            "contact-sent": "message-envoyee",
-            "legal-mentions": "mentions-legales",
-            "redactors": "blog\/redacteurs\/{user}"
-        },
         "validation": {
-            "accepted": "Le champ {attribute} doit être accepté.",
-            "active_url": "Le champ {attribute} n'est pas une URL valide.",
-            "after": "Le champ {attribute} doit être une date postérieure au {date}.",
-            "after_or_equal": "Le champ {attribute} doit être une date postérieure ou égal au {date}.",
-            "alpha": "Le champ {attribute} doit seulement contenir des lettres.",
-            "alpha_dash": "Le champ {attribute} doit seulement contenir des lettres, des chiffres et des tirets.",
-            "alpha_num": "Le champ {attribute} doit seulement contenir des chiffres et des lettres.",
-            "array": "Le champ {attribute} doit être un tableau.",
-            "before": "Le champ {attribute} doit être une date antérieure au {date}.",
-            "before_or_equal": "Le champ {attribute} doit être une date antérieure ou égal au {date}.",
+            "accepted": "{attribute} debe ser aceptado.",
+            "active_url": "{attribute} no es una URL válida.",
+            "after": "{attribute} debe ser una fecha posterior a {date}.",
+            "after_or_equal": "{attribute} debe ser una fecha posterior o igual a {date}.",
+            "alpha": "{attribute} sólo debe contener letras.",
+            "alpha_dash": "{attribute} sólo debe contener letras, números y guiones.",
+            "alpha_num": "{attribute} sólo debe contener letras y números.",
+            "array": "{attribute} debe ser un conjunto.",
+            "before": "{attribute} debe ser una fecha anterior a {date}.",
+            "before_or_equal": "{attribute} debe ser una fecha anterior o igual a {date}.",
             "between": {
-                "numeric": "La valeur de {attribute} doit être comprise entre {min} et {max}.",
-                "file": "La taille du fichier de {attribute} doit être comprise entre {min} et {max} kilo-octets.",
-                "string": "Le texte {attribute} doit contenir entre {min} et {max} caractères.",
-                "array": "Le tableau {attribute} doit contenir entre {min} et {max} éléments."
+                "numeric": "{attribute} tiene que estar entre {min} - {max}.",
+                "file": "{attribute} debe pesar entre {min} - {max} kilobytes.",
+                "string": "{attribute} tiene que tener entre {min} - {max} caracteres.",
+                "array": "{attribute} tiene que tener entre {min} - {max} ítems."
             },
-            "boolean": "Le champ {attribute} doit être vrai ou faux.",
-            "confirmed": "Le champ de confirmation {attribute} ne correspond pas.",
-            "date": "Le champ {attribute} n'est pas une date valide.",
-            "date_format": "Le champ {attribute} ne correspond pas au format {format}.",
-            "different": "Les champs {attribute} et {other} doivent être différents.",
-            "digits": "Le champ {attribute} doit contenir {digits} chiffres.",
-            "digits_between": "Le champ {attribute} doit contenir entre {min} et {max} chiffres.",
-            "dimensions": "La taille de l'image {attribute} n'est pas conforme.",
-            "distinct": "Le champ {attribute} a une valeur dupliquée.",
-            "email": "Le champ {attribute} doit être une adresse e-mail valide.",
-            "exists": "Le champ {attribute} sélectionné est invalide.",
-            "file": "Le champ {attribute} doit être un fichier.",
-            "filled": "Le champ {attribute} doit avoir une valeur.",
-            "image": "Le champ {attribute} doit être une image.",
-            "in": "Le champ {attribute} est invalide.",
-            "in_array": "Le champ {attribute} n'existe pas dans {other}.",
-            "integer": "Le champ {attribute} doit être un entier.",
-            "ip": "Le champ {attribute} doit être une adresse IP valide.",
-            "ipv4": "Le champ {attribute} doit être une adresse IPv4 valide.",
-            "ipv6": "Le champ {attribute} doit être une adresse IPv6 valide.",
-            "json": "Le champ {attribute} doit être un document JSON valide.",
+            "boolean": "El campo {attribute} debe tener un valor verdadero o falso.",
+            "confirmed": "La confirmación de {attribute} no coincide.",
+            "date": "{attribute} no es una fecha válida.",
+            "date_format": "{attribute} no corresponde al formato {format}.",
+            "different": "{attribute} y {other} deben ser diferentes.",
+            "digits": "{attribute} debe tener {digits} dígitos.",
+            "digits_between": "{attribute} debe tener entre {min} y {max} dígitos.",
+            "dimensions": "Las dimensiones de la imagen {attribute} no son válidas.",
+            "distinct": "El campo {attribute} contiene un valor duplicado.",
+            "email": "{attribute} no es un correo válido",
+            "exists": "{attribute} es inválido.",
+            "file": "El campo {attribute} debe ser un archivo.",
+            "filled": "El campo {attribute} es obligatorio.",
+            "image": "{attribute} debe ser una imagen.",
+            "in": "{attribute} es inválido.",
+            "in_array": "El campo {attribute} no existe en {other}.",
+            "integer": "{attribute} debe ser un número entero.",
+            "ip": "{attribute} debe ser una dirección IP válida.",
+            "ipv4": "{attribute} debe ser un dirección IPv4 válida",
+            "ipv6": "{attribute} debe ser un dirección IPv6 válida.",
+            "json": "El campo {attribute} debe tener una cadena JSON válida.",
             "max": {
-                "numeric": "La valeur de {attribute} ne peut être supérieure à {max}.",
-                "file": "La taille du fichier de {attribute} ne peut pas dépasser {max} kilo-octets.",
-                "string": "Le texte de {attribute} ne peut contenir plus de {max} caractères.",
-                "array": "Le tableau {attribute} ne peut contenir plus de {max} éléments."
+                "numeric": "{attribute} no debe ser mayor a {max}.",
+                "file": "{attribute} no debe ser mayor que {max} kilobytes.",
+                "string": "{attribute} no debe ser mayor que {max} caracteres.",
+                "array": "{attribute} no debe tener más de {max} elementos."
             },
-            "mimes": "Le champ {attribute} doit être un fichier de type : {values}.",
-            "mimetypes": "Le champ {attribute} doit être un fichier de type : {values}.",
+            "mimes": "{attribute} debe ser un archivo con formato: {values}.",
+            "mimetypes": "{attribute} debe ser un archivo con formato: {values}.",
             "min": {
-                "numeric": "La valeur de {attribute} doit être supérieure ou égale à {min}.",
-                "file": "La taille du fichier de {attribute} doit être supérieure à {min} kilo-octets.",
-                "string": "Le texte {attribute} doit contenir au moins {min} caractères.",
-                "array": "Le tableau {attribute} doit contenir au moins {min} éléments."
+                "numeric": "El tamaño de {attribute} debe ser de al menos {min}.",
+                "file": "El tamaño de {attribute} debe ser de al menos {min} kilobytes.",
+                "string": "{attribute} debe contener al menos {min} caracteres.",
+                "array": "{attribute} debe tener al menos {min} elementos."
             },
-            "not_in": "Le champ {attribute} sélectionné n'est pas valide.",
-            "not_regex": "Le format du champ {attribute} n'est pas valide.",
-            "numeric": "Le champ {attribute} doit contenir un nombre.",
-            "present": "Le champ {attribute} doit être présent.",
-            "regex": "Le format du champ {attribute} est invalide.",
-            "required": "Le champ {attribute} est obligatoire.",
-            "required_if": "Le champ {attribute} est obligatoire quand la valeur de {other} est {value}.",
-            "required_unless": "Le champ {attribute} est obligatoire sauf si {other} est {values}.",
-            "required_with": "Le champ {attribute} est obligatoire quand {values} est présent.",
-            "required_with_all": "Le champ {attribute} est obligatoire quand {values} est présent.",
-            "required_without": "Le champ {attribute} est obligatoire quand {values} n'est pas présent.",
-            "required_without_all": "Le champ {attribute} est requis quand aucun de {values} n'est présent.",
-            "same": "Les champs {attribute} et {other} doivent être identiques.",
+            "not_in": "{attribute} es inválido.",
+            "not_regex": "El formato del campo {attribute} no es válido.",
+            "numeric": "{attribute} debe ser numérico.",
+            "present": "El campo {attribute} debe estar presente.",
+            "regex": "El formato de {attribute} es inválido.",
+            "required": "El campo {attribute} es obligatorio.",
+            "required_if": "El campo {attribute} es obligatorio cuando {other} es {value}.",
+            "required_unless": "El campo {attribute} es obligatorio a menos que {other} esté en {values}.",
+            "required_with": "El campo {attribute} es obligatorio cuando {values} está presente.",
+            "required_with_all": "El campo {attribute} es obligatorio cuando {values} está presente.",
+            "required_without": "El campo {attribute} es obligatorio cuando {values} no está presente.",
+            "required_without_all": "El campo {attribute} es obligatorio cuando ninguno de {values} estén presentes.",
+            "same": "{attribute} y {other} deben coincidir.",
             "size": {
-                "numeric": "La valeur de {attribute} doit être {size}.",
-                "file": "La taille du fichier de {attribute} doit être de {size} kilo-octets.",
-                "string": "Le texte de {attribute} doit contenir {size} caractères.",
-                "array": "Le tableau {attribute} doit contenir {size} éléments."
+                "numeric": "El tamaño de {attribute} debe ser {size}.",
+                "file": "El tamaño de {attribute} debe ser {size} kilobytes.",
+                "string": "{attribute} debe contener {size} caracteres.",
+                "array": "{attribute} debe contener {size} elementos."
             },
-            "string": "Le champ {attribute} doit être une chaîne de caractères.",
-            "timezone": "Le champ {attribute} doit être un fuseau horaire valide.",
-            "unique": "La valeur du champ {attribute} est déjà utilisée.",
-            "uploaded": "Le fichier du champ {attribute} n'a pu être téléchargé.",
-            "url": "Le format de l'URL de {attribute} n'est pas valide.",
+            "string": "El campo {attribute} debe ser una cadena de caracteres.",
+            "timezone": "El {attribute} debe ser una zona válida.",
+            "unique": "{attribute} ya ha sido registrado.",
+            "uploaded": "Subir {attribute} ha fallado.",
+            "url": "El formato {attribute} es inválido.",
             "custom": {
                 "attribute-name": {
-                    "rule-name": "custom-message"
+                    "rule-name": "mensaje personalizado"
                 }
             },
             "attributes": {
-                "name": "Nom",
-                "display_name": "Nom affiché",
-                "username": "Pseudo",
-                "email": "Adresse e-mail",
-                "first_name": "Prénom",
-                "last_name": "Nom",
-                "password": "Mot de passe",
-                "password_confirmation": "Confirmation du mot de passe",
-                "old_password": "Ancien mot de passe",
-                "new_password": "Nouveau mot de passe",
-                "new_password_confirmation": "Confirmation du nouveau mot de passe",
-                "postal_code": "Code postal",
-                "city": "Ville",
-                "country": "Pays",
-                "address": "Adresse",
-                "phone": "Téléphone",
-                "mobile": "Portable",
-                "age": "Age",
-                "sex": "Sexe",
-                "gender": "Genre",
-                "day": "Jour",
-                "month": "Mois",
-                "year": "Année",
-                "hour": "Heure",
-                "minute": "Minute",
-                "second": "Seconde",
-                "title": "Titre",
-                "content": "Contenu",
-                "description": "Description",
-                "summary": "Résumé",
-                "excerpt": "Extrait",
-                "date": "Date",
-                "time": "Heure",
+                "name": "Nombre",
+                "display_name": "Nombre para mostrar",
+                "username": "Seudo",
+                "email": "Email",
+                "first_name": "Nombre",
+                "last_name": "Apellidos",
+                "password": "Contraseña",
+                "password_confirmation": "Confirmar contraseña",
+                "old_password": "Contraseña anterior",
+                "new_password": "Nueva contraseña",
+                "new_password_confirmation": "Confirmar nueva contraseña",
+                "postal_code": "código postal",
+                "city": "Ciudad",
+                "country": "País",
+                "address": "Dirección",
+                "phone": "Teléfono",
+                "mobile": "Móvil",
+                "age": "Años",
+                "sex": "Sexo",
+                "gender": "Género",
+                "day": "Día",
+                "month": "Mes",
+                "year": "Año",
+                "hour": "Hora",
+                "minute": "Minuto",
+                "second": "Segundo",
+                "title": "Título",
+                "content": "Contenido",
+                "description": "Descripción",
+                "summary": "Resumen",
+                "excerpt": "Extracto",
+                "date": "Fecha",
+                "time": "Hora",
                 "available": "Disponible",
-                "size": "Taille",
-                "roles": "Rôles",
-                "permissions": "Permissions",
-                "active": "Actif",
-                "message": "Message",
+                "size": "Tamaño",
+                "roles": "Roles",
+                "permissions": "Permisos",
+                "active": "Activo",
+                "message": "Mensaje",
                 "g-recaptcha-response": "Captcha",
-                "locale": "Localisation",
-                "route": "Route",
-                "url": "Alias URL",
-                "form_type": "Type de formulaire",
-                "form_data": "Données du formulaire",
-                "recipients": "Destinataires",
-                "source_path": "Chemin origine",
-                "target_path": "Chemin cible",
-                "redirect_type": "Type de redirection",
-                "timezone": "Fuseau horaire",
-                "order": "Ordre d'affichage",
-                "image": "Image",
-                "status": "Statut",
-                "pinned": "Epinglé",
-                "promoted": "Mis en avant",
-                "body": "Corps",
-                "tags": "Etiquettes",
-                "published_at": "Publier le",
-                "unpublished_at": "Dépublier le",
-                "metable_type": "Entité"
+                "locale": "Localización",
+                "route": "Ruta",
+                "url": "URL alias",
+                "form_type": "Tipo de formulario",
+                "form_data": "Datos de formulario",
+                "recipients": "Destinatarios",
+                "source_path": "Ruta original",
+                "target_path": "Ruta de destino",
+                "redirect_type": "Redirigir tipo",
+                "timezone": "Zona horaria",
+                "order": "Orden de visualización",
+                "image": "Imagen",
+                "status": "Estado",
+                "pinned": "Fijado",
+                "promoted": "Promovido",
+                "body": "Cuerpo",
+                "tags": "Etiquetas",
+                "published_at": "Publicar en",
+                "unpublished_at": "Anular publicación en",
+                "metable_type": "Entidad"
             }
         },
         "buttons": {
-            "cancel": "Annuler",
-            "save": "Sauvegarder",
-            "close": "Fermer",
-            "create": "Créer",
-            "delete": "Supprimer",
-            "confirm": "Valider",
-            "show": "Voir",
-            "edit": "Editer",
-            "update": "Mettre à jour",
-            "view": "Voir",
-            "preview": "Prévisualiser",
-            "back": "Retour",
-            "send": "Envoyer",
-            "login-as": "Se loguer en tant que {name}",
-            "apply": "Appliquer",
+            "cancel": "Cancelar",
+            "save": "Salvar",
+            "close": "Cerrar",
+            "create": "Crear",
+            "delete": "Borrar",
+            "confirm": "Confirmar",
+            "show": "Mostrar",
+            "edit": "Editar",
+            "update": "Actualizar",
+            "view": "Ver",
+            "preview": "Previsualizar",
+            "back": "Atras",
+            "send": "Enviar",
+            "login-as": "Iniciar como {name}",
+            "apply": "Aplicar",
             "users": {
-                "create": "Créer un utilisateur"
+                "create": "Crear usuario"
             },
             "roles": {
-                "create": "Créer un rôle"
+                "create": "Crear rol"
             },
             "metas": {
-                "create": "Créer une meta"
+                "create": "Crear meta"
             },
             "form_settings": {
-                "create": "Créer un paramètre"
+                "create": "Crear configuración"
             },
             "redirections": {
-                "create": "Créer une redirection",
-                "import": "Importer le CSV"
+                "create": "Crear redirección",
+                "import": "Importar CSV"
             },
             "posts": {
-                "create": "Créer un article",
-                "save_and_publish": "Enregistrer et publier",
-                "save_as_draft": "Enregistrer en tant que brouillon"
+                "create": "Crear publicación",
+                "save_and_publish": "Guardar y publicar",
+                "save_as_draft": "Guardar como borrador"
+            }
+        }
+    },
+    "fr": {
+        "passwords": {
+            "password": "Les mots de passe doivent contenir au moins six caractères et doivent être identiques.",
+            "reset": "Votre mot de passe a été réinitialisé !",
+            "sent": "Nous vous avons envoyé par courriel le lien de réinitialisation du mot de passe !",
+            "token": "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
+            "user": "Aucun utilisateur n'a été trouvé avec cette adresse e-mail."
+        },
+        "auth": {
+            "failed": "Ces identifiants ne correspondent pas à nos enregistrements",
+            "throttle": "Trop de tentatives de connexion. Veuillez essayer de nouveau dans {seconds} secondes.",
+            "socialite": {
+                "unacceptable": "{provider} n'est pas accepté."
             }
         },
-        "alerts": {
-            "backend": {
-                "users": {
-                    "created": "Utilisateur créé",
-                    "updated": "Utilisateur mis à jour",
-                    "deleted": "Utilisateur supprimé",
-                    "bulk_destroyed": "Utilisateurs sélectionnés supprimés",
-                    "bulk_enabled": "Utilisateurs sélectionnés activés",
-                    "bulk_disabled": "Utilisateurs sélectionnés désactivés"
-                },
-                "roles": {
-                    "created": "Rôle créé",
-                    "updated": "Rôle mis à jour",
-                    "deleted": "Rôle supprimé"
-                },
-                "metas": {
-                    "created": "Meta créée",
-                    "updated": "Meta mise à jour",
-                    "deleted": "Meta supprimée",
-                    "bulk_destroyed": "Metas sélectionnées supprimées"
-                },
-                "form_submissions": {
-                    "deleted": "Soumission supprimée",
-                    "bulk_destroyed": "Soumissions sélectionnées supprimées"
-                },
-                "form_settings": {
-                    "created": "Paramétrage de formulaire créé",
-                    "updated": "Paramétrage de formulaire mis à jour",
-                    "deleted": "Paramétrage de formulaire supprimé"
-                },
-                "redirections": {
-                    "created": "Redirection créée",
-                    "updated": "Redirection mise à jour",
-                    "deleted": "Redirection supprimée",
-                    "bulk_destroyed": "Redirections sélectionnées supprimées",
-                    "bulk_enabled": "Redirections sélectionnées activées",
-                    "bulk_disabled": "Redirections sélectionnées désactivées",
-                    "file_imported": "Fichier importé avec succès"
-                },
-                "posts": {
-                    "created": "Article créé",
-                    "updated": "Article mis à jour",
-                    "deleted": "Article supprimé",
-                    "bulk_destroyed": "Articles sélectionnés supprimés",
-                    "bulk_published": "Articles sélectionnés publiés",
-                    "bulk_pending": "Articles sélectionnés en attente de modération",
-                    "bulk_pinned": "Articles sélectionnés épinglé",
-                    "bulk_promoted": "Articles sélectionnés mis en avant"
-                },
-                "actions": {
-                    "invalid": "Action invalide"
-                }
+        "mails": {
+            "layout": {
+                "hello": "Bonjour !",
+                "regards": "Cordialement",
+                "trouble": "Si vous rencontrer un problème en cliquant sur le bouton {action}, copier et coller l'URL suivante dans votre navigateur :",
+                "all_rights_reserved": "Tous droits réservés."
             },
-            "frontend": []
+            "password_reset": {
+                "subject": "Réinitialisation de mon mot de passe",
+                "intro": "Vous recevez cet email car vous avez effectué une demande de réinitialisation de mot de passe.",
+                "action": "Réinitialiser le mot de passe",
+                "outro": "Si vous n'avez pas fait cette demande de réinitialisation, aucune action n'est requise."
+            },
+            "contact": {
+                "subject": "Nouveau message de contact",
+                "new_contact": "Vous avez reçu un nouveau message de contact. Détail de la soumission :"
+            },
+            "alert": {
+                "subject": "[{app_name}] Exception error",
+                "message": "Une exception serveur non prévue a été levée dont le message est : {message}.",
+                "trace": "Trace complète :"
+            }
+        },
+        "forms": {
+            "contact": {
+                "display_name": "Formulaire de contact"
+            }
         },
         "labels": {
             "language": "Langue",
@@ -3431,46 +3164,85 @@ export default {
                 }
             }
         },
-        "auth": {
-            "failed": "Ces identifiants ne correspondent pas à nos enregistrements",
-            "throttle": "Trop de tentatives de connexion. Veuillez essayer de nouveau dans {seconds} secondes.",
-            "socialite": {
-                "unacceptable": "{provider} n'est pas accepté."
-            }
-        },
         "pagination": {
             "previous": "&laquo; Précédent",
             "next": "Suivant &raquo;"
         },
-        "passwords": {
-            "password": "Les mots de passe doivent contenir au moins six caractères et doivent être identiques.",
-            "reset": "Votre mot de passe a été réinitialisé !",
-            "sent": "Nous vous avons envoyé par courriel le lien de réinitialisation du mot de passe !",
-            "token": "Ce jeton de réinitialisation du mot de passe n'est pas valide.",
-            "user": "Aucun utilisateur n'a été trouvé avec cette adresse e-mail."
+        "routes": {
+            "home": "accueil",
+            "about": "qui-sommes-nous",
+            "contact": "demande-de-contact",
+            "contact-sent": "message-envoyee",
+            "legal-mentions": "mentions-legales",
+            "redactors": "blog\/redacteurs\/{user}"
         },
-        "mails": {
-            "layout": {
-                "hello": "Bonjour !",
-                "regards": "Cordialement",
-                "trouble": "Si vous rencontrer un problème en cliquant sur le bouton {action}, copier et coller l'URL suivante dans votre navigateur :",
-                "all_rights_reserved": "Tous droits réservés."
+        "logs": {
+            "backend": {
+                "users": {
+                    "created": "Utilisateur ID {user} créé",
+                    "updated": "Utilisateur ID {user} mis à jour",
+                    "deleted": "Utilisateur ID {user} supprimé"
+                },
+                "form_submissions": {
+                    "created": "Soumission de formulaire ID {form_submission} créée"
+                }
             },
-            "password_reset": {
-                "subject": "Réinitialisation de mon mot de passe",
-                "intro": "Vous recevez cet email car vous avez effectué une demande de réinitialisation de mot de passe.",
-                "action": "Réinitialiser le mot de passe",
-                "outro": "Si vous n'avez pas fait cette demande de réinitialisation, aucune action n'est requise."
+            "frontend": []
+        },
+        "alerts": {
+            "backend": {
+                "users": {
+                    "created": "Utilisateur créé",
+                    "updated": "Utilisateur mis à jour",
+                    "deleted": "Utilisateur supprimé",
+                    "bulk_destroyed": "Utilisateurs sélectionnés supprimés",
+                    "bulk_enabled": "Utilisateurs sélectionnés activés",
+                    "bulk_disabled": "Utilisateurs sélectionnés désactivés"
+                },
+                "roles": {
+                    "created": "Rôle créé",
+                    "updated": "Rôle mis à jour",
+                    "deleted": "Rôle supprimé"
+                },
+                "metas": {
+                    "created": "Meta créée",
+                    "updated": "Meta mise à jour",
+                    "deleted": "Meta supprimée",
+                    "bulk_destroyed": "Metas sélectionnées supprimées"
+                },
+                "form_submissions": {
+                    "deleted": "Soumission supprimée",
+                    "bulk_destroyed": "Soumissions sélectionnées supprimées"
+                },
+                "form_settings": {
+                    "created": "Paramétrage de formulaire créé",
+                    "updated": "Paramétrage de formulaire mis à jour",
+                    "deleted": "Paramétrage de formulaire supprimé"
+                },
+                "redirections": {
+                    "created": "Redirection créée",
+                    "updated": "Redirection mise à jour",
+                    "deleted": "Redirection supprimée",
+                    "bulk_destroyed": "Redirections sélectionnées supprimées",
+                    "bulk_enabled": "Redirections sélectionnées activées",
+                    "bulk_disabled": "Redirections sélectionnées désactivées",
+                    "file_imported": "Fichier importé avec succès"
+                },
+                "posts": {
+                    "created": "Article créé",
+                    "updated": "Article mis à jour",
+                    "deleted": "Article supprimé",
+                    "bulk_destroyed": "Articles sélectionnés supprimés",
+                    "bulk_published": "Articles sélectionnés publiés",
+                    "bulk_pending": "Articles sélectionnés en attente de modération",
+                    "bulk_pinned": "Articles sélectionnés épinglé",
+                    "bulk_promoted": "Articles sélectionnés mis en avant"
+                },
+                "actions": {
+                    "invalid": "Action invalide"
+                }
             },
-            "contact": {
-                "subject": "Nouveau message de contact",
-                "new_contact": "Vous avez reçu un nouveau message de contact. Détail de la soumission :"
-            },
-            "alert": {
-                "subject": "[{app_name}] Exception error",
-                "message": "Une exception serveur non prévue a été levée dont le message est : {message}.",
-                "trace": "Trace complète :"
-            }
+            "frontend": []
         },
         "permissions": {
             "categories": {
@@ -3626,18 +3398,247 @@ export default {
                 "description": "Permet de prendre l'identité d'un autre utilisateur. Utile pour les tests."
             }
         },
-        "logs": {
+        "exceptions": {
+            "general": "Erreur serveur",
+            "unauthorized": "Action non autorisée",
             "backend": {
                 "users": {
-                    "created": "Utilisateur ID {user} créé",
-                    "updated": "Utilisateur ID {user} mis à jour",
-                    "deleted": "Utilisateur ID {user} supprimé"
+                    "create": "Erreur lors de la création de l'utilisateur",
+                    "update": "Erreur lors de la mise à jour de l'utilisateur",
+                    "delete": "Erreur lors de la suppression de l'utilisateur",
+                    "first_user_cannot_be_edited": "Vous ne pouvez pas éditer l'utilisateur super admin",
+                    "first_user_cannot_be_disabled": "L'utilisateur super admin ne peut pas être désactivé",
+                    "first_user_cannot_be_destroyed": "L'utilisateur super admin ne peut pas être supprimé",
+                    "first_user_cannot_be_impersonated": "L'utilisateur super admin ne peut pas être usurpé",
+                    "cannot_set_superior_roles": "Vous ne pouvez pas attribuer de rôle supérieur au vôtre"
+                },
+                "roles": {
+                    "create": "Erreur lors de la création du rôle",
+                    "update": "Erreur lors de la mise à jour du rôle",
+                    "delete": "Erreur lors de la suppression du rôle"
+                },
+                "metas": {
+                    "create": "Erreur lors de la création de la meta",
+                    "update": "Erreur lors de la mise à jour de la meta",
+                    "delete": "Erreur lors de la suppression de la meta",
+                    "already_exist": "Il existe déjà une meta pour cette route"
                 },
                 "form_submissions": {
-                    "created": "Soumission de formulaire ID {form_submission} créée"
+                    "create": "Erreur lors de la création de la soumission",
+                    "delete": "Erreur lors de la suppression de la soumission"
+                },
+                "form_settings": {
+                    "create": "Erreur lors de la création du paramètre de formulaire",
+                    "update": "Erreur lors de la mise à jour du paramètre de formulaire",
+                    "delete": "Erreur lors de la suppression du paramètre de formulaire",
+                    "already_exist": "Il existe déjà un paramétrage pour ce formulaire"
+                },
+                "redirections": {
+                    "create": "Erreur lors de la création de la redirection",
+                    "update": "Erreur lors de la mise à jour de la redirection",
+                    "delete": "Erreur lors de la suppression de la redirection",
+                    "already_exist": "Il existe déjà une redirection pour ce chemin"
+                },
+                "posts": {
+                    "create": "Erreur lors de la création de l'article",
+                    "update": "Erreur lors de la mise à jour de l'article",
+                    "save": "Erreur lors de l'enregistrement de l'article",
+                    "delete": "Erreur lors de la suppression de l'article"
                 }
             },
-            "frontend": []
+            "frontend": {
+                "user": {
+                    "email_taken": "Cet email est déjà utilisé par un compte existant.",
+                    "password_mismatch": "L'ancien mot de passe est incorrect.",
+                    "delete_account": "Erreur lors de la suppression de votre compte.",
+                    "updating_disabled": "La modification de compte est désactivée."
+                },
+                "auth": {
+                    "registration_disabled": "L'enregistrement d'utilisateurs est désactivé."
+                }
+            }
+        },
+        "validation": {
+            "accepted": "Le champ {attribute} doit être accepté.",
+            "active_url": "Le champ {attribute} n'est pas une URL valide.",
+            "after": "Le champ {attribute} doit être une date postérieure au {date}.",
+            "after_or_equal": "Le champ {attribute} doit être une date postérieure ou égal au {date}.",
+            "alpha": "Le champ {attribute} doit seulement contenir des lettres.",
+            "alpha_dash": "Le champ {attribute} doit seulement contenir des lettres, des chiffres et des tirets.",
+            "alpha_num": "Le champ {attribute} doit seulement contenir des chiffres et des lettres.",
+            "array": "Le champ {attribute} doit être un tableau.",
+            "before": "Le champ {attribute} doit être une date antérieure au {date}.",
+            "before_or_equal": "Le champ {attribute} doit être une date antérieure ou égal au {date}.",
+            "between": {
+                "numeric": "La valeur de {attribute} doit être comprise entre {min} et {max}.",
+                "file": "La taille du fichier de {attribute} doit être comprise entre {min} et {max} kilo-octets.",
+                "string": "Le texte {attribute} doit contenir entre {min} et {max} caractères.",
+                "array": "Le tableau {attribute} doit contenir entre {min} et {max} éléments."
+            },
+            "boolean": "Le champ {attribute} doit être vrai ou faux.",
+            "confirmed": "Le champ de confirmation {attribute} ne correspond pas.",
+            "date": "Le champ {attribute} n'est pas une date valide.",
+            "date_format": "Le champ {attribute} ne correspond pas au format {format}.",
+            "different": "Les champs {attribute} et {other} doivent être différents.",
+            "digits": "Le champ {attribute} doit contenir {digits} chiffres.",
+            "digits_between": "Le champ {attribute} doit contenir entre {min} et {max} chiffres.",
+            "dimensions": "La taille de l'image {attribute} n'est pas conforme.",
+            "distinct": "Le champ {attribute} a une valeur dupliquée.",
+            "email": "Le champ {attribute} doit être une adresse e-mail valide.",
+            "exists": "Le champ {attribute} sélectionné est invalide.",
+            "file": "Le champ {attribute} doit être un fichier.",
+            "filled": "Le champ {attribute} doit avoir une valeur.",
+            "image": "Le champ {attribute} doit être une image.",
+            "in": "Le champ {attribute} est invalide.",
+            "in_array": "Le champ {attribute} n'existe pas dans {other}.",
+            "integer": "Le champ {attribute} doit être un entier.",
+            "ip": "Le champ {attribute} doit être une adresse IP valide.",
+            "ipv4": "Le champ {attribute} doit être une adresse IPv4 valide.",
+            "ipv6": "Le champ {attribute} doit être une adresse IPv6 valide.",
+            "json": "Le champ {attribute} doit être un document JSON valide.",
+            "max": {
+                "numeric": "La valeur de {attribute} ne peut être supérieure à {max}.",
+                "file": "La taille du fichier de {attribute} ne peut pas dépasser {max} kilo-octets.",
+                "string": "Le texte de {attribute} ne peut contenir plus de {max} caractères.",
+                "array": "Le tableau {attribute} ne peut contenir plus de {max} éléments."
+            },
+            "mimes": "Le champ {attribute} doit être un fichier de type : {values}.",
+            "mimetypes": "Le champ {attribute} doit être un fichier de type : {values}.",
+            "min": {
+                "numeric": "La valeur de {attribute} doit être supérieure ou égale à {min}.",
+                "file": "La taille du fichier de {attribute} doit être supérieure à {min} kilo-octets.",
+                "string": "Le texte {attribute} doit contenir au moins {min} caractères.",
+                "array": "Le tableau {attribute} doit contenir au moins {min} éléments."
+            },
+            "not_in": "Le champ {attribute} sélectionné n'est pas valide.",
+            "not_regex": "Le format du champ {attribute} n'est pas valide.",
+            "numeric": "Le champ {attribute} doit contenir un nombre.",
+            "present": "Le champ {attribute} doit être présent.",
+            "regex": "Le format du champ {attribute} est invalide.",
+            "required": "Le champ {attribute} est obligatoire.",
+            "required_if": "Le champ {attribute} est obligatoire quand la valeur de {other} est {value}.",
+            "required_unless": "Le champ {attribute} est obligatoire sauf si {other} est {values}.",
+            "required_with": "Le champ {attribute} est obligatoire quand {values} est présent.",
+            "required_with_all": "Le champ {attribute} est obligatoire quand {values} est présent.",
+            "required_without": "Le champ {attribute} est obligatoire quand {values} n'est pas présent.",
+            "required_without_all": "Le champ {attribute} est requis quand aucun de {values} n'est présent.",
+            "same": "Les champs {attribute} et {other} doivent être identiques.",
+            "size": {
+                "numeric": "La valeur de {attribute} doit être {size}.",
+                "file": "La taille du fichier de {attribute} doit être de {size} kilo-octets.",
+                "string": "Le texte de {attribute} doit contenir {size} caractères.",
+                "array": "Le tableau {attribute} doit contenir {size} éléments."
+            },
+            "string": "Le champ {attribute} doit être une chaîne de caractères.",
+            "timezone": "Le champ {attribute} doit être un fuseau horaire valide.",
+            "unique": "La valeur du champ {attribute} est déjà utilisée.",
+            "uploaded": "Le fichier du champ {attribute} n'a pu être téléchargé.",
+            "url": "Le format de l'URL de {attribute} n'est pas valide.",
+            "custom": {
+                "attribute-name": {
+                    "rule-name": "custom-message"
+                }
+            },
+            "attributes": {
+                "name": "Nom",
+                "display_name": "Nom affiché",
+                "username": "Pseudo",
+                "email": "Adresse e-mail",
+                "first_name": "Prénom",
+                "last_name": "Nom",
+                "password": "Mot de passe",
+                "password_confirmation": "Confirmation du mot de passe",
+                "old_password": "Ancien mot de passe",
+                "new_password": "Nouveau mot de passe",
+                "new_password_confirmation": "Confirmation du nouveau mot de passe",
+                "postal_code": "Code postal",
+                "city": "Ville",
+                "country": "Pays",
+                "address": "Adresse",
+                "phone": "Téléphone",
+                "mobile": "Portable",
+                "age": "Age",
+                "sex": "Sexe",
+                "gender": "Genre",
+                "day": "Jour",
+                "month": "Mois",
+                "year": "Année",
+                "hour": "Heure",
+                "minute": "Minute",
+                "second": "Seconde",
+                "title": "Titre",
+                "content": "Contenu",
+                "description": "Description",
+                "summary": "Résumé",
+                "excerpt": "Extrait",
+                "date": "Date",
+                "time": "Heure",
+                "available": "Disponible",
+                "size": "Taille",
+                "roles": "Rôles",
+                "permissions": "Permissions",
+                "active": "Actif",
+                "message": "Message",
+                "g-recaptcha-response": "Captcha",
+                "locale": "Localisation",
+                "route": "Route",
+                "url": "Alias URL",
+                "form_type": "Type de formulaire",
+                "form_data": "Données du formulaire",
+                "recipients": "Destinataires",
+                "source_path": "Chemin origine",
+                "target_path": "Chemin cible",
+                "redirect_type": "Type de redirection",
+                "timezone": "Fuseau horaire",
+                "order": "Ordre d'affichage",
+                "image": "Image",
+                "status": "Statut",
+                "pinned": "Epinglé",
+                "promoted": "Mis en avant",
+                "body": "Corps",
+                "tags": "Etiquettes",
+                "published_at": "Publier le",
+                "unpublished_at": "Dépublier le",
+                "metable_type": "Entité"
+            }
+        },
+        "buttons": {
+            "cancel": "Annuler",
+            "save": "Sauvegarder",
+            "close": "Fermer",
+            "create": "Créer",
+            "delete": "Supprimer",
+            "confirm": "Valider",
+            "show": "Voir",
+            "edit": "Editer",
+            "update": "Mettre à jour",
+            "view": "Voir",
+            "preview": "Prévisualiser",
+            "back": "Retour",
+            "send": "Envoyer",
+            "login-as": "Se loguer en tant que {name}",
+            "apply": "Appliquer",
+            "users": {
+                "create": "Créer un utilisateur"
+            },
+            "roles": {
+                "create": "Créer un rôle"
+            },
+            "metas": {
+                "create": "Créer une meta"
+            },
+            "form_settings": {
+                "create": "Créer un paramètre"
+            },
+            "redirections": {
+                "create": "Créer une redirection",
+                "import": "Importer le CSV"
+            },
+            "posts": {
+                "create": "Créer un article",
+                "save_and_publish": "Enregistrer et publier",
+                "save_as_draft": "Enregistrer en tant que brouillon"
+            }
         }
     }
 }
