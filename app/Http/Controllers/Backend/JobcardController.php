@@ -137,12 +137,12 @@ class JobcardController extends BackendController
     public function store(StoreJobcardRequest $request)
     {
         
-        $data = $request->input();
-        $data['projects_id'] = $request->projects_id['id'];
-        $data['labour_rates_id'] = $request->labour_rates_id['id'];
-        $data['materials_rates_id'] = $request->materials_rates_id['id'];
-        $data['contractor_id'] = $request->contractor_id['id'];
-        $data['quotations_id'] = $request->quotations_id['id'];
+        $data = $request->all();
+        // $data['projects_id'] = $request->projects_id['id'];
+        // $data['labour_rates_id'] = $request->labour_rates_id['id'];
+        // $data['materials_rates_id'] = $request->materials_rates_id['id'];
+        // $data['contractor_id'] = $request->contractor_id['id'];
+        // $data['quotations_id'] = $request->quotations_id['id'];
         
         //dd($data);
         $jobcard = $this->jobcard->make($data); 

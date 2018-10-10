@@ -41,7 +41,6 @@ class Jobcard extends Model
         'projects_id',
         'labour_rates_id',
         'materials_rates_id',
-        'quotations_id',
     ];
 
     protected $table = 'jobcard';

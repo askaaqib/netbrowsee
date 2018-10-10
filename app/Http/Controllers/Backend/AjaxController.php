@@ -188,6 +188,22 @@ class AjaxController extends Controller
         
     }
 
+    public function searchQuotes(QuotesRepository $quote, Request $request){
+        $search = $request->get('q');
+        if ($search) {
+            return $quote->query()
+                ->where('quotation_name' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('quotation_digit' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('quotation_number' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('client_email' ,'LIKE' ,'%'. $search .'%')
+                ->get();
+        } else {
+            return $quote->query()
+                ->where('id' ,'>' ,0)
+                ->get();    
+        }
+    }
+
     public function searchLabours(LabourRateRepository $labour, Request $request){
         $search = $request->get('q');
         if ($search) {

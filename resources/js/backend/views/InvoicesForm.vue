@@ -235,6 +235,11 @@
                 <span class="hidden-xs">Add Parts</span>
                 <span class="glyphicon glyphicon-plus"></span>
               </b-btn>
+              <!-- Add job quotes button -->
+              <b-btn class="btn-invoices" title="Add a part to the job" @click="showModal('AddQuotes')">
+                <span class="hidden-xs">Add Quotes</span>
+                <span class="glyphicon glyphicon-plus"></span>
+              </b-btn>
             </div>
           </h5>
           <br>
@@ -298,6 +303,26 @@
                       <div class="pull-right">
                         <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
                         <button type="button" class="btn btn-secondary btn-sm" @click="editRowParts(index)">Edit</button>
+                      </div>
+                    </td>
+                  </template>
+                  <template v-else-if="row.quotation">
+                    <td>
+                      {{ row.quotation }}
+                    </td>
+                    <td>
+                      {{ row.quantity }}
+                    </td>
+                    <td>
+                      {{ row.net_amount }}
+                    </td>
+                    <td>
+                      {{ row.total_amount }}
+                    </td>
+                    <td>
+                      <div class="pull-right">
+                        <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowQuotes(index)">Edit</button>
                       </div>
                     </td>
                   </template>
@@ -433,6 +458,49 @@
         <button type="button" class="btn btn-danger" @click="hideModal('updateSectionModalRef')">Cancel</button>
         <button type="button" class="btn btn-invoices" @click="UpdateSection(section_edit_index)">Save</button>
       </div>
+    </b-modal>
+
+    <!-- Create Quote Modal -->
+    <b-modal ref="AddQuotes" id="labour-modal" hide-footer>
+      <b-tabs v-model="labourTabIndex">
+        <b-tab ref="searchSavedLabour" title="Search Saved Quotes" active>
+          <b-input-group>
+            <b-form-input
+              id="search_labour"
+              name="search_labour"
+              v-model="quote_search.search_quote"
+              placeholder="Search Quote"
+            ></b-form-input>
+            <b-input-group-append>
+              <b-btn variant="success" @click="searchSavedQuote"><i class="fe fe-search"></i></b-btn>
+            </b-input-group-append>
+          </b-input-group>
+          <div class="model-body search-content">
+            <ul v-if="!quote_search.quote_info_get.error" class="grid">
+              <li v-for="(quotee,index) in quote_search.quote_info_get" :key="quotee.id">
+                <div class="part-list">
+                  <input type="hidden" :class="'part_json_' +quotee.id" v-model="quote_search.quote_searched_data">
+                  <h4 class="part-name">{{ quotee.quotation_name }}</h4>
+                  <p><b>Reference: </b>{{ quotee.quotation_digit }}-{{ quotee.quotation_number }} </p>
+                  <p><b>Date: </b>{{ quotee.quotation_date }}</p>
+                  <p><b>Client Email: </b>{{ quotee.client_email }}</p>
+                  <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedQuote(index)">Select<i class="fe fe-check"></i></b-btn>
+                  <div class="total-price">
+                    <h4 class="h-total-price">Total Price:</h4>
+                    <span class="labour-total-price">ZAR{{ quotee.total_amount }}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div v-if="quote_search.quote_info_get.error" class="mt-2">
+              <b-alert show variant="danger">{{ quote_search.quote_info_get.error }}</b-alert>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" @click="hideModal('AddQuotes')">Cancel</button>
+          </div>
+        </b-tab>
+      </b-tabs>
     </b-modal>
     <!-- Create Labour Modal -->
     <b-modal ref="AddLabourSection" id="labour-modal" hide-footer>
@@ -632,7 +700,7 @@
         <button type="button" class="btn btn-secondary" @click="UpdateLabour(labour_edit_index)">Update</button>
       </div>
     </b-modal>
-    <!-- Parts Modal -------- PARTS SECTION -----------  -->
+    <!-- Parts Modal  PARTS SECTION   -->
     <b-modal ref="AddPartsSection" hide-footer id="parts-modal">
       <b-tabs>
         <b-tab title="Supplier Parts" active>
@@ -896,6 +964,11 @@ export default {
         labour_vat_rate: 15.00,
         labour_vat_amount_zar: 0.00,
         labour_total_zar: 0.00
+      },
+      quote_search: {
+        search_quote: '',
+        quote_info_get: [],
+        quote_searched_data: []
       },
       labour_search: {
         search_labour: '',
@@ -1174,6 +1247,18 @@ export default {
         this.rows.splice(index, 1)
       }
     },
+    searchSavedQuote: function () {
+      this.searchQuote(this.quote_search.search_quote)
+    },
+    selectSearchedQuote: function (index) {
+      var currentIndex = this.quote_search.quote_info_get[index]
+      var quotationName = currentIndex.quotation_name
+      var quotationReference = currentIndex.quotation_digit + '-' + currentIndex.quotation_number
+      var quotationFullName = 'Quote Name:' + quotationName + ' Quote:' + quotationReference
+      this.rows.push({ quotation: quotationFullName, quantity: 1, net_amount: currentIndex.net_amount, total_amount: currentIndex.total_amount })
+      this.hideModal('AddQuotes')
+      // console.log(this.rows)
+    },
     searchClient: function () {
       this.searchClientClick(this.client_search.search_client)
     },
@@ -1330,6 +1415,16 @@ export default {
         this.client_search.client_info_get = { error: 'No Client Found' }
       }
     },
+    async searchQuote ($q) {
+      let { data } = await axios.get(this.$app.route('admin.quotations.searchquotes'), { params: { q: $q } })
+      console.log(data)
+      if (data.length > 0) {
+        this.quote_search.quote_info_get = data
+        this.quote_search.quote_searched_data = { name: data.quotation_name, quantity: 1, net_amount: data.net_amount, total_amount: data.total_amount }
+      } else {
+        this.quote_search.quote_info_get = { error: 'No Quotes Found' }
+      }
+    },
     async searchLabour ($q) {
       let { data } = await axios.get(this.$app.route('admin.labours.searchlabour'), { params: { q: $q } })
       if (data.length > 0) {
@@ -1418,6 +1513,9 @@ export default {
       if (ModalRef === 'updatePartsSection') {
         this.$refs.updatePartsSection.show()
       }
+      if (ModalRef === 'AddQuotes') {
+        this.$refs.AddQuotes.show()
+      }
     },
     hideModal (ModalRef) {
       if (ModalRef === 'sectionModalRef') {
@@ -1445,6 +1543,9 @@ export default {
       }
       if (ModalRef === 'clientSearchModalRef') {
         this.$refs.clientSearchModalRef.hide()
+      }
+      if (ModalRef === 'AddQuotes') {
+        this.$refs.AddQuotes.hide()
       }
     },
     emptySectionText: function () {
