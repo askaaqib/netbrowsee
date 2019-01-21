@@ -136,6 +136,22 @@
                 <b-form-file v-if="!model.company_logo" placeholder="Select Logo..." @change="onFileSelected"></b-form-file>
               </template>
             </b-form-group>
+            <b-form-group
+              :label="$t('validation.attributes.roles')"
+              label-for="roles"
+              horizontal
+              :label-cols="3"
+            >
+              <b-form-checkbox-group stacked v-model="model.district" name="roles[]">
+                <b-form-checkbox
+                v-b-tooltip.left
+                :title="role.description"
+                :value="role.id"
+                >
+                  Enable District
+                </b-form-checkbox>
+              </b-form-checkbox-group>
+            </b-form-group>
 
             <b-row slot="footer">
               <b-col md>
@@ -189,7 +205,8 @@ export default {
         quote_ref_start: null,
         quote_ref_alphabet: null,
         quote_vat: null,
-        invoice_ref_start: null
+        invoice_ref_start: null,
+        district: 0
       }
     }
   },

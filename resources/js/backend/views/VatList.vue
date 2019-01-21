@@ -2,7 +2,9 @@
   <div>
     <b-card>
       <template slot="header">
-        <h3 class="card-title">{{ $t('labels.backend.vat.titles.index') }}</h3>
+        <h3 class="card-title">
+          {{ $t('labels.backend.vat.titles.index') }}
+        </h3>
         <div class="card-options" v-if="this.$app.user.can('create vat')">
           <b-button to="/vat/create" variant="success" size="sm">
             <i class="fe fe-plus-circle"></i> {{ $t('buttons.vat.create') }}

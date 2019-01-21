@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class StoreJobcardRequest extends FormRequest
 {
@@ -21,26 +22,47 @@ class StoreJobcardRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
+        if($request->jobcard_num){
+            return [
+                'jobcard_num' => 'required',
+                'problem_type' => 'required',
+                'description' => 'required',
+                'priority' => 'required',
+                'facility_name' => 'required',
+                'district' => 'required',
+                'sub_district' => 'required',
+                'projects_id' => 'required',
+                'labour_rates_id' => 'required',
+                'materials_rates_id' => 'required',
+                'travelling_paid' => 'required',
+                'quoted_amount' => 'required',
+                'status' => 'required',
+                'contractor_id' => 'required',
+                'before_pictures' => 'required',
+                'during_pictures' => 'required',
+                'after_pictures' => 'required',
+            ];
+        }
         return [
             'jobcard_num'          => 'required',
-            'problem_type' => 'required',
+            // 'problem_type' => 'required',
             'description' => 'required',
-            'priority' => 'required',
-            'facility_name' => 'required',
-            'district' => 'required',
-            'sub_district' => 'required',
-            'projects_id' => 'required',
-            'labour_rates_id' => 'required',
-            'materials_rates_id' => 'required',
-            'travelling_paid' => 'required',
-            'quoted_amount' => 'required',
-            'status' => 'required',
-            'contractor_id' => 'required',
-            'before_pictures' => 'required',
-            'during_pictures' => 'required',
-            'after_pictures' => 'required',
+            // 'priority' => 'required',
+            // 'facility_name' => 'required',
+            // 'district' => 'required',
+            // 'sub_district' => 'required',
+            // 'projects_id' => 'required',
+            // 'labour_rates_id' => 'required',
+            // 'materials_rates_id' => 'required',
+            // 'travelling_paid' => 'required',
+            // 'quoted_amount' => 'required',
+            // 'status' => 'required',
+            // 'contractor_id' => 'required',
+            // 'before_pictures' => 'required',
+            // 'during_pictures' => 'required',
+            // 'after_pictures' => 'required',
         ];
     }
 }

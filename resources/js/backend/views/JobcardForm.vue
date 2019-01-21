@@ -49,7 +49,7 @@
               <b-form-input
                 id="problem_type"
                 name="problem_type"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.problem_type')"
                 v-model="model.problem_type"
                 :state="state('problem_type')"
@@ -66,7 +66,7 @@
               <b-form-input
                 id="priority"
                 name="priority"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.priority')"
                 v-model="model.priority"
                 :state="state('priority')"
@@ -83,7 +83,7 @@
               <b-form-input
                 id="facility_name"
                 name="facility_name"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.facility_name')"
                 v-model="model.facility_name"
                 :state="state('facility_name')"
@@ -100,7 +100,7 @@
               <b-form-input
                 id="district"
                 name="district"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.district')"
                 v-model="model.district"
                 :state="state('district')"
@@ -117,7 +117,7 @@
               <b-form-input
                 id="sub_district"
                 name="sub_district"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.sub_district')"
                 v-model="model.sub_district"
                 :state="state('sub_district')"
@@ -164,7 +164,7 @@
               <b-form-input
                 id="travelling_paid"
                 name="travelling_paid"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.travelling_paid')"
                 v-model="model.travelling_paid"
                 :state="state('travelling_paid')"
@@ -196,7 +196,7 @@
               <b-form-input
                 id="quoted_amount"
                 name="quoted_amount"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.quoted_amount')"
                 v-model="model.quoted_amount"
                 :state="state('quoted_amount')"
@@ -213,7 +213,7 @@
               <b-form-input
                 id="status"
                 name="status"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.status')"
                 v-model="model.status"
                 :state="state('status')"
@@ -245,7 +245,7 @@
               <b-form-input
                 id="before_pictures"
                 name="before_pictures"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.before_pictures')"
                 v-model="model.before_pictures"
                 :state="state('before_pictures')"
@@ -262,7 +262,7 @@
               <b-form-input
                 id="during_pictures"
                 name="during_pictures"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.during_pictures')"
                 v-model="model.during_pictures"
                 :state="state('during_pictures')"
@@ -279,7 +279,7 @@
               <b-form-input
                 id="after_pictures"
                 name="after_pictures"
-                required
+                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.after_pictures')"
                 v-model="model.after_pictures"
                 :state="state('after_pictures')"
