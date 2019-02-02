@@ -127,6 +127,19 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       url: '/settings',
       icon: 'fe fe-settings',
       access: app.user.can('view')
+    },
+    {
+      name: 'District',
+      url: '/districts',
+      icon: 'fe fe-settings',
+      access: app.user.can('view')
+    },
+    {
+      name: 'Sub-District',
+      url: '/subdistricts',
+      icon: 'fe fe-book',
+      access: app.user.can('view')
     }
+
   ]
 }

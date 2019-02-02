@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 // Containers
 import Full from '../containers/Full'
-
 // Views
 import Search from '../views/Search'
 import Dashboard from '../views/Dashboard'
@@ -40,6 +38,10 @@ import QuotesForm from '../views/QuotesForm'
 import QuotesList from '../views/QuotesList'
 import QuotesShow from '../views/QuotesShow'
 import QuotesPdf from '../views/QuotesPdf'
+import DistrictForm from '../views/DistrictForm'
+import DistrictList from '../views/DistrictList'
+import SubDistrictForm from '../views/SubDistrictForm'
+import SubDistrictList from '../views/SubDistrictList'
 
 Vue.use(Router)
 
@@ -408,8 +410,7 @@ export function createRouter (base, i18n) {
                 }
               }
             ]
-          },
-          {
+          }, {
             path: 'users',
             component: {
               render (c) {
@@ -446,8 +447,7 @@ export function createRouter (base, i18n) {
                 }
               }
             ]
-          },
-          {
+          }, {
             path: 'roles',
             component: {
               render (c) {
@@ -481,6 +481,82 @@ export function createRouter (base, i18n) {
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.roles.titles.edit')
+                }
+              }
+            ]
+          },
+          {
+            path: 'districts',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.district.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'districts',
+                component: DistrictList,
+                meta: {
+                  label: i18n.t('labels.backend.district.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'districts_create',
+                component: DistrictForm,
+                meta: {
+                  label: i18n.t('labels.backend.district.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'districts_edit',
+                component: DistrictForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.district.titles.edit')
+                }
+              }
+            ]
+          },
+          {
+            path: 'subdistricts',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.subdistrict.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'subdistricts',
+                component: SubDistrictList,
+                meta: {
+                  label: i18n.t('labels.backend.subdistrict.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'subdistricts_create',
+                component: SubDistrictForm,
+                meta: {
+                  label: i18n.t('labels.backend.subdistrict.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'subdistricts_edit',
+                component: SubDistrictForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.district.titles.edit')
                 }
               }
             ]

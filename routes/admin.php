@@ -7,6 +7,10 @@ Route::post('images/upload', 'AjaxController@imageUpload')->name('images.upload'
 Route::get('labours/getrates', 'AjaxController@getLabourRates')->name('labours.getids');
 Route::get('materials/getrates', 'AjaxController@getMaterialRates')->name('materials.getids');
 Route::get('vats/getrates', 'AjaxController@getVatRates')->name('vats.getids');
+
+Route::get('district/getids','AjaxController@getDistricts')->name('district.getdata');
+Route::get('subdistrict/getids','AjaxController@getSubDistricts')->name('subdistrict.getdata');
+
 Route::get('projects/getids', 'AjaxController@getProjects')->name('projects.getdata');
 Route::get('labours/info', 'AjaxController@getLabours')->name('labours.getdata');
 Route::get('labours/search', 'AjaxController@searchLabours')->name('labours.searchlabour');
@@ -20,6 +24,7 @@ Route::get('settings/data', 'AjaxController@getSettingsData')->name('settings.ge
 Route::get('quotations/lastref', 'AjaxController@getQuotationsRecentReference')->name('quotations.getreference');
 Route::get('clients/search', 'AjaxController@searchClients')->name('clients.searchclients');
 Route::get('quotations/search', 'AjaxController@searchQuotes')->name('quotations.searchquotes');
+//Route::post('jobscards/file', 'AjaxController@file')->name('jobcards.file');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');
@@ -27,6 +32,8 @@ Route::get('jobcards/{jobcard}/show', 'JobcardController@show')->name('jobcards.
 Route::get('jobcards/search', 'JobcardController@search')->name('jobcards.search');
 Route::get('jobcards/latest', 'JobcardController@getLastestJobcards')->name('jobcards.latest');
 Route::resource('jobcards', 'JobcardController', ['only' => ['store', 'update', 'destroy'],]);
+Route::post('jobscards/file', 'JobcardController@file')->name('jobcards.file');
+
 
 /* Project Routes */
 Route::post('projects/batch_action', 'ProjectController@batchAction')->name('projects.batch_action');
@@ -71,6 +78,25 @@ Route::post('settings/batch_action', 'SettingsController@batchAction')->name('se
 Route::get('settings/{setting}/show', 'SettingsController@show')->name('settings.show');
 Route::get('settings/search', 'SettingsController@search')->name('settings.search');
 Route::resource('settings', 'SettingsController', ['only' => ['store', 'update', 'destroy'],]);
+
+
+
+/* Districts Routes */
+Route::post('districts/batch_action', 'DistrictController@batchAction')->name('districts.batch_action');
+Route::get('districts/{district}/show', 'DistrictController@show')->name('districts.show');
+Route::get('districts/search', 'DistrictController@search')->name('districts.search');
+Route::resource('districts', 'DistrictController', ['only' => ['store', 'update', 'destroy'],]);
+
+
+
+
+/* SubDistricts Routes */
+Route::post('subdistricts/batch_action', 'SubDistrictController@batchAction')->name('subdistricts.batch_action');
+Route::get('subdistricts/{subdistrict}/show', 'SubDistrictController@show')->name('subdistricts.show');
+Route::get('subdistricts/search', 'SubDistrictController@search')->name('subdistricts.search');
+Route::resource('subdistricts', 'SubDistrictController', ['only' => ['store', 'update', 'destroy'],]);
+
+
 
 /* Invoices Routes */
 Route::post('invoices/batch_action', 'InvoicesController@batchAction')->name('invoices.batch_action');

@@ -18,6 +18,9 @@ use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Contracts\QuotesRepository;
 use App\Repositories\Contracts\JobcardRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
+use App\Repositories\Contracts\DistrictRepository;
+use App\Repositories\Contracts\SubDistrictRepository;
+
 use App\Models\Settings;
 use App\Models\Quotes;
 use App\Models\User;
@@ -187,6 +190,20 @@ class AjaxController extends Controller
                 ->select('id','name')->get();
         
     }
+    public function getDistricts(DistrictRepository $district){
+
+        return $district->query()
+                    ->where('id','>',0) ->
+                    select('id','name')->get();
+    }
+
+
+    public function getSubDistricts(SubDistrictRepository $subdistrict){
+
+        return $subdistrict->query()
+        ->where('id','>',0)->
+        select('id','name')->get();
+    }
 
     public function searchQuotes(QuotesRepository $quote, Request $request){
         $search = $request->get('q');
@@ -346,4 +363,6 @@ class AjaxController extends Controller
             'height'   => $image->height(),
         ];
     }
+
+    public function file() {}
 }

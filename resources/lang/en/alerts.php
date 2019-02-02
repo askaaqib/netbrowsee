@@ -155,6 +155,18 @@ return [
             'bulk_promoted'  => 'Selected settings promoted',
         ],
 
+        'District' => [
+            'created'        => 'District created',
+            'updated'        => 'District updated',
+            'deleted'        => 'District deleted',
+        ],
+
+
+        'SubDistrict' => [
+            'created'        => 'SubDistrict created',
+            'updated'        => 'SubDistrict updated',
+            'deleted'        => 'SubDistrict deleted',
+        ],
         'invoices' => [
             'created'        => 'Invoice created',
             'updated'        => 'Invoice updated',

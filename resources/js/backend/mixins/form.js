@@ -28,8 +28,7 @@ export default {
         this.onModelChanged()
       }
     },
-    onModelChanged () {
-    },
+    onModelChanged () {},
     feedback (name) {
       if (this.state(name)) {
         return this.validation.errors[name][0]

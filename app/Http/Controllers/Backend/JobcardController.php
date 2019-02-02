@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\JobcardRepository;
 
 
+
 class JobcardController extends BackendController
 {
     /**
@@ -89,7 +90,7 @@ class JobcardController extends BackendController
                     __('validation.jobcards.district'),
                     __('validation.jobcards.sub_district'),
                     __('validation.jobcards.travelling_paid'),
-                    __('validation.jobcards.quoted_amount'),
+                   __('validation.jobcards.quoted_amount'),
                     __('validation.jobcards.status'),
                     __('validation.jobcards.before_pictures'),
                     __('validation.jobcards.during_pictures'),
@@ -138,6 +139,7 @@ class JobcardController extends BackendController
     {
         
         $data = $request->all();
+       // dd($data);
         // $data['projects_id'] = $request->projects_id['id'];
         // $data['labour_rates_id'] = $request->labour_rates_id['id'];
         // $data['materials_rates_id'] = $request->materials_rates_id['id'];
@@ -200,7 +202,7 @@ class JobcardController extends BackendController
     {
         $data = $request->input();
         $data['projects_id'] = $request->projects_id['id'];
-        $data['labour_rates_id'] = $request->labour_rates_id['id'];
+        //$data['labour_rates_id'] = $request->labour_rates_id['id'];
         $data['materials_rates_id'] = $request->materials_rates_id['id'];
         $data['contractor_id'] = $request->contractor_id['id'];
         $data['quotations_id'] = $request->quotations_id['id'];
@@ -246,4 +248,6 @@ class JobcardController extends BackendController
 
         return $this->redirectResponse($request, __('alerts.backend.actions.invalid'), 'error');
     }
+    public function file() {}
+    
 }

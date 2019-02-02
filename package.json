@@ -74,7 +74,9 @@
   "dependencies": {
     "jspdf": "^1.4.1",
     "moment": "^2.22.2",
-    "popper": "^1.0.1"
+    "npm-watch": "^0.6.0",
+    "popper": "^1.0.1",
+    "vue2-dropzone": "^3.5.2"
   },
   "browserslist": [
     "> 1%",

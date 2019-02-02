@@ -146,6 +146,7 @@ return [
         'title'                     => 'Title123',
         'content'                   => 'Content',
         'description'               => 'Description',
+        'problemType'               => 'Problem Type',
         'summary'                   => 'Summary',
         'excerpt'                   => 'Excerpt',
         'date'                      => 'Date',
@@ -179,6 +180,8 @@ return [
         'metable_type'              => 'Entity',
         'rate'                      => 'Rate',
     ],
+
+
 
     'jobcards' => [
         'jobcard_num'               => 'Jobcard Number',
@@ -219,7 +222,30 @@ return [
       'jobcard_id'          => 'Jobcard'
       
     ],
+'District' => [
+      'name'        => 'District Name'
+     ],
 
+'SubDistrict' => [
+      'name'        => 'Sub District Name'
+     ],
+
+'quotes' => [
+      'quotation_number'          => 'Quote Number',
+      'project_num'               => 'Project Number',
+      'quotation_name'               => 'Quotes Name',
+      'travelling_time'           => 'Travelling Time',
+      'travelling_km'             => 'Travelling KM',
+      'vat_amount'                => 'Vat Amount',
+      'net_amount'                => 'Net Amount',
+      'total_amount'              => 'Total Amount',
+      'quotation_date'           => 'Quotation Date',
+      'labour_rates'           => 'Labour Rates',
+      'material_rates'           => 'Material Rates',
+      'vat_rates'           => 'Vat Rates',
+      'jobcard_id'          => 'Jobcard'
+      
+    ],
     'reports' => [
       'description'=> 'Description',
       'status'=> 'Status',

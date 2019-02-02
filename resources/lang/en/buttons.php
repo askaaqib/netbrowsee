@@ -1,5 +1,5 @@
 <?php
-
+ 
 return [
     'cancel'   => 'Cancel',
     'save'     => 'Save',
@@ -60,8 +60,18 @@ return [
         'save_and_publish' => 'Save and publish',
         'save_as_draft'    => 'Save as draft',
     ],
+     'district' => [
+        'create'           => 'Create District',
+        'save_and_publish' => 'Save and publish',
+        'save_as_draft'    => 'Save as draft',
+    ],
+'subdistrict' => [
+        'create'           => 'Create SubDistrict',
+        'save_and_publish' => 'Save and publish',
+        'save_as_draft'    => 'Save as draft',
+    ],
 
-    'project_managers' => [
+     'project_managers' => [
         'create'           => 'Create Project Manager',
         'save_and_publish' => 'Save and publish',
         'save_as_draft'    => 'Save as draft',

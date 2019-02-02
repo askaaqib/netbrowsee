@@ -142,7 +142,7 @@
               horizontal
               :label-cols="3"
             >
-              <b-form-checkbox-group stacked v-model="model.district" name="roles[]">
+              <!-- <b-form-checkbox-group stacked v-model="model.district" name="roles[]">
                 <b-form-checkbox
                 v-b-tooltip.left
                 :title="role.description"
@@ -150,7 +150,7 @@
                 >
                   Enable District
                 </b-form-checkbox>
-              </b-form-checkbox-group>
+              </b-form-checkbox-group> -->
             </b-form-group>
 
             <b-row slot="footer">
@@ -208,6 +208,9 @@ export default {
         invoice_ref_start: null,
         district: 0
       }
+      // role:{
+      //   description:""
+      // }
     }
   },
   watch: {

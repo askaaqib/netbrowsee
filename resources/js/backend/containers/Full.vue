@@ -2,11 +2,13 @@
   <div class="app">
     <AppHeader></AppHeader>
     <div class="app-body">
-      <Sidebar fixed>
+    <Sidebar fixed>
         <div class="sidebar-header">
-          <i class="fe fe-user"></i>&nbsp;&nbsp;{{ $app.user.name }}
+        <i class="fe fe-user"></i>&nbsp;&nbsp;{{ $app.user.name }}
         </div>
+        <!-- this appsearch component is related to search bar in the sidebar portion -->
         <AppSearch></AppSearch>
+        <!-- SidebarNav this component is used to sh0w the all list items in the navigation all list items -->
         <SidebarNav :nav-items="nav"></SidebarNav>
         <SidebarFooter></SidebarFooter>
         <SidebarMinimizer></SidebarMinimizer>
@@ -27,10 +29,8 @@
     ></AppFooter>
   </div>
 </template>
-
 <script>
 import nav from '../_nav'
-
 import AppFooter from '../components/Footer'
 import AppHeader from '../components/Header'
 import AppSearch from '../components/Search'

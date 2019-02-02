@@ -1,5 +1,5 @@
 <?php
-
+ 
 return [
     'language'            => 'Language',
     'actions'             => 'Actions',
@@ -582,7 +582,86 @@ return [
                 'pin'     => 'Pin selected invoices',
                 'promote' => 'Promote selected invoices',
             ],
+
         ],
+ 
+        'district' => [
+                    'statuses' => [
+                        'draft'     => 'Draft',
+                        'pending'   => 'Pending',
+                        'published' => 'Published',
+                    ],
+
+                    'titles' => [
+                        'main'        => 'Districts',
+                        'index'       => 'District list',
+                        'create'      => 'Create District',
+                        'edit'        => 'Edit District',
+                        'publication' => 'Publication options',
+                    ],
+
+                    'descriptions' => [
+                        'meta_title'       => 'If leave empty, title will be that of project\'s title by default.',
+                        'meta_description' => 'If leave empty, description will be that of project\'s summary by default.',
+                    ],
+
+                    'placeholders' => [
+                        'body'             => 'Write your content...',
+                        'meta_title'       => 'Projects\'s title.',
+                        'meta_description' => 'Projects\'s summary.',
+                    ],
+
+                    'actions' => [
+                        'destroy' => 'Delete selected District',
+                        'publish' => 'Publish selected Districts',
+                        'pin'     => 'Pin selected projects',
+                        'promote' => 'Promote selected projects',
+                    ],
+                ],
+
+
+
+
+
+
+        'subdistrict' => [
+                    'statuses' => [
+                        'draft'     => 'Draft',
+                        'pending'   => 'Pending',
+                        'published' => 'Published',
+                    ],
+
+                    'titles' => [
+                        'main'        => 'Sub District',
+                        'index'       => 'Sub District list',
+                        'create'      => 'Create Sub District',
+                        'edit'        => 'Edit Sub District',
+                        'publication' => 'Publication options',
+                    ],
+
+                    'descriptions' => [
+                        'meta_title'       => 'If leave empty, title will be that of project\'s title by default.',
+                        'meta_description' => 'If leave empty, description will be that of project\'s summary by default.',
+                    ],
+
+                    'placeholders' => [
+                        'body'             => 'Write your content...',
+                        'meta_title'       => 'Projects\'s title.',
+                        'meta_description' => 'Projects\'s summary.',
+                    ],
+
+                    'actions' => [
+                        'destroy' => 'Delete selected SubDistrict',
+                        'publish' => 'Publish selected SubDistricts',
+                        'pin'     => 'Pin selected projects',
+                        'promote' => 'Promote selected projects',
+                    ],
+                ],
+
+
+
+
+
         'quotes' => [
             'statuses' => [
                 'draft'     => 'Draft',
