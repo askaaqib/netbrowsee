@@ -11,7 +11,7 @@
               horizontal
               :label-cols="2"
               :feedback="feedback('name')"
-          >
+            >
               <b-form-input
                 id="name"
                 name="name"
@@ -25,7 +25,7 @@
                         variant="success" size="sm" @click="model.status = 'publish'; onSubmit()"
                         :disabled="pending"
                         v-if="isNew || this.$app.user.can('edit district') || this.$app.user.can('edit own projects')"
-          >
+            >
               <b-dropdown-item @click="model.status = 'draft'; onSubmit()">{{ $t('buttons.jobcards.save_as_draft') }}
               </b-dropdown-item>
             </b-dropdown>

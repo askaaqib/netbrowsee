@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div id="Invoices-view" class="container">
     <div class="Invoices-form">
       <b-card>

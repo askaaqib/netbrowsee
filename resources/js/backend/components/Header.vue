@@ -8,7 +8,7 @@
     </a>
     <SidebarToggler class="d-md-down-none" display="lg"></SidebarToggler>
     <b-navbar-nav class="ml-auto">
-<!-- //this section is related to the add button in the header where we can add different posts -->
+      <!-- //this section is related to the add button in the header where we can add different posts -->
       <HeaderDropdown right class="px-3 d-none d-md-block">
         <template slot="header">
           <span class="d-md-down-none">
@@ -46,7 +46,8 @@
         <template slot="dropdown">
           <b-dropdown-item :key="index" v-for="(locale, index) in this.$app.locales"
                            :hreflang="index"
-                           :href="`/${index}/${$app.adminPathName}${$route.fullPath}`">
+                           :href="`/${index}/${$app.adminPathName}${$route.fullPath}`"
+          >
             {{ locale.native }}
           </b-dropdown-item>
         </template>

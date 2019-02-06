@@ -21,6 +21,7 @@ use Mcamara\LaravelLocalization\LaravelLocalization;
 use App\Repositories\Contracts\DistrictRepository;
 use App\Repositories\Contracts\SubDistrictRepository;
 
+use App\Models\Jobcard;
 use App\Models\Settings;
 use App\Models\Quotes;
 use App\Models\User;
@@ -364,5 +365,63 @@ class AjaxController extends Controller
         ];
     }
 
-    public function file() {}
+    public function JobcardRemoveImage(Request $request, Jobcard $jobcard_model, JobcardRepository $jobcard) {
+      $id = $request->id;
+      $image_name = $request->image_name;
+      $type = $request->type;
+      // dd($image_name);
+      $result = $jobcard->query()->where('id', $id)->select('*')->get();
+      if ($type == 'before_pictures') {
+        $before_pictures = json_decode($result[0]->before_pictures, true);
+          foreach($before_pictures as $key => $value) {
+            if ($value['image_name'] == $image_name) {
+              array_splice($before_pictures, $key, 1);
+            }
+          }
+          $update_jobcard = [
+            'before_pictures' => json_encode($before_pictures)
+          ];
+          $before_pictures = json_encode($before_pictures);
+          $save = $jobcard_model::where('id', $id)->update($update_jobcard);
+          if ($save) {
+            if(file_exists(public_path().$image_name)) {
+              if(unlink(public_path().$image_name)){
+                return response()->json([
+                  'status'  => 200,
+                  'image_delete' => $image_name
+                ]); 
+              } else {
+                return response()->json([
+                  'status'  => 403
+                ]); 
+              }
+            }
+          }
+      }
+      if ($type == 'after_pictures')  {
+        $before_pictures = json_decode($result[0]->before_pictures, true);
+        foreach($before_pictures as $key => $value) {
+            if ($value['image_name'] == $image_name) {
+              array_splice($before_pictures, $key, 1);
+            }
+        }
+        $update_jobcard = ['before_pictures' => json_encode($before_pictures)];
+        $before_pictures = json_encode($before_pictures);
+        $save = $jobcard_model::where('id', $id)->update($update_jobcard);
+        if ($save) {
+            if(file_exists(public_path().$image_name)) {
+                if(unlink(public_path().$image_name)){
+                return response()->json([
+                  'status'  => 200,
+                  'image_delete' => $image_name
+                ]); 
+              } else {
+                return response()->json([
+                  'status'  => 403
+                ]); 
+              }
+            }
+        }
+      }
+    }     
 }

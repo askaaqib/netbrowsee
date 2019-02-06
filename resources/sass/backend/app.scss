@@ -241,3 +241,19 @@ form.invoices-form .table > thead > tr > th {
 //     border-radius: 10px;
 //     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 // }
+
+@media print {
+* {
+    -webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+    color-adjust: exact !important;  /*Firefox*/
+  }
+  #hidedownload{
+    display: none;
+  }
+  #hideprint{
+    display: none;
+  }
+  #hideback{
+    display: none;
+  }
+}

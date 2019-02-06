@@ -35,6 +35,7 @@ export default {
       }
     },
     state (name) {
+      console.log(this.validation.errors)
       return this.validation.errors !== undefined && this.validation.errors.hasOwnProperty(name)
         ? 'invalid'
         : null

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="confirmUpload">
+    <form @submit.prevent="onSubmit">
       <b-row>
         <b-col xl="8">
           <b-card>
@@ -95,8 +95,8 @@
                 :feedback="feedback('district')"
               >
                 <b-select
-                  v-model="model.district_id"
-                  :state="state('district_id')"
+                  v-model="model.district"
+                  :state="state('district')"
                 >
                   <option value="">Please Select Districts</option>
                   <option
@@ -153,24 +153,21 @@
                 </option>
               </b-select>
             </b-form-group>
-
             <b-form-group
               :label="$t('validation.jobcards.labour_paid')"
-              label-for="labour_rates_id"
+              label-for="labour_paid"
               horizontal
               :label-cols="2"
-              :feedback="feedback('labour_rates_id')"
+              :feedback="feedback('labour_paid')"
             >
               <b-form-input
                 id="labour_paid"
                 name="labour_paid"
-                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.labour_paid')"
                 v-model="model.labour_paid"
                 :state="state('labour_paid')"
               ></b-form-input>
             </b-form-group>
-
             <b-form-group
               :label="$t('validation.jobcards.travelling_paid')"
               label-for="travelling_paid"
@@ -181,13 +178,11 @@
               <b-form-input
                 id="travelling_paid"
                 name="travelling_paid"
-                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.travelling_paid')"
                 v-model="model.travelling_paid"
                 :state="state('travelling_paid')"
               ></b-form-input>
             </b-form-group>
-
             <b-form-group
               :label="$t('validation.jobcards.materials_paid')"
               label-for="materials_rates_id"
@@ -198,29 +193,11 @@
               <b-form-input
                 id="materials_paid"
                 name="materials_paid"
-                :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.materials_paid')"
                 v-model="model.materials_paid"
                 :state="state('materials_paid')"
               ></b-form-input>
             </b-form-group>
-            <b-form-group
-              :label="$t('validation.jobcards.quoted_amount')"
-              label-for="quoted_amount"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('quoted_amount')"
-            >
-              <b-form-input
-                id="quoted_amount"
-                name="quoted_amount"
-                :required="model.contractor_id != '' ? true : false"
-                :placeholder="$t('validation.jobcards.quoted_amount')"
-                v-model="model.quoted_amount"
-                :state="state('quoted_amount')"
-              ></b-form-input>
-            </b-form-group>
-
             <b-form-group
               :label="$t('validation.jobcards.status')"
               label-for="status"
@@ -228,16 +205,14 @@
               :label-cols="2"
               :feedback="feedback('status')"
             >
-              <b-form-input
-                id="status"
-                name="status"
-                :required="model.contractor_id != '' ? true : false"
-                :placeholder="$t('validation.jobcards.status')"
+              <b-select
                 v-model="model.status"
-                :state="state('status')"
-              ></b-form-input>
+              >
+                <option value="">Please Select Status</option>
+                <option value="1" data-foo="Assigned">Assigned</option>
+                <option value="2" data-foo="UnAssigned">UnAssigned</option>
+              </b-select>
             </b-form-group>
-
             <b-form-group
               :label="$t('validation.jobcards.assigned_to')"
               label-for="contractor_id"
@@ -253,6 +228,7 @@
               </b-select>
             </b-form-group>
 
+            <!-- BEFORE PICTURES -->
             <b-form-group
               :label="$t('validation.jobcards.before_pictures')"
               label-for="before_pictures"
@@ -260,30 +236,26 @@
               :label-cols="2"
               :feedback="feedback('before_pictures')"
             >
-            <!-- <b-form-input
-              id="before_pictures"
-              name="before_pictures"
-              :required="model.contractor_id != '' ? true : false"
-              :placeholder="$t('validation.jobcards.before_pictures')"
-              v-model="model.before_pictures"
-              :state="state('before_pictures')"
-            ></b-form-input> -->
             </b-form-group>
-            <template>
-              <div>
-                <vue-dropzone
-                ref="myVueDropzone" 
-                id="dropzone"
-                name="before_pictures"
-                :required="model.contractor_id != '' ? true : false"
-                :placeholder="$t('validation.jobcards.before_pictures')"
-                v-model="model.before_pictures"
-                :state="state('before_pictures')"
-                :options="dropzoneOptions"
-                >
-                </vue-dropzone>
-              </div>
+            <template v-if="isNew">
+              <BeforeImageUpload @changeFile="beforeImagesAdded"></BeforeImageUpload>
             </template>
+
+            <template v-if="!isNew">
+              <b-row>
+                <BeforeImageGallery
+                  :id="id"
+                  :beforepictures="beforepictures"
+                  :modelbeforepictures="model.before_pictures"
+                  @changeFile="changeBeforeGalleryImage"
+                ></BeforeImageGallery>
+              </b-row>
+              <b-row>
+                <BeforeImageEdit @changeFile="beforeImagesEdit"></BeforeImageEdit>
+              </b-row>
+            </template>
+
+            <!-- AFTER PICTURES -->
             <b-form-group
               :label="$t('validation.jobcards.after_pictures')"
               label-for="after_pictures"
@@ -291,15 +263,25 @@
               :label-cols="2"
               :feedback="feedback('after_pictures')"
             >
-              <b-form-input
-                id="after_pictures"
-                name="after_pictures"
-                :required="model.contractor_id != '' ? true : false"
-                :placeholder="$t('validation.jobcards.after_pictures')"
-                v-model="model.after_pictures"
-                :state="state('after_pictures')"
-              ></b-form-input>
             </b-form-group>
+            <template v-if="isNew">
+              <AfterImageUpload @changeFile="afterImagesAdded"></AfterImageUpload>
+            </template>
+
+            <template v-if="!isNew">
+              <b-row>
+                <AfterImageGallery
+                  :id="id"
+                  :afterpictures="afterpictures"
+                  :modelafterpictures="model.after_pictures"
+                  @changeFile="changeAfterGalleryImage"
+                ></AfterImageGallery>
+              </b-row>
+              <b-row>
+                <AfterImageEdit @changeFile="afterImagesEdit"></AfterImageEdit>
+              </b-row>
+            </template>
+
             <b-row slot="footer">
               <b-col md>
                 <b-button to="/jobcards" exact variant="danger" size="md">
@@ -308,10 +290,17 @@
               </b-col>
               <b-col md>
                 <input name="status" type="hidden" value="publish">
-
-                  <div class="confirm-upload">
-              <b-button @click="confirmUpload" class="btn-green">Confirm</b-button>
-            </div>
+                <!-- <button
+                  class="float-right"
+                  variant="success"
+                  size="sm"
+                  @click= "onSubmit()"
+                >
+                  Submit
+                </button> -->
+                <div class="confirm-upload">
+                  <b-button @click="onSubmit()" class="btn-green">Confirm</b-button>
+                </div>
               </b-col>
             </b-row>
           </b-card>
@@ -323,12 +312,22 @@
 <script>
 import axios from 'axios'
 import form from '../mixins/form'
-import vue2Dropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import AfterImageUpload from './Jobcard/AfterImagesUpload'
+import AfterImageEdit from './Jobcard/AfterImagesEdit'
+import AfterImageGallery from './Jobcard/AfterImageGallery'
+import BeforeImageUpload from './Jobcard/BeforeImagesUpload'
+import BeforeImageEdit from './Jobcard/BeforeImagesEdit'
+import BeforeImageGallery from './Jobcard/BeforeImageGallery'
+
 export default {
   name: 'JobcardForm',
   components: {
-    vueDropzone: vue2Dropzone
+    AfterImageUpload,
+    AfterImageGallery,
+    AfterImageEdit,
+    BeforeImageUpload,
+    BeforeImageGallery,
+    BeforeImageEdit
   },
   mixins: [form],
   data () {
@@ -336,13 +335,16 @@ export default {
       modelName: 'jobcard',
       resourceRoute: 'jobcards',
       listPath: '/jobcards',
+      indexgallery: null,
+      beforepictures: [],
+      afterpictures: [],
       config: {
         wrap: true,
         time_24hr: true,
         enableTime: true
       },
       dropzoneOptions: {
-        url: '/admin/jobscards/file',
+        url: '/admin/jobscards/addedfile',
         thumbnailWidth: 150,
         maxFilesize: 2,
         maxFiles: 9,
@@ -362,6 +364,8 @@ export default {
       quotations: [],
       district: [],
       subdistrict: [],
+      jsonParseImgBefore: false,
+      jsonParseImgAfter: false,
       model: {
         jobcard_num: null,
         description: null,
@@ -371,12 +375,45 @@ export default {
         district: null,
         sub_district: null,
         // subdistrict,
+        labour_paid: null,
         projects_id: '',
         travelling_paid: null,
         contractor_id: '',
         status: null,
-        before_pictures: null,
-        after_pictures: null
+        before_pictures: [],
+        before_pictures_edit: [],
+        after_pictures: [],
+        after_pictures_edit: []
+      }
+    }
+  },
+  watch: {
+    'model.before_pictures': function (val) {
+      if (val && val.length > 0) {
+        if (!this.isNew && !this.jsonParseImgBefore) {
+          this.jsonParseImgBefore = true
+          this.model.before_pictures = JSON.parse(val)
+          var Workordrimg = JSON.parse(val)
+          Workordrimg.map((item) => {
+            if (item.image_name) {
+              this.beforepictures.push(item.image_name)
+            }
+          })
+        }
+      }
+    },
+    'model.after_pictures': function (val) {
+      if (val && val.length > 0) {
+        if (!this.isNew && !this.jsonParseImgAfter) {
+          this.jsonParseImgAfter = true
+          this.model.after_pictures = JSON.parse(val)
+          var Workordrimg = JSON.parse(val)
+          Workordrimg.map((item) => {
+            if (item.image_name) {
+              this.afterpictures.push(item.image_name)
+            }
+          })
+        }
       }
     }
   },
@@ -390,35 +427,74 @@ export default {
     this.getsubdistrict()
   },
   methods: {
-
-    filesAdded (file, response) {
-      if (file) {
-        this.before_pictures.push(file)
+    changeBeforeGalleryImage (images) {
+      this.model.before_pictures = images
+    },
+    changeAfterGalleryImage (images) {
+      this.model.after_pictures = images
+    },
+    afterImagesEdit (images) {
+      this.model.after_pictures_edit = images
+    },
+    beforeImagesEdit (images) {
+      this.model.before_pictures_edit = images
+    },
+    afterImagesAdded (images) {
+      this.model.after_pictures = images
+    },
+    beforeImagesAdded (images) {
+      this.model.before_pictures = images
+    },
+    filesAdded (store, response) {
+      if (store) {
+        this.model.before_pictures.push(store)
       }
     },
-    fileRemoved (file) {
+    filesAddeds (store, response) {
+      if (store) {
+        this.model.after_pictures.push(store)
+      }
+    },
+    fileRemoved (store) {
       if (this.isNew) {
-        var workorderImg = this.before_pictures
-        var IndexToRemove = workorderImg.indexOf(file)
+        var workorderImg = this.model.before_pictures
+        var IndexToRemove = workorderImg.indexOf(store)
         if (IndexToRemove !== -1) {
-          this.before_pictures.splice(IndexToRemove, 1)
+          this.model.before_pictures.splice(IndexToRemove, 1)
         }
       }
     },
-    async confirmUpload() {
-      var model = this.model
-      let action = this.$app.route(`jobcards.file`)
-      let formData = this.$app.objectToFormData(model)
-      // formData.append('_method', 'PATCH')
-      console.log(formData);
-      await axios.post(action, formData).then(response => {
-        if (response.data.status == 200) {
-          this.$emit('confirmUpload', model)
-          this.showError = false
-        } else {
-          this.showError = true
+    fileRemoveds (store) {
+      if (this.isNew) {
+        var workorderImg = this.model.after_pictures
+        var IndexToRemove = workorderImg.indexOf(store)
+        if (IndexToRemove !== -1) {
+          this.model.after_pictures.splice(IndexToRemove, 1)
         }
-      })
+      }
+    },
+    async confirmUpload () {
+      var model = this.model
+      let action = ''
+      if (this.isNew) {
+        action = this.$app.route(`admin.jobcards.store`)
+      } else {
+        action = this.$app.route(`admin.jobcards.update`, { [this.modelName]: this.id })
+      }
+      let formData = this.$app.objectToFormData(model)
+      if (!this.isNew) {
+        formData.append('_method', 'PATCH')
+      }
+      // formData.append('_method', 'PATCH')
+      await axios.post(action, formData)
+        .then((response) => {
+          if (response.data.status === 'success') {
+            this.$app.noty[response.data.status](response.data.message)
+            this.$router.push('/jobcards')
+          } else {
+            this.$app.noty[response.data.status](response.message)
+          }
+        })
     },
     async getLabours () {
       let { data } = await axios.get(this.$app.route('admin.labours.getdata'), {})

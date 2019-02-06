@@ -1,12 +1,12 @@
-<template>
+<template> 
   <div id="quotes-view" class="container">
     <div class="quotes-form">
       <b-card>
         <h3 class="card-title" slot="header">Completed Quote</h3>
         <b-row>
           <b-col class="col-md-12">
-            <b-btn class="btn-show pull-right" variant="secondary" @click="print('viewport')">Print<i class="fe fe-printer fe-lg"></i></b-btn>
-            <b-btn class="btn-show pull-right" variant="secondary">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+            <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print<i class="fe fe-printer fe-lg"></i></b-btn>
+            <b-btn class="btn-show pull-right" id="hidedownload" variant="secondary">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
           </b-col>
         </b-row>
         <!-- ViewPort  Starts -->
@@ -145,7 +145,7 @@
           <!-- Bank Details & Total Amount Section Ends -->
         </div>
         <!-- ViewPort  Ends -->
-        <b-row slot="footer">
+        <b-row id="hideback" slot="footer">
           <b-col md>
             <b-button to="/quotes" exact variant="danger" size="md">
               {{ $t('buttons.back') }}
@@ -710,6 +710,7 @@ export default {
         bank_account: null,
         company_logo: null
       },
+      printstatus: 1,
       model: {
         quotation_number: null,
         quotation_name: null,
@@ -875,6 +876,13 @@ export default {
     this.getQuotesReference()
   },
   methods: {
+    printquotes: function () {
+      this.printstatus = null
+      setTimeout(function () {
+        this.printstatus = 1
+        window.print()
+      }, 1000)
+    },
     downloadjspdf: function () {
       // Landscape export, 2×4 inches
       var doc = new JSPDF({

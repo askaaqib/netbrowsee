@@ -75,7 +75,8 @@ class EloquentJobcardRepository extends EloquentBaseRepository implements Jobcar
     public function saveAndPublish(Jobcard $jobcard, array $input)
     {
                 
-        $jobcard->status = Jobcard::PUBLISHED;
+        // $jobcard->status = Jobcard::PUBLISHED;
+        // dd($input);
             
         return $this->save($jobcard, $input);
     }
@@ -91,7 +92,7 @@ class EloquentJobcardRepository extends EloquentBaseRepository implements Jobcar
      */
     public function saveAsDraft(Jobcard $jobcard, array $input)
     {
-        $jobcard->status = Jobcard::DRAFT;
+        // $jobcard->status = Jobcard::DRAFT;
 
         return $this->save($jobcard, $input);
     }

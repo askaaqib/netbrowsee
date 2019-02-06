@@ -2,9 +2,9 @@
   <div class="app">
     <AppHeader></AppHeader>
     <div class="app-body">
-    <Sidebar fixed>
+      <Sidebar fixed>
         <div class="sidebar-header">
-        <i class="fe fe-user"></i>&nbsp;&nbsp;{{ $app.user.name }}
+          <i class="fe fe-user"></i>&nbsp;&nbsp;{{ $app.user.name }}
         </div>
         <!-- this appsearch component is related to search bar in the sidebar portion -->
         <AppSearch></AppSearch>

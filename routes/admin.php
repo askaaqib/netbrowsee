@@ -24,7 +24,7 @@ Route::get('settings/data', 'AjaxController@getSettingsData')->name('settings.ge
 Route::get('quotations/lastref', 'AjaxController@getQuotationsRecentReference')->name('quotations.getreference');
 Route::get('clients/search', 'AjaxController@searchClients')->name('clients.searchclients');
 Route::get('quotations/search', 'AjaxController@searchQuotes')->name('quotations.searchquotes');
-//Route::post('jobscards/file', 'AjaxController@file')->name('jobcards.file');
+Route::post('jobcards/removeimage', 'AjaxController@JobcardRemoveImage')->name('jobcards.removeimage');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');
@@ -32,7 +32,9 @@ Route::get('jobcards/{jobcard}/show', 'JobcardController@show')->name('jobcards.
 Route::get('jobcards/search', 'JobcardController@search')->name('jobcards.search');
 Route::get('jobcards/latest', 'JobcardController@getLastestJobcards')->name('jobcards.latest');
 Route::resource('jobcards', 'JobcardController', ['only' => ['store', 'update', 'destroy'],]);
-Route::post('jobscards/file', 'JobcardController@file')->name('jobcards.file');
+Route::post('jobscards/addedfile', 'JobcardController@addedfile')->name('jobcards.addedfile');
+//Route::post('jobscards/file', 'JobcardController@file')->name('jobcards.file');
+Route::post('jobscards/store', 'JobcardController@store')->name('jobcards.store');
 
 
 /* Project Routes */
