@@ -1,4 +1,4 @@
-<template> 
+<template>
   <div id="quotes-view" class="container">
     <div class="quotes-form">
       <b-card>

@@ -1,12 +1,13 @@
-<template> 
+<template>
   <div id="Invoices-view" class="container">
     <div class="Invoices-form">
       <b-card>
         <h3 class="card-title" slot="header">Completed Invoice</h3>
         <b-row>
           <b-col class="col-md-12">
-            <b-btn class="btn-show pull-right" variant="secondary" @click="print('viewport')">Print<i class="fe fe-printer fe-lg"></i></b-btn>
-            <b-btn class="btn-show pull-right" variant="secondary">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+            <!--             <b-btn class="btn-show pull-right" variant="secondary" @click="print('viewport')">Print<i class="fe fe-printer fe-lg"></i></b-btn> -->
+            <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printinvoices()">Print<i class="fe fe-printer fe-lg"></i></b-btn>
+            <!--  <b-btn class="btn-show pull-right" variant="secondary">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn> -->
           </b-col>
         </b-row>
         <!-- ViewPort  Starts -->
@@ -108,6 +109,20 @@
                       {{ row.net_total }}
                     </td>
                   </template>
+                  <template v-else-if="row.quotation">
+                    <td>
+                      {{ row.quotation }}
+                    </td>
+                    <td>
+                      {{ row.quantity }}
+                    </td>
+                    <td>
+                      {{ row.net_amount }}
+                    </td>
+                    <td>
+                      {{ row.net_total }}
+                    </td>
+                  </template>
                 </tr>
               </tbody>
             </table>
@@ -145,7 +160,7 @@
           <!-- Bank Details & Total Amount Section Ends -->
         </div>
         <!-- ViewPort  Ends -->
-        <b-row slot="footer">
+        <b-row id="hideprint" slot="footer">
           <b-col md>
             <b-button to="/Invoices" exact variant="danger" size="md">
               {{ $t('buttons.back') }}
@@ -790,31 +805,33 @@ export default {
       this.Invoices.InvoicesNetTotal = 0
       this.Invoices.InvoicesVatTotal = 0
       var saveVal = 'empty'
-      val.forEach((item, index) => {
-        if (item.labour || item.parts) {
-          if (!this.isNew) {
-            this.Invoices.InvoicesNetTotal += parseInt(item.net_total)
-            this.Invoices.InvoicesVatTotal += this.model.vat_rates * item.net_total / 100
+      if (val !== '""null""') {
+        val.map((item, index) => {
+          console.log(item)
+          if (item.labour || item.parts || item.quotation) {
+            if (!this.isNew) {
+              this.Invoices.InvoicesNetTotal += parseInt(item.net_total)
+              this.Invoices.InvoicesVatTotal += this.model.vat_rates * item.net_total / 100
+            } else {
+              this.Invoices.InvoicesNetTotal += parseInt(item.net_total)
+              this.Invoices.InvoicesVatTotal += this.settings.Invoice_vat * item.net_total / 100
+            }
+          }
+          if (item.section) {
+            saveVal = index
+            this.sectionStatus = 1
           } else {
-            this.Invoices.InvoicesNetTotal += parseInt(item.net_total)
-            this.Invoices.InvoicesVatTotal += this.settings.Invoice_vat * item.net_total / 100
+            if (saveVal !== 'empty') {
+              item.parent_section = saveVal
+            }
+            if (saveVal === 'empty') {
+              this.sectionStatus = null
+            }
           }
+        })
+        if (val.length === 0) {
+          this.sectionStatus = null
         }
-        if (item.section) {
-          saveVal = index
-          this.sectionStatus = 1
-        } else {
-          if (saveVal !== 'empty') {
-            item.parent_section = saveVal
-          }
-          if (saveVal === 'empty') {
-            this.sectionStatus = null
-          }
-        }
-      })
-
-      if (val.length === 0) {
-        this.sectionStatus = null
       }
       this.model.net_amount = this.Invoices.InvoicesNetTotal
       this.model.vat_amount = this.Invoices.InvoicesVatTotal
@@ -875,6 +892,13 @@ export default {
     this.getInvoicesReference()
   },
   methods: {
+    printinvoices: function () {
+      this.printstatus = null
+      setTimeout(function () {
+        this.printstatus = 1
+        window.print()
+      }, 1000)
+    },
     downloadjspdf: function () {
       // Landscape export, 2×4 inches
       var doc = new JSPDF({
@@ -888,8 +912,6 @@ export default {
         15,
         15
       )
-      console.log(doc)
-      // doc.save('dataurlnewwindow.pdf')
     },
     getProjectId: function () {
       alert('coming here')
@@ -898,7 +920,6 @@ export default {
       try {
         this.rows.splice(index + 1, 0, {})
       } catch (e) {
-        // console.log(e)
       }
     },
     editRowSection: function (key) {

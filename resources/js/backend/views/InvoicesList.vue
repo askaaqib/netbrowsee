@@ -16,7 +16,7 @@
                    action-route="admin.invoices.batch_action" :actions="actions"
                    :selected.sync="selected"
       >
-        <b-table ref="datatable"
+        <b-table class="my-table" ref="datatable"
                  striped
                  bordered
                  show-empty
@@ -27,7 +27,7 @@
                  :fields="fields"
                  :items="dataLoadProvider"
                  sort-by="invoices.created_at"
-                 :sort-desc="true"
+                 :sort-desc="false"
         >
           <template slot="HEAD_checkbox" slot-scope="data"></template>
           <template slot="checkbox" slot-scope="row">

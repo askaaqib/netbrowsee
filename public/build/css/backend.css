@@ -27531,6 +27531,35 @@ form.invoices-form .table > thead > tr > th {
   #hideback {
     display: none;
   }
+
+  .thead-show th {
+    background: #303030 !important;
+    text-shadow: none;
+    color: #fff !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #Invoices-view,
+  #quotes-view,
+  #quotes-view *,
+  #Invoices-view * {
+    visibility: visible;
+  }
+
+  #Invoices-view,
+  #quotes-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.my-table th,
+.my-table td {
+  padding: 0.15rem !important;
 }
 
 

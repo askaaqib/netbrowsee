@@ -322,7 +322,7 @@
                     <td>
                       <div class="pull-right">
                         <button type="button" class="btn btn-danger btn-sm" @click="removeRow(index)">Delete</button>
-                        <button type="button" class="btn btn-secondary btn-sm" @click="editRowQuotes(index)">Edit</button>
+                        <!-- <button type="button" class="btn btn-secondary btn-sm" @click="editRowQuotes(index)">Edit</button> -->
                       </div>
                     </td>
                   </template>
@@ -462,7 +462,7 @@
 
     <!-- Create Quote Modal -->
     <b-modal ref="AddQuotes" id="labour-modal" hide-footer>
-      <b-tabs v-model="labourTabIndex">
+      <b-tabs v-model="quotesTabIndex">
         <b-tab ref="searchSavedLabour" title="Search Saved Quotes" active>
           <b-input-group>
             <b-form-input
@@ -521,7 +521,7 @@
             <ul v-if="!labour_search.labour_info_get.error" class="grid">
               <li v-for="(labourr,index) in labour_search.labour_info_get" :key="labourr.id">
                 <div class="part-list">
-                  <input type="hidden" :class="'part_json_' +labourr.id" v-model="labour_search.labour_searched_data">
+                  <input type="hidden" :class="'part_json_' +labourr.id" v-model="labour_search.labour_searched_data.id">
                   <h4 class="part-name">{{ labourr.name }}</h4>
                   <div v-if="labourr.description" class="description">
                     <h5>Description:</h5>
@@ -937,6 +937,7 @@ export default {
       section_select: 'null',
       jobcards_facility: [],
       last_Invoice_ref: null,
+      quotesTabIndex: 0,
       labourTabIndex: 0,
       sectionStatus: null,
       rowsRemember: null,
@@ -1086,31 +1087,38 @@ export default {
       this.invoices.invoicesNetTotal = 0
       this.invoices.invoicesVatTotal = 0
       var saveVal = 'empty'
-      val.forEach((item, index) => {
-        if (item.labour || item.parts) {
-          if (!this.isNew) {
-            this.invoices.invoicesNetTotal += parseInt(item.net_total)
-            this.invoices.invoicesVatTotal += this.model.vat_rates * item.net_total / 100
+      // console.log(val)
+      // val = val.replace(/\\|(^"|"$)/g, '')
+      if (val !== '""null""') {
+        val.map((item, index) => {
+          console.log(item)
+          if (item.labour || item.parts || item.quotation) {
+            if (!this.isNew) {
+              console.log(item, 'new')
+              this.invoices.invoicesNetTotal += parseInt(item.net_total)
+              this.invoices.invoicesVatTotal += this.model.vat_rates * item.net_total / 100
+            } else {
+              console.log(item, 'old')
+              this.invoices.invoicesNetTotal += parseInt(item.net_total)
+              this.invoices.invoicesVatTotal += parseInt(this.settings.Invoice_vat) * item.net_total / 100
+            }
+          }
+          if (item.section) {
+            saveVal = index
+            this.sectionStatus = 1
           } else {
-            this.invoices.invoicesNetTotal += parseInt(item.net_total)
-            this.invoices.invoicesVatTotal += parseInt(this.settings.Invoice_vat) * item.net_total / 100
+            if (saveVal !== 'empty') {
+              item.parent_section = saveVal
+            }
+            if (saveVal === 'empty') {
+              this.sectionStatus = null
+            }
           }
-        }
-        if (item.section) {
-          saveVal = index
-          this.sectionStatus = 1
-        } else {
-          if (saveVal !== 'empty') {
-            item.parent_section = saveVal
-          }
-          if (saveVal === 'empty') {
-            this.sectionStatus = null
-          }
-        }
-      })
+        })
 
-      if (val.length === 0) {
-        this.sectionStatus = null
+        if (val.length === 0) {
+          this.sectionStatus = null
+        }
       }
       this.model.net_amount = this.invoices.invoicesNetTotal
       this.model.vat_amount = this.invoices.invoicesVatTotal
@@ -1255,7 +1263,7 @@ export default {
       var quotationName = currentIndex.quotation_name
       var quotationReference = currentIndex.quotation_digit + '-' + currentIndex.quotation_number
       var quotationFullName = 'Quote Name:' + quotationName + ' Quote:' + quotationReference
-      this.rows.push({ quotation: quotationFullName, quantity: 1, net_amount: currentIndex.net_amount, total_amount: currentIndex.total_amount })
+      this.rows.push({ quotation: quotationFullName, quantity: 1, net_total: currentIndex.net_amount, net_amount: currentIndex.net_amount, total_amount: currentIndex.total_amount })
       this.hideModal('AddQuotes')
       // console.log(this.rows)
     },
@@ -1390,7 +1398,9 @@ export default {
       this.rows = previousRows
     },
     selectSearchedLabour: function (index) {
+      console.log(this.labourTabIndex)
       this.labourTabIndex += 1
+      console.log(this.labourTabIndex)
       this.labour.labour_name = this.labour_search.labour_info_get[index].name
       this.labour.labour_quantity = 1
       this.labour.labour_rate_zar = this.labour_search.labour_info_get[index].rate
@@ -1417,10 +1427,9 @@ export default {
     },
     async searchQuote ($q) {
       let { data } = await axios.get(this.$app.route('admin.quotations.searchquotes'), { params: { q: $q } })
-      console.log(data)
       if (data.length > 0) {
         this.quote_search.quote_info_get = data
-        this.quote_search.quote_searched_data = { name: data.quotation_name, quantity: 1, net_amount: data.net_amount, total_amount: data.total_amount }
+        this.quote_search.quote_searched_data = { name: data.quotation_name, quantity: 1, net_total: data.net_amount, net_amount: data.net_amount, total_amount: data.total_amount }
       } else {
         this.quote_search.quote_info_get = { error: 'No Quotes Found' }
       }
@@ -1430,6 +1439,7 @@ export default {
       if (data.length > 0) {
         this.labour_search.labour_info_get = data
         this.labour_search.labour_searched_data = { id: data.id, name: data.name, description: data.description, vat_rate: 15, rate: data.rate }
+        console.log(this.labour_search.labour_searched_data)
       } else {
         this.labour_search.labour_info_get = { error: 'No Labour Found' }
       }

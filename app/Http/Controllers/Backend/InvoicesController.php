@@ -102,8 +102,9 @@ class InvoicesController extends BackendController
      */
     public function store(StoreInvoicesRequest $request)
     {
-        //dd($request->all());
+        
         $data = $request->all();
+       //var_dump($data);
         $data['rows'] = json_encode($request->rows);
        
         $invoice = $this->invoice->make($data); 
