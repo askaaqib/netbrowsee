@@ -16,7 +16,9 @@
             <b-col sm="6">
               <address class="form-group">
                 <h5 v-if="model.company_address">Company Address:</h5>
-                <p>{{ model.company_address }}</p>
+                <!-- <p>{{ model.company_address }}</p> -->
+                <p v-html="settings.company_address"></p>
+                <!--  <p>{{ model.company_address }}</p> -->
               </address>
             </b-col>
             <b-col sm="6">
@@ -142,15 +144,15 @@
                 <tbody>
                   <tr>
                     <th class="verticle-th">Total Net Amount</th>
-                    <td>ZAR{{ model.net_amount }}</td>
+                    <td>ZAR {{ model.net_amount }}</td>
                   </tr>
                   <tr>
                     <th class="verticle-th">Total VAT Amount</th>
-                    <td>ZAR{{ model.vat_amount }}</td>
+                    <td>ZAR {{ model.vat_amount }}</td>
                   </tr>
                   <tr>
                     <th class="verticle-th">Total</th>
-                    <td>ZAR{{ model.total_amount }}</td>
+                    <td>ZAR {{ model.total_amount }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -833,9 +835,9 @@ export default {
           this.sectionStatus = null
         }
       }
-      this.model.net_amount = this.Invoices.InvoicesNetTotal
-      this.model.vat_amount = this.Invoices.InvoicesVatTotal
-      this.model.total_amount = this.Invoices.InvoicesTotal = parseInt(this.Invoices.InvoicesNetTotal) + parseInt(this.Invoices.InvoicesVatTotal)
+      this.model.net_amount = (this.Invoices.InvoicesNetTotal).toFixed(2)
+      this.model.vat_amount = (this.Invoices.InvoicesVatTotal).toFixed(2)
+      this.model.total_amount = (this.Invoices.InvoicesTotal = parseInt(this.Invoices.InvoicesNetTotal) + parseInt(this.Invoices.InvoicesVatTotal)).toFixed(2)
       this.model.rows = val
     },
     'model.rows': function (val) {

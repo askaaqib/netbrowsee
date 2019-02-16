@@ -274,10 +274,39 @@ body * {
     left: 0;
     top: 0;
   }
-
+// .action{
+//     display: flex;
+//     align-items: center !important;
+//     justify-content: center !important;
+//     height: 100vh !important;
+// }
+.texty{
+  font-size: 1.2em !important;
 }
-
-
+}
 .my-table th, .my-table td {
   padding: 0.15rem !important;
 }
+#manage{
+    border: 1px 
+    solid rgb(204, 204, 204);
+    height: 200px;
+    width: 450px;
+    padding-right: 1px;
+}
+#right{
+    border: 1px 
+    solid rgb(204, 204, 204);
+    height: 200px;
+    width: 450px;
+    padding-left: 1px;
+    text-align: right;
+}
+#sideline{
+    border-collapse: collapse;
+    padding-top: 10px;
+}
+#fontset{
+  font-size: 14px;
+}
+

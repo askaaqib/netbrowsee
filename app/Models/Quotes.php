@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-
+use App\Models\Jobcard;
 /**
  * App\Models\Quotes.
  *
@@ -25,6 +25,11 @@ class Quotes extends Model
      */
 
 
+     protected $with = [
+        'jobcard',
+    ];
+
+
     protected $fillable = [
         'quotation_number',
         'quotation_name',        
@@ -39,16 +44,24 @@ class Quotes extends Model
         'vat_rates',
         'client_email',
         'project_id',
-        'project_managers_id',
+        //'project_managers_id',
         'jobcard_id',
         'rows',
         'company_address',
         'company_logo',
         'bank_account',
-        'quotation_digit'
+        'quotation_digit',
+        'attachment_receipt'
     ];
 
 
     protected $table = 'quotes';
+
+
+    public function jobcard()
+    { 
+
+        return $this->belongsTo(Jobcard::class);
+    }
 
 }

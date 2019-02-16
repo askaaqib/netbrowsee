@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Backend;
 
@@ -56,6 +56,7 @@ class JobcardController extends BackendController
             'district',
             'sub_district',
             'travelling_paid',
+            //'attachment_receipt',
             //'quoted_amount',
             'status',
         ]);
@@ -90,9 +91,9 @@ class JobcardController extends BackendController
                     __('labels.updated_at'),
                 ],
                 'jobcard');
-        }
+        } 
 
-        return $requestSearchQuery->result([
+        return $requestSearchQuery->resultJobcard([
             'jobcard.id',
             'jobcard_num',
             'description',
@@ -146,7 +147,7 @@ class JobcardController extends BackendController
        //  return $this->redirectResponse($request, __('alerts.backend.jobcards.created'));
         
        $data = $request->all();
-       //dd($data);
+      
         if(isset($data['before_pictures'])) {
             $imageNames = array();
             $images = $data['before_pictures'];    
@@ -167,8 +168,17 @@ class JobcardController extends BackendController
             }
             $data['after_pictures'] = json_encode($imageNames);
         } 
+        if(isset($data['attachment_receipt'])) {
+            $imageNames = array();
+            $images = $data['attachment_receipt'];    
+            foreach($images as $image) {
+                $imageName = rand(0,10000000).$image->getClientOriginalName();
+                $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
+                $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
+            }
+            $data['attachment_receipt'] = json_encode($imageNames);
+        } 
         // dd($data);
-
         $jobcard = $this->jobcard->make($data);
 
         if ('publish' === $data['status']) {
@@ -223,7 +233,7 @@ class JobcardController extends BackendController
     {
         $data = $request->all();
         /* BEFORE PICTURES */
-        // dd($data);
+        //dd($data);
         if(isset($data['before_pictures']) && !isset($data['before_pictures_edit'])) {
             $imageNames = $data['before_pictures'];
             $data['before_pictures'] = json_encode($imageNames);
@@ -269,6 +279,30 @@ class JobcardController extends BackendController
                 $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
             }
             $data['after_pictures'] = json_encode($imageNames);
+        }
+
+         /* Attachment and receipt PICTURES */
+        if(isset($data['attachment_receipt']) && !isset($data['attachment_receipt_edit'])) {
+            $imageNames = $data['attachment_receipt'];
+            $data['attachment_receipt'] = json_encode($imageNames);
+        }
+
+        if(isset($data['attachment_receipt']) && isset($data['attachment_receipt_edit'])) {
+            $imageNames = array();
+            /* loop old data and add to new array */
+            $old_images = $data['attachment_receipt'];
+            foreach($old_images as $image) {
+                $imageNames[]['image_name'] = $image['image_name'];
+            }
+        }
+        if (isset($data['attachment_receipt_edit'])) {
+            $new_images = $data['attachment_receipt_edit'];    
+            foreach($new_images as $image) {
+                $imageName = rand(0,10000000).$image->getClientOriginalName();
+                $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
+                $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
+            }
+            $data['attachment_receipt'] = json_encode($imageNames);
         }
 
         $jobcard->fill(

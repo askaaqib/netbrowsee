@@ -33,6 +33,16 @@
   margin: 5px;
 }
 
+
+.image[data-v-3f8c8f54] {
+  float: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ebebeb;
+  margin: 5px;
+}
+
 .fade-enter-active, .fade-leave-active {
     transition: opacity .15s linear;
 }
@@ -27555,11 +27565,39 @@ form.invoices-form .table > thead > tr > th {
     left: 0;
     top: 0;
   }
+
+  .texty {
+    font-size: 1.2em !important;
+  }
 }
 
 .my-table th,
 .my-table td {
   padding: 0.15rem !important;
+}
+
+#manage {
+  border: 1px solid #cccccc;
+  height: 200px;
+  width: 450px;
+  padding-right: 1px;
+}
+
+#right {
+  border: 1px solid #cccccc;
+  height: 200px;
+  width: 450px;
+  padding-left: 1px;
+  text-align: right;
+}
+
+#sideline {
+  border-collapse: collapse;
+  padding-top: 10px;
+}
+
+#fontset {
+  font-size: 14px;
 }
 
 

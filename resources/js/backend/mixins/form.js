@@ -19,7 +19,6 @@ export default {
         let { data } = await axios.get(this.$app.route(`admin.${this.resourceRoute}.show`, {
           [this.modelName]: this.id
         }))
-
         Object.keys(data).forEach((key) => {
           if (key in this.model) {
             this.model[key] = data[key]
@@ -35,7 +34,6 @@ export default {
       }
     },
     state (name) {
-      console.log(this.validation.errors)
       return this.validation.errors !== undefined && this.validation.errors.hasOwnProperty(name)
         ? 'invalid'
         : null

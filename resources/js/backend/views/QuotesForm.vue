@@ -5,8 +5,8 @@
         <h3 class="card-title" slot="header">{{ isNew ? $t('labels.backend.quotes.titles.create') : $t('labels.backend.quotes.titles.edit') }}</h3>
         <b-row>
           <b-col sm="6">
-            <address class="form-group">
-              <template v-if="settings.company_address">
+            <address class=" newwidth form-group">
+              <template id="newwidth" v-if="settings.company_address">
                 <h5>Company Address:</h5>
                 <p>{{ settings.company_address }}</p>
               </template>
@@ -125,7 +125,7 @@
                 </b-select>
               </b-form-group>
 
-              <b-form-group
+              <!--  <b-form-group
                 v-if="model.project_id"
                 label="Select Project Manager"
                 label-for="project_manager_id"
@@ -139,7 +139,7 @@
                     {{ option.name }}
                   </option>
                 </b-select>
-              </b-form-group>
+              </b-form-group> -->
 
               <b-form-group
                 :label="$t('validation.quotes.quotation_name')"
@@ -511,6 +511,7 @@
                   name="labour_part_quantity_edit"
                   type="number"
                   v-model="labour.labour_quantity"
+                  @blur.native="labour.labour_quantity = parseFloat(labour.labour_quantity).toFixed(2)"
                   @change="LabourRateChange"
                 ></b-form-input>
               </b-form-group>
@@ -1015,11 +1016,11 @@ export default {
       val.forEach((item, index) => {
         if (item.labour || item.parts) {
           if (!this.isNew) {
-            this.quotes.quotesNetTotal += parseInt(item.net_total)
-            this.quotes.quotesVatTotal += this.model.vat_rates * item.net_total / 100
+            this.quotes.quotesNetTotal += parseFloat(item.net_total).toFixed(2)
+            this.quotes.quotesVatTotal += (this.model.vat_rates * item.net_total) / 100
           } else {
-            this.quotes.quotesNetTotal += parseInt(item.net_total)
-            this.quotes.quotesVatTotal += this.settings.quote_vat * item.net_total / 100
+            this.quotes.quotesNetTotal += parseFloat(item.net_total)
+            this.quotes.quotesVatTotal += (this.settings.quote_vat * item.net_total) / 100
           }
         }
         if (item.section) {
@@ -1039,8 +1040,8 @@ export default {
         this.sectionStatus = null
       }
       this.model.net_amount = this.quotes.quotesNetTotal
-      this.model.vat_amount = this.quotes.quotesVatTotal
-      this.model.total_amount = this.quotes.quotesTotal = parseInt(this.quotes.quotesNetTotal) + parseInt(this.quotes.quotesVatTotal)
+      this.model.vat_amount = parseFloat(this.quotes.quotesVatTotal)
+      this.model.total_amount = this.quotes.quotesTotal = (parseFloat(this.quotes.quotesNetTotal) + parseFloat(this.quotes.quotesVatTotal)).toFixed(2)
       this.model.rows = val
     },
     'model.rows': function (val) {
@@ -1199,13 +1200,15 @@ export default {
       this.hideModal('updateSectionModalRef')
     },
     LabourRateChange: function () {
-      this.labour.net_labour_price_zar = parseInt(this.labour.labour_quantity) * parseInt(this.labour.labour_rate_zar)
-      this.labour.labour_vat_amount_zar = (this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100
-      this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
+      let labourQuantity = parseFloat(this.labour.labour_quantity).toFixed(2)
+      let labourRAteZar = parseFloat(this.labour.labour_rate_zar).toFixed(2)
+      this.labour.net_labour_price_zar = parseFloat(labourQuantity * labourRAteZar).toFixed(2)
+      this.labour.labour_vat_amount_zar = (parseFloat(this.labour.labour_vat_rate) * parseFloat(this.labour.net_labour_price_zar)) / 100
+      this.labour.labour_total_zar = (parseFloat(this.labour.net_labour_price_zar) + parseFloat(this.labour.labour_vat_amount_zar.toFixed(2))).toFixed(2)
       // On Edit LabourRate Change
-      this.labour_edit.net_labour_price_zar = parseInt(this.labour_edit.labour_quantity) * parseInt(this.labour_edit.labour_rate_zar)
+      this.labour_edit.net_labour_price_zar = parseFloat(this.labour_edit.labour_quantity).toFixed(2) * parseFloat(this.labour_edit.labour_rate_zar).toFixed(2)
       this.labour_edit.labour_vat_amount_zar = (this.labour_edit.labour_vat_rate * this.labour_edit.net_labour_price_zar) / 100
-      this.labour_edit.labour_total_zar = this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar
+      this.labour_edit.labour_total_zar = (this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar).toFixed(2)
     },
     AddLabour: function () {
       if (this.labour.labour_name === '') {
@@ -1251,13 +1254,15 @@ export default {
       this.rows = previousRows
     },
     PartsRateChange: function () {
-      this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
+      let partsQuantity = parseFloat(this.parts.parts_quantity).toFixed(2)
+      let PartsRateZar = parseFloat(this.parts.parts_rate_zar).toFixed(2)
+      this.parts.net_parts_price_zar = parseFloat(partsQuantity * PartsRateZar).toFixed(2)
       this.parts.parts_vat_amount_zar = (this.parts.parts_vat_rate * this.parts.net_parts_price_zar) / 100
-      this.parts.parts_total_zar = this.parts.net_parts_price_zar + this.parts.parts_vat_amount_zar
+      this.parts.parts_total_zar = (parseFloat(this.parts.net_parts_price_zar) + parseFloat(this.parts.parts_vat_amount_zar.toFixed(2))).toFixed(2)
       // On Edit PartsRate Change
-      this.parts_edit.net_parts_price_zar = parseInt(this.parts_edit.parts_quantity) * parseInt(this.parts_edit.parts_rate_zar)
+      this.parts_edit.net_parts_price_zar = parseFloat(this.parts_edit.parts_quantity) * parseFloat(this.parts_edit.parts_rate_zar)
       this.parts_edit.parts_vat_amount_zar = (this.parts_edit.parts_vat_rate * this.parts_edit.net_parts_price_zar) / 100
-      this.parts_edit.parts_total_zar = this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar
+      this.parts_edit.parts_total_zar = (this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar).toFixed(2)
     },
     AddParts: function () {
       this.errors.parts_name = ''

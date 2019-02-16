@@ -191,6 +191,12 @@ class AjaxController extends Controller
                 ->select('id','name')->get();
         
     }
+    public function getProjectManager(ProjectManagerRepository $project_manager)
+    {
+        return $project_manager->query()
+                 ->where('id' , '>' ,0)
+                 ->select('id','name')->get();
+    }
     public function getDistricts(DistrictRepository $district){
 
         return $district->query()

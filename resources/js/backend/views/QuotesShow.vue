@@ -1,6 +1,6 @@
 <template>
   <div id="quotes-view" class="container">
-    <div class="quotes-form">
+    <div class="quotes-form action texty" id="fontset">
       <b-card>
         <h3 class="card-title" slot="header">Completed Quote</h3>
         <b-row>
@@ -15,7 +15,8 @@
             <b-col sm="6">
               <address class="form-group">
                 <h5 v-if="model.company_address">Company Address:</h5>
-                <p>{{ model.company_address }}</p>
+                <!-- <p>{{ model.company_address }}</p> -->
+                <p v-html="settings.company_address"></p>
               </address>
             </b-col>
             <b-col sm="6">
@@ -29,7 +30,7 @@
           <b-row>
             <b-col sm="6">
               <b-col sm="8">
-                <div class="well" style="border:1px solid #CCCCCC">
+                <div class="well" id="manage">
                   <address class="form-group">
                     <label class="control-label"><b>Quote for:</b></label>
                     <p class="form-control-static">{{ model.client_email }}</p>
@@ -39,7 +40,7 @@
               </b-col>
             </b-col>
             <b-col sm="6">
-              <div class="well" style="border:1px solid #CCCCCC">
+              <div class="well" id="right">
                 <div class="align-right">
                   <div class="form-group">
                     <label class="control-label"><b>Quote name: </b></label> <span class="form-control-static">{{ model.quotation_name }}</span>
@@ -61,11 +62,10 @@
           <h3 style="color:#303030">Description Of Work</h3>
           <p>{{ model.quotation_description }}</p>
           <!-- Description Section Ends -->
-          <hr>
           <!-- Quote Details Section -->
           <br>
           <div id="jobPartsTableDivShow">
-            <table ref="detailsTable" class="table table-bordered table-striped table-hover" width="100%">
+            <table ref="detailsTable" id="sideline" class="table table-striped table-hover" width="100%">
               <thead class="thead-show">
                 <tr>
                   <th>Name</th>
@@ -127,15 +127,15 @@
                 <tbody>
                   <tr>
                     <th class="verticle-th">Total Net Amount</th>
-                    <td>ZAR{{ model.net_amount }}</td>
+                    <td>ZAR {{ model.net_amount }}</td>
                   </tr>
                   <tr>
                     <th class="verticle-th">Total VAT Amount</th>
-                    <td>ZAR{{ model.vat_amount }}</td>
+                    <td>ZAR {{ model.vat_amount }}</td>
                   </tr>
                   <tr>
                     <th class="verticle-th">Total</th>
-                    <td>ZAR{{ model.total_amount }}</td>
+                    <td>ZAR {{ model.total_amount }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -144,6 +144,29 @@
           </div>
           <!-- Bank Details & Total Amount Section Ends -->
         </div>
+        <!-------------------------------Pictures to show------------------------->
+        <b-form-group
+          :label="$t('validation.jobcards.attachment_receipt')"
+          label-for="attachment_receipt"
+          horizontal
+          :label-cols="4"
+          :feedback="feedback('jobcard.attachment_receipt')"
+        >
+        </b-form-group>
+        <template>
+          <b-row>
+            <AttachmentImageGallery
+              :id="id"
+              :quotes-pic-size="true"
+              :image-width="'300px'"
+              :image-height="'300px'"
+              :attachmentpictures="attachmentpictures"
+              :modelattachmentpictures="model.jobcard.attachment_receipt"
+              @changeFile="changeAttachmentGalleryImage"
+            ></AttachmentImageGallery>
+          </b-row>
+        </template>
+        <!-------------------------------Pictures to show------------------------->
         <!-- ViewPort  Ends -->
         <b-row id="hideback" slot="footer">
           <b-col md>
@@ -618,9 +641,13 @@ import moment from 'moment'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import swal from 'sweetalert2'
 import JSPDF from 'jspdf'
+import AttachmentImageGallery from './Jobcard/AttachmentImageGallery'
 
 export default {
   name: 'QuotesForm',
+  components: {
+    AttachmentImageGallery
+  },
   directives: { 'b-modal': bModalDirective },
   mixins: [form],
   data () {
@@ -654,6 +681,8 @@ export default {
       labourTabIndex: 0,
       sectionStatus: null,
       rowsRemember: null,
+      attachmentpictures: [],
+      jsonParseImgAttach: false,
       client_search: {
         search_client: null,
         client_info_get: [],
@@ -730,6 +759,9 @@ export default {
         client_email: null,
         quotation_description: null,
         rows: [],
+        jobcard: {
+          attachment_receipt: []
+        },
         quotation_date: null,
         company_address: null,
         company_logo: null,
@@ -769,6 +801,22 @@ export default {
         this.model.quotation_name = ''
       }
     },
+    'model.jobcard.attachment_receipt': function (val) {
+      console.log(val)
+      if (val && val.length > 0) {
+        if (!this.isNew && !this.jsonParseImgAttach) {
+          this.jsonParseImgAttach = true
+          this.model.jobcard.attachment_receipt = JSON.parse(val)
+          // console.log(this.model.attachment_receipt);
+          var Workordrimg = JSON.parse(val)
+          Workordrimg.map((item) => {
+            if (item.image_name) {
+              this.attachmentpictures.push(item.image_name)
+            }
+          })
+        }
+      }
+    },
     'jobcards_facility': function (val) {
       if (val) {
         this.model.quotation_name = val.jobcard_num + '-' + val.facility_name
@@ -794,11 +842,11 @@ export default {
       val.forEach((item, index) => {
         if (item.labour || item.parts) {
           if (!this.isNew) {
-            this.quotes.quotesNetTotal += parseInt(item.net_total)
-            this.quotes.quotesVatTotal += this.model.vat_rates * item.net_total / 100
+            this.quotes.quotesNetTotal += parseInt(item.net_total).toFixed(2)
+            this.quotes.quotesVatTotal += this.model.vat_rates.toFixed(2) * item.net_total.toFixed(2) / 100
           } else {
-            this.quotes.quotesNetTotal += parseInt(item.net_total)
-            this.quotes.quotesVatTotal += this.settings.quote_vat * item.net_total / 100
+            this.quotes.quotesNetTotal += parseInt(item.net_total).toFixed(2)
+            this.quotes.quotesVatTotal += this.settings.quote_vat.toFixed(2) * item.net_total.toFixed(2) / 100
           }
         }
         if (item.section) {
@@ -817,9 +865,9 @@ export default {
       if (val.length === 0) {
         this.sectionStatus = null
       }
-      this.model.net_amount = this.quotes.quotesNetTotal
-      this.model.vat_amount = this.quotes.quotesVatTotal
-      this.model.total_amount = this.quotes.quotesTotal = parseInt(this.quotes.quotesNetTotal) + parseInt(this.quotes.quotesVatTotal)
+      this.model.net_amount = (this.quotes.quotesNetTotal).toFixed(2)
+      this.model.vat_amount = (this.quotes.quotesVatTotal).toFixed(2)
+      this.model.total_amount = (this.quotes.quotesTotal = parseInt(this.quotes.quotesNetTotal) + parseInt(this.quotes.quotesVatTotal)).toFixed(2)
       this.model.rows = val
     },
     'model.rows': function (val) {
@@ -896,7 +944,7 @@ export default {
         15,
         15
       )
-      console.log(doc)
+      // console.log(doc)
       // doc.save('dataurlnewwindow.pdf')
     },
     getProjectId: function () {
@@ -908,6 +956,9 @@ export default {
       } catch (e) {
         // console.log(e)
       }
+    },
+    changeAttachmentGalleryImage (images) {
+      this.model.attachment_receipt = images
     },
     editRowSection: function (key) {
       this.section_name_edit = this.rows[key].section
@@ -978,13 +1029,23 @@ export default {
       this.hideModal('updateSectionModalRef')
     },
     LabourRateChange: function () {
-      this.labour.net_labour_price_zar = parseInt(this.labour.labour_quantity) * parseInt(this.labour.labour_rate_zar)
-      this.labour.labour_vat_amount_zar = (this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100
-      this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
+      let netLabourprice = parseFloat(this.labour.net_labour_price_zar).toFixed(2)
+      let labourvatRate = parseFloat(this.labour.labour_vat_rate).toFixed(2)
+      let labourvatAmmount = parseFloat(this.labour.labour_vat_amount_zar).toFixed(2)
+      let labourRateZar = parseFloat(this.labour.labour_rate_zar).toFixed(2)
+      let labourQuantity = parseFloat(this.labour.labour_quantity).toFixed(2)
+      let EditlabourQuantities = parseFloat(this.labour_edit.labour_quantity).toFixed(2)
+      let EditLabourRateZar = parseFloat(this.labour_edit.labour_rate_zar).toFixed(2)
+      let EditLabourPriceZar = parseFloat(this.labour_edit.net_labour_price_zar).toFixed(2)
+      let EditVatRate = parseFloat(this.labour_edit.labour_vat_rate).toFixed(2)
+      let EditlabourVatZar = parseFloat(this.labour_edit.labour_vat_amount_zar).toFixed(2)
+      this.labour.net_labour_price_zar = labourQuantity * labourRateZar
+      this.labour.labour_vat_amount_zar = (labourvatRate * netLabourprice) / 100
+      this.labour.labour_total_zar = netLabourprice + labourvatAmmount
       // On Edit LabourRate Change
-      this.labour_edit.net_labour_price_zar = parseInt(this.labour_edit.labour_quantity) * parseInt(this.labour_edit.labour_rate_zar)
-      this.labour_edit.labour_vat_amount_zar = (this.labour_edit.labour_vat_rate * this.labour_edit.net_labour_price_zar) / 100
-      this.labour_edit.labour_total_zar = this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar
+      this.labour_edit.net_labour_price_zar = EditlabourQuantities * EditLabourRateZar
+      this.labour_edit.labour_vat_amount_zar = (EditVatRate * EditLabourPriceZar) / 100
+      this.labour_edit.labour_total_zar = EditLabourPriceZar + EditlabourVatZar
     },
     AddLabour: function () {
       if (this.labour.labour_name === '') {
@@ -994,9 +1055,9 @@ export default {
         this.errors.labour_name = ''
       }
       if (this.section_select !== 'null') {
-        this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+        this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar.tofixed(2), labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
       } else {
-        this.rows.unshift({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar, labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+        this.rows.unshift({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar.tofixed(2), net_total: this.labour.net_labour_price_zar.tofixed(2), labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
       }
       this.hideModal('addLabourSection')
     },
@@ -1030,13 +1091,13 @@ export default {
       this.rows = previousRows
     },
     PartsRateChange: function () {
-      this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
-      this.parts.parts_vat_amount_zar = (this.parts.parts_vat_rate * this.parts.net_parts_price_zar) / 100
-      this.parts.parts_total_zar = this.parts.net_parts_price_zar + this.parts.parts_vat_amount_zar
+      this.parts.net_parts_price_zar = (parseFloat(this.parts.parts_quantity) * parseFloat(this.parts.parts_rate_zar)).toFixed(2)
+      this.parts.parts_vat_amount_zar = ((this.parts.parts_vat_rate * this.parts.net_parts_price_zar) / 100).toFixed(2)
+      this.parts.parts_total_zar = (this.parts.net_parts_price_zar + this.parts.parts_vat_amount_zar).toFixed(2)
       // On Edit PartsRate Change
-      this.parts_edit.net_parts_price_zar = parseInt(this.parts_edit.parts_quantity) * parseInt(this.parts_edit.parts_rate_zar)
-      this.parts_edit.parts_vat_amount_zar = (this.parts_edit.parts_vat_rate * this.parts_edit.net_parts_price_zar) / 100
-      this.parts_edit.parts_total_zar = this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar
+      this.parts_edit.net_parts_price_zar = (parseFloat(this.parts_edit.parts_quantity) * parseFloat(this.parts_edit.parts_rate_zar)).toFixed(2)
+      this.parts_edit.parts_vat_amount_zar = ((this.parts_edit.parts_vat_rate * this.parts_edit.net_parts_price_zar) / 100).toFixed(2)
+      this.parts_edit.parts_total_zar = (this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar).toFixed(2)
     },
     AddParts: function () {
       this.errors.parts_name = ''
@@ -1089,9 +1150,9 @@ export default {
       this.labour.labour_rate_zar = this.labour_search.labour_info_get[index].rate
       this.labour.labour_vat_rate = this.settings.quote_vat
 
-      this.labour.net_labour_price_zar = parseInt(this.labour.labour_quantity) * parseInt(this.labour.labour_rate_zar)
-      this.labour.labour_vat_amount_zar = (this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100
-      this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
+      this.labour.net_labour_price_zar = (parseFloat(this.labour.labour_quantity) * parseFloat(this.labour.labour_rate_zar)).toFixed(2)
+      this.labour.labour_vat_amount_zar = ((this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100).toFixed(2)
+      this.labour.labour_total_zar = (this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar).toFixed(2)
     },
     searchSupplierParts: function () {
       // console.log('Search Supplier Parts')

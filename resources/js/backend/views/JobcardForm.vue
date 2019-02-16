@@ -154,6 +154,27 @@
               </b-select>
             </b-form-group>
             <b-form-group
+              :label="$t('validation.jobcards.projectmanager')"
+              label-for="projectmanager"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('projectmanager_id')"
+            >
+              <b-select
+                v-model="model.projectmanager_id"
+                :state="state('projectmanager_id')"
+              >
+                <option value="">Please Select Project Manager</option>
+                <option
+                  v-for="(option, index) in project_manager"
+                  :key="index"
+                  :value="option.id"
+                >
+                  {{ option.name }}
+                </option>
+              </b-select>
+            </b-form-group>
+            <b-form-group
               :label="$t('validation.jobcards.labour_paid')"
               label-for="labour_paid"
               horizontal
@@ -209,8 +230,14 @@
                 v-model="model.status"
               >
                 <option value="">Please Select Status</option>
-                <option value="1" data-foo="Assigned">Assigned</option>
-                <option value="2" data-foo="UnAssigned">UnAssigned</option>
+                <option value="1" data-foo="Received">Received</option>
+                <option value="2" data-foo="Assigned">Assigned</option>
+                <option value="3" data-foo="On Hold">On Hold</option>
+                <option value="4" data-foo="Completed">Completed</option>
+                <option value="5" data-foo="Submitted for Vetting">Submitted for Vetting</option>
+                <option value="6" data-foo="Invoiced">Invoiced</option>
+                <option value="7" data-foo="Paid">Paid</option>
+                <option value="8" data-foo="Cancelled">Cancelled</option>
               </b-select>
             </b-form-group>
             <b-form-group
@@ -281,6 +308,35 @@
                 <AfterImageEdit @changeFile="afterImagesEdit"></AfterImageEdit>
               </b-row>
             </template>
+            <!-- Any receipts and invoices Attachment -->
+            <b-form-group
+              :label="$t('validation.jobcards.attachment_receipt')"
+              label-for="attachment_receipt"
+              horizontal
+              :label-cols="4"
+              :feedback="feedback('attachment_receipt')"
+            >
+            </b-form-group>
+            <template v-if="isNew">
+              <AttachmentImageUpload @changeFile="attachmentImagesAdded"></AttachmentImageUpload>
+            </template>
+
+            <template v-if="!isNew">
+              <b-row>
+                <AttachmentImageGallery
+                  :id="id"
+                  :jobcard-pic-size="true"
+                  :image-width="'130px'"
+                  :image-height="'80px'"
+                  :attachmentpictures="attachmentpictures"
+                  :modelattachmentpictures="model.attachment_receipt"
+                  @changeFile="changeAttachmentGalleryImage"
+                ></AttachmentImageGallery>
+              </b-row>
+              <b-row>
+                <AttachmentImageEdit @changeFile="attachmentImagesEdit"></AttachmentImageEdit>
+              </b-row>
+            </template>
 
             <b-row slot="footer">
               <b-col md>
@@ -318,6 +374,9 @@ import AfterImageGallery from './Jobcard/AfterImageGallery'
 import BeforeImageUpload from './Jobcard/BeforeImagesUpload'
 import BeforeImageEdit from './Jobcard/BeforeImagesEdit'
 import BeforeImageGallery from './Jobcard/BeforeImageGallery'
+import AttachmentImageUpload from './Jobcard/AttachmentImagesUpload'
+import AttachmentImageEdit from './Jobcard/AttachmentImagesEdit'
+import AttachmentImageGallery from './Jobcard/AttachmentImageGallery'
 
 export default {
   name: 'JobcardForm',
@@ -327,7 +386,11 @@ export default {
     AfterImageEdit,
     BeforeImageUpload,
     BeforeImageGallery,
-    BeforeImageEdit
+    BeforeImageEdit,
+    AttachmentImageUpload,
+    AttachmentImageEdit,
+    AttachmentImageGallery
+
   },
   mixins: [form],
   data () {
@@ -338,6 +401,7 @@ export default {
       indexgallery: null,
       beforepictures: [],
       afterpictures: [],
+      attachmentpictures: [],
       config: {
         wrap: true,
         time_24hr: true,
@@ -359,6 +423,7 @@ export default {
       },
       labour_rates: [],
       projects: [],
+      project_manager: [],
       materials_rates: [],
       assigned_to: [],
       quotations: [],
@@ -366,6 +431,7 @@ export default {
       subdistrict: [],
       jsonParseImgBefore: false,
       jsonParseImgAfter: false,
+      jsonParseImgAttach: false,
       model: {
         jobcard_num: null,
         description: null,
@@ -377,13 +443,16 @@ export default {
         // subdistrict,
         labour_paid: null,
         projects_id: '',
+        projectmanager_id: '',
         travelling_paid: null,
         contractor_id: '',
         status: null,
         before_pictures: [],
         before_pictures_edit: [],
         after_pictures: [],
-        after_pictures_edit: []
+        attachment_receipt: [],
+        after_pictures_edit: [],
+        attachment_receipt_edit: []
       }
     }
   },
@@ -415,12 +484,30 @@ export default {
           })
         }
       }
+    },
+    'model.attachment_receipt': function (val) {
+      // console.log(val);
+      if (val && val.length > 0) {
+        if (!this.isNew && !this.jsonParseImgAttach) {
+          this.jsonParseImgAttach = true
+          this.model.attachment_receipt = JSON.parse(val)
+          // console.log(this.model.attachment_receipt);
+          var Workordrimg = JSON.parse(val)
+          Workordrimg.map((item) => {
+            // console.log(item);
+            if (item.image_name) {
+              this.attachmentpictures.push(item.image_name)
+            }
+          })
+        }
+      }
     }
   },
   created: function () {
     this.getLabours()
     this.getMaterials()
     this.getProjects()
+    this.getProjectManager()
     this.getUsers()
     this.getQuotations()
     this.getdistrict()
@@ -433,14 +520,23 @@ export default {
     changeAfterGalleryImage (images) {
       this.model.after_pictures = images
     },
+    changeAttachmentGalleryImage (images) {
+      this.model.attachment_receipt = images
+    },
     afterImagesEdit (images) {
       this.model.after_pictures_edit = images
+    },
+    attachmentImagesEdit (images) {
+      this.model.attachment_receipt_edit = images
     },
     beforeImagesEdit (images) {
       this.model.before_pictures_edit = images
     },
     afterImagesAdded (images) {
       this.model.after_pictures = images
+    },
+    attachmentImagesAdded (images) {
+      this.model.attachment_receipt = images
     },
     beforeImagesAdded (images) {
       this.model.before_pictures = images
@@ -455,12 +551,26 @@ export default {
         this.model.after_pictures.push(store)
       }
     },
+    filesAddedes (store, response) {
+      if (store) {
+        this.model.attachment_receipt.push(store)
+      }
+    },
     fileRemoved (store) {
       if (this.isNew) {
         var workorderImg = this.model.before_pictures
         var IndexToRemove = workorderImg.indexOf(store)
         if (IndexToRemove !== -1) {
           this.model.before_pictures.splice(IndexToRemove, 1)
+        }
+      }
+    },
+    fileRemovede (store) {
+      if (this.isNew) {
+        var workorderImg = this.model.attachment_receipt
+        var IndexToRemove = workorderImg.indexOf(store)
+        if (IndexToRemove !== -1) {
+          this.model.attachment_receipt.splice(IndexToRemove, 1)
         }
       }
     },
@@ -507,6 +617,10 @@ export default {
     async getProjects () {
       let { data } = await axios.get(this.$app.route('admin.projects.getdata'), {})
       this.projects = data
+    },
+    async getProjectManager () {
+      let { data } = await axios.get(this.$app.route('admin.project_manager.getdata'), {})
+      this.project_manager = data
     },
     async getdistrict () {
       let { data } = await axios.get(this.$app.route('admin.district.getdata'), {})

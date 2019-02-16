@@ -1124,6 +1124,7 @@ export default {
                 "district": "District",
                 "sub_district": "Sub District",
                 "projects": "Projects",
+                "projectmanager": "Project Manager",
                 "labour_paid": "Labour Paid",
                 "travelling_paid": "Travelling Paid",
                 "materials_paid": "Materials Paid",
@@ -1133,6 +1134,7 @@ export default {
                 "before_pictures": "Before Pictures",
                 "during_pictures": "During Pictures",
                 "after_pictures": "After Pictures",
+                "attachment_receipt": "Receipt & Invoice Attachment",
                 "upload_jobcard": "Upload Jobcard",
                 "quotations": "Quotation"
             },
@@ -2005,7 +2007,7 @@ export default {
         },
         "permissions": {
             "categories": {
-                "blog": "Blog",
+                "jobcards": "Jobcards",
                 "form": "Forms",
                 "access": "Access",
                 "seo": "SEO"
@@ -2049,7 +2051,13 @@ export default {
                     "posts": {
                         "display_name": "View own posts",
                         "description": "Can view own posts."
+                    },
+                    "jobcards": {
+                        "display_name": "View own Jobcards"
                     }
+                },
+                "jobcards": {
+                    "display_name": "View Jobcards"
                 }
             },
             "create": {
@@ -2076,6 +2084,9 @@ export default {
                 "posts": {
                     "display_name": "Create posts",
                     "description": "Can create all posts."
+                },
+                "jobcards": {
+                    "display_name": "Create Jobcards"
                 }
             },
             "edit": {
@@ -2107,7 +2118,13 @@ export default {
                     "posts": {
                         "display_name": "Edit own posts",
                         "description": "Can edit own posts."
+                    },
+                    "jobcards": {
+                        "display_name": "Edit own Jobcards"
                     }
+                },
+                "jobcards": {
+                    "display_name": "Edit Jobcards"
                 }
             },
             "delete": {
@@ -2143,13 +2160,22 @@ export default {
                     "posts": {
                         "display_name": "Delete own posts",
                         "description": "Can delete own posts."
+                    },
+                    "jobcards": {
+                        "display_name": "Delete own Jobcards"
                     }
+                },
+                "jobcards": {
+                    "display_name": "Delete Jobcards"
                 }
             },
             "publish": {
                 "posts": {
                     "display_name": "Publish posts",
                     "description": "Can manage posts publication."
+                },
+                "jobcards": {
+                    "display_name": "Publish Jobcards"
                 }
             },
             "impersonate": {

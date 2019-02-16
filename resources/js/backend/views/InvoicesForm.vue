@@ -95,7 +95,7 @@
           </b-col>
           <b-col sm="6">
             <div class="well">
-              <b-form-group
+              <!--  <b-form-group
                 :label="$t('validation.invoices.jobcard_id')"
                 label-for="jobcard_id"
                 horizontal
@@ -108,7 +108,7 @@
                     {{ option.jobcard_num }}
                   </option>
                 </b-select>
-              </b-form-group>
+              </b-form-group> -->
 
               <b-form-group
                 label="Select Project"
@@ -124,7 +124,7 @@
                   </option>
                 </b-select>
               </b-form-group>
-
+              <!--
               <b-form-group
                 v-if="model.project_id"
                 label="Select Project Manager"
@@ -139,7 +139,7 @@
                     {{ option.name }}
                   </option>
                 </b-select>
-              </b-form-group>
+              </b-form-group> -->
 
               <b-form-group
                 label="Invoice Name"
@@ -926,7 +926,7 @@ export default {
       labour_rates: [],
       materials_rates: [],
       vat_rates: [],
-      jobcards: [],
+      // jobcards: [],
       projects: [],
       project_managers: [],
       section_name: '',
@@ -935,7 +935,7 @@ export default {
       labour_edit_index: null,
       parts_edit_index: null,
       section_select: 'null',
-      jobcards_facility: [],
+      // jobcards_facility: [],
       last_Invoice_ref: null,
       quotesTabIndex: 0,
       labourTabIndex: 0,
@@ -1016,7 +1016,7 @@ export default {
         labour_rates: null,
         materials_rates: null,
         vat_rates: null,
-        jobcard_id: '',
+        // jobcard_id: '',
         project_id: '',
         project_managers_id: '',
         general_vat_rate: 15.00,
@@ -1056,18 +1056,18 @@ export default {
         }
       }
     },
-    'model.jobcard_id': function (val) {
-      if (val) {
-        this.getJobcardsFacility(val)
-      } else {
-        this.model.invoice_name = ''
-      }
-    },
-    'jobcards_facility': function (val) {
-      if (val) {
-        this.model.invoice_name = val.jobcard_num + '-' + val.facility_name
-      }
-    },
+    // 'model.jobcard_id': function (val) {
+    //   if (val) {
+    //     this.getJobcardsFacility(val)
+    //   } else {
+    //     this.model.invoice_name = ''
+    //   }
+    // },
+    // 'jobcards_facility': function (val) {
+    //   if (val) {
+    //     this.model.invoice_name = val.jobcard_num + '-' + val.facility_name
+    //   }
+    // },
     'last_Invoice_ref': function (val) {
       if (this.isNew) {
         if (val) {
@@ -1091,16 +1091,16 @@ export default {
       // val = val.replace(/\\|(^"|"$)/g, '')
       if (val !== '""null""') {
         val.map((item, index) => {
-          console.log(item)
+          // console.log(item)
           if (item.labour || item.parts || item.quotation) {
             if (!this.isNew) {
               console.log(item, 'new')
-              this.invoices.invoicesNetTotal += parseInt(item.net_total)
+              this.invoices.invoicesNetTotal += parseFloat(item.net_total)
               this.invoices.invoicesVatTotal += this.model.vat_rates * item.net_total / 100
             } else {
-              console.log(item, 'old')
-              this.invoices.invoicesNetTotal += parseInt(item.net_total)
-              this.invoices.invoicesVatTotal += parseInt(this.settings.Invoice_vat) * item.net_total / 100
+              // console.log(item, 'old')
+              this.invoices.invoicesNetTotal += parseFloat(item.net_total)
+              this.invoices.invoicesVatTotal += parseFloat(this.settings.Invoice_vat) * item.net_total / 100
             }
           }
           if (item.section) {
@@ -1120,9 +1120,9 @@ export default {
           this.sectionStatus = null
         }
       }
-      this.model.net_amount = this.invoices.invoicesNetTotal
-      this.model.vat_amount = this.invoices.invoicesVatTotal
-      this.model.total_amount = this.invoices.invoicesTotal = parseInt(this.invoices.invoicesNetTotal) + parseInt(this.invoices.invoicesVatTotal)
+      this.model.net_amount = (this.invoices.invoicesNetTotal).toFixed(2)
+      this.model.vat_amount = (this.invoices.invoicesVatTotal).toFixed(2)
+      this.model.total_amount = this.invoices.invoicesTotal = (parseFloat(this.invoices.invoicesNetTotal) + parseFloat(this.invoices.invoicesVatTotal)).toFixed(2)
       this.model.rows = val
     },
     'model.rows': function (val) {
@@ -1194,7 +1194,7 @@ export default {
     this.getLabours()
     this.getMaterials()
     this.getVats()
-    this.getJobcards()
+    // this.getJobcards()
     this.getProjects()
     if (this.isNew) {
       this.getSettings()
@@ -1293,13 +1293,17 @@ export default {
       this.hideModal('updateSectionModalRef')
     },
     LabourRateChange: function () {
-      this.labour.net_labour_price_zar = parseInt(this.labour.labour_quantity) * parseInt(this.labour.labour_rate_zar)
-      this.labour.labour_vat_amount_zar = (this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100
-      this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
+      let labourQuantity = parseFloat(this.labour.labour_quantity).toFixed(2)
+      let labourRateZar = parseFloat(this.labour.labour_rate_zar).toFixed(2)
+      this.labour.net_labour_price_zar = parseFloat(labourQuantity * labourRateZar).toFixed(2)
+      this.labour.labour_vat_amount_zar = (parseFloat(this.labour.labour_vat_rate) * parseFloat(this.labour.net_labour_price_zar)) / 100
+      this.labour.labour_total_zar = (parseFloat(this.labour.net_labour_price_zar) + parseFloat(this.labour.labour_vat_amount_zar.toFixed(2))).toFixed(2)
+      // this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
       // On Edit LabourRate Change
-      this.labour_edit.net_labour_price_zar = parseInt(this.labour_edit.labour_quantity) * parseInt(this.labour_edit.labour_rate_zar)
+      // this.labour_edit.net_labour_price_zar = parseInt(this.labour_edit.labour_quantity) * parseInt(this.labour_edit.labour_rate_zar)
+      this.labour_edit.net_labour_price_zar = parseFloat(this.labour_edit.labour_quantity).toFixed(2) * parseFloat(this.labour_edit.labour_rate_zar).toFixed(2)
       this.labour_edit.labour_vat_amount_zar = (this.labour_edit.labour_vat_rate * this.labour_edit.net_labour_price_zar) / 100
-      this.labour_edit.labour_total_zar = this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar
+      this.labour_edit.labour_total_zar = (this.labour_edit.net_labour_price_zar + this.labour_edit.labour_vat_amount_zar).toFixed(2)
     },
     AddLabour: function () {
       if (this.labour.labour_name === '') {
@@ -1345,13 +1349,21 @@ export default {
       this.rows = previousRows
     },
     PartsRateChange: function () {
-      this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
+      // this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
+      // this.parts.parts_vat_amount_zar = (this.parts.parts_vat_rate * this.parts.net_parts_price_zar) / 100
+      // this.parts.parts_total_zar = this.parts.net_parts_price_zar + this.parts.parts_vat_amount_zar
+      let partsQuantity = parseFloat(this.parts.parts_quantity).toFixed(2)
+      let PartsRateZar = parseFloat(this.parts.parts_rate_zar).toFixed(2)
+      this.parts.net_parts_price_zar = parseFloat(partsQuantity * PartsRateZar).toFixed(2)
       this.parts.parts_vat_amount_zar = (this.parts.parts_vat_rate * this.parts.net_parts_price_zar) / 100
-      this.parts.parts_total_zar = this.parts.net_parts_price_zar + this.parts.parts_vat_amount_zar
+      this.parts.parts_total_zar = (parseFloat(this.parts.net_parts_price_zar) + parseFloat(this.parts.parts_vat_amount_zar.toFixed(2))).toFixed(2)
       // On Edit PartsRate Change
-      this.parts_edit.net_parts_price_zar = parseInt(this.parts_edit.parts_quantity) * parseInt(this.parts_edit.parts_rate_zar)
+      // this.parts_edit.net_parts_price_zar = parseInt(this.parts_edit.parts_quantity) * parseInt(this.parts_edit.parts_rate_zar)
+      // this.parts_edit.parts_vat_amount_zar = (this.parts_edit.parts_vat_rate * this.parts_edit.net_parts_price_zar) / 100
+      // this.parts_edit.parts_total_zar = this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar
+      this.parts_edit.net_parts_price_zar = parseFloat(this.parts_edit.parts_quantity) * parseFloat(this.parts_edit.parts_rate_zar)
       this.parts_edit.parts_vat_amount_zar = (this.parts_edit.parts_vat_rate * this.parts_edit.net_parts_price_zar) / 100
-      this.parts_edit.parts_total_zar = this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar
+      this.parts_edit.parts_total_zar = (this.parts_edit.net_parts_price_zar + this.parts_edit.parts_vat_amount_zar).toFixed(2)
     },
     AddParts: function () {
       this.errors.parts_name = ''
@@ -1458,11 +1470,11 @@ export default {
 
       this.vat_rates = data.ids
     },
-    async getJobcards () {
-      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {})
+    // async getJobcards () {
+    //   let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {})
 
-      this.jobcards = data
-    },
+    //   this.jobcards = data
+    // },
     async getProjects () {
       let { data } = await axios.get(this.$app.route('admin.projects.getdata'), {})
 
@@ -1473,14 +1485,14 @@ export default {
 
       this.project_managers = data
     },
-    async getJobcardsFacility ($id = 0) {
-      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), { params: { id: $id } })
-      if (data) {
-        this.jobcards_facility = data[0]
-      } else {
-        this.jobcards_facility = ''
-      }
-    },
+    // async getJobcardsFacility ($id = 0) {
+    //   let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), { params: { id: $id } })
+    //   if (data) {
+    //     this.jobcards_facility = data[0]
+    //   } else {
+    //     this.jobcards_facility = ''
+    //   }
+    // },
     async getSettings () {
       let { data } = await axios.get(this.$app.route('admin.settings.getdata'), {})
       this.settings.company_name = data.company_name

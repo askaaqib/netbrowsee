@@ -63,6 +63,7 @@ export default {
   data () {
     return {
       selected: [],
+      clerk: false,
       fields: [
         { key: 'checkbox' },
         { key: 'jobcard_num', label: this.$t('validation.jobcards.jobcard_num'), sortable: true },
@@ -75,6 +76,7 @@ export default {
       }
     }
   },
+  created () {},
   methods: {
     dataLoadProvider (ctx) {
       return this.$refs.datasource.loadData(ctx.sortBy, ctx.sortDesc)

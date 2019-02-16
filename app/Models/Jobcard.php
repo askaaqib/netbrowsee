@@ -39,6 +39,8 @@ class Jobcard extends Model
         //'during_pictures',
         'after_pictures',
         'projects_id',
+        'projectmanager_id',
+        'attachment_receipt'
         //'labour_rates_id',
         //'materials_rates_id',
     ];

@@ -118,10 +118,10 @@ class EloquentJobcardRepository extends EloquentBaseRepository implements Jobcar
             //$jobcard->user_id = auth()->id();
         }
 
-        if (Jobcard::PUBLISHED === $jobcard->status && ! Gate::check('publish jobcards')) {
-            // User with no publish permissions must go to moderation awaiting
-            $jobcard->status = Jobcard::PENDING;
-        }
+        // if (Jobcard::PUBLISHED === $jobcard->status && ! Gate::check('publish jobcards')) {
+        //     // User with no publish permissions must go to moderation awaiting
+        //     $jobcard->status = Jobcard::PENDING;
+        // }
 
         DB::transaction(function () use ($jobcard, $input) {
             if (! $jobcard->save()) {

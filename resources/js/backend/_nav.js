@@ -19,7 +19,7 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       name: i18n.t('labels.backend.jobcards.titles.main'),
       url: '/jobcards',
       icon: 'fe fe-grid',
-      access: app.user.can('view')
+      access: app.user.can('view jobcards')
     },
     {
       name: i18n.t('labels.backend.projects.titles.main'),
