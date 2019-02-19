@@ -64,8 +64,8 @@ export default {
       )
     },
     async fetchData () {
-      await this.$store.dispatch('LOAD_COUNTERS')
-      this.initNav()
+      // await this.$store.dispatch('LOAD_COUNTERS')
+      // this.initNav()
     }
   }
 }

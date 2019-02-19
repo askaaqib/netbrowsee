@@ -8,11 +8,13 @@
             <address class="form-group">
               <template v-if="settings.company_address">
                 <h5>Company Address:</h5>
-                <p>{{ settings.company_address }}</p>
+                <!-- <p>{{ settings.company_address }}</p> -->
+                <p class="line" v-for="seprate in settings.company_address.split('\n')">{{ seprate }}</p>
               </template>
               <template v-else-if="model.company_logo">
                 <h5>Company Address:</h5>
-                <p>{{ model.company_address }}</p>
+                <!--  <p>{{ model.company_address }}</p> -->
+                <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
               </template>
             </address>
           </b-col>
@@ -1046,6 +1048,11 @@ export default {
     }
   },
   watch: {
+    'invoices.invoicesNetTotal': function (val) {
+      if (val) {
+        // this.invoices.invoicesNetTotal = (val).toFixed(2)
+      }
+    },
     'model.project_id': function (val, oldval) {
       if (val) {
         this.getProjectManagers(val)
@@ -1096,7 +1103,7 @@ export default {
             if (!this.isNew) {
               console.log(item, 'new')
               this.invoices.invoicesNetTotal += parseFloat(item.net_total)
-              this.invoices.invoicesVatTotal += this.model.vat_rates * item.net_total / 100
+              this.invoices.invoicesVatTotal += parseFloat(this.model.vat_rates * item.net_total / 100)
             } else {
               // console.log(item, 'old')
               this.invoices.invoicesNetTotal += parseFloat(item.net_total)
@@ -1124,6 +1131,7 @@ export default {
       this.model.vat_amount = (this.invoices.invoicesVatTotal).toFixed(2)
       this.model.total_amount = this.invoices.invoicesTotal = (parseFloat(this.invoices.invoicesNetTotal) + parseFloat(this.invoices.invoicesVatTotal)).toFixed(2)
       this.model.rows = val
+      this.invoices.invoicesNetTotal = this.invoices.invoicesNetTotal.toFixed(2)
     },
     'model.rows': function (val) {
       // console.log(typeof val)

@@ -1977,6 +1977,11 @@ export default {
                     "updated": "District updated",
                     "deleted": "District deleted"
                 },
+                "project_managers": {
+                    "created": "ProjectManager created",
+                    "updated": "ProjectManager updated",
+                    "deleted": "ProjectManager deleted"
+                },
                 "SubDistrict": {
                     "created": "SubDistrict created",
                     "updated": "SubDistrict updated",

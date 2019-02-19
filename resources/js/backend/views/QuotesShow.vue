@@ -16,7 +16,8 @@
               <address class="form-group">
                 <h5 v-if="model.company_address">Company Address:</h5>
                 <!-- <p>{{ model.company_address }}</p> -->
-                <p v-html="settings.company_address"></p>
+                <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
+                <!-- <p v-html="settings.company_address"></p> -->
               </address>
             </b-col>
             <b-col sm="6">
@@ -683,6 +684,7 @@ export default {
       rowsRemember: null,
       attachmentpictures: [],
       jsonParseImgAttach: false,
+      setAddress: null,
       client_search: {
         search_client: null,
         client_info_get: [],
@@ -802,7 +804,7 @@ export default {
       }
     },
     'model.jobcard.attachment_receipt': function (val) {
-      console.log(val)
+      // console.log(val)
       if (val && val.length > 0) {
         if (!this.isNew && !this.jsonParseImgAttach) {
           this.jsonParseImgAttach = true
@@ -836,17 +838,15 @@ export default {
       }
     },
     'rows': function (val) {
-      this.quotes.quotesNetTotal = 0.00
-      this.quotes.quotesVatTotal = 0.00
       var saveVal = 'empty'
       val.forEach((item, index) => {
         if (item.labour || item.parts) {
           if (!this.isNew) {
-            this.quotes.quotesNetTotal += parseInt(item.net_total).toFixed(2)
-            this.quotes.quotesVatTotal += this.model.vat_rates.toFixed(2) * item.net_total.toFixed(2) / 100
+            this.quotes.quotesNetTotal += parseFloat(item.net_total).toFixed(2)
+            this.quotes.quotesVatTotal += parseFloat(this.model.vat_rates).toFixed(2) * parseFloat(item.net_total).toFixed(2) / 100
           } else {
-            this.quotes.quotesNetTotal += parseInt(item.net_total).toFixed(2)
-            this.quotes.quotesVatTotal += this.settings.quote_vat.toFixed(2) * item.net_total.toFixed(2) / 100
+            this.quotes.quotesNetTotal += parseFloat(item.net_total).toFixed(2)
+            this.quotes.quotesVatTotal += parseFloat(this.settings.quote_vat).toFixed(2) * parseFloat(item.net_total).toFixed(2) / 100
           }
         }
         if (item.section) {
@@ -865,9 +865,9 @@ export default {
       if (val.length === 0) {
         this.sectionStatus = null
       }
-      this.model.net_amount = (this.quotes.quotesNetTotal).toFixed(2)
-      this.model.vat_amount = (this.quotes.quotesVatTotal).toFixed(2)
-      this.model.total_amount = (this.quotes.quotesTotal = parseInt(this.quotes.quotesNetTotal) + parseInt(this.quotes.quotesVatTotal)).toFixed(2)
+      this.model.net_amount = parseFloat(this.quotes.quotesNetTotal).toFixed(2)
+      this.model.vat_amount = parseFloat(this.quotes.quotesVatTotal).toFixed(2)
+      this.model.total_amount = (this.quotes.quotesTotal = parseFloat(this.quotes.quotesNetTotal) + parseFloat(this.quotes.quotesVatTotal)).toFixed(2)
       this.model.rows = val
     },
     'model.rows': function (val) {
