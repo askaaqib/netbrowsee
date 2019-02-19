@@ -2,6 +2,9 @@
   "backend.css": "/build/css/backend.css",
   "backend.js": "/build/js/backend.js",
   "vendor-backend.js": "/build/js/vendor-backend.js",
+<<<<<<< HEAD
   "fonts/app.scss": "/build/fonts/feather-webfont.svg?68bee8ffe37eb3cbfc76f1d1a17b0d49",
+=======
+>>>>>>> c112cb61e38e09ac08c7342114bc8a2fd9ba142d
   "images/logo.png": "/build/images/logo.png?dac075a09aa1174c83763064939c77c8"
 }

@@ -17,7 +17,8 @@
               <address class="form-group">
                 <h5 v-if="model.company_address">Company Address:</h5>
                 <!-- <p>{{ model.company_address }}</p> -->
-                <p v-html="settings.company_address"></p>
+               <!--  <p v-html="settings.company_address"></p> -->
+               <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
                 <!--  <p>{{ model.company_address }}</p> -->
               </address>
             </b-col>
@@ -656,7 +657,7 @@ export default {
       labour_rates: [],
       materials_rates: [],
       vat_rates: [],
-      jobcards: [],
+      // jobcards: [],
       projects: [],
       project_managers: [],
       today_date: null,
@@ -666,7 +667,7 @@ export default {
       labour_edit_index: null,
       parts_edit_index: null,
       section_select: 'null',
-      jobcards_facility: [],
+      // jobcards_facility: [],
       last_Invoice_ref: null,
       labourTabIndex: 0,
       sectionStatus: null,
@@ -738,7 +739,7 @@ export default {
         labour_rates: null,
         materials_rates: null,
         vat_rates: null,
-        jobcard_id: null,
+        // jobcard_id: null,
         project_id: null,
         project_managers_id: null,
         general_vat_rate: 15.00,
@@ -778,18 +779,18 @@ export default {
         }
       }
     },
-    'model.jobcard_id': function (val) {
-      if (val) {
-        this.getJobcardsFacility(val)
-      } else {
-        this.model.quotation_name = ''
-      }
-    },
-    'jobcards_facility': function (val) {
-      if (val) {
-        this.model.quotation_name = val.jobcard_num + '-' + val.facility_name
-      }
-    },
+    // 'model.jobcard_id': function (val) {
+    //   if (val) {
+    //     this.getJobcardsFacility(val)
+    //   } else {
+    //     this.model.quotation_name = ''
+    //   }
+    // },
+    // 'jobcards_facility': function (val) {
+    //   if (val) {
+    //     this.model.quotation_name = val.jobcard_num + '-' + val.facility_name
+    //   }
+    // },
     'last_Invoice_ref': function (val) {
       if (val) {
         this.model.quotation_number = parseInt(val) + 1
@@ -888,7 +889,7 @@ export default {
     this.getLabours()
     this.getMaterials()
     this.getVats()
-    this.getJobcards()
+    // this.getJobcards()
     this.getProjects()
     this.getSettings()
     this.getInvoicesReference()
@@ -1146,11 +1147,11 @@ export default {
 
       this.vat_rates = data.ids
     },
-    async getJobcards () {
-      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {})
+    // async getJobcards () {
+    //   let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {})
 
-      this.jobcards = data
-    },
+    //   this.jobcards = data
+    // },
     async getProjects () {
       let { data } = await axios.get(this.$app.route('admin.projects.getdata'), {})
 
@@ -1161,14 +1162,14 @@ export default {
 
       this.project_managers = data
     },
-    async getJobcardsFacility ($id = 0) {
-      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), { params: { id: $id } })
-      if (data) {
-        this.jobcards_facility = data[0]
-      } else {
-        this.jobcards_facility = ''
-      }
-    },
+    // async getJobcardsFacility ($id = 0) {
+    //   let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), { params: { id: $id } })
+    //   if (data) {
+    //     this.jobcards_facility = data[0]
+    //   } else {
+    //     this.jobcards_facility = ''
+    //   }
+    // },
     async getSettings () {
       let { data } = await axios.get(this.$app.route('admin.settings.getdata'), {})
       this.settings.company_name = data.company_name

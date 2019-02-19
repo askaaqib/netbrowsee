@@ -26103,4 +26103,8 @@ form.invoices-form .table > thead > tr > th {
   font-size: 14px;
 }
 
+.line {
+  line-height: 0.4;
+}
+
 

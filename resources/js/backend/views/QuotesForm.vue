@@ -8,11 +8,13 @@
             <address class=" newwidth form-group">
               <template id="newwidth" v-if="settings.company_address">
                 <h5>Company Address:</h5>
-                <p>{{ settings.company_address }}</p>
+                <!-- <p>{{ settings.company_address }}</p> -->
+                <p class="line" v-for="seprate in settings.company_address.split('\n')">{{ seprate }}</p>
               </template>
               <template v-else-if="model.company_logo">
                 <h5>Company Address:</h5>
-                <p>{{ model.company_address }}</p>
+                <!-- <p v-html="settings.company_address"></p> -->
+                <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
               </template>
             </address>
           </b-col>
@@ -972,6 +974,11 @@ export default {
     }
   },
   watch: {
+    'quotes.quotesNetTotal': function (val) {
+      if (val) {
+        // this.quotes.quotesNetTotal = this.quotes.quotesNetTotal.toFixed(2)
+      }
+    },
     'model.project_id': function (val, oldval) {
       if (val) {
         this.getProjectManagers(val)
@@ -1016,11 +1023,11 @@ export default {
       val.forEach((item, index) => {
         if (item.labour || item.parts) {
           if (!this.isNew) {
-            this.quotes.quotesNetTotal += parseFloat(item.net_total).toFixed(2)
-            this.quotes.quotesVatTotal += (this.model.vat_rates * item.net_total) / 100
+            this.quotes.quotesNetTotal += parseFloat(item.net_total)
+            this.quotes.quotesVatTotal += parseFloat(this.model.vat_rates * item.net_total) / 100
           } else {
             this.quotes.quotesNetTotal += parseFloat(item.net_total)
-            this.quotes.quotesVatTotal += (this.settings.quote_vat * item.net_total) / 100
+            this.quotes.quotesVatTotal += parseFloat(this.settings.quote_vat * item.net_total) / 100
           }
         }
         if (item.section) {
@@ -1035,14 +1042,16 @@ export default {
           }
         }
       })
-
+      // -------------------------------------------------------------------------------------------------------------------------
       if (val.length === 0) {
         this.sectionStatus = null
       }
-      this.model.net_amount = this.quotes.quotesNetTotal
+      this.model.net_amount = parseFloat(this.quotes.quotesNetTotal).toFixed(2)
       this.model.vat_amount = parseFloat(this.quotes.quotesVatTotal)
-      this.model.total_amount = this.quotes.quotesTotal = (parseFloat(this.quotes.quotesNetTotal) + parseFloat(this.quotes.quotesVatTotal)).toFixed(2)
+      this.quotes.quotesTotal = (parseFloat(this.quotes.quotesNetTotal) + parseFloat(this.quotes.quotesVatTotal)).toFixed(2)
+      this.model.total_amount = this.quotes.quotesTotal
       this.model.rows = val
+      this.quotes.quotesNetTotal = this.quotes.quotesNetTotal.toFixed(2)
     },
     'model.rows': function (val) {
       // console.log(typeof val)
