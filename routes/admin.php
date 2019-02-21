@@ -26,6 +26,7 @@ Route::get('quotations/lastref', 'AjaxController@getQuotationsRecentReference')-
 Route::get('clients/search', 'AjaxController@searchClients')->name('clients.searchclients');
 Route::get('quotations/search', 'AjaxController@searchQuotes')->name('quotations.searchquotes');
 Route::post('jobcards/removeimage', 'AjaxController@JobcardRemoveImage')->name('jobcards.removeimage');
+Route::get('invoices/lastref', 'AjaxController@getInvoicesRecentReference')->name('invoices.getreference');
 
 /* JobCard Routes */
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');

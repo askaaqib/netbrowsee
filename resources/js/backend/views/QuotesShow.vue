@@ -16,7 +16,9 @@
               <address class="form-group">
                 <h5 v-if="model.company_address">Company Address:</h5>
                 <!-- <p>{{ model.company_address }}</p> -->
-                <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
+                <template v-for="(seprate, index) in model.company_address.split('\n')">
+                  <p class="line" :key="index">{{ seprate }}</p>
+                </template>
                 <!-- <p v-html="settings.company_address"></p> -->
               </address>
             </b-col>
@@ -825,17 +827,17 @@ export default {
       }
     },
     'last_quote_ref': function (val) {
-      if (val) {
-        this.model.quotation_number = parseInt(val) + 1
-      } else {
-        // check value quote ref start from settings
-        if (this.settings.quote_ref_start) {
-          this.model.quotation_number = this.settings.quote_ref_start + 1
-        } else {
-          alert('Please Add Quote Reference Start From Settings')
-          this.$router.push('/settings')
-        }
-      }
+      // if (val) {
+      //   this.model.quotation_number = parseInt(val) + 1
+      // } else {
+      //   // check value quote ref start from settings
+      //   if (this.settings.quote_ref_start) {
+      //     this.model.quotation_number = this.settings.quote_ref_start + 1
+      //   } else {
+      //     alert('Please Add Quote Reference Start From Settings')
+      //     this.$router.push('/settings')
+      //   }
+      // }
     },
     'rows': function (val) {
       var saveVal = 'empty'

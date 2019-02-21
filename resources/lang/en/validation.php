@@ -264,7 +264,8 @@ return [
       'company_logo'=> 'Company Logo',
       'bank_account'=> 'Bank Account',
       'quote_ref_start'=> 'Quote Reference Start',
-      'quote_ref_alphabet'=> 'Reference Start Characters',
+      'quote_ref_alphabet'=> 'Quote Reference Start Characters',
+      'invoice_ref_alphabet'=> 'Invoice Reference Start Characters',
       'quote_vat'=> 'Quote Vat Rate', 
       'invoice_ref_start' => 'Invoice Reference Start'                   
     ],
@@ -280,9 +281,10 @@ return [
       'vat_id'=>'Vat Rates',
       'quotations_id'=>'Quotation',
       'invoice_name' => 'Name',
+      'invoice_status' => 'Status',
       'invoice_reference' => 'Reference No',
       'client_email' => 'Client Email',
       'invoice_date' => 'Invoice Date',
-      'jobcard_id'          => 'Jobcard'             
+      'jobcard_id'          => 'Jobcard'
     ],
 ];

@@ -9,12 +9,16 @@
               <template id="newwidth" v-if="settings.company_address">
                 <h5>Company Address:</h5>
                 <!-- <p>{{ settings.company_address }}</p> -->
-                <p class="line" v-for="seprate in settings.company_address.split('\n')">{{ seprate }}</p>
+                <template v-for="(seprate, index) in settings.company_address.split('\n')">
+                  <p class="line" :key="index">{{ seprate }}</p>
+                </template>
               </template>
               <template v-else-if="model.company_logo">
                 <h5>Company Address:</h5>
                 <!-- <p v-html="settings.company_address"></p> -->
-                <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
+                <template v-for="(seprate, index) in model.company_address.split('\n')">
+                  <p class="line" :key="index">{{ seprate }}</p>
+                </template>
               </template>
             </address>
           </b-col>
@@ -243,10 +247,10 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th style="text-align:right">Quantity</th>
+                  <th style="text-align:left">Quantity</th>
                   <th>Net Amount</th>
-                  <th style="text-align:right">Net Total</th>
-                  <th style="text-align:right">Actions</th>
+                  <th style="text-align:left">Net Total</th>
+                  <th style="text-align:left">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -1052,6 +1056,7 @@ export default {
       this.model.total_amount = this.quotes.quotesTotal
       this.model.rows = val
       this.quotes.quotesNetTotal = this.quotes.quotesNetTotal.toFixed(2)
+      this.quotes.quotesVatTotal = this.quotes.quotesVatTotal.toFixed(2)
     },
     'model.rows': function (val) {
       // console.log(typeof val)

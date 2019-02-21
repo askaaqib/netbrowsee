@@ -1,5 +1,5 @@
 <template>
-  <vue-dropzone
+  <vueDropzone
     ref="myVueDropzone"
     @vdropzone-success="filesAdded"
     @vdropzone-removed-file="fileRemoved"
@@ -8,7 +8,7 @@
     v-model="before_pictures"
     :options="dropzoneOptions"
   >
-  </vue-dropzone>
+  </vueDropzone>
 </template>
 
 <script>

@@ -71,6 +71,22 @@
             </b-form-group>
 
             <b-form-group
+              :label="$t('validation.settings.invoice_ref_alphabet')"
+              label-for="invoice_ref_alphabet"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('invoice_ref_alphabet')"
+            >
+              <b-form-input
+                id="invoice_ref_alphabet"
+                name="invoice_ref_alphabet"
+                :placeholder="$t('validation.settings.invoice_ref_alphabet')"
+                v-model="model.invoice_ref_alphabet"
+                :state="state('invoice_ref_alphabet')"
+              ></b-form-input>
+            </b-form-group>
+
+            <b-form-group
               :label="$t('validation.settings.quote_ref_start')"
               label-for="quote_ref_start"
               horizontal
@@ -204,6 +220,7 @@ export default {
         bank_account: null,
         quote_ref_start: null,
         quote_ref_alphabet: null,
+        invoice_ref_alphabet: null,
         quote_vat: null,
         invoice_ref_start: null,
         district: 0

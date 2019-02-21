@@ -9,12 +9,16 @@
               <template v-if="settings.company_address">
                 <h5>Company Address:</h5>
                 <!-- <p>{{ settings.company_address }}</p> -->
-                <p class="line" v-for="seprate in settings.company_address.split('\n')">{{ seprate }}</p>
+                <template v-for="(seprate, index) in settings.company_address.split('\n')">
+                  <p class="line" :key="index">{{ seprate }}</p>
+                </template>
               </template>
               <template v-else-if="model.company_logo">
                 <h5>Company Address:</h5>
                 <!--  <p>{{ model.company_address }}</p> -->
-                <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
+                <template v-for="(seprate, index) in model.company_address.split('\n')">
+                  <p class="line" :key="index">{{ seprate }}</p>
+                </template>
               </template>
             </address>
           </b-col>
@@ -250,10 +254,10 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th style="text-align:right">Quantity</th>
+                  <th style="text-align:left">Quantity</th>
                   <th>Net Amount</th>
-                  <th style="text-align:right">Net Total</th>
-                  <th style="text-align:right">Actions</th>
+                  <th style="text-align:left">Net Total</th>
+                  <th style="text-align:left">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -384,6 +388,13 @@
           </b-col>
         </b-row>
         <!-- Bank Details & Total Amount Section Ends -->
+        <!-- Invoice Status -->
+        <div class="well">
+          <b-form-group label="Invoice Status">
+            <b-form-select v-model="model.invoice_status" :options="statusOptions"></b-form-select>
+          </b-form-group>
+        </div>
+        <!-- Invoice Status -->
         <b-row slot="footer">
           <b-col md>
             <b-button to="/invoices" exact variant="danger" size="md">
@@ -483,7 +494,7 @@
                 <div class="part-list">
                   <input type="hidden" :class="'part_json_' +quotee.id" v-model="quote_search.quote_searched_data">
                   <h4 class="part-name">{{ quotee.quotation_name }}</h4>
-                  <p><b>Reference: </b>{{ quotee.quotation_digit }}-{{ quotee.quotation_number }} </p>
+                  <p><b>Quote Reference: </b>{{ quotee.quotation_digit }}-{{ quotee.quotation_number }} </p>
                   <p><b>Date: </b>{{ quotee.quotation_date }}</p>
                   <p><b>Client Email: </b>{{ quotee.client_email }}</p>
                   <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedQuote(index)">Select<i class="fe fe-check"></i></b-btn>
@@ -928,6 +939,11 @@ export default {
       labour_rates: [],
       materials_rates: [],
       vat_rates: [],
+      statusOptions: [
+        { value: 'unpaid', text: 'Unpaid' },
+        { value: 'paid', text: 'Paid' },
+        { value: 'overdue', text: 'Overdue' }
+      ],
       // jobcards: [],
       projects: [],
       project_managers: [],
@@ -1029,7 +1045,8 @@ export default {
         bank_account: null,
         company_address: null,
         company_logo: null,
-        invoice_date: null
+        invoice_date: null,
+        invoice_status: 'unpaid'
       },
       invoices: {
         invoicesNetTotal: 0.00,
@@ -1508,7 +1525,7 @@ export default {
       this.settings.company_logo = data.company_logo
       this.settings.bank_account = data.bank_account
       this.settings.Invoice_ref_start = data.invoice_ref_start
-      this.settings.Invoice_ref_alphabet = data.quote_ref_alphabet
+      this.settings.Invoice_ref_alphabet = data.invoice_ref_alphabet
       this.settings.Invoice_vat = data.quote_vat
       // Assign the general/settings vat rate value to labour and parts vat rate
       if (data.quote_vat) {
@@ -1519,7 +1536,7 @@ export default {
       }
     },
     async getInvoicesReference () {
-      let { data } = await axios.get(this.$app.route('admin.quotations.getreference'), {})
+      let { data } = await axios.get(this.$app.route('admin.invoices.getreference'), {})
       this.last_Invoice_ref = data.invoice_number
     },
     showModal (ModalRef) {

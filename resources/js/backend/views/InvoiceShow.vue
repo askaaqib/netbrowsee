@@ -17,8 +17,10 @@
               <address class="form-group">
                 <h5 v-if="model.company_address">Company Address:</h5>
                 <!-- <p>{{ model.company_address }}</p> -->
-               <!--  <p v-html="settings.company_address"></p> -->
-               <p class="line" v-for="seprate in model.company_address.split('\n')">{{ seprate }}</p>
+                <!--  <p v-html="settings.company_address"></p> -->
+                <template v-for="(seprate, index) in model.company_address.split('\n')">
+                  <p class="line" :key="index">{{ seprate }}</p>
+                </template>
                 <!--  <p>{{ model.company_address }}</p> -->
               </address>
             </b-col>
