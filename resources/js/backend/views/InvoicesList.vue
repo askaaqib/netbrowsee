@@ -40,6 +40,9 @@
             <span v-text="row.item.invoice_digit"></span>-
             <span v-text="row.item.invoice_number"></span>
           </template>
+          <template slot="invoice_status" slot-scope="row">
+            <span style="text-transform: capitalize;" v-text="row.item.invoice_status"></span>
+          </template>
           <template slot="invoices.created_at" slot-scope="row">
             {{ row.item.created_at }}
           </template>
@@ -78,6 +81,7 @@ export default {
         { key: 'net_amount', label: this.$t('validation.invoices.net_amount'), sortable: true },
         { key: 'vat_amount', label: this.$t('validation.invoices.vat_amount'), sortable: true },
         { key: 'total_amount', label: this.$t('validation.invoices.total_amount'), sortable: true },
+        { key: 'invoice_status', label: this.$t('validation.invoices.invoice_status') },
         { key: 'invoices.created_at', label: this.$t('labels.created_at'), 'class': 'text-center', sortable: true },
         { key: 'invoices.updated_at', label: this.$t('labels.updated_at'), 'class': 'text-center', sortable: true },
         { key: 'actions', label: this.$t('labels.actions'), 'class': 'nowrap' }

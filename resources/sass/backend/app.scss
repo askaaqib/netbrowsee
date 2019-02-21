@@ -312,4 +312,28 @@ body * {
 .line{
 line-height: 0.4;
 }
-
+.w-45 {
+  width: 45%;
+}
+#jobPartsTableDiv {
+  table {
+    thead {
+      tr {
+        th:first-child {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+#jobPartsTableDivShow {
+  table {
+    thead {
+      tr {
+        th:first-child {
+          width: 60%;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <vue-dropzone
+  <vueDropzone
     ref="myVueDropzone"
     @vdropzone-success="filesAddedEdit"
     @vdropzone-removed-file="fileRemovedEdit"
@@ -7,7 +7,7 @@
     v-model="before_pictures_edit"
     :options="dropzoneOptionsEdit"
   >
-  </vue-dropzone>
+  </vueDropzone>
 </template>
 
 <script>

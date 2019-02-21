@@ -28,7 +28,8 @@ class Invoices extends Model
 			"rows",
 			"bank_account" ,
 			"company_address",
-			"company_logo" 
+			"company_logo",
+			"invoice_status" 
 	];
 
    	protected $table = 'invoices';

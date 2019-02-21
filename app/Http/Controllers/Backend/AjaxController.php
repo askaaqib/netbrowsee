@@ -24,6 +24,7 @@ use App\Repositories\Contracts\SubDistrictRepository;
 use App\Models\Jobcard;
 use App\Models\Settings;
 use App\Models\Quotes;
+use App\Models\Invoices;
 use App\Models\User;
 
 class AjaxController extends Controller
@@ -344,6 +345,13 @@ class AjaxController extends Controller
     {
         $quote = Quotes::orderBy('id', 'DESC')->first();       
         return $quote;
+       
+    }
+
+    public function getInvoicesRecentReference()
+    {
+        $invoice = Invoices::orderBy('id', 'DESC')->first();       
+        return $invoice;
        
     }
     /**
