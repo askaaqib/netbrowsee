@@ -313,9 +313,7 @@
                     </td>
                   </template>
                   <template v-else-if="row.quotation">
-                    <td>
-                      {{ row.quotation }}
-                    </td>
+                    <td v-text="row.quotation"></td>
                     <td>
                       {{ row.quantity }}
                     </td>
@@ -1287,7 +1285,7 @@ export default {
       var currentIndex = this.quote_search.quote_info_get[index]
       var quotationName = currentIndex.quotation_name
       var quotationReference = currentIndex.quotation_digit + '-' + currentIndex.quotation_number
-      var quotationFullName = 'Quote Name:' + quotationName + ' Quote:' + quotationReference
+      var quotationFullName = quotationName + ' Quote Reference:' + quotationReference
       this.rows.push({ quotation: quotationFullName, quantity: 1, net_total: currentIndex.net_amount, net_amount: currentIndex.net_amount, total_amount: currentIndex.total_amount })
       this.hideModal('AddQuotes')
       // console.log(this.rows)

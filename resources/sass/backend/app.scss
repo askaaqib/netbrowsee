@@ -261,28 +261,31 @@ form.invoices-form .table > thead > tr > th {
     background: #303030 !important;
     text-shadow: none;
     color: #fff !important;
-}
+  }
 
-body * {
-    visibility: hidden;
+  body * {
+      visibility: hidden;
+    }
+    #Invoices-view, #quotes-view, #quotes-view *,  #Invoices-view * {
+      visibility: visible;
+    }
+    #Invoices-view, #quotes-view {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  // .action{
+  //     display: flex;
+  //     align-items: center !important;
+  //     justify-content: center !important;
+  //     height: 100vh !important;
+  // }
+  .texty{
+    font-size: 1.2em !important;
   }
-  #Invoices-view, #quotes-view, #quotes-view *,  #Invoices-view * {
-    visibility: visible;
+  @page {
+    margin: 2cm 1cm 7cm 1cm;
   }
-  #Invoices-view, #quotes-view {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-// .action{
-//     display: flex;
-//     align-items: center !important;
-//     justify-content: center !important;
-//     height: 100vh !important;
-// }
-.texty{
-  font-size: 1.2em !important;
-}
 }
 .my-table th, .my-table td {
   padding: 0.15rem !important;
@@ -290,14 +293,14 @@ body * {
 #manage{
     border: 1px 
     solid rgb(204, 204, 204);
-    height: 200px;
+    height: 165px;
     width: 450px;
     padding-right: 1px;
 }
 #right{
     border: 1px 
     solid rgb(204, 204, 204);
-    height: 200px;
+    height: 165px;
     width: 450px;
     padding-left: 1px;
     text-align: right;
@@ -326,8 +329,22 @@ line-height: 0.4;
     }
   }
 }
+#quotes-view {
+  font-size: 12px;
+}
 #jobPartsTableDivShow {
   table {
+    tr {
+      th {
+       padding: 2px 10px;   
+      }
+      td {
+        h3 {
+          margin: 0;
+        }
+       padding: 2px 10px;   
+      }
+    }
     thead {
       tr {
         th:first-child {

@@ -219,6 +219,7 @@
                 :state="state('materials_paid')"
               ></b-form-input>
             </b-form-group>
+
             <b-form-group
               :label="$t('validation.jobcards.status')"
               label-for="status"
@@ -229,7 +230,7 @@
               <b-select
                 v-model="model.status"
               >
-                <option value="">Please Select Status</option>
+                <option value="null">Please Select Status</option>
                 <option value="1" data-foo="Received">Received</option>
                 <option value="2" data-foo="Assigned">Assigned</option>
                 <option value="3" data-foo="On Hold">On Hold</option>
@@ -240,6 +241,7 @@
                 <option value="8" data-foo="Cancelled">Cancelled</option>
               </b-select>
             </b-form-group>
+
             <b-form-group
               :label="$t('validation.jobcards.assigned_to')"
               label-for="contractor_id"
@@ -251,6 +253,23 @@
                 <option value="">Please Select User to assign</option>
                 <option v-for="(option, index) in assigned_to" :key="index" :value="option.id">
                   {{ option.name }}
+                </option>
+              </b-select>
+            </b-form-group>
+
+            <b-form-group
+              :label="$t('validation.jobcards.vat_rate_id')"
+              label-for="vat_rate_id"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('vat_rate_id')"
+            >
+              <b-select
+                v-model="model.vat_rate_id"
+              >
+                <option value="null">Please Select Vat Rate</option>
+                <option v-for="(vat, index) in vat_rates" :key="index" :value="vat.id">
+                  {{ vat.name }}
                 </option>
               </b-select>
             </b-form-group>
@@ -421,6 +440,7 @@ export default {
             .content
         }
       },
+      vat_rates: [],
       labour_rates: [],
       projects: [],
       project_manager: [],
@@ -447,6 +467,7 @@ export default {
         travelling_paid: null,
         contractor_id: '',
         status: null,
+        vat_rate_id: null,
         before_pictures: [],
         before_pictures_edit: [],
         after_pictures: [],
@@ -512,6 +533,7 @@ export default {
     this.getQuotations()
     this.getdistrict()
     this.getsubdistrict()
+    this.getVatRates()
   },
   methods: {
     changeBeforeGalleryImage (images) {
@@ -637,6 +659,10 @@ export default {
     async getQuotations () {
       let { data } = await axios.get(this.$app.route('admin.quotations.getdata'), {})
       this.quotations = data
+    },
+    async getVatRates () {
+      let { data } = await axios.get(this.$app.route('admin.vats.getdata'), {})
+      this.vat_rates = data
     }
   }
 }

@@ -29,7 +29,7 @@ export default {
         maxFiles: 9,
         addRemoveLinks: true,
         clickable: true,
-        acceptedFiles: 'image/*',
+        acceptedFiles: 'image/*,.pdf',
         dictDefaultMessage: 'Drop Images here to upload.',
         headers: {
           'X-CSRF-TOKEN': document.head.querySelector('[name=csrf-token]')

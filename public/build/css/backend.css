@@ -1101,7 +1101,7 @@ span.flatpickr-weekday {
 
 /*!
  * CoreUI - Open Source Dashboard UI Kit
- * @version v2.0.10
+ * @version v2.0.6
  * @link https://coreui.io
  * Copyright (c) 2018 creativeLabs Łukasz Holeczek
  * Licensed under MIT (https://coreui.io/license)
@@ -15826,18 +15826,6 @@ canvas {
     display: none;
   }
 
-  .sidebar-minimized .sidebar .sidebar-minimizer {
-    position: fixed;
-    bottom: 0;
-    width: 50px;
-    height: 50px;
-    background-color: #292d32;
-  }
-
-  .sidebar-minimized .sidebar .sidebar-nav {
-    padding-bottom: 50px;
-  }
-
   .sidebar-minimized .sidebar .sidebar-minimizer::before {
     width: 100%;
     -webkit-transform: rotate(-180deg);
@@ -17475,7 +17463,6 @@ html[dir="rtl"] .aside-menu-show .aside-menu {
 
   .app-header .navbar-brand {
     position: absolute;
-    top: 0;
     left: 50%;
     margin-left: -77.5px;
   }
@@ -20500,7 +20487,7 @@ body.swal2-toast-column .swal2-toast .swal2-input {
   font-size: 1em;
 }
 
-body.swal2-toast-column .swal2-toast .swal2-validation-message {
+body.swal2-toast-column .swal2-toast .swal2-validationerror {
   font-size: 1em;
 }
 
@@ -21227,8 +21214,6 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-actions {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -21295,7 +21280,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-styled {
-  margin: .3125em;
+  margin: 0 .3125em;
   padding: .625em 2em;
   font-weight: 500;
   -webkit-box-shadow: none;
@@ -21539,7 +21524,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   margin: 0 .4em;
 }
 
-.swal2-popup .swal2-validation-message {
+.swal2-popup .swal2-validationerror {
   display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -21555,7 +21540,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   overflow: hidden;
 }
 
-.swal2-popup .swal2-validation-message::before {
+.swal2-popup .swal2-validationerror::before {
   display: inline-block;
   width: 1.5em;
   min-width: 1.5em;
@@ -21880,20 +21865,6 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
-  }
-}
-
-@media print {
-  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
-    overflow-y: scroll !important;
-  }
-
-  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) > [aria-hidden='true'] {
-    display: none;
-  }
-
-  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container {
-    position: initial !important;
   }
 }
 
@@ -22512,7 +22483,7 @@ body.swal2-toast-column .swal2-toast .swal2-input {
   font-size: 1em;
 }
 
-body.swal2-toast-column .swal2-toast .swal2-validation-message {
+body.swal2-toast-column .swal2-toast .swal2-validationerror {
   font-size: 1em;
 }
 
@@ -23139,8 +23110,6 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-actions {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -23207,7 +23176,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-styled {
-  margin: .3125em;
+  margin: 0 .3125em;
   padding: .625em 2em;
   font-weight: 500;
   -webkit-box-shadow: none;
@@ -23451,7 +23420,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   margin: 0 .4em;
 }
 
-.swal2-popup .swal2-validation-message {
+.swal2-popup .swal2-validationerror {
   display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -23467,7 +23436,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   overflow: hidden;
 }
 
-.swal2-popup .swal2-validation-message::before {
+.swal2-popup .swal2-validationerror::before {
   display: inline-block;
   width: 1.5em;
   min-width: 1.5em;
@@ -23780,20 +23749,6 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
-  }
-}
-
-@media print {
-  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
-    overflow-y: scroll !important;
-  }
-
-  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) > [aria-hidden='true'] {
-    display: none;
-  }
-
-  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container {
-    position: initial !important;
   }
 }
 
@@ -26072,6 +26027,10 @@ form.invoices-form .table > thead > tr > th {
   .texty {
     font-size: 1.2em !important;
   }
+
+@page {
+    margin: 2cm 1cm 7cm 1cm;
+}
 }
 
 .my-table th,
@@ -26081,14 +26040,14 @@ form.invoices-form .table > thead > tr > th {
 
 #manage {
   border: 1px solid #cccccc;
-  height: 200px;
+  height: 165px;
   width: 450px;
   padding-right: 1px;
 }
 
 #right {
   border: 1px solid #cccccc;
-  height: 200px;
+  height: 165px;
   width: 450px;
   padding-left: 1px;
   text-align: right;
@@ -26113,6 +26072,22 @@ form.invoices-form .table > thead > tr > th {
 
 #jobPartsTableDiv table thead tr th:first-child {
   width: 50%;
+}
+
+#quotes-view {
+  font-size: 12px;
+}
+
+#jobPartsTableDivShow table tr th {
+  padding: 2px 10px;
+}
+
+#jobPartsTableDivShow table tr td {
+  padding: 2px 10px;
+}
+
+#jobPartsTableDivShow table tr td h3 {
+  margin: 0;
 }
 
 #jobPartsTableDivShow table thead tr th:first-child {

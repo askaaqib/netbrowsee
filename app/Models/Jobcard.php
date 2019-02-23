@@ -40,9 +40,10 @@ class Jobcard extends Model
         'after_pictures',
         'projects_id',
         'projectmanager_id',
-        'attachment_receipt'
+        'attachment_receipt',
         //'labour_rates_id',
         //'materials_rates_id',
+        'vat_rate_id',
     ];
 
     protected $table = 'jobcard';
