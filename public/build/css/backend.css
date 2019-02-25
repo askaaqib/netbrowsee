@@ -1101,7 +1101,7 @@ span.flatpickr-weekday {
 
 /*!
  * CoreUI - Open Source Dashboard UI Kit
- * @version v2.0.6
+ * @version v2.0.10
  * @link https://coreui.io
  * Copyright (c) 2018 creativeLabs Łukasz Holeczek
  * Licensed under MIT (https://coreui.io/license)
@@ -15826,6 +15826,18 @@ canvas {
     display: none;
   }
 
+  .sidebar-minimized .sidebar .sidebar-minimizer {
+    position: fixed;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    background-color: #292d32;
+  }
+
+  .sidebar-minimized .sidebar .sidebar-nav {
+    padding-bottom: 50px;
+  }
+
   .sidebar-minimized .sidebar .sidebar-minimizer::before {
     width: 100%;
     -webkit-transform: rotate(-180deg);
@@ -17463,6 +17475,7 @@ html[dir="rtl"] .aside-menu-show .aside-menu {
 
   .app-header .navbar-brand {
     position: absolute;
+    top: 0;
     left: 50%;
     margin-left: -77.5px;
   }
@@ -20487,7 +20500,7 @@ body.swal2-toast-column .swal2-toast .swal2-input {
   font-size: 1em;
 }
 
-body.swal2-toast-column .swal2-toast .swal2-validationerror {
+body.swal2-toast-column .swal2-toast .swal2-validation-message {
   font-size: 1em;
 }
 
@@ -21214,6 +21227,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-actions {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -21280,7 +21295,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-styled {
-  margin: 0 .3125em;
+  margin: .3125em;
   padding: .625em 2em;
   font-weight: 500;
   -webkit-box-shadow: none;
@@ -21524,7 +21539,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   margin: 0 .4em;
 }
 
-.swal2-popup .swal2-validationerror {
+.swal2-popup .swal2-validation-message {
   display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -21540,7 +21555,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   overflow: hidden;
 }
 
-.swal2-popup .swal2-validationerror::before {
+.swal2-popup .swal2-validation-message::before {
   display: inline-block;
   width: 1.5em;
   min-width: 1.5em;
@@ -21865,6 +21880,20 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+@media print {
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    overflow-y: scroll !important;
+  }
+
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) > [aria-hidden='true'] {
+    display: none;
+  }
+
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container {
+    position: initial !important;
   }
 }
 
@@ -22483,7 +22512,7 @@ body.swal2-toast-column .swal2-toast .swal2-input {
   font-size: 1em;
 }
 
-body.swal2-toast-column .swal2-toast .swal2-validationerror {
+body.swal2-toast-column .swal2-toast .swal2-validation-message {
   font-size: 1em;
 }
 
@@ -23110,6 +23139,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-actions {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -23176,7 +23207,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-styled {
-  margin: 0 .3125em;
+  margin: .3125em;
   padding: .625em 2em;
   font-weight: 500;
   -webkit-box-shadow: none;
@@ -23420,7 +23451,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   margin: 0 .4em;
 }
 
-.swal2-popup .swal2-validationerror {
+.swal2-popup .swal2-validation-message {
   display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -23436,7 +23467,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   overflow: hidden;
 }
 
-.swal2-popup .swal2-validationerror::before {
+.swal2-popup .swal2-validation-message::before {
   display: inline-block;
   width: 1.5em;
   min-width: 1.5em;
@@ -23749,6 +23780,20 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+@media print {
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    overflow-y: scroll !important;
+  }
+
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) > [aria-hidden='true'] {
+    display: none;
+  }
+
+  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container {
+    position: initial !important;
   }
 }
 
@@ -25980,67 +26025,6 @@ form.invoices-form .table > thead > tr > th {
   margin-top: 30px;
 }
 
-@media print {
-  * {
-    -webkit-print-color-adjust: exact !important;
-    /*Chrome, Safari */
-    color-adjust: exact !important;
-    /*Firefox*/
-  }
-
-  #hidedownload {
-    display: none;
-  }
-
-  #hideprint {
-    display: none;
-  }
-
-  #hideback {
-    display: none;
-  }
-
-  .thead-show th {
-    background: #303030 !important;
-    text-shadow: none;
-    color: #fff !important;
-  }
-
-  body * {
-    visibility: hidden;
-  }
-
-  #Invoices-view,
-  #quotes-view,
-  #quotes-view *,
-  #Invoices-view * {
-    visibility: visible;
-  }
-
-  #Invoices-view,
-  #quotes-view {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
-  table.table-invoice-total th {
-    margin-bottom: 1rem;
-  }
-
-  .texty {
-    font-size: 1.2em !important;
-  }
-
-@page {
-    margin: 2cm;
-}
-
-  .pagebreak {
-    page-break-inside: avoid;
-  }
-}
-
 .my-table th,
 .my-table td {
   padding: 0.15rem !important;
@@ -26102,5 +26086,75 @@ form.invoices-form .table > thead > tr > th {
 #jobPartsTableDivShow table thead tr th:first-child {
   width: 60%;
 }
+
+table#table-invoice-total th,
+table#table-invoice-total td {
+  padding: 4px;
+}
+
+/* PRINT MEDIA QUERIES */
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    /*Chrome, Safari */
+    color-adjust: exact !important;
+    /*Firefox*/
+  }
+
+  #hidedownload {
+    display: none;
+  }
+
+  #hideprint {
+    display: none;
+  }
+
+  #hideback {
+    display: none;
+  }
+
+  .thead-show th {
+    background: #303030 !important;
+    text-shadow: none;
+    color: #fff !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #Invoices-view,
+  #quotes-view,
+  #quotes-view *,
+  #Invoices-view * {
+    visibility: visible;
+  }
+
+  #Invoices-view,
+  #quotes-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .texty {
+    font-size: 1.2em !important;
+  }
+
+@page {
+    margin: 2cm;
+}
+
+  #viewport {
+    page-break-inside: avoid;
+  }
+
+  .pagebreak {
+    page-break-inside: avoid;
+  }
+}
+
+/* PRINT MEDIA QUERIES */
 
 
