@@ -26024,6 +26024,10 @@ form.invoices-form .table > thead > tr > th {
     top: 0;
   }
 
+  table.table-invoice-total th {
+    margin-bottom: 1rem;
+  }
+
   .texty {
     font-size: 1.2em !important;
   }
