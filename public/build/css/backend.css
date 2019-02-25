@@ -26029,8 +26029,12 @@ form.invoices-form .table > thead > tr > th {
   }
 
 @page {
-    margin: 2cm 1cm 7cm 1cm;
+    margin: 2cm;
 }
+
+  .pagebreak {
+    page-break-inside: avoid;
+  }
 }
 
 .my-table th,
@@ -26076,6 +26080,7 @@ form.invoices-form .table > thead > tr > th {
 
 #quotes-view {
   font-size: 12px;
+  page-break-inside: avoid;
 }
 
 #jobPartsTableDivShow table tr th {

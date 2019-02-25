@@ -413,14 +413,39 @@ class AjaxController extends Controller
           }
       }
       if ($type == 'after_pictures')  {
-        $before_pictures = json_decode($result[0]->before_pictures, true);
-        foreach($before_pictures as $key => $value) {
+        $after_pictures = json_decode($result[0]->after_pictures, true);
+        foreach($after_pictures as $key => $value) {
             if ($value['image_name'] == $image_name) {
-              array_splice($before_pictures, $key, 1);
+              array_splice($after_pictures, $key, 1);
             }
         }
-        $update_jobcard = ['before_pictures' => json_encode($before_pictures)];
-        $before_pictures = json_encode($before_pictures);
+        $update_jobcard = ['after_pictures' => json_encode($after_pictures)];
+        $after_pictures = json_encode($after_pictures);
+        $save = $jobcard_model::where('id', $id)->update($update_jobcard);
+        if ($save) {
+            if(file_exists(public_path().$image_name)) {
+                if(unlink(public_path().$image_name)){
+                return response()->json([
+                  'status'  => 200,
+                  'image_delete' => $image_name
+                ]); 
+              } else {
+                return response()->json([
+                  'status'  => 403
+                ]); 
+              }
+            }
+        }
+      }
+      if ($type == 'attachment_receipt')  {
+        $attachment_receipt = json_decode($result[0]->attachment_receipt, true);
+        foreach($attachment_receipt as $key => $value) {
+            if ($value['image_name'] == $image_name) {
+              array_splice($attachment_receipt, $key, 1);
+            }
+        }
+        $update_jobcard = ['attachment_receipt' => json_encode($attachment_receipt)];
+        $attachment_receipt = json_encode($attachment_receipt);
         $save = $jobcard_model::where('id', $id)->update($update_jobcard);
         if ($save) {
             if(file_exists(public_path().$image_name)) {

@@ -13,22 +13,24 @@
         @click="indexgallery = imageInd"
         :style="{
           backgroundImage: 'url(' + image.image_name + ')',
-          width: '130px',
-          height: '80px',
+          width: imageWidth,
+          height: imageHeight,
           backgroundSize: 'cover'
         }"
       >
-        <div class="edit">
-          <b-button
-            variant="danger"
-            @click.stop="
-              indexgallery = null
-              deleteWorkOrderImg(imageInd)
-            "
-          >
-            <i class="fe fe-trash fe-lg"></i>
-          </b-button>
-        </div>
+        <template v-if="jobcardPicSize">
+          <div class="edit">
+            <b-button
+              variant="danger"
+              @click.stop="
+                indexgallery = null
+                deleteWorkOrderImg(imageInd)
+              "
+            >
+              <i class="fe fe-trash fe-lg"></i>
+            </b-button>
+          </div>
+        </template>
       </div>
     </template>
   </div>
@@ -52,9 +54,21 @@ export default {
       type: Array,
       default: () => []
     },
+    jobcardPicSize: {
+      type: Boolean,
+      default: false
+    },
     id: {
       type: String,
       default: null
+    },
+    imageHeight: {
+      type: String,
+      default: '100px'
+    },
+    imageWidth: {
+      type: String,
+      default: '100px'
     }
   },
   data () {

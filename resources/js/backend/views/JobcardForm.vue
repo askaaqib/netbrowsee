@@ -291,6 +291,7 @@
               <b-row>
                 <BeforeImageGallery
                   :id="id"
+                  :jobcard-pic-size="true"
                   :beforepictures="beforepictures"
                   :modelbeforepictures="model.before_pictures"
                   @changeFile="changeBeforeGalleryImage"
@@ -318,6 +319,7 @@
               <b-row>
                 <AfterImageGallery
                   :id="id"
+                  :jobcard-pic-size="true"
                   :afterpictures="afterpictures"
                   :modelafterpictures="model.after_pictures"
                   @changeFile="changeAfterGalleryImage"

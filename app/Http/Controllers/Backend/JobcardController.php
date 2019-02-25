@@ -235,76 +235,73 @@ class JobcardController extends BackendController
         /* BEFORE PICTURES */
         //dd($data);
         if(isset($data['before_pictures']) && !isset($data['before_pictures_edit'])) {
-            $imageNames = $data['before_pictures'];
-            $data['before_pictures'] = json_encode($imageNames);
+            $data['before_pictures'] = json_encode($data['before_pictures']);
         }
 
         if(isset($data['before_pictures']) && isset($data['before_pictures_edit'])) {
-            $imageNames = array();
+            $imageNamesBefore = array();
             /* loop old data and add to new array */
-            $old_images = $data['before_pictures'];
-            foreach($old_images as $image) {
-                $imageNames[]['image_name'] = $image['image_name'];
+            $old_images_before = $data['before_pictures'];
+            foreach($old_images_before as $image) {
+                $imageNamesBefore[]['image_name'] = $image['image_name'];
             }
         }
         if (isset($data['before_pictures_edit'])) {
-            $new_images = $data['before_pictures_edit'];    
-            foreach($new_images as $image) {
-                $imageName = rand(0,10000000).$image->getClientOriginalName();
-                $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
-                $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
+            $new_images_before = $data['before_pictures_edit'];    
+            foreach($new_images_before as $image) {
+                $imageNameBefore = rand(0,10000000).$image->getClientOriginalName();
+                $uploadedBefore = $image->move(base_path('/public/images/jobcard/'),$imageNameBefore);
+                $imageNamesBefore[]['image_name'] = '/images/jobcard/'.$imageNameBefore;
             }
-            $data['before_pictures'] = json_encode($imageNames);
+            $data['before_pictures'] = json_encode($imageNamesBefore);
         }
         
         /* AFTER  PICTURES */
         if(isset($data['after_pictures']) && !isset($data['after_pictures_edit'])) {
-            $imageNames = $data['after_pictures'];
-            $data['after_pictures'] = json_encode($imageNames);
+            $data['after_pictures'] = json_encode($data['after_pictures']);
         }
 
         if(isset($data['after_pictures']) && isset($data['after_pictures_edit'])) {
-            $imageNames = array();
+            $imageNamesAfter = array();
             /* loop old data and add to new array */
-            $old_images = $data['after_pictures'];
-            foreach($old_images as $image) {
-                $imageNames[]['image_name'] = $image['image_name'];
+            $old_images_after = $data['after_pictures'];
+            foreach($old_images_after as $image) {
+                $imageNamesAfter[]['image_name'] = $image['image_name'];
             }
         }
         if (isset($data['after_pictures_edit'])) {
-            $new_images = $data['after_pictures_edit'];    
-            foreach($new_images as $image) {
-                $imageName = rand(0,10000000).$image->getClientOriginalName();
-                $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
-                $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
+            $new_images_after = $data['after_pictures_edit'];    
+            foreach($new_images_after as $image) {
+                $imageNameAfter = rand(0,10000000).$image->getClientOriginalName();
+                $uploadedAfter = $image->move(base_path('/public/images/jobcard/'),$imageNameAfter);
+                $imageNamesAfter[]['image_name'] = '/images/jobcard/'.$imageNameAfter;
             }
-            $data['after_pictures'] = json_encode($imageNames);
+            $data['after_pictures'] = json_encode($imageNamesAfter);
         }
 
          /* Attachment and receipt PICTURES */
         if(isset($data['attachment_receipt']) && !isset($data['attachment_receipt_edit'])) {
-            $imageNames = $data['attachment_receipt'];
-            $data['attachment_receipt'] = json_encode($imageNames);
+            $data['attachment_receipt'] = json_encode($data['attachment_receipt']);
         }
 
         if(isset($data['attachment_receipt']) && isset($data['attachment_receipt_edit'])) {
-            $imageNames = array();
+            $imageNamesAttachment = array();
             /* loop old data and add to new array */
-            $old_images = $data['attachment_receipt'];
-            foreach($old_images as $image) {
-                $imageNames[]['image_name'] = $image['image_name'];
+            $old_images_attachment = $data['attachment_receipt'];
+            foreach($old_images_attachment as $image) {
+                $imageNamesAttachment[]['image_name'] = $image['image_name'];
             }
         }
         if (isset($data['attachment_receipt_edit'])) {
             $new_images = $data['attachment_receipt_edit'];    
             foreach($new_images as $image) {
-                $imageName = rand(0,10000000).$image->getClientOriginalName();
-                $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
-                $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
+                $imageNameAttachment = rand(0,10000000).$image->getClientOriginalName();
+                $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageNameAttachment);
+                $imageNamesAttachment[]['image_name'] = '/images/jobcard/'.$imageNameAttachment;
             }
-            $data['attachment_receipt'] = json_encode($imageNames);
+            $data['attachment_receipt'] = json_encode($imageNamesAttachment);
         }
-
+        
         $jobcard->fill(
             $data
         );

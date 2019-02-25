@@ -91,7 +91,7 @@ export default {
           .post(this.$app.route('admin.jobcards.removeimage'), {
             id: this.id,
             image_name: imgname,
-            type: 'after_pictures'
+            type: 'attachment_receipt'
           })
           .then((response) => {
             if (response.data.status === 200) {

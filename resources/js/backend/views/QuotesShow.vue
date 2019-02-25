@@ -147,29 +147,82 @@
           </div>
           <!-- Bank Details & Total Amount Section Ends -->
         </div>
-        <!-------------------------------Pictures to show------------------------->
-        <b-form-group
-          :label="$t('validation.jobcards.attachment_receipt')"
-          label-for="attachment_receipt"
-          horizontal
-          :label-cols="4"
-          :feedback="feedback('jobcard.attachment_receipt')"
-        >
-        </b-form-group>
-        <template>
-          <b-row>
-            <AttachmentImageGallery
-              :id="id"
-              :quotes-pic-size="true"
-              :image-width="'300px'"
-              :image-height="'300px'"
-              :attachmentpictures="attachmentpictures"
-              :modelattachmentpictures="model.jobcard.attachment_receipt"
-              @changeFile="changeAttachmentGalleryImage"
-            ></AttachmentImageGallery>
-          </b-row>
+        <!-------------------------------Before Pictures to show------------------------->
+        <div class="pagebreak">
+          <template v-if="beforepictures.length > 0">
+            <h3>Before Pictures</h3>
+            <b-form-group
+              class="font-weight-bold"
+              label-for="before_pictures"
+              horizontal
+              :label-cols="4"
+              :feedback="feedback('jobcard.before_pictures')"
+            >
+            </b-form-group>
+            <template>
+              <b-row>
+                <BeforeImageGallery
+                  :id="id"
+                  :quotes-pic-size="true"
+                  :image-width="'280px'"
+                  :image-height="'280px'"
+                  :beforepictures="beforepictures"
+                  :modelbeforepictures="model.jobcard.before_pictures"
+                  @changeFile="changeBeforeGalleryImage"
+                ></BeforeImageGallery>
+              </b-row>
+            </template>
+          </template>
+        </div>
+        <!-------------------------------Before Pictures to show------------------------->
+        <!-------------------------------After Pictures to show------------------------->
+        <template v-if="afterpictures.length > 0">
+          <div class="pagebreak">
+            <h3>After Pictures</h3>
+            <b-form-group
+              class="font-weight-bold"
+              label-for="after_pictures"
+              horizontal
+              :label-cols="4"
+              :feedback="feedback('jobcard.after_pictures')"
+            >
+            </b-form-group>
+            <template>
+              <b-row>
+                <AfterImageGallery
+                  :id="id"
+                  :quotes-pic-size="true"
+                  :image-width="'280px'"
+                  :image-height="'240px'"
+                  :afterpictures="afterpictures"
+                  :modelafterpictures="model.jobcard.after_pictures"
+                  @changeFile="changeAfterGalleryImage"
+                ></AfterImageGallery>
+              </b-row>
+            </template>
+          </div>
         </template>
-        <!-------------------------------Pictures to show------------------------->
+        <!-------------------------------After Pictures to show------------------------->
+        <!-------------------------------Attachment Pictures to show------------------------->
+        <template v-if="attachmentpictures.length > 0">
+          <div class="pagebreak">
+            <h3>Proof of Purchases</h3>
+            <template>
+              <b-row>
+                <AttachmentImageGallery
+                  :id="id"
+                  :quotes-pic-size="true"
+                  :image-width="'280px'"
+                  :image-height="'280px'"
+                  :attachmentpictures="attachmentpictures"
+                  :modelattachmentpictures="model.jobcard.attachment_receipt"
+                  @changeFile="changeAttachmentGalleryImage"
+                ></AttachmentImageGallery>
+              </b-row>
+            </template>
+          </div>
+        </template>
+        <!-------------------------------Attachment Pictures to show------------------------->
         <!-- ViewPort  Ends -->
         <b-row id="hideback" slot="footer">
           <b-col md>
@@ -645,11 +698,15 @@ import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import swal from 'sweetalert2'
 import JSPDF from 'jspdf'
 import AttachmentImageGallery from './Jobcard/AttachmentImageGallery'
+import BeforeImageGallery from './Jobcard/BeforeImageGallery'
+import AfterImageGallery from './Jobcard/AfterImageGallery'
 
 export default {
   name: 'QuotesForm',
   components: {
-    AttachmentImageGallery
+    AttachmentImageGallery,
+    BeforeImageGallery,
+    AfterImageGallery
   },
   directives: { 'b-modal': bModalDirective },
   mixins: [form],
@@ -685,7 +742,11 @@ export default {
       sectionStatus: null,
       rowsRemember: null,
       attachmentpictures: [],
+      beforepictures: [],
+      afterpictures: [],
       jsonParseImgAttach: false,
+      jsonParseImgBefore: false,
+      jsonParseImgAfter: false,
       setAddress: null,
       client_search: {
         search_client: null,
@@ -806,16 +867,42 @@ export default {
       }
     },
     'model.jobcard.attachment_receipt': function (val) {
-      // console.log(val)
       if (val && val.length > 0) {
         if (!this.isNew && !this.jsonParseImgAttach) {
           this.jsonParseImgAttach = true
           this.model.jobcard.attachment_receipt = JSON.parse(val)
-          // console.log(this.model.attachment_receipt);
           var Workordrimg = JSON.parse(val)
           Workordrimg.map((item) => {
             if (item.image_name) {
               this.attachmentpictures.push(item.image_name)
+            }
+          })
+        }
+      }
+    },
+    'model.jobcard.before_pictures': function (val) {
+      if (val && val.length > 0) {
+        if (!this.isNew && !this.jsonParseImgBefore) {
+          this.jsonParseImgBefore = true
+          this.model.jobcard.before_pictures = JSON.parse(val)
+          var Workordrimg = JSON.parse(val)
+          Workordrimg.map((item) => {
+            if (item.image_name) {
+              this.beforepictures.push(item.image_name)
+            }
+          })
+        }
+      }
+    },
+    'model.jobcard.after_pictures': function (val) {
+      if (val && val.length > 0) {
+        if (!this.isNew && !this.jsonParseImgAfter) {
+          this.jsonParseImgAfter = true
+          this.model.jobcard.after_pictures = JSON.parse(val)
+          var Workordrimg = JSON.parse(val)
+          Workordrimg.map((item) => {
+            if (item.image_name) {
+              this.afterpictures.push(item.image_name)
             }
           })
         }
@@ -961,6 +1048,12 @@ export default {
     },
     changeAttachmentGalleryImage (images) {
       this.model.attachment_receipt = images
+    },
+    changeBeforeGalleryImage (images) {
+      this.model.before_pictures = images
+    },
+    changeAfterGalleryImage (images) {
+      this.model.after_pictures = images
     },
     editRowSection: function (key) {
       this.section_name_edit = this.rows[key].section
