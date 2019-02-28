@@ -51,7 +51,14 @@ class Quotes extends Model
         'company_logo',
         'bank_account',
         'quotation_digit',
-        'attachment_receipt'
+        'attachment_receipt',
+        'client_id',
+        'client_name',
+        'client_business',
+        'client_street',
+        'client_town',
+        'client_region',
+        'client_postcode',
     ];
 
 

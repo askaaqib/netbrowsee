@@ -139,7 +139,17 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       url: '/subdistricts',
       icon: 'fe fe-book',
       access: app.user.can('view')
+    },
+    {
+      title: true,
+      name: 'Contacts',
+      access: app.user.can('view')
+    },
+    {
+      name: 'Clients',
+      url: '/clients',
+      icon: 'fe fe-user',
+      access: app.user.can('view')
     }
-
   ]
 }

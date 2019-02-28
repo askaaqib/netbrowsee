@@ -1,5 +1,5 @@
 <?php
-
+/********* AJAX REQEUSTS ************************/
 Route::get('index/search', 'AjaxController@search')->name('search');
 Route::get('routes/search', 'AjaxController@routesSearch')->name('routes.search');
 Route::get('tags/search', 'AjaxController@tagsSearch')->name('tags.search');
@@ -23,12 +23,13 @@ Route::get('vats/getids', 'AjaxController@getVats')->name('vats.getdata');
 Route::get('project_managers/getids', 'AjaxController@getProjectManagers')->name('project_managers.getdata');
 Route::get('settings/data', 'AjaxController@getSettingsData')->name('settings.getdata');
 Route::get('quotations/lastref', 'AjaxController@getQuotationsRecentReference')->name('quotations.getreference');
-Route::get('clients/search', 'AjaxController@searchClients')->name('clients.searchclients');
+Route::get('clients/getclients', 'AjaxController@searchClients')->name('clients.searchclients');
 Route::get('quotations/search', 'AjaxController@searchQuotes')->name('quotations.searchquotes');
 Route::post('jobcards/removeimage', 'AjaxController@JobcardRemoveImage')->name('jobcards.removeimage');
 Route::get('invoices/lastref', 'AjaxController@getInvoicesRecentReference')->name('invoices.getreference');
+/********* AJAX REQEUSTS ************************/
 
-/* JobCard Routes */
+/************* JobCard Routes *************/
 Route::post('jobcards/batch_action', 'JobcardController@batchAction')->name('jobcards.batch_action');
 Route::get('jobcards/{jobcard}/show', 'JobcardController@show')->name('jobcards.show');
 Route::get('jobcards/search', 'JobcardController@search')->name('jobcards.search');
@@ -37,86 +38,96 @@ Route::resource('jobcards', 'JobcardController', ['only' => ['store', 'update', 
 Route::post('jobscards/addedfile', 'JobcardController@addedfile')->name('jobcards.addedfile');
 //Route::post('jobscards/file', 'JobcardController@file')->name('jobcards.file');
 Route::post('jobscards/store', 'JobcardController@store')->name('jobcards.store');
+/************* JobCard Routes *************/
 
-
-/* Project Routes */
+/************* Project Routes *************/
 Route::post('projects/batch_action', 'ProjectController@batchAction')->name('projects.batch_action');
 Route::get('projects/{project}/show', 'ProjectController@show')->name('projects.show');
 Route::get('projects/search', 'ProjectController@search')->name('projects.search');
 Route::get('projects/latest', 'ProjectController@getLastestprojects')->name('projects.latest');
 Route::resource('projects', 'ProjectController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Project Routes *************/
 
-/* Project Manager Routes */
+/************* Project Manager Routes *************/
 Route::post('project_managers/batch_action', 'ProjectManagerController@batchAction')->name('project_managers.batch_action');
 Route::get('project_managers/{project_manager}/show', 'ProjectManagerController@show')->name('project_managers.show');
 Route::get('project_managers/search', 'ProjectManagerController@search')->name('project_managers.search');
 Route::resource('project_managers', 'ProjectManagerController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Project Manager Routes *************/
 
 
-/* Labour Rates Routes */
+/************* Labour Rates Routes *************/
 Route::post('labour_rates/batch_action', 'LabourRateController@batchAction')->name('labour_rates.batch_action');
 Route::get('labour_rates/{labour_rate}/show', 'LabourRateController@show')->name('labour_rates.show');
 Route::get('labour_rates/search', 'LabourRateController@search')->name('labour_rates.search');
 Route::resource('labour_rates', 'LabourRateController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Labour Rates Routes *************/
 
-/* Material Rates Routes */
+/************* Material Rates Routes *************/
 Route::post('materials_rates/batch_action', 'MaterialRateController@batchAction')->name('materials_rates.batch_action');
 Route::get('materials_rates/{materials_rate}/show', 'MaterialRateController@show')->name('materials_rates.show');
 Route::get('materials_rates/search', 'MaterialRateController@search')->name('materials_rates.search');
 Route::resource('materials_rates', 'MaterialRateController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Material Rates Routes *************/
 
-/* Vat Routes */
+/************* Vat Routes *************/
 Route::post('vat/batch_action', 'VatController@batchAction')->name('vat.batch_action');
 Route::get('vat/{vat}/show', 'VatController@show')->name('vat.show');
 Route::get('vat/search', 'VatController@search')->name('vat.search');
 Route::resource('vat', 'VatController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Vat Routes *************/
 
-/* Reports Routes */
+/************* Reports Routes *************/
 Route::post('reports/batch_action', 'ReportsController@batchAction')->name('reports.batch_action');
 Route::get('reports/{report}/show', 'ReportsController@show')->name('reports.show');
 Route::get('reports/search', 'ReportsController@search')->name('reports.search');
 Route::resource('reports', 'ReportsController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Reports Routes *************/
 
-/* Settings Routes */
+/************* Settings Routes *************/
 Route::post('settings/batch_action', 'SettingsController@batchAction')->name('settings.batch_action');
 Route::get('settings/{setting}/show', 'SettingsController@show')->name('settings.show');
 Route::get('settings/search', 'SettingsController@search')->name('settings.search');
 Route::resource('settings', 'SettingsController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Settings Routes *************/
 
-
-
-/* Districts Routes */
+/************* Districts Routes *************/
 Route::post('districts/batch_action', 'DistrictController@batchAction')->name('districts.batch_action');
 Route::get('districts/{district}/show', 'DistrictController@show')->name('districts.show');
 Route::get('districts/search', 'DistrictController@search')->name('districts.search');
 Route::resource('districts', 'DistrictController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Districts Routes *************/
 
-
-
-
-/* SubDistricts Routes */
+/************* SubDistricts Routes *************/
 Route::post('subdistricts/batch_action', 'SubDistrictController@batchAction')->name('subdistricts.batch_action');
 Route::get('subdistricts/{subdistrict}/show', 'SubDistrictController@show')->name('subdistricts.show');
 Route::get('subdistricts/search', 'SubDistrictController@search')->name('subdistricts.search');
 Route::resource('subdistricts', 'SubDistrictController', ['only' => ['store', 'update', 'destroy'],]);
 
-
-
-/* Invoices Routes */
+/************* Invoices Routes *************/
 Route::post('invoices/batch_action', 'InvoicesController@batchAction')->name('invoices.batch_action');
 Route::get('invoices/{invoice}/show', 'InvoicesController@show')->name('invoices.show');
 Route::get('invoices/search', 'InvoicesController@search')->name('invoices.search');
 Route::resource('invoices', 'InvoicesController', ['only' => ['store', 'update', 'destroy'],]);
 
-/* Quotes Routes */
+/************* Quotes Routes *************/
 Route::post('quotes/batch_action', 'QuotesController@batchAction')->name('quotes.batch_action');
 Route::get('quotes/{quote}/show', 'QuotesController@show')->name('quotes.show');
 Route::get('quotes/search', 'QuotesController@search')->name('quotes.search');
 Route::get('quotes/latest', 'QuotesController@getLastestquotes')->name('quotes.latest');
 // Route::get('quotes/index', 'QuotesController@index')->name('quotes.index');
-Route::resource('quotes', 'QuotesController', [
-                'only' => ['store', 'update', 'destroy'],
-            ]);
+Route::resource('quotes', 'QuotesController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Quotes Routes *************/
+
+/************* Clients Routes *************/
+Route::post('clients/batch_action', 'ClientsController@batchAction')->name('clients.batch_action');
+Route::get('clients/{client}/show', 'ClientsController@show')->name('clients.show');
+Route::get('clients/search', 'ClientsController@search')->name('clients.search');
+Route::get('clients/latest', 'ClientsController@getLastestclients')->name('clients.latest');
+// Route::get('clients/index', 'ClientsController@index')->name('clients.index');
+Route::resource('clients', 'ClientsController', ['only' => ['store', 'update', 'destroy'],]);
+/************* Clients Routes *************/
+
 Route::group(
     ['middleware' => ['can:view form_settings']],
     function () {

@@ -10,8 +10,7 @@ use App\Http\Requests\StoreJobcardRequest;
 use App\Http\Requests\UpdateJobcardRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\JobcardRepository;
-
-
+use Mail;
 
 class JobcardController extends BackendController
 {
@@ -232,8 +231,9 @@ class JobcardController extends BackendController
     public function update(Jobcard $jobcard, UpdateJobcardRequest $request)
     {
         $data = $request->all();
-        /* BEFORE PICTURES */
-        //dd($data);
+        $old_status = $jobcard->status;
+        $new_status = $data['status'];
+        /************* BEFORE PICTURES *************/
         if(isset($data['before_pictures']) && !isset($data['before_pictures_edit'])) {
             $data['before_pictures'] = json_encode($data['before_pictures']);
         }
@@ -256,7 +256,7 @@ class JobcardController extends BackendController
             $data['before_pictures'] = json_encode($imageNamesBefore);
         }
         
-        /* AFTER  PICTURES */
+        /************* AFTER  PICTURES *************/
         if(isset($data['after_pictures']) && !isset($data['after_pictures_edit'])) {
             $data['after_pictures'] = json_encode($data['after_pictures']);
         }
@@ -279,7 +279,7 @@ class JobcardController extends BackendController
             $data['after_pictures'] = json_encode($imageNamesAfter);
         }
 
-         /* Attachment and receipt PICTURES */
+        /************* Attachment and receipt PICTURES *************/
         if(isset($data['attachment_receipt']) && !isset($data['attachment_receipt_edit'])) {
             $data['attachment_receipt'] = json_encode($data['attachment_receipt']);
         }
@@ -306,8 +306,13 @@ class JobcardController extends BackendController
             $data
         );
         
-        $this->jobcard->saveAndPublish($jobcard, $data);
-           
+        $saved = $this->jobcard->saveAndPublish($jobcard, $data);
+        
+        if ($saved) {
+            if ($old_status != $new_status) {
+                $this->sendEmail($old_status, $data);
+            }
+        }
         return $this->redirectResponse($request, __('alerts.backend.jobcards.updated'));
     }
 
@@ -381,4 +386,16 @@ class JobcardController extends BackendController
 
     public function addedfile() {}
     
+    protected function sendEmail($old_status, $data) {
+      $to_email = 'netbrowse@yopmail.com';
+      $mail_data = array("old_status" => $old_status, "data" => $data);
+       try{       
+        Mail::send('emails.mail', $mail_data, function($message) use ($to_email) {
+          $message->to($to_email)
+            ->subject('NetBrowse');
+          $message->from('support@netbrowse.com','Netbrowse App Support');
+        });
+        }
+        catch(Exception $e){}
+    }
 }

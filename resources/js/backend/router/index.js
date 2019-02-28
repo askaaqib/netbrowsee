@@ -5,43 +5,45 @@ import Full from '../containers/Full'
 // Views
 import Search from '../views/Search'
 import Dashboard from '../views/Dashboard'
-import PostForm from '../views/PostForm'
-import JobcardForm from '../views/JobcardForm'
-import PostList from '../views/PostList'
-import JobcardList from '../views/JobcardList'
-import ProjectList from '../views/ProjectList'
-import ProjectForm from '../views/ProjectForm'
-import ProjectManagerList from '../views/ProjectManagerList'
-import ProjectManagerForm from '../views/ProjectManagerForm'
-import LabourRateList from '../views/LabourRateList'
-import LabourRateForm from '../views/LabourRateForm'
-import MaterialRateList from '../views/MaterialRateList'
-import MaterialRateForm from '../views/MaterialRateForm'
-import VatList from '../views/VatList'
-import VatForm from '../views/VatForm'
-import ReportsList from '../views/ReportsList'
-import ReportsForm from '../views/ReportsForm'
+import PostForm from '../views/Post/PostForm'
+import PostList from '../views/Post/PostList'
+import JobcardForm from '../views/Jobcard/JobcardForm'
+import JobcardList from '../views/Jobcard/JobcardList'
+import ProjectList from '../views/Project/ProjectList'
+import ProjectForm from '../views/Project/ProjectForm'
+import ProjectManagerList from '../views/ProjectManager/ProjectManagerList'
+import ProjectManagerForm from '../views/ProjectManager/ProjectManagerForm'
+import LabourRateList from '../views/LabourRate/LabourRateList'
+import LabourRateForm from '../views/LabourRate/LabourRateForm'
+import MaterialRateList from '../views/MaterialRate/MaterialRateList'
+import MaterialRateForm from '../views/MaterialRate/MaterialRateForm'
+import VatList from '../views/Vat/VatList'
+import VatForm from '../views/Vat/VatForm'
+import ReportsList from '../views/Reports/ReportsList'
+import ReportsForm from '../views/Reports/ReportsForm'
 // import SettingsList from '../views/SettingsList'
-import SettingsForm from '../views/SettingsForm'
-import InvoicesList from '../views/InvoicesList'
-import InvoicesForm from '../views/InvoicesForm'
-import InvoiceShow from '../views/InvoiceShow'
-import FormSettingForm from '../views/FormSettingForm'
-import FormSettingList from '../views/FormSettingList'
-import FormSubmissionShow from '../views/FormSubmissionShow'
-import FormSubmissionList from '../views/FormSubmissionList'
-import UserForm from '../views/UserForm'
-import UserList from '../views/UserList'
-import RoleForm from '../views/RoleForm'
-import RoleList from '../views/RoleList'
-import QuotesForm from '../views/QuotesForm'
-import QuotesList from '../views/QuotesList'
-import QuotesShow from '../views/QuotesShow'
-import QuotesPdf from '../views/QuotesPdf'
-import DistrictForm from '../views/DistrictForm'
-import DistrictList from '../views/DistrictList'
-import SubDistrictForm from '../views/SubDistrictForm'
-import SubDistrictList from '../views/SubDistrictList'
+import SettingsForm from '../views/Settings/SettingsForm'
+import InvoicesList from '../views/Invoices/InvoicesList'
+import InvoicesForm from '../views/Invoices/InvoicesForm'
+import InvoiceShow from '../views/Invoices/InvoiceShow'
+import FormSettingForm from '../views/FormSetting/FormSettingForm'
+import FormSettingList from '../views/FormSetting/FormSettingList'
+import FormSubmissionShow from '../views/FormSubmission/FormSubmissionShow'
+import FormSubmissionList from '../views/FormSubmission/FormSubmissionList'
+import UserForm from '../views/User/UserForm'
+import UserList from '../views/User/UserList'
+import RoleForm from '../views/Role/RoleForm'
+import RoleList from '../views/Role/RoleList'
+import QuotesForm from '../views/Quotes/QuotesForm'
+import QuotesList from '../views/Quotes/QuotesList'
+import QuotesShow from '../views/Quotes/QuotesShow'
+import QuotesPdf from '../views/Quotes/QuotesPdf'
+import DistrictForm from '../views/District/DistrictForm'
+import DistrictList from '../views/District/DistrictList'
+import SubDistrictForm from '../views/SubDistrict/SubDistrictForm'
+import SubDistrictList from '../views/SubDistrict/SubDistrictList'
+import ClientsForm from '../views/Clients/ClientsForm'
+import ClientsList from '../views/Clients/ClientsList'
 
 Vue.use(Router)
 
@@ -736,6 +738,44 @@ export function createRouter (base, i18n) {
                 props: true,
                 meta: {
                   label: i18n.t('labels.backend.invoices.titles.edit')
+                }
+              }
+            ]
+          },
+          {
+            path: 'clients',
+            component: {
+              render (c) {
+                return c('router-view')
+              }
+            },
+            meta: {
+              label: i18n.t('labels.backend.clients.titles.main')
+            },
+            children: [
+              {
+                path: '/',
+                name: 'clients',
+                component: ClientsList,
+                meta: {
+                  label: i18n.t('labels.backend.clients.titles.index')
+                }
+              },
+              {
+                path: 'create',
+                name: 'clients_create',
+                component: ClientsForm,
+                meta: {
+                  label: i18n.t('labels.backend.clients.titles.create')
+                }
+              },
+              {
+                path: ':id/edit',
+                name: 'clients_edit',
+                component: ClientsForm,
+                props: true,
+                meta: {
+                  label: i18n.t('labels.backend.clients.titles.edit')
                 }
               }
             ]

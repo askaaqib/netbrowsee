@@ -26,6 +26,7 @@ use App\Models\Settings;
 use App\Models\Quotes;
 use App\Models\Invoices;
 use App\Models\User;
+use App\Models\Clients;
 
 class AjaxController extends Controller
 {
@@ -243,22 +244,34 @@ class AjaxController extends Controller
         }
     }
 
-    public function searchClients(UserRepository $user, Request $request){
+    public function searchClients(Clients $client, Request $request){
         $search = $request->get('q');
         if ($search) {
-            return $users = User::whereHas('roles', function($q){
-                $q->where('name', 'redactor');
-            })
-            ->where('name','LIKE', '%'. $search . '%')
+            return $users = Clients::where('first_name','LIKE', '%'. $search . '%')
+            ->orwhere('last_name','LIKE', '%'. $search . '%')
+            ->orwhere('business_name','LIKE', '%'. $search . '%')
             ->orwhere('email','LIKE', '%'. $search . '%')
+            ->select('id','first_name','last_name','business_name','email', 'primary_phone', 'secondary_phone', 'street', 'town', 'region', 'postcode', 'notes')
             ->get();
         } else {
-            return $users = User::whereHas('roles', function($q){
-                $q->where('name', 'redactor');
-            })
-            ->select('id','name','email')
+            return $users = Clients::where('id', '>', 0)
+            ->select('id','first_name','last_name','business_name','email', 'primary_phone', 'secondary_phone', 'street', 'town', 'region', 'postcode','notes')
             ->get();  
         }
+        // if ($search) {
+        //     return $users = User::whereHas('roles', function($q){
+        //         $q->where('name', 'redactor');
+        //     })
+        //     ->where('name','LIKE', '%'. $search . '%')
+        //     ->orwhere('email','LIKE', '%'. $search . '%')
+        //     ->get();
+        // } else {
+        //     return $users = User::whereHas('roles', function($q){
+        //         $q->where('name', 'redactor');
+        //     })
+        //     ->select('id','name','email')
+        //     ->get();  
+        // }
     }
 
     public function getLabours(LabourRateRepository $labour)

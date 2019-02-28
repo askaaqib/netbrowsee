@@ -1386,6 +1386,35 @@ export default {
                         "promote": "Promote selected projects"
                     }
                 },
+                "clients": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Clients",
+                        "index": "Clients list",
+                        "create": "Create Clients",
+                        "edit": "Edit Clients",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of project's title by default.",
+                        "meta_description": "If leave empty, description will be that of project's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Client's title.",
+                        "meta_description": "Client's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected Client",
+                        "publish": "Publish selected Clients",
+                        "pin": "Pin selected projects",
+                        "promote": "Promote selected projects"
+                    }
+                },
                 "quotes": {
                     "statuses": {
                         "draft": "Draft",
@@ -1619,6 +1648,16 @@ export default {
                     "bulk_pending": "Selected invoices are awaiting moderation",
                     "bulk_pinned": "Selected invoices pinned",
                     "bulk_promoted": "Selected invoices promoted"
+                },
+                "clients": {
+                    "created": "Client created",
+                    "updated": "Client updated",
+                    "deleted": "Client deleted",
+                    "bulk_destroyed": "Selected Clients deleted",
+                    "bulk_published": "Selected Clients published",
+                    "bulk_pending": "Selected Clients are awaiting moderation",
+                    "bulk_pinned": "Selected Clients pinned",
+                    "bulk_promoted": "Selected Clients promoted"
                 },
                 "actions": {
                     "invalid": "Invalid action"
@@ -2091,6 +2130,18 @@ export default {
                 "client_email": "Client Email",
                 "invoice_date": "Invoice Date",
                 "jobcard_id": "Jobcard"
+            },
+            "clients": {
+                "first_name": "First Name",
+                "last_name": "Last Name",
+                "business_name": "Business Name",
+                "street": "Street",
+                "town": "Town",
+                "email": "Email",
+                "region": "Region",
+                "primary_phone": "Primary Phone",
+                "secondary_phone": "Secondary Phone",
+                "notes": "Notes"
             }
         },
         "buttons": {
@@ -2152,6 +2203,11 @@ export default {
             },
             "subdistrict": {
                 "create": "Create SubDistrict",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "clients": {
+                "create": "Create Client",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             },

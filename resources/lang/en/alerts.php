@@ -160,6 +160,7 @@ return [
             'updated'        => 'District updated',
             'deleted'        => 'District deleted',
         ],
+
         'project_managers' => [
             'created'        => 'ProjectManager created',
             'updated'        => 'ProjectManager updated',
@@ -172,6 +173,7 @@ return [
             'updated'        => 'SubDistrict updated',
             'deleted'        => 'SubDistrict deleted',
         ],
+
         'invoices' => [
             'created'        => 'Invoice created',
             'updated'        => 'Invoice updated',
@@ -181,6 +183,17 @@ return [
             'bulk_pending'   => 'Selected invoices are awaiting moderation',
             'bulk_pinned'    => 'Selected invoices pinned',
             'bulk_promoted'  => 'Selected invoices promoted',
+        ],
+
+        'clients' => [
+            'created'        => 'Client created',
+            'updated'        => 'Client updated',
+            'deleted'        => 'Client deleted',
+            'bulk_destroyed' => 'Selected Clients deleted',
+            'bulk_published' => 'Selected Clients published',
+            'bulk_pending'   => 'Selected Clients are awaiting moderation',
+            'bulk_pinned'    => 'Selected Clients pinned',
+            'bulk_promoted'  => 'Selected Clients promoted',
         ],
 
         'actions' => [

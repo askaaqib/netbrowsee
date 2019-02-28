@@ -288,4 +288,17 @@ return [
       'invoice_date' => 'Invoice Date',
       'jobcard_id'          => 'Jobcard'
     ],
+
+    'clients' => [
+      'first_name'  => 'First Name',
+      'last_name'  => 'Last Name',
+      'business_name'  => 'Business Name',
+      'street'  => 'Street',
+      'town'  => 'Town',
+      'email'  => 'Email',
+      'region'  => 'Region',
+      'primary_phone'  => 'Primary Phone',
+      'secondary_phone'  => 'Secondary Phone',
+      'notes'  => 'Notes',
+    ],
 ];

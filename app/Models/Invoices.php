@@ -29,7 +29,14 @@ class Invoices extends Model
 			"bank_account" ,
 			"company_address",
 			"company_logo",
-			"invoice_status" 
+			"invoice_status",
+			"client_id",
+	        "client_name",
+	        "client_business",
+	        "client_street",
+	        "client_town",
+	        "client_region",
+	        "client_postcode", 
 	];
 
    	protected $table = 'invoices';

@@ -65,8 +65,15 @@ return [
         'save_and_publish' => 'Save and publish',
         'save_as_draft'    => 'Save as draft',
     ],
-'subdistrict' => [
+
+    'subdistrict' => [
         'create'           => 'Create SubDistrict',
+        'save_and_publish' => 'Save and publish',
+        'save_as_draft'    => 'Save as draft',
+    ],
+
+    'clients' => [
+        'create'           => 'Create Client',
         'save_and_publish' => 'Save and publish',
         'save_as_draft'    => 'Save as draft',
     ],
