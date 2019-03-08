@@ -20,15 +20,23 @@ class Invoices extends Model
 			"net_amount",
 			"total_amount",
 			"vat_rates",
-			"jobcard_id",
+			//"jobcard_id",
 			"project_id",
-			"project_managers_id",
+			//"project_managers_id",
 			"client_email",
 			"invoice_description",
 			"rows",
 			"bank_account" ,
 			"company_address",
-			"company_logo" 
+			"company_logo",
+			"invoice_status",
+			"client_id",
+	        "client_name",
+	        "client_business",
+	        "client_street",
+	        "client_town",
+	        "client_region",
+	        "client_postcode", 
 	];
 
    	protected $table = 'invoices';

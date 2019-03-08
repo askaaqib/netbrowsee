@@ -47,6 +47,13 @@ use App\Repositories\Contracts\FormSettingRepository;
 use App\Repositories\Contracts\RedirectionRepository;
 use App\Repositories\EloquentFormSubmissionRepository;
 use App\Repositories\Contracts\FormSubmissionRepository;
+use App\Repositories\EloquentDistrictRepository;
+use App\Repositories\Contracts\DistrictRepository;
+use App\Repositories\EloquentSubDistrictRepository;
+use App\Repositories\Contracts\SubDistrictRepository;
+use App\Repositories\EloquentClientsRepository;
+use App\Repositories\Contracts\ClientsRepository;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -171,6 +178,21 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             TagRepository::class,
             EloquentTagRepository::class
+        );
+
+        $this->app->bind(
+            DistrictRepository::class,
+            EloquentDistrictRepository::class
+        );
+
+        $this->app->bind(
+            SubDistrictRepository::class,
+            EloquentSubDistrictRepository::class
+        );
+
+        $this->app->bind(
+            ClientsRepository::class,
+            EloquentClientsRepository::class
         );
     }
 }

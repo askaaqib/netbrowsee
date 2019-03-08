@@ -32,15 +32,18 @@ class Jobcard extends Model
         'district',
         'sub_district',
         'travelling_paid',
-        'quoted_amount',
+        //'quoted_amount',
         'status',
         'contractor_id',
         'before_pictures',
-        'during_pictures',
+        //'during_pictures',
         'after_pictures',
         'projects_id',
-        'labour_rates_id',
-        'materials_rates_id',
+        'projectmanager_id',
+        'attachment_receipt',
+        //'labour_rates_id',
+        //'materials_rates_id',
+        'vat_rate_id',
     ];
 
     protected $table = 'jobcard';

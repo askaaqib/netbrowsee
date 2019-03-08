@@ -70,7 +70,20 @@ class RequestSearchQuery
      */
     public function result($columns)
     {
-        return $this->query->paginate($this->request->get('perPage'), $columns);
+        $result = $this->query->paginate($this->request->get('perPage'), $columns);
+        return $result;
+    }
+
+    public function resultJobcard($columns)
+    {
+        $user_id = auth()->user()->id;
+        $role = auth()->user()->roles;
+        $user_role = isset($role[0]->display_name) ? $role[0]->display_name : '';  
+        if ($user_role == 'Clerk') {
+            $this->query->where('status', 2)->orWhere('status', 3)->orWhere('contractor_id', $user_id);
+        }
+        $result = $this->query->paginate($this->request->get('perPage'), $columns);
+        return $result;
     }
 
     /**

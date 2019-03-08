@@ -31,6 +31,8 @@ module.exports = {
       },
       svg: 'never',
       math: 'never'
-    }]
+    }],
+    "vue/singleline-html-element-content-newline": 'off',
+     "vue/multiline-html-element-content-newline": 'off'
   }
 }

@@ -23,11 +23,11 @@
                                     {{ Form::bsPassword('password', ['required', 'placeholder' => __('validation.attributes.password')]) }}
                                 </div>
 
-                                @if($isLocked)
+                                <!-- @if($isLocked)
                                     <div class="form-group">
                                         {!! Form::captcha() !!}
-                                    </div>
-                                @endif
+                                    </div> -->
+                                <!-- @endif -->
                                 <div class="form-group">
                                     {{ Form::bsCheckbox('remember', __('labels.user.remember')) }}
                                 </div>

@@ -146,6 +146,7 @@ return [
         'title'                     => 'Title123',
         'content'                   => 'Content',
         'description'               => 'Description',
+        'problemType'               => 'Problem Type',
         'summary'                   => 'Summary',
         'excerpt'                   => 'Excerpt',
         'date'                      => 'Date',
@@ -180,6 +181,8 @@ return [
         'rate'                      => 'Rate',
     ],
 
+
+
     'jobcards' => [
         'jobcard_num'               => 'Jobcard Number',
         'project_num'               => 'Project Number',
@@ -187,20 +190,23 @@ return [
         'problem_type'              => 'Problem Type',
         'priority'                  => 'Priority',
         'facility_name'             => 'Facility Name',
-        'district'                  => 'District',
-        'sub_district'              => 'Sub District',
-        'projects'                  => 'Projects',
+        'district'                  => 'Select District',
+        'sub_district'              => 'Select Sub District',
+        'projects'                  => 'Select Projects',
+        'projectmanager'            => 'Select Project Manager',
         'labour_paid'               => 'Labour Paid',
         'travelling_paid'           => 'Travelling Paid',
         'materials_paid'            => 'Materials Paid',
         'quoted_amount'            => 'Quoted Amount',
-        'status'                    => 'Status',
-        'assigned_to'               => 'Assign to',
+        'status'                    => 'Select Status',
+        'assigned_to'               => 'Select User to Assign',
         'before_pictures'           => 'Before Pictures',
         'during_pictures'           => 'During Pictures',
         'after_pictures'           => 'After Pictures',
+        'attachment_receipt'           => 'Receipt & Invoice Attachment',
         'upload_jobcard'           => 'Upload Jobcard',
         'quotations'           => 'Quotation',
+        'vat_rate_id'           => 'Select Vat Rates',
     ],
 
     'quotes' => [
@@ -219,7 +225,30 @@ return [
       'jobcard_id'          => 'Jobcard'
       
     ],
+'District' => [
+      'name'        => 'District Name'
+     ],
 
+'SubDistrict' => [
+      'name'        => 'Sub District Name'
+     ],
+
+'quotes' => [
+      'quotation_number'          => 'Quote Number',
+      'project_num'               => 'Project Number',
+      'quotation_name'               => 'Quotes Name',
+      'travelling_time'           => 'Travelling Time',
+      'travelling_km'             => 'Travelling KM',
+      'vat_amount'                => 'Vat Amount',
+      'net_amount'                => 'Net Amount',
+      'total_amount'              => 'Total Amount',
+      'quotation_date'           => 'Quotation Date',
+      'labour_rates'           => 'Labour Rates',
+      'material_rates'           => 'Material Rates',
+      'vat_rates'           => 'Vat Rates',
+      'jobcard_id'          => 'Jobcard'
+      
+    ],
     'reports' => [
       'description'=> 'Description',
       'status'=> 'Status',
@@ -236,7 +265,8 @@ return [
       'company_logo'=> 'Company Logo',
       'bank_account'=> 'Bank Account',
       'quote_ref_start'=> 'Quote Reference Start',
-      'quote_ref_alphabet'=> 'Reference Start Characters',
+      'quote_ref_alphabet'=> 'Quote Reference Start Characters',
+      'invoice_ref_alphabet'=> 'Invoice Reference Start Characters',
       'quote_vat'=> 'Quote Vat Rate', 
       'invoice_ref_start' => 'Invoice Reference Start'                   
     ],
@@ -252,9 +282,23 @@ return [
       'vat_id'=>'Vat Rates',
       'quotations_id'=>'Quotation',
       'invoice_name' => 'Name',
+      'invoice_status' => 'Status',
       'invoice_reference' => 'Reference No',
       'client_email' => 'Client Email',
       'invoice_date' => 'Invoice Date',
-      'jobcard_id'          => 'Jobcard'             
+      'jobcard_id'          => 'Jobcard'
+    ],
+
+    'clients' => [
+      'first_name'  => 'First Name',
+      'last_name'  => 'Last Name',
+      'business_name'  => 'Business Name',
+      'street'  => 'Street',
+      'town'  => 'Town',
+      'email'  => 'Email',
+      'region'  => 'Region',
+      'primary_phone'  => 'Primary Phone',
+      'secondary_phone'  => 'Secondary Phone',
+      'notes'  => 'Notes',
     ],
 ];

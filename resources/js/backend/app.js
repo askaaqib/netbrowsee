@@ -1,3 +1,4 @@
+// import './jquery-global'
 import './load-client-scripts'
 
 // Vue & axios
@@ -6,6 +7,7 @@ import '../axios-config'
 import moment from 'moment'
 import 'babel-polyfill'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
+import jspdf from 'jspdf'
 
 // Vendor plugins components
 import '../vendor/coreui/components'
@@ -39,7 +41,7 @@ export function createApp () {
   const i18n = createLocales(window.settings.locale)
   const router = createRouter(window.settings.adminHomePath, i18n)
   const store = createStore(window.route)
-
+  window.jspdf = jspdf
   /**
    * Server-side settings
    */
@@ -164,6 +166,8 @@ export function createApp () {
     store,
     i18n,
     moment,
+    $,
+    jQuery,
     render: (h) => h(App)
   })
 

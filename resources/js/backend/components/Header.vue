@@ -1,5 +1,6 @@
 <template>
   <Header fixed>
+    <!-- //this section is related to the picture logo in the header section -->
     <SidebarToggler class="d-lg-none" display="md" mobile></SidebarToggler>
     <a class="navbar-brand" :href="$app.homePath" target="_blank">
       <img class="navbar-brand-full" src="../../../sass/vendor/tabler/brand/logo.png" height="30" alt="Laravel Admin">
@@ -7,6 +8,7 @@
     </a>
     <SidebarToggler class="d-md-down-none" display="lg"></SidebarToggler>
     <b-navbar-nav class="ml-auto">
+      <!-- //this section is related to the add button in the header where we can add different posts -->
       <HeaderDropdown right class="px-3 d-none d-md-block">
         <template slot="header">
           <span class="d-md-down-none">
@@ -32,8 +34,11 @@
           <b-dropdown-item to="/redirections/create" v-if="this.$app.user.can('create redirections')">
             <i class="fe fe-fast-forward"></i>&nbsp;&nbsp;{{ $t('labels.backend.new_menu.redirection') }}
           </b-dropdown-item>
+          <!-- <b-dropdown-item to="/rePost/create" v-if="this.$app.user.can('create rePost')">
+          <i class="fe fe-user"></i>&nbsp;&nbsp;{{}} -->
         </template>
       </HeaderDropdown>
+      <!-- //  this section is related to different language -->
       <HeaderDropdown right class="px-3 d-none d-md-block">
         <template slot="header">
           <span class="d-md-down-none">{{ $t('labels.language') }}</span>
@@ -67,7 +72,6 @@
     <AsideToggler class="d-none d-lg-block"></AsideToggler>
   </Header>
 </template>
-
 <script>
 export default {
   name: 'AppHeader'

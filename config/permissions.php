@@ -13,55 +13,55 @@ return [
         'category'     => 'permissions.categories.access',
     ],
 
-    'view posts' => [
-        'display_name' => 'permissions.view.posts.display_name',
-        'description'  => 'permissions.view.posts.description',
-        'category'     => 'permissions.categories.blog',
-        'children'     => ['view own posts'],
+    'view jobcards' => [
+        'display_name' => 'permissions.view.jobcards.display_name',
+        'description'  => 'permissions.view.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
+        'children'     => ['view own jobcards'],
     ],
 
-    'create posts' => [
-        'display_name' => 'permissions.create.posts.display_name',
-        'description'  => 'permissions.create.posts.description',
-        'category'     => 'permissions.categories.blog',
+    'create jobcards' => [
+        'display_name' => 'permissions.create.jobcards.display_name',
+        'description'  => 'permissions.create.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
     ],
 
-    'edit posts' => [
-        'display_name' => 'permissions.edit.posts.display_name',
-        'description'  => 'permissions.edit.posts.description',
-        'category'     => 'permissions.categories.blog',
-        'children'     => ['edit own posts'],
+    'edit jobcards' => [
+        'display_name' => 'permissions.edit.jobcards.display_name',
+        'description'  => 'permissions.edit.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
+        'children'     => ['edit own jobcards'],
     ],
 
-    'delete posts' => [
-        'display_name' => 'permissions.delete.posts.display_name',
-        'description'  => 'permissions.delete.posts.description',
-        'category'     => 'permissions.categories.blog',
-        'children'     => ['delete own posts'],
+    'delete jobcards' => [
+        'display_name' => 'permissions.delete.jobcards.display_name',
+        'description'  => 'permissions.delete.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
+        'children'     => ['delete own jobcards'],
     ],
 
-    'view own posts' => [
-        'display_name' => 'permissions.view.own.posts.display_name',
-        'description'  => 'permissions.view.own.posts.description',
-        'category'     => 'permissions.categories.blog',
+    'view own jobcards' => [
+        'display_name' => 'permissions.view.own.jobcards.display_name',
+        'description'  => 'permissions.view.own.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
     ],
 
-    'edit own posts' => [
-        'display_name' => 'permissions.edit.own.posts.display_name',
-        'description'  => 'permissions.edit.own.posts.description',
-        'category'     => 'permissions.categories.blog',
+    'edit own jobcards' => [
+        'display_name' => 'permissions.edit.own.jobcards.display_name',
+        'description'  => 'permissions.edit.own.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
     ],
 
-    'delete own posts' => [
-        'display_name' => 'permissions.delete.own.posts.display_name',
-        'description'  => 'permissions.delete.own.posts.description',
-        'category'     => 'permissions.categories.blog',
+    'delete own jobcards' => [
+        'display_name' => 'permissions.delete.own.jobcards.display_name',
+        'description'  => 'permissions.delete.own.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
     ],
 
-    'publish posts' => [
-        'display_name' => 'permissions.publish.posts.display_name',
-        'description'  => 'permissions.publish.posts.description',
-        'category'     => 'permissions.categories.blog',
+    'publish jobcards' => [
+        'display_name' => 'permissions.publish.jobcards.display_name',
+        'description'  => 'permissions.publish.jobcards.description',
+        'category'     => 'permissions.categories.jobcards',
     ],
 
     'view form_settings' => [

@@ -16,9 +16,9 @@
     @endif
 
     <!-- CDN -->
+    <script defer src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script defer src="{{ asset('js/popper.min.js') }}"></script>
     <script defer src="{{ asset('js/ckeditor.js') }}"></script>
-
     <!-- Scripts -->
     <script defer src="{{ Html::asset('backend', 'vendor-backend.js') }}"></script>
     <script defer src="{{ Html::asset('backend', 'backend.js') }}"></script>

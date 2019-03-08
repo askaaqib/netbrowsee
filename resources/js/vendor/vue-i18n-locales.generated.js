@@ -1328,6 +1328,93 @@ export default {
                         "promote": "Promote selected invoices"
                     }
                 },
+                "district": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Districts",
+                        "index": "District list",
+                        "create": "Create District",
+                        "edit": "Edit District",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of project's title by default.",
+                        "meta_description": "If leave empty, description will be that of project's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Projects's title.",
+                        "meta_description": "Projects's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected District",
+                        "publish": "Publish selected Districts",
+                        "pin": "Pin selected projects",
+                        "promote": "Promote selected projects"
+                    }
+                },
+                "subdistrict": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Sub District",
+                        "index": "Sub District list",
+                        "create": "Create Sub District",
+                        "edit": "Edit Sub District",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of project's title by default.",
+                        "meta_description": "If leave empty, description will be that of project's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Projects's title.",
+                        "meta_description": "Projects's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected SubDistrict",
+                        "publish": "Publish selected SubDistricts",
+                        "pin": "Pin selected projects",
+                        "promote": "Promote selected projects"
+                    }
+                },
+                "clients": {
+                    "statuses": {
+                        "draft": "Draft",
+                        "pending": "Pending",
+                        "published": "Published"
+                    },
+                    "titles": {
+                        "main": "Clients",
+                        "index": "Clients list",
+                        "create": "Create Clients",
+                        "edit": "Edit Clients",
+                        "publication": "Publication options"
+                    },
+                    "descriptions": {
+                        "meta_title": "If leave empty, title will be that of project's title by default.",
+                        "meta_description": "If leave empty, description will be that of project's summary by default."
+                    },
+                    "placeholders": {
+                        "body": "Write your content...",
+                        "meta_title": "Client's title.",
+                        "meta_description": "Client's summary."
+                    },
+                    "actions": {
+                        "destroy": "Delete selected Client",
+                        "publish": "Publish selected Clients",
+                        "pin": "Pin selected projects",
+                        "promote": "Promote selected projects"
+                    }
+                },
                 "quotes": {
                     "statuses": {
                         "draft": "Draft",
@@ -1537,6 +1624,21 @@ export default {
                     "bulk_pinned": "Selected settings pinned",
                     "bulk_promoted": "Selected settings promoted"
                 },
+                "District": {
+                    "created": "District created",
+                    "updated": "District updated",
+                    "deleted": "District deleted"
+                },
+                "project_managers": {
+                    "created": "ProjectManager created",
+                    "updated": "ProjectManager updated",
+                    "deleted": "ProjectManager deleted"
+                },
+                "SubDistrict": {
+                    "created": "SubDistrict created",
+                    "updated": "SubDistrict updated",
+                    "deleted": "SubDistrict deleted"
+                },
                 "invoices": {
                     "created": "Invoice created",
                     "updated": "Invoice updated",
@@ -1547,6 +1649,16 @@ export default {
                     "bulk_pinned": "Selected invoices pinned",
                     "bulk_promoted": "Selected invoices promoted"
                 },
+                "clients": {
+                    "created": "Client created",
+                    "updated": "Client updated",
+                    "deleted": "Client deleted",
+                    "bulk_destroyed": "Selected Clients deleted",
+                    "bulk_published": "Selected Clients published",
+                    "bulk_pending": "Selected Clients are awaiting moderation",
+                    "bulk_pinned": "Selected Clients pinned",
+                    "bulk_promoted": "Selected Clients promoted"
+                },
                 "actions": {
                     "invalid": "Invalid action"
                 }
@@ -1555,7 +1667,7 @@ export default {
         },
         "permissions": {
             "categories": {
-                "blog": "Blog",
+                "jobcards": "Jobcards",
                 "form": "Forms",
                 "access": "Access",
                 "seo": "SEO"
@@ -1599,7 +1711,13 @@ export default {
                     "posts": {
                         "display_name": "View own posts",
                         "description": "Can view own posts."
+                    },
+                    "jobcards": {
+                        "display_name": "View own Jobcards"
                     }
+                },
+                "jobcards": {
+                    "display_name": "View Jobcards"
                 }
             },
             "create": {
@@ -1626,6 +1744,9 @@ export default {
                 "posts": {
                     "display_name": "Create posts",
                     "description": "Can create all posts."
+                },
+                "jobcards": {
+                    "display_name": "Create Jobcards"
                 }
             },
             "edit": {
@@ -1657,7 +1778,13 @@ export default {
                     "posts": {
                         "display_name": "Edit own posts",
                         "description": "Can edit own posts."
+                    },
+                    "jobcards": {
+                        "display_name": "Edit own Jobcards"
                     }
+                },
+                "jobcards": {
+                    "display_name": "Edit Jobcards"
                 }
             },
             "delete": {
@@ -1693,13 +1820,22 @@ export default {
                     "posts": {
                         "display_name": "Delete own posts",
                         "description": "Can delete own posts."
+                    },
+                    "jobcards": {
+                        "display_name": "Delete own Jobcards"
                     }
+                },
+                "jobcards": {
+                    "display_name": "Delete Jobcards"
                 }
             },
             "publish": {
                 "posts": {
                     "display_name": "Publish posts",
                     "description": "Can manage posts publication."
+                },
+                "jobcards": {
+                    "display_name": "Publish Jobcards"
                 }
             },
             "impersonate": {
@@ -1878,6 +2014,7 @@ export default {
                 "title": "Title123",
                 "content": "Content",
                 "description": "Description",
+                "problemType": "Problem Type",
                 "summary": "Summary",
                 "excerpt": "Excerpt",
                 "date": "Date",
@@ -1918,20 +2055,23 @@ export default {
                 "problem_type": "Problem Type",
                 "priority": "Priority",
                 "facility_name": "Facility Name",
-                "district": "District",
-                "sub_district": "Sub District",
-                "projects": "Projects",
+                "district": "Select District",
+                "sub_district": "Select Sub District",
+                "projects": "Select Projects",
+                "projectmanager": "Select Project Manager",
                 "labour_paid": "Labour Paid",
                 "travelling_paid": "Travelling Paid",
                 "materials_paid": "Materials Paid",
                 "quoted_amount": "Quoted Amount",
-                "status": "Status",
-                "assigned_to": "Assign to",
+                "status": "Select Status",
+                "assigned_to": "Select User to Assign",
                 "before_pictures": "Before Pictures",
                 "during_pictures": "During Pictures",
                 "after_pictures": "After Pictures",
+                "attachment_receipt": "Receipt & Invoice Attachment",
                 "upload_jobcard": "Upload Jobcard",
-                "quotations": "Quotation"
+                "quotations": "Quotation",
+                "vat_rate_id": "Select Vat Rates"
             },
             "quotes": {
                 "quotation_number": "Quote Number",
@@ -1948,6 +2088,12 @@ export default {
                 "vat_rates": "Vat Rates",
                 "jobcard_id": "Jobcard"
             },
+            "District": {
+                "name": "District Name"
+            },
+            "SubDistrict": {
+                "name": "Sub District Name"
+            },
             "reports": {
                 "description": "Description",
                 "status": "Status",
@@ -1963,7 +2109,8 @@ export default {
                 "company_logo": "Company Logo",
                 "bank_account": "Bank Account",
                 "quote_ref_start": "Quote Reference Start",
-                "quote_ref_alphabet": "Reference Start Characters",
+                "quote_ref_alphabet": "Quote Reference Start Characters",
+                "invoice_ref_alphabet": "Invoice Reference Start Characters",
                 "quote_vat": "Quote Vat Rate",
                 "invoice_ref_start": "Invoice Reference Start"
             },
@@ -1978,10 +2125,23 @@ export default {
                 "vat_id": "Vat Rates",
                 "quotations_id": "Quotation",
                 "invoice_name": "Name",
+                "invoice_status": "Status",
                 "invoice_reference": "Reference No",
                 "client_email": "Client Email",
                 "invoice_date": "Invoice Date",
                 "jobcard_id": "Jobcard"
+            },
+            "clients": {
+                "first_name": "First Name",
+                "last_name": "Last Name",
+                "business_name": "Business Name",
+                "street": "Street",
+                "town": "Town",
+                "email": "Email",
+                "region": "Region",
+                "primary_phone": "Primary Phone",
+                "secondary_phone": "Secondary Phone",
+                "notes": "Notes"
             }
         },
         "buttons": {
@@ -2033,6 +2193,21 @@ export default {
             },
             "projects": {
                 "create": "Create Project",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "district": {
+                "create": "Create District",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "subdistrict": {
+                "create": "Create SubDistrict",
+                "save_and_publish": "Save and publish",
+                "save_as_draft": "Save as draft"
+            },
+            "clients": {
+                "create": "Create Client",
                 "save_and_publish": "Save and publish",
                 "save_as_draft": "Save as draft"
             },

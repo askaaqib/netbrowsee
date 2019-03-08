@@ -55,7 +55,8 @@ class InvoicesController extends BackendController
 			"rows",
 			"bank_account" ,
 			"company_address",
-			"company_logo" 
+            "company_logo",
+			"invoice_status" 
         ]);
 
         if ($request->get('exportData')) {
@@ -89,6 +90,7 @@ class InvoicesController extends BackendController
             "vat_amount",
             "net_amount",
             "total_amount",
+            "invoice_status",
             'invoices.created_at',
             'invoices.updated_at',
         ]);
@@ -102,8 +104,9 @@ class InvoicesController extends BackendController
      */
     public function store(StoreInvoicesRequest $request)
     {
-        //dd($request->all());
+        
         $data = $request->all();
+       //var_dump($data);
         $data['rows'] = json_encode($request->rows);
        
         $invoice = $this->invoice->make($data); 

@@ -18,9 +18,15 @@ use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Contracts\QuotesRepository;
 use App\Repositories\Contracts\JobcardRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
+use App\Repositories\Contracts\DistrictRepository;
+use App\Repositories\Contracts\SubDistrictRepository;
+
+use App\Models\Jobcard;
 use App\Models\Settings;
 use App\Models\Quotes;
+use App\Models\Invoices;
 use App\Models\User;
+use App\Models\Clients;
 
 class AjaxController extends Controller
 {
@@ -187,6 +193,26 @@ class AjaxController extends Controller
                 ->select('id','name')->get();
         
     }
+    public function getProjectManager(ProjectManagerRepository $project_manager)
+    {
+        return $project_manager->query()
+                 ->where('id' , '>' ,0)
+                 ->select('id','name')->get();
+    }
+    public function getDistricts(DistrictRepository $district){
+
+        return $district->query()
+                    ->where('id','>',0) ->
+                    select('id','name')->get();
+    }
+
+
+    public function getSubDistricts(SubDistrictRepository $subdistrict){
+
+        return $subdistrict->query()
+        ->where('id','>',0)->
+        select('id','name')->get();
+    }
 
     public function searchQuotes(QuotesRepository $quote, Request $request){
         $search = $request->get('q');
@@ -218,22 +244,34 @@ class AjaxController extends Controller
         }
     }
 
-    public function searchClients(UserRepository $user, Request $request){
+    public function searchClients(Clients $client, Request $request){
         $search = $request->get('q');
         if ($search) {
-            return $users = User::whereHas('roles', function($q){
-                $q->where('name', 'redactor');
-            })
-            ->where('name','LIKE', '%'. $search . '%')
+            return $users = Clients::where('first_name','LIKE', '%'. $search . '%')
+            ->orwhere('last_name','LIKE', '%'. $search . '%')
+            ->orwhere('business_name','LIKE', '%'. $search . '%')
             ->orwhere('email','LIKE', '%'. $search . '%')
+            ->select('id','first_name','last_name','business_name','email', 'primary_phone', 'secondary_phone', 'street', 'town', 'region', 'postcode', 'notes')
             ->get();
         } else {
-            return $users = User::whereHas('roles', function($q){
-                $q->where('name', 'redactor');
-            })
-            ->select('id','name','email')
+            return $users = Clients::where('id', '>', 0)
+            ->select('id','first_name','last_name','business_name','email', 'primary_phone', 'secondary_phone', 'street', 'town', 'region', 'postcode','notes')
             ->get();  
         }
+        // if ($search) {
+        //     return $users = User::whereHas('roles', function($q){
+        //         $q->where('name', 'redactor');
+        //     })
+        //     ->where('name','LIKE', '%'. $search . '%')
+        //     ->orwhere('email','LIKE', '%'. $search . '%')
+        //     ->get();
+        // } else {
+        //     return $users = User::whereHas('roles', function($q){
+        //         $q->where('name', 'redactor');
+        //     })
+        //     ->select('id','name','email')
+        //     ->get();  
+        // }
     }
 
     public function getLabours(LabourRateRepository $labour)
@@ -322,6 +360,13 @@ class AjaxController extends Controller
         return $quote;
        
     }
+
+    public function getInvoicesRecentReference()
+    {
+        $invoice = Invoices::orderBy('id', 'DESC')->first();       
+        return $invoice;
+       
+    }
     /**
      * @param Request $request
      *
@@ -346,4 +391,89 @@ class AjaxController extends Controller
             'height'   => $image->height(),
         ];
     }
+
+    public function JobcardRemoveImage(Request $request, Jobcard $jobcard_model, JobcardRepository $jobcard) {
+      $id = $request->id;
+      $image_name = $request->image_name;
+      $type = $request->type;
+      // dd($image_name);
+      $result = $jobcard->query()->where('id', $id)->select('*')->get();
+      if ($type == 'before_pictures') {
+        $before_pictures = json_decode($result[0]->before_pictures, true);
+          foreach($before_pictures as $key => $value) {
+            if ($value['image_name'] == $image_name) {
+              array_splice($before_pictures, $key, 1);
+            }
+          }
+          $update_jobcard = [
+            'before_pictures' => json_encode($before_pictures)
+          ];
+          $before_pictures = json_encode($before_pictures);
+          $save = $jobcard_model::where('id', $id)->update($update_jobcard);
+          if ($save) {
+            if(file_exists(public_path().$image_name)) {
+              if(unlink(public_path().$image_name)){
+                return response()->json([
+                  'status'  => 200,
+                  'image_delete' => $image_name
+                ]); 
+              } else {
+                return response()->json([
+                  'status'  => 403
+                ]); 
+              }
+            }
+          }
+      }
+      if ($type == 'after_pictures')  {
+        $after_pictures = json_decode($result[0]->after_pictures, true);
+        foreach($after_pictures as $key => $value) {
+            if ($value['image_name'] == $image_name) {
+              array_splice($after_pictures, $key, 1);
+            }
+        }
+        $update_jobcard = ['after_pictures' => json_encode($after_pictures)];
+        $after_pictures = json_encode($after_pictures);
+        $save = $jobcard_model::where('id', $id)->update($update_jobcard);
+        if ($save) {
+            if(file_exists(public_path().$image_name)) {
+                if(unlink(public_path().$image_name)){
+                return response()->json([
+                  'status'  => 200,
+                  'image_delete' => $image_name
+                ]); 
+              } else {
+                return response()->json([
+                  'status'  => 403
+                ]); 
+              }
+            }
+        }
+      }
+      if ($type == 'attachment_receipt')  {
+        $attachment_receipt = json_decode($result[0]->attachment_receipt, true);
+        foreach($attachment_receipt as $key => $value) {
+            if ($value['image_name'] == $image_name) {
+              array_splice($attachment_receipt, $key, 1);
+            }
+        }
+        $update_jobcard = ['attachment_receipt' => json_encode($attachment_receipt)];
+        $attachment_receipt = json_encode($attachment_receipt);
+        $save = $jobcard_model::where('id', $id)->update($update_jobcard);
+        if ($save) {
+            if(file_exists(public_path().$image_name)) {
+                if(unlink(public_path().$image_name)){
+                return response()->json([
+                  'status'  => 200,
+                  'image_delete' => $image_name
+                ]); 
+              } else {
+                return response()->json([
+                  'status'  => 403
+                ]); 
+              }
+            }
+        }
+      }
+    }     
 }
