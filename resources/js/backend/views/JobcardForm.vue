@@ -242,14 +242,34 @@
               :label-cols="2"
               :feedback="feedback('before_pictures')"
             >
-              <b-form-input
-                id="before_pictures"
-                name="before_pictures"
-                :required="model.contractor_id != '' ? true : false"
-                :placeholder="$t('validation.jobcards.before_pictures')"
-                v-model="model.before_pictures"
-                :state="state('before_pictures')"
-              ></b-form-input>
+            <div class="row">
+              <div class="col-md-5">
+                <vueDropzone
+                  ref="myVueDropzone"
+                  @vdropzone-success="filesAdded"
+                  @vdropzone-removed-file="fileRemoved"
+                  id="dropzone"
+                  v-model="model.before_pictures"
+                  :options="dropzoneOptions"
+                  :required="model.contractor_id != '' ? true : false"
+                  :placeholder="$t('validation.jobcards.before_pictures')"
+                  :state="state('before_pictures')"
+                  name="before_pictures"
+                >
+                </vueDropzone>
+              </div>
+              <div class="col-md-5">
+                <div class="upload-again">
+                  <b-button @click="uploadFile" class="btn-green btn-upload">Choose File</b-button>
+                </div>
+                <div class="confirm-upload">
+                  <b-button :disabled="!fileInProgress" @click="confirmUpload" class="btn-green">Confirm</b-button>
+                </div>
+                <div class="instruction">
+                  <small>Maximum File Size is 8MB. <br> JPG or PNG format only</small>
+                </div>
+              </div>
+            </div>
             </b-form-group>
 
             <b-form-group

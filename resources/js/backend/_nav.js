@@ -127,6 +127,12 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       url: '/settings',
       icon: 'fe fe-settings',
       access: app.user.can('view')
-    }
+    },
+    {
+    name: 'Districts Settings',
+    url: '/settings',
+    icon: 'fe fe-settings',
+    access: app.user.can('view')
+  }
   ]
 }

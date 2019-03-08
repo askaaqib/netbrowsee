@@ -23,7 +23,7 @@ class SettingsController extends BackendController
         //dd($jobcards);
         $this->setting = $Settings;
     }
-    
+
     /**
      * Show the application dashboard.
      *
@@ -38,7 +38,7 @@ class SettingsController extends BackendController
 
         /** @var Builder $query */
         $query = $this->setting->query();
-        
+
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
             'company_name',
             'company_address',
@@ -46,7 +46,7 @@ class SettingsController extends BackendController
         ]);
 
         if ($request->get('exportData')) {
-            return $requestSearchQuery->export([                
+            return $requestSearchQuery->export([
                 'company_name',
                 'company_address',
                 'bank_account',
@@ -80,24 +80,24 @@ class SettingsController extends BackendController
      */
     public function store(StoreSettingsRequest $request)
     {
-       
-       // dd($request->all());   
+
+       // dd($request->all());
         $data = $request->input();
         $new_logo = $request->selectedLogo;
 
         if($new_logo){
             $logo_name_random = rand(0,9999). $new_logo->getClientOriginalName();
             $logo_name = str_replace(' ', '', $logo_name_random);
-            $data['company_logo'] = $logo_name; 
-            
-            // remove old file 
+            $data['company_logo'] = $logo_name;
+
+            // remove old file
             $new_logo->move(public_path('uploads'),$logo_name);
         }
 
-        //$data['jobcard_id'] = $request->jobcard_id['id'];    
-        $setting = $this->setting->make($data); 
-       
-       //dd($request->input());     
+        //$data['jobcard_id'] = $request->jobcard_id['id'];
+        $setting = $this->setting->make($data);
+
+       //dd($request->input());
        $this->setting->save($setting, $data);
 
        return $this->redirectResponse($request, __('alerts.backend.settings.created'));
@@ -133,12 +133,12 @@ class SettingsController extends BackendController
      * @return \Illuminate\Http\Response
      */
     public function update(Settings $setting, UpdateSettingsRequest $request)
-    {   
+    {
         // $logo = $request->selectedLogo;
         // $logo_name_random = rand(0,9999). $logo->getClientOriginalName();
         // $logo_name = str_replace(' ', '', $logo_name_random);
         // $logo->move(public_path('uploads'),$logo_name);
-
+dd($request->all());
         $data = $request->input();
 
         $new_logo = $request->selectedLogo;
@@ -147,12 +147,12 @@ class SettingsController extends BackendController
         if($new_logo){
             $logo_name_random = rand(0,9999). $new_logo->getClientOriginalName();
             $logo_name = str_replace(' ', '', $logo_name_random);
-            $data['company_logo'] = $logo_name; 
-            
+            $data['company_logo'] = $logo_name;
+
             if(file_exists(public_path('uploads/').$old_logo)){
                 unlink(public_path('uploads/').$old_logo);
             }
-             // remove old file 
+             // remove old file
             $new_logo->move(public_path('uploads'),$logo_name);
         }
 
@@ -184,9 +184,9 @@ class SettingsController extends BackendController
     {
         $action = $request->get('action');
         $ids = $request->get('ids');
-        
+
         switch ($action) {
-            case 'destroy':                
+            case 'destroy':
                     $this->setting->batchDestroy($ids);
                     return $this->redirectResponse($request, __('alerts.backend.settings.bulk_destroyed'));
                 break;

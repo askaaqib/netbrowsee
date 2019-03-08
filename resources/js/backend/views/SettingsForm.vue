@@ -142,11 +142,11 @@
               horizontal
               :label-cols="3"
             >
-              <b-form-checkbox-group stacked v-model="model.district" name="roles[]">
+              <b-form-checkbox-group stacked v-model="model.district" name="district">
                 <b-form-checkbox
                 v-b-tooltip.left
-                :title="role.description"
-                :value="role.id"
+                value="1"
+                unchcecked-value = "0"
                 >
                   Enable District
                 </b-form-checkbox>
