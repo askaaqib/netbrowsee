@@ -25857,6 +25857,13 @@ form.quotes-form .table > thead > tr > th {
   padding-top: 10px;
 }
 
+.company-logo img {
+  width: 250px;
+  height: 250px;
+  border: 1px solid #dedede;
+  padding: 4px;
+}
+
 #org-img img {
   width: 500px;
 }
