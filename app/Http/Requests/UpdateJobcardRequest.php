@@ -25,6 +25,7 @@ class UpdateJobcardRequest extends FormRequest
     {
         return [
             'jobcard_num'          => 'required',
+            // 'labour_paid'          => 'numeric',
         ];
     }
 }

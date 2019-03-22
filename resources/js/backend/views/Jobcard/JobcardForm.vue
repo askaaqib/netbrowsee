@@ -257,7 +257,7 @@
               </b-select>
             </b-form-group>
 
-            <b-form-group
+            <!-- <b-form-group
               :label="$t('validation.jobcards.vat_rate_id')"
               label-for="vat_rate_id"
               horizontal
@@ -272,7 +272,7 @@
                   {{ vat.name }}
                 </option>
               </b-select>
-            </b-form-group>
+            </b-form-group> -->
 
             <!-- BEFORE PICTURES -->
             <b-form-group

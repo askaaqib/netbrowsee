@@ -475,5 +475,10 @@ class AjaxController extends Controller
             }
         }
       }
-    }     
+    }
+    
+    public function jobcardreports(Request $request, Jobcard $jobcard, JobcardRepository $jobcard_rep) {
+      $data = $jobcard_rep->query()->where('id', '>', 0)->paginate($request->get('perPage'));
+      return $data;
+    }
 }

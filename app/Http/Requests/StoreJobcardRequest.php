@@ -50,7 +50,8 @@ class StoreJobcardRequest extends FormRequest
         if($request->status === "1"){
             return[
 
-               'labour_paid' => 'required',
+               'labour_paid' => 'required|numeric',
+                // 'materials_paid' => 'required|numeric',
                 //'materials_rates_id' => 'required',
                 //'travelling_paid' => 'required',
                 'jobcard_num'          => 'required',

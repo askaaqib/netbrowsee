@@ -81,6 +81,7 @@ Route::resource('vat', 'VatController', ['only' => ['store', 'update', 'destroy'
 Route::post('reports/batch_action', 'ReportsController@batchAction')->name('reports.batch_action');
 Route::get('reports/{report}/show', 'ReportsController@show')->name('reports.show');
 Route::get('reports/search', 'ReportsController@search')->name('reports.search');
+Route::get('reports/jobcardreports', 'AjaxController@jobcardreports')->name('reports.jobcardreports');
 Route::resource('reports', 'ReportsController', ['only' => ['store', 'update', 'destroy'],]);
 /************* Reports Routes *************/
 

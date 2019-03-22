@@ -33,7 +33,6 @@ class Jobcard extends Model
         'district',
         'sub_district',
         'travelling_paid',
-        // 'quoted_amount',
         'status',
         'contractor_id',
         'before_pictures',
