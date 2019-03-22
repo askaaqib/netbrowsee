@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Reports;
+use App\Models\Jobcard as Reports;
 use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
 use Illuminate\Support\Facades\Gate;
@@ -20,10 +20,9 @@ class ReportsController extends BackendController
 
     public function __construct(ReportsRepository $reports)
     {
-        //dd($jobcards);
         $this->report = $reports;
     }
-    
+
     /**
      * Show the application dashboard.
      *
@@ -38,50 +37,101 @@ class ReportsController extends BackendController
 
         /** @var Builder $query */
         $query = $this->report->query();
-        
+
+
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
+            'jobcard_num',
             'description',
+            'problem_type',
+            'priority',
+            'facility_name',
+            'district',
+            'sub_district',
+            'travelling_paid',
+            // 'quoted_amount',
             'status',
-            'expenses',
-            'amount',
-            'vat_collected',
-            'profit_loss',
+            'contractor_id',
+            'before_pictures',
+            'during_pictures',
+            'after_pictures',
+            'projects_id',
+            'projectmanager_id',
+            'attachment_receipt',
+            'labour_paid',
+            'materials_paid',
+            'vat_rate_id',
         ]);
 
         if ($request->get('exportData')) {
-            return $requestSearchQuery->export([                
+            return $requestSearchQuery->export([
+                'jobcard_num',
                 'description',
+                'problem_type',
+                'priority',
+                'facility_name',
+                'district',
+                'sub_district',
+                'travelling_paid',
+                // 'quoted_amount',
                 'status',
-                'expenses',
-                'amount',
-                'vat_collected',
-                'profit_loss',
-                'reports.created_at',
-                'reports.updated_at',
+                'contractor_id',
+                'before_pictures',
+                'during_pictures',
+                'after_pictures',
+                'projects_id',
+                'projectmanager_id',
+                'attachment_receipt',
+                'labour_paid',
+                'materials_paid',
+                'vat_rate_id',
             ],
                 [
-                    __('validation.reports.description'),
-                    __('validation.reports.status'),
-                    __('validation.reports.expenses'),
-                    __('validation.reports.amount'),
-                    __('validation.reports.vat_collected'),
-                    __('validation.reports.profit_loss'),
-                    __('labels.created_at'),
-                    __('labels.updated_at'),
+                    'jobcard_num',
+                    'description',
+                    'problem_type',
+                    'priority',
+                    'facility_name',
+                    'district',
+                    'sub_district',
+                    'travelling_paid',
+                    // 'quoted_amount',
+                    'status',
+                    'contractor_id',
+                    'before_pictures',
+                    'during_pictures',
+                    'after_pictures',
+                    'projects_id',
+                    'projectmanager_id',
+                    'attachment_receipt',
+                    'labour_paid',
+                    'materials_paid',
+                    'vat_rate_id',
                 ],
                 'reports');
         }
 
         return $requestSearchQuery->result([
             'id',
+            'jobcard_num',
             'description',
+            'problem_type',
+            'priority',
+            'facility_name',
+            'district',
+            'sub_district',
+            'travelling_paid',
+            // 'quoted_amount',
             'status',
-            'expenses',
-            'amount',
-            'vat_collected',
-            'profit_loss',
-            'reports.created_at',
-            'reports.updated_at',
+            'contractor_id',
+            'before_pictures',
+            'during_pictures',
+            'after_pictures',
+            'projects_id',
+            'projectmanager_id',
+            'attachment_receipt',
+            'labour_paid',
+            'materials_paid',
+            'vat_rate_id',
         ]);
     }
 
@@ -93,12 +143,12 @@ class ReportsController extends BackendController
      */
     public function store(StoreReportsRequest $request)
     {
-          
+
         $data = $request->all();
-        $data['jobcard_id'] = $request->jobcard_id['id'];    
-        $report = $this->report->make($data); 
-       
-       //dd($request->input());     
+        $data['jobcard_id'] = $request->jobcard_id['id'];
+        $report = $this->report->make($data);
+
+       //dd($request->input());
        $this->report->save($report, $data);
 
        return $this->redirectResponse($request, __('alerts.backend.reports.created'));
@@ -134,13 +184,13 @@ class ReportsController extends BackendController
      * @return \Illuminate\Http\Response
      */
     public function update(Reports $report, UpdateReportsRequest $request)
-    {   
+    {
         $data = $request->input();
         $data['jobcard_id'] = $request->jobcard_id['id'];
         $report->fill($data);
-        
+
         $this->report->save($report, $data);
-           
+
         return $this->redirectResponse($request, __('alerts.backend.reports.updated'));
     }
 
@@ -167,9 +217,9 @@ class ReportsController extends BackendController
     {
         $action = $request->get('action');
         $ids = $request->get('ids');
-        
+
         switch ($action) {
-            case 'destroy':                
+            case 'destroy':
                     $this->report->batchDestroy($ids);
                     return $this->redirectResponse($request, __('alerts.backend.reports.bulk_destroyed'));
                 break;

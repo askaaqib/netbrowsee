@@ -25860,8 +25860,8 @@ form.quotes-form .table > thead > tr > th {
 .company-logo img {
   width: 250px;
   height: 250px;
-  border: 1px solid #dedede;
-  padding: 4px;
+  border: 1px solid #d0d0d0;
+  padding: 5px;
 }
 
 #org-img img {
@@ -26004,6 +26004,15 @@ form.invoices-form .table > thead > tr > th {
   height: 165px;
   width: 450px;
   padding-left: 1px;
+  text-align: right;
+}
+
+#box_right {
+  border: 1px solid #cccccc;
+  height: 165px;
+}
+
+.box_text {
   text-align: right;
 }
 

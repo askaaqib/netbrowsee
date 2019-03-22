@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Reports;
+use App\Models\Jobcard as Reports;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Gate;
@@ -39,7 +39,7 @@ class EloquentReportsRepository extends EloquentBaseRepository implements Report
         DB::transaction(function () use ($report, $input) {
             if (! $report->save()) {
                 throw new GeneralException(__('exceptions.backend.reports.save'));
-            }           
+            }
             return true;
         });
 
@@ -84,7 +84,7 @@ class EloquentReportsRepository extends EloquentBaseRepository implements Report
     public function batchDestroy(array $ids)
     {
         DB::transaction(function () use ($ids) {
-            $query = $this->batchQuery($ids);            
+            $query = $this->batchQuery($ids);
 
             /** @var Reports[] $projects */
             $reports = $query->get();

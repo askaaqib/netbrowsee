@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Jobcard extends Model
 {
-	
+
+    protected $with = ['quotes'];
 	/**
      * The attributes that are mass assignable.
      *
@@ -32,22 +33,26 @@ class Jobcard extends Model
         'district',
         'sub_district',
         'travelling_paid',
-        //'quoted_amount',
+        // 'quoted_amount',
         'status',
         'contractor_id',
         'before_pictures',
-        //'during_pictures',
+        'during_pictures',
         'after_pictures',
         'projects_id',
         'projectmanager_id',
         'attachment_receipt',
-        //'labour_rates_id',
-        //'materials_rates_id',
+        'labour_paid',
+        'materials_paid',
         'vat_rate_id',
     ];
 
     protected $table = 'jobcard';
 
+    public function quotes()
+    {
+        return $this->belongsTo(Quotes::class);
+    }
     const DRAFT = 0;
     const PENDING = 1;
     const PUBLISHED = 2;

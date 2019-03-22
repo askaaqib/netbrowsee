@@ -86,8 +86,8 @@ export default {
         { key: 'amount', label: this.$t('validation.reports.amount'), sortable: true },
         { key: 'vat_collected', label: this.$t('validation.reports.vat_collected'), sortable: true },
         { key: 'profit_loss', label: this.$t('validation.reports.profit_loss'), sortable: true },
-        { key: 'reports.created_at', label: this.$t('labels.created_at'), 'class': 'text-center', sortable: true },
-        { key: 'reports.updated_at', label: this.$t('labels.updated_at'), 'class': 'text-center', sortable: true },
+        { key: 'jobcard.created_at', label: this.$t('labels.created_at'), 'class': 'text-center', sortable: true },
+        { key: 'jobcard.updated_at', label: this.$t('labels.updated_at'), 'class': 'text-center', sortable: true },
         { key: 'actions', label: this.$t('labels.actions'), 'class': 'nowrap' }
       ],
       actions: {
