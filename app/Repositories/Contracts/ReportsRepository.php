@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Models\Reports;
+use App\Models\Jobcard as Reports;
 
 /**
  * Interface ProjectProjectManagerRepository.

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Backend;
 
@@ -45,7 +45,7 @@ class JobcardController extends BackendController
 
         /** @var Builder $query */
         $query = $this->jobcard->query();
-        
+
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
             'jobcard_num',
             'description',
@@ -90,7 +90,7 @@ class JobcardController extends BackendController
                     __('labels.updated_at'),
                 ],
                 'jobcard');
-        } 
+        }
 
         return $requestSearchQuery->resultJobcard([
             'jobcard.id',
@@ -125,7 +125,7 @@ class JobcardController extends BackendController
      */
     public function store(StoreJobcardRequest $request)
     {
-        
+
        //  $data = $request->all();
        // // dd($data);
        //  // $data['projects_id'] = $request->projects_id['id'];
@@ -133,10 +133,10 @@ class JobcardController extends BackendController
        //  // $data['materials_rates_id'] = $request->materials_rates_id['id'];
        //  // $data['contractor_id'] = $request->contractor_id['id'];
        //  // $data['quotations_id'] = $request->quotations_id['id'];
-        
+
        //  //dd($data);
-       //  $jobcard = $this->jobcard->make($data); 
-        
+       //  $jobcard = $this->jobcard->make($data);
+
        //  if ('publish' === $data['status']) {
        //      $this->jobcard->saveAndPublish($jobcard, $data);
        //  } else {
@@ -144,39 +144,39 @@ class JobcardController extends BackendController
        //  }
 
        //  return $this->redirectResponse($request, __('alerts.backend.jobcards.created'));
-        
+
        $data = $request->all();
-      
+
         if(isset($data['before_pictures'])) {
             $imageNames = array();
-            $images = $data['before_pictures'];    
+            $images = $data['before_pictures'];
             foreach($images as $image) {
                 $imageName = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
                 $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
             }
             $data['before_pictures'] = json_encode($imageNames);
-        } 
+        }
          if(isset($data['after_pictures'])) {
             $imageNames = array();
-            $images = $data['after_pictures'];    
+            $images = $data['after_pictures'];
             foreach($images as $image) {
                 $imageName = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
                 $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
             }
             $data['after_pictures'] = json_encode($imageNames);
-        } 
+        }
         if(isset($data['attachment_receipt'])) {
             $imageNames = array();
-            $images = $data['attachment_receipt'];    
+            $images = $data['attachment_receipt'];
             foreach($images as $image) {
                 $imageName = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
                 $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
             }
             $data['attachment_receipt'] = json_encode($imageNames);
-        } 
+        }
         // dd($data);
         $jobcard = $this->jobcard->make($data);
 
@@ -193,7 +193,7 @@ class JobcardController extends BackendController
      */
     public function getLastestJobcards()
     {
-        $query = $this->jobcard->query();        
+        $query = $this->jobcard->query();
 
         return $query->orderByDesc('created_at')->limit(10)->get();
     }
@@ -247,7 +247,7 @@ class JobcardController extends BackendController
             }
         }
         if (isset($data['before_pictures_edit'])) {
-            $new_images_before = $data['before_pictures_edit'];    
+            $new_images_before = $data['before_pictures_edit'];
             foreach($new_images_before as $image) {
                 $imageNameBefore = rand(0,10000000).$image->getClientOriginalName();
                 $uploadedBefore = $image->move(base_path('/public/images/jobcard/'),$imageNameBefore);
@@ -255,7 +255,7 @@ class JobcardController extends BackendController
             }
             $data['before_pictures'] = json_encode($imageNamesBefore);
         }
-        
+
         /************* AFTER  PICTURES *************/
         if(isset($data['after_pictures']) && !isset($data['after_pictures_edit'])) {
             $data['after_pictures'] = json_encode($data['after_pictures']);
@@ -270,7 +270,7 @@ class JobcardController extends BackendController
             }
         }
         if (isset($data['after_pictures_edit'])) {
-            $new_images_after = $data['after_pictures_edit'];    
+            $new_images_after = $data['after_pictures_edit'];
             foreach($new_images_after as $image) {
                 $imageNameAfter = rand(0,10000000).$image->getClientOriginalName();
                 $uploadedAfter = $image->move(base_path('/public/images/jobcard/'),$imageNameAfter);
@@ -293,7 +293,7 @@ class JobcardController extends BackendController
             }
         }
         if (isset($data['attachment_receipt_edit'])) {
-            $new_images = $data['attachment_receipt_edit'];    
+            $new_images = $data['attachment_receipt_edit'];
             foreach($new_images as $image) {
                 $imageNameAttachment = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageNameAttachment);
@@ -301,13 +301,13 @@ class JobcardController extends BackendController
             }
             $data['attachment_receipt'] = json_encode($imageNamesAttachment);
         }
-        
+
         $jobcard->fill(
             $data
         );
-        
+
         $saved = $this->jobcard->saveAndPublish($jobcard, $data);
-        
+
         if ($saved) {
             if ($old_status != $new_status) {
                 $this->sendEmail($old_status, $data);
@@ -338,9 +338,9 @@ class JobcardController extends BackendController
     {
         $action = $request->get('action');
         $ids = $request->get('ids');
-        
+
         switch ($action) {
-            case 'destroy':                
+            case 'destroy':
                     $this->jobcard->batchDestroy($ids);
                     return $this->redirectResponse($request, __('alerts.backend.jobcards.bulk_destroyed'));
                 break;
@@ -354,24 +354,24 @@ class JobcardController extends BackendController
        // //dd($data);
        //  if(isset($data['before_pictures'])) {
        //      $imageNames = array();
-       //      $images = $data['before_pictures'];    
+       //      $images = $data['before_pictures'];
        //      foreach($images as $image) {
        //          $imageName = rand(0,10000000).$image->getClientOriginalName();
        //          $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
        //          $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
        //      }
        //      $data['before_pictures'] = json_encode($imageNames);
-       //  } 
+       //  }
        //   if(isset($data['after_pictures'])) {
        //      $imageNames = array();
-       //      $images = $data['after_pictures'];    
+       //      $images = $data['after_pictures'];
        //      foreach($images as $image) {
        //          $imageName = rand(0,10000000).$image->getClientOriginalName();
        //          $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
        //          $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
        //      }
        //      $data['after_pictures'] = json_encode($imageNames);
-       //  } 
+       //  }
        //  // dd($data);
 
        //  $jobcard = $this->jobcard->make($data);
@@ -385,11 +385,11 @@ class JobcardController extends BackendController
     }
 
     public function addedfile() {}
-    
+
     protected function sendEmail($old_status, $data) {
       $to_email = 'netbrowse@yopmail.com';
       $mail_data = array("old_status" => $old_status, "data" => $data);
-       try{       
+       try{
         Mail::send('emails.mail', $mail_data, function($message) use ($to_email) {
           $message->to($to_email)
             ->subject('NetBrowse');

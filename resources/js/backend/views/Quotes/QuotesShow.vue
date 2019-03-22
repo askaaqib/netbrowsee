@@ -7,7 +7,7 @@
           <b-row>
             <b-col class="col-md-12">
               <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print<i class="fe fe-printer fe-lg"></i></b-btn>
-              <b-btn class="btn-show pull-right" id="hidedownload" variant="secondary">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+              <b-btn class="btn-show pull-right" id="hidedownload" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
             </b-col>
           </b-row>
           <!-- ViewPort  Starts -->
@@ -58,8 +58,8 @@
                 </b-col>
               </b-col>
               <b-col sm="6">
-                <div class="well" id="right">
-                  <div class="align-right">
+                <div class="well" id="box_right">
+                  <div class="box_text">
                     <div class="form-group">
                       <label class="control-label"><b>Quote name: </b></label> <span class="form-control-static">{{ model.quotation_name }}</span>
                     </div>
@@ -715,7 +715,7 @@ import swal from 'sweetalert2'
 import AttachmentImageGallery from '../Jobcard/AttachmentImageGallery'
 import BeforeImageGallery from '../Jobcard/BeforeImageGallery'
 import AfterImageGallery from '../Jobcard/AfterImageGallery'
-import JsPDF from 'jspdf'
+import html2pdf from 'html2pdf.js'
 
 export default {
   name: 'QuotesForm',
@@ -1042,7 +1042,19 @@ export default {
         window.print()
       }, 1000)
     },
+    printFacture: function () {
+      var elementor = document.getElementById('quotes-view')
+      html2pdf(elementor,{
+        margin:       1.5,
+        filename:     'myfile.pdf',
+        //image:        { type: 'png' },
+        html2canvas:  { dpi: 192, letterRendering: true},
+        jsPDF:        { unit: 'cm', format: 'a4', orientation: 'p' }
+      })
+
+    },
     downloadjspdf: function () {
+
       // var doc = new jsPDF('p', 'mm', [297, 210])
       var doc = new JsPDF()
       // doc.text('hello world', 10, 10)

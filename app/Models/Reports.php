@@ -13,12 +13,12 @@ class Reports extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-	    	'description',            
-            'status',            
-            'expenses',            
-            'amount',            
-            'vat_collected',            
-            'profit_loss', 
+	    	'description',
+            'status',
+            'expenses',
+            'amount',
+            'vat_collected',
+            'profit_loss',
             'jobcard_id',
 	];
 

@@ -464,6 +464,7 @@ export default {
         sub_district: null,
         // subdistrict,
         labour_paid: null,
+        materials_paid: null,
         projects_id: '',
         projectmanager_id: '',
         travelling_paid: null,
