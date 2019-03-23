@@ -44,6 +44,7 @@ import SubDistrictForm from '../views/SubDistrict/SubDistrictForm'
 import SubDistrictList from '../views/SubDistrict/SubDistrictList'
 import ClientsForm from '../views/Clients/ClientsForm'
 import ClientsList from '../views/Clients/ClientsList'
+import AgeingReport from '../views/Reports/AgeingReport'
 
 Vue.use(Router)
 
@@ -779,6 +780,13 @@ export function createRouter (base, i18n) {
                 }
               }
             ]
+          },
+          {
+            path: 'ageingreport',
+            component: AgeingReport,
+            meta: {
+              label: 'Ageing Report'
+            }
           }
         ]
       }

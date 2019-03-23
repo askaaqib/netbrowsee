@@ -26063,6 +26063,10 @@ table#table-invoice-total td {
   padding: 4px;
 }
 
+.ageing-report .invoice-status {
+  text-transform: capitalize;
+}
+
 /* PRINT MEDIA QUERIES */
 
 @media print {

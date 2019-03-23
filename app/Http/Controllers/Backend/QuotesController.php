@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Quotes;
+use App\Models\Jobcard;
 use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
 use Illuminate\Support\Facades\Gate;
@@ -78,14 +79,21 @@ class QuotesController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreQuotesRequest $request)
+    public function store(StoreQuotesRequest $request, Jobcard $jobcard)
     {
         $data = $request->all();
         // dd($data);
         $data['rows'] = json_encode($request->rows);
         $quote = $this->quote->make($data); 
         
-       $this->quote->save($quote, $data);
+        $data_saved = $this->quote->save($quote, $data);
+        if($data_saved) {
+            $quote_id = $quote->id;
+            $jobcard_id = $data['jobcard_id'];
+            $quote_amount = $data['vat_amount'];
+            /*************** UPDATE JOBCARD ***************/
+            $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount]);
+        }
 
        return $this->redirectResponse($request, __('alerts.backend.quotes.created'));
     }
@@ -129,10 +137,14 @@ class QuotesController extends BackendController
      * @param  \App\Quotes  $quote
      * @return \Illuminate\Http\Response
      */
-    public function update(Quotes $quote, UpdateQuotesRequest $request)
+    public function update(Quotes $quote, UpdateQuotesRequest $request, Jobcard $jobcard)
     {   
         $data = $request->all();
-        // dd($data);
+        $quote_id = $quote->id;
+        $jobcard_id = $data['jobcard_id'];
+        $quote_amount = $data['vat_amount'];
+        /*************** UPDATE JOBCARD ***************/
+        $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount]);
         $data['rows'] = json_encode($request->rows);
         $quote->fill($data);
         

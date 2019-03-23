@@ -27,6 +27,8 @@ use App\Models\Quotes;
 use App\Models\Invoices;
 use App\Models\User;
 use App\Models\Clients;
+use DB;
+use Carbon\Carbon;
 
 class AjaxController extends Controller
 {
@@ -312,12 +314,21 @@ class AjaxController extends Controller
     public function getJobcards(JobcardRepository $jobcard, Request $request)
     {
         $jobcard_id = $request->get('id');
+        $quote_id = $request->get('quote_id');
         if($jobcard_id){
             return $jobcard->query()
                 ->where('id' , $jobcard_id)
                 ->select('id','jobcard_num','facility_name')->get();
-        }else{
+        }
+        if ($quote_id) {
+          return $jobcard->query()
+            ->where('quote_id' , $quote_id)
+            ->orWhere('quote_id' , NULL)
+            ->select('jobcard_num','id')->get();          
+        }
+        else{
             return $jobcard->query()
+                ->where('quote_id' , NULL)
                 ->select('jobcard_num','id')->get();  
         }
         
@@ -478,7 +489,53 @@ class AjaxController extends Controller
     }
     
     public function jobcardreports(Request $request, Jobcard $jobcard, JobcardRepository $jobcard_rep) {
-      $data = $jobcard_rep->query()->where('id', '>', 0)->paginate($request->get('perPage'));
+      $data = $jobcard_rep->query()
+                ->select(
+                    'id', 'jobcard_num', 'labour_paid',
+                    'materials_paid', 'travelling_paid',
+                    'quote_id', 'quote_amount', 'status',
+                    DB::raw('(labour_paid + materials_paid + travelling_paid) as expenses')
+                  )
+                ->where('id', '>', 0)
+                ->paginate($request->get('perPage'));
       return $data;
+    }
+
+    public function getInvoiceRecords(Invoices $invoice) {
+      $today = Carbon::now();
+      $upto_30 = (Carbon::now())->subDays(30);
+      $upto_60 = (Carbon::now())->subDays(60);
+      $upto_90 = (Carbon::now())->subDays(90);
+      $upto_120 = (Carbon::now())->subDays(120);
+      /*********** MONEY OWNED UPTO 30 ************/
+      $less_30 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
+                  ->where('created_at', '>', $upto_30)
+                  ->sum('total_amount');
+      /************ MONEY OWNED UPTO 60 ************/
+      $plus_30 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
+                  ->whereBetween('created_at', array($upto_60, $upto_30))
+                  ->sum('total_amount');
+      /************ MONEY OWNED UPTO 90 ************/
+      $plus_60 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
+                  ->whereBetween('created_at', array($upto_90, $upto_60))
+                  ->sum('total_amount');
+      /************ MONEY OWNED UPTO 120 ************/
+      $plus_90 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
+                  ->whereBetween('created_at', array($upto_120, $upto_90))
+                  ->sum('total_amount');
+      /************ MONEY OWNED MORE THAN 120 ************/
+      $plus_120 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
+                  ->where('created_at', '<', $upto_120)
+                  ->sum('total_amount');
+      return response()->json([
+        'status' => 200,
+        'counts' => [
+          'less_30' => $less_30,
+          'plus_30' => $plus_30,
+          'plus_60' => $plus_60,
+          'plus_90' => $plus_90,
+          'plus_120' => $plus_120
+        ]
+      ]);
     }
 }

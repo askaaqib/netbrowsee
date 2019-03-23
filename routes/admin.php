@@ -106,9 +106,11 @@ Route::get('subdistricts/search', 'SubDistrictController@search')->name('subdist
 Route::resource('subdistricts', 'SubDistrictController', ['only' => ['store', 'update', 'destroy'],]);
 
 /************* Invoices Routes *************/
+Route::get('invoices/getInvoiceRecords', 'AjaxController@getInvoiceRecords')->name('invoices.getInvoiceRecords');
 Route::post('invoices/batch_action', 'InvoicesController@batchAction')->name('invoices.batch_action');
 Route::get('invoices/{invoice}/show', 'InvoicesController@show')->name('invoices.show');
 Route::get('invoices/search', 'InvoicesController@search')->name('invoices.search');
+Route::get('invoices/invoicereport', 'InvoicesController@invoicereport')->name('invoices.invoicereport');
 Route::resource('invoices', 'InvoicesController', ['only' => ['store', 'update', 'destroy'],]);
 
 /************* Quotes Routes *************/

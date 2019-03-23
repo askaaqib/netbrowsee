@@ -96,6 +96,69 @@ class InvoicesController extends BackendController
         ]);
     }
 
+    public function invoicereport(Request $request)
+    {
+
+        /** @var Builder $query */
+        $query = $this->invoice->query();
+        
+        $requestSearchQuery = new RequestSearchQuery($request, $query, [
+            "invoice_number",
+            "invoice_digit",
+            "invoice_name",
+            "vat_amount",
+            "net_amount",
+            "total_amount",
+            "vat_rates",
+            "jobcard_id",
+            "project_id",
+            "project_managers_id",
+            "client_email",
+            "invoice_description",
+            "rows",
+            "bank_account" ,
+            "company_address",
+            "company_logo",
+            "invoice_status" 
+        ]);
+
+        if ($request->get('exportData')) {
+            return $requestSearchQuery->export([
+                "invoice_name",
+                "client_email",
+                "vat_amount",
+                "net_amount",
+                "total_amount",
+                "created_at",
+                "updated_at"
+            ],
+                [
+                    __('validation.invoices.invoice_name'),
+                    __('validation.invoices.client_email'),
+                    __('validation.invoices.vat_amount'),
+                    __('validation.invoices.net_amount'),
+                    __('validation.invoices.total_amount'),
+                    __('labels.created_at'),
+                    __('labels.updated_at'),
+                ],
+                'invoices');
+        }
+
+        return $requestSearchQuery->result([
+            "id",
+            "invoice_name",
+            "invoice_number",
+            "invoice_digit",
+            "client_email",
+            "vat_amount",
+            "net_amount",
+            "total_amount",
+            "invoice_status",
+            'invoices.created_at',
+            'invoices.updated_at',
+        ]);
+    }
+    
     /**
      * Store a newly created resource in storage.
      *

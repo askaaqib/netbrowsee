@@ -1409,7 +1409,11 @@ export default {
       this.vat_rates = data.ids
     },
     async getJobcards () {
-      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {})
+      let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {
+        params: {
+          quote_id: this.id
+        }
+      })
 
       this.jobcards = data
     },

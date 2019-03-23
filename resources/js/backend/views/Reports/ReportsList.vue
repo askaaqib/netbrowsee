@@ -9,26 +9,49 @@
           </b-button>
         </div>
       </template>
-      <b-datatable ref="datasource"
-                   @context-changed="onContextChanged"
-                   search-route="admin.reports.jobcardreports"
-                   delete-route="admin.reports.destroy"
-                   action-route="admin.reports.batch_action" :actions="actions"
-                   :selected.sync="selected"
+      <b-datatable
+        ref="datasource"
+        @context-changed="onContextChanged"
+        search-route="admin.reports.jobcardreports"
+        delete-route="admin.reports.destroy"
+        action-route="admin.reports.batch_action"
+        :actions="actions"
+        :selected.sync="selected"
+        :search="false"
       >
-        <b-table ref="datatable"
-                 striped
-                 bordered
-                 show-empty
-                 stacked="md"
-                 no-local-sorting
-                 :empty-text="$t('labels.datatables.no_results')"
-                 :empty-filtered-text="$t('labels.datatables.no_matched_results')"
-                 :fields="fields"
-                 :items="dataLoadProvider"
-                 sort-by="reports.created_at"
-                 :sort-desc="true"
+        <b-table
+          ref="datatable"
+          striped
+          bordered
+          show-empty
+          stacked="md"
+          no-local-sorting
+          :empty-text="$t('labels.datatables.no_results')"
+          :empty-filtered-text="$t('labels.datatables.no_matched_results')"
+          :fields="fields"
+          :items="dataLoadProvider"
+          sort-by="reports.created_at"
+          :sort-desc="true"
         >
+          <template slot="expenses" slot-scope="row">
+            <span>$ {{ row.item.expenses }}</span>
+          </template>
+          <template slot="quote_amount" slot-scope="row">
+            <span>$ {{ row.item.quote_amount }}</span>
+          </template>
+          <template slot="profit" slot-scope="row">
+            <span>$ {{ parseFloat(row.item.expenses) - parseFloat(row.item.quote_amount) }}</span>
+          </template>
+          <template slot="status" slot-scope="row">
+            <span v-if="row.item.status == 1">Received</span>
+            <span v-if="row.item.status == 2">Assigned</span>
+            <span v-if="row.item.status == 3">On Hold</span>
+            <span v-if="row.item.status == 4">Completed</span>
+            <span v-if="row.item.status == 5">Submitted for Vetting</span>
+            <span v-if="row.item.status == 6">Invoiced</span>
+            <span v-if="row.item.status == 7">Paid</span>
+            <span v-if="row.item.status == 8">Cancelled</span>
+          </template>
         </b-table>
       </b-datatable>
     </b-card>
@@ -43,8 +66,11 @@ export default {
     return {
       selected: [],
       fields: [
-        { key: 'checkbox' },
-        { key: 'jobcard_num', label: 'Jobcard Number' }
+        { key: 'jobcard_num', label: 'Jobcard Number' },
+        { key: 'expenses', label: 'Expenses' },
+        { key: 'quote_amount', label: 'Quoted Amount' },
+        { key: 'profit', label: 'Profit' },
+        { key: 'status', label: 'Status' }
       ],
       actions: {
         destroy: this.$t('labels.backend.reports.actions.destroy')
