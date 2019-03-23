@@ -2,7 +2,7 @@
   <div class="ageing-report">
     <b-card>
       <template slot="header">
-        <h3 class="card-title">Ageing Report</h3>
+        <h3 class="card-title">VAT Reports</h3>
       </template>
       <b-datatable
         ref="datasource"
