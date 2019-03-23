@@ -511,22 +511,35 @@ class AjaxController extends Controller
       $less_30 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->where('created_at', '>', $upto_30)
                   ->sum('total_amount');
+      
       /************ MONEY OWNED UPTO 60 ************/
       $plus_30 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->whereBetween('created_at', array($upto_60, $upto_30))
                   ->sum('total_amount');
+      
       /************ MONEY OWNED UPTO 90 ************/
       $plus_60 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->whereBetween('created_at', array($upto_90, $upto_60))
                   ->sum('total_amount');
+      
       /************ MONEY OWNED UPTO 120 ************/
       $plus_90 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->whereBetween('created_at', array($upto_120, $upto_90))
                   ->sum('total_amount');
+
       /************ MONEY OWNED MORE THAN 120 ************/
       $plus_120 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->where('created_at', '<', $upto_120)
                   ->sum('total_amount');
+      
+      /****************** TOTAL OWNED *******************/
+      $total_owned = $less_30 + $plus_30 + $plus_60 + $plus_90 + $plus_120;
+      $total_owned = number_format($total_owned, 2);
+      
+      /****************** TOTAL PAID *******************/
+      $total_paid = $invoice::where('invoice_status', 'paid')->sum('total_amount');
+      $total_paid = number_format($total_paid, 2);
+
       return response()->json([
         'status' => 200,
         'counts' => [
@@ -535,7 +548,9 @@ class AjaxController extends Controller
           'plus_60' => $plus_60,
           'plus_90' => $plus_90,
           'plus_120' => $plus_120
-        ]
+        ],
+        'total_paid' => $total_paid,
+        'total_owned' => $total_owned
       ]);
     }
 }

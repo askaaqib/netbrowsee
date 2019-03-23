@@ -59,6 +59,22 @@
         </tbody>
       </table>
     </b-card>
+    <b-card>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Total Paid</th>
+            <th>Total Owned</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$ {{ totalPaid }}</td>
+            <td>$ {{ totalOwned }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </b-card>
   </div>
 </template>
 
@@ -71,6 +87,8 @@ export default {
     return {
       selected: [],
       countsData: null,
+      totalPaid: '0.00',
+      totalOwned: '0.00',
       fields: [
         { key: 'invoice_number', label: 'Invoice Number' },
         { key: 'net_amount', label: 'Amount before VAT' },
@@ -98,6 +116,8 @@ export default {
       await axios.get(this.$app.route('admin.invoices.getInvoiceRecords')).then((result) => {
         if (result.data.status === 200) {
           this.countsData = result.data.counts
+          this.totalPaid = result.data.total_paid
+          this.totalOwned = result.data.total_owned
         }
       })
     }
