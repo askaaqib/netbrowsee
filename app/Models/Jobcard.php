@@ -18,7 +18,11 @@ use Illuminate\Database\Eloquent\Builder;
 class Jobcard extends Model
 {
 
-    protected $with = ['quotes'];
+    protected $with = [
+        'quotes',
+        'get_assigned_user',
+        'get_project_manager'
+    ];
 	/**
      * The attributes that are mass assignable.
      *
@@ -43,7 +47,7 @@ class Jobcard extends Model
         'attachment_receipt',
         'labour_paid',
         'materials_paid',
-        'vat_rate_id',
+        'vat_rate',
     ];
 
     protected $table = 'jobcard';
@@ -51,6 +55,14 @@ class Jobcard extends Model
     public function quotes()
     {
         return $this->belongsTo(Quotes::class);
+    }
+
+    public function get_project_manager() {
+        return $this->belongsTo(ProjectManager::class, 'projectmanager_id');
+    }
+
+    public function get_assigned_user() {
+        return $this->belongsTo(User::class, 'contractor_id');
     }
     const DRAFT = 0;
     const PENDING = 1;

@@ -236,6 +236,20 @@
             </b-form-group>
 
             <b-form-group
+              :label="$t('validation.jobcards.vat_rate')"
+              label-for="vat_rate"
+              horizontal
+              :label-cols="2"
+              :feedback="feedback('vat_rate')"
+            >
+              <b-form-input
+                v-model="vat_rate"
+                :state="state('status')"
+              >
+              </b-form-input>
+            </b-form-group>
+  
+            <b-form-group
               :label="$t('validation.jobcards.before_pictures')"
               label-for="before_pictures"
               horizontal
@@ -367,6 +381,7 @@ export default {
         travelling_paid: null,
         materials_rates_id: '',
         contractor_id: '',
+        vat_rate: null,
         quoted_amount: null,
         status: null,
         before_pictures: null,

@@ -66,7 +66,7 @@ export default {
     return {
       selected: [],
       fields: [
-        { key: 'jobcard_num', label: 'Jobcard Number' },
+        { key: 'jobcard_num', label: 'Jobcard #' },
         { key: 'expenses', label: 'Expenses' },
         { key: 'quote_amount', label: 'Quoted Amount' },
         { key: 'profit', label: 'Profit' },

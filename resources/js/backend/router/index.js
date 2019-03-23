@@ -45,6 +45,8 @@ import SubDistrictList from '../views/SubDistrict/SubDistrictList'
 import ClientsForm from '../views/Clients/ClientsForm'
 import ClientsList from '../views/Clients/ClientsList'
 import AgeingReport from '../views/Reports/AgeingReport'
+import VatReport from '../views/Reports/VatReport'
+import StatusReport from '../views/Reports/StatusReport'
 
 Vue.use(Router)
 
@@ -786,6 +788,20 @@ export function createRouter (base, i18n) {
             component: AgeingReport,
             meta: {
               label: 'Ageing Report'
+            }
+          },
+          {
+            path: 'vatreport',
+            component: VatReport,
+            meta: {
+              label: 'Vat Report'
+            }
+          },
+          {
+            path: 'statusreport',
+            component: StatusReport,
+            meta: {
+              label: 'Vat Report'
             }
           }
         ]

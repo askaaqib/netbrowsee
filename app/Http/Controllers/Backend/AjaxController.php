@@ -531,7 +531,7 @@ class AjaxController extends Controller
       $plus_120 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->where('created_at', '<', $upto_120)
                   ->sum('total_amount');
-      
+
       /****************** TOTAL OWNED *******************/
       $total_owned = $less_30 + $plus_30 + $plus_60 + $plus_90 + $plus_120;
       $total_owned = number_format($total_owned, 2);
@@ -553,4 +553,5 @@ class AjaxController extends Controller
         'total_owned' => $total_owned
       ]);
     }
+
 }

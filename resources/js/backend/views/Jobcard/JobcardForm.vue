@@ -257,22 +257,18 @@
               </b-select>
             </b-form-group>
 
-            <!-- <b-form-group
-              :label="$t('validation.jobcards.vat_rate_id')"
-              label-for="vat_rate_id"
+            <b-form-group
+              label="Vat Rate"
+              label-for="vat_rate"
               horizontal
               :label-cols="2"
-              :feedback="feedback('vat_rate_id')"
+              :feedback="feedback('vat_rate')"
             >
-              <b-select
-                v-model="model.vat_rate_id"
-              >
-                <option value="null">Please Select Vat Rate</option>
-                <option v-for="(vat, index) in vat_rates" :key="index" :value="vat.id">
-                  {{ vat.name }}
-                </option>
-              </b-select>
-            </b-form-group> -->
+              <b-form-input
+                v-model="model.vat_rate"
+                :state="state('vat_rate')"
+              ></b-form-input>
+            </b-form-group>
 
             <!-- BEFORE PICTURES -->
             <b-form-group
@@ -442,7 +438,6 @@ export default {
             .content
         }
       },
-      vat_rates: [],
       labour_rates: [],
       projects: [],
       project_manager: [],
@@ -470,7 +465,7 @@ export default {
         travelling_paid: null,
         contractor_id: '',
         status: null,
-        vat_rate_id: null,
+        vat_rate: null,
         before_pictures: [],
         before_pictures_edit: [],
         after_pictures: [],
@@ -536,7 +531,6 @@ export default {
     this.getQuotations()
     this.getdistrict()
     this.getsubdistrict()
-    this.getVatRates()
   },
   methods: {
     changeBeforeGalleryImage (images) {
@@ -662,10 +656,6 @@ export default {
     async getQuotations () {
       let { data } = await axios.get(this.$app.route('admin.quotations.getdata'), {})
       this.quotations = data
-    },
-    async getVatRates () {
-      let { data } = await axios.get(this.$app.route('admin.vats.getdata'), {})
-      this.vat_rates = data
     }
   }
 }

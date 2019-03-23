@@ -102,12 +102,12 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       icon: 'fe fe-bar-chart-2',
       access: app.user.can('view')
     },
-    {
-      name: 'Profilt & Loss',
-      url: '/profitlossreport',
-      icon: 'fe fe-bar-chart-2',
-      access: app.user.can('view')
-    },
+    // {
+    //   name: 'Profilt & Loss',
+    //   url: '/profitlossreport',
+    //   icon: 'fe fe-bar-chart-2',
+    //   access: app.user.can('view')
+    // },
     {
       name: 'Ageing Report',
       url: '/ageingreport',

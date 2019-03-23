@@ -38,6 +38,7 @@ Route::resource('jobcards', 'JobcardController', ['only' => ['store', 'update', 
 Route::post('jobscards/addedfile', 'JobcardController@addedfile')->name('jobcards.addedfile');
 //Route::post('jobscards/file', 'JobcardController@file')->name('jobcards.file');
 Route::post('jobscards/store', 'JobcardController@store')->name('jobcards.store');
+Route::get('jobscard/statusreport', 'JobcardController@statusreport')->name('jobcard.statusreport');
 /************* JobCard Routes *************/
 
 /************* Project Routes *************/
@@ -110,8 +111,9 @@ Route::get('invoices/getInvoiceRecords', 'AjaxController@getInvoiceRecords')->na
 Route::post('invoices/batch_action', 'InvoicesController@batchAction')->name('invoices.batch_action');
 Route::get('invoices/{invoice}/show', 'InvoicesController@show')->name('invoices.show');
 Route::get('invoices/search', 'InvoicesController@search')->name('invoices.search');
-Route::get('invoices/invoicereport', 'InvoicesController@invoicereport')->name('invoices.invoicereport');
+Route::get('invoices/ageingreport', 'InvoicesController@ageingreport')->name('invoices.ageingreport');
 Route::resource('invoices', 'InvoicesController', ['only' => ['store', 'update', 'destroy'],]);
+Route::get('invoices/vatreport', 'InvoicesController@vatreport')->name('invoices.vatreport');
 
 /************* Quotes Routes *************/
 Route::post('quotes/batch_action', 'QuotesController@batchAction')->name('quotes.batch_action');

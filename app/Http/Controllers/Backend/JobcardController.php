@@ -55,8 +55,6 @@ class JobcardController extends BackendController
             'district',
             'sub_district',
             'travelling_paid',
-            //'attachment_receipt',
-            //'quoted_amount',
             'status',
         ]);
 
@@ -102,6 +100,33 @@ class JobcardController extends BackendController
             'facility_name',
             'district',
             'sub_district',
+            //'quoted_amount',
+            'jobcard.created_at',
+            'jobcard.updated_at',
+        ]);
+    }
+
+     public function statusreport(Request $request)
+    {
+
+        /** @var Builder $query */
+        $query = $this->jobcard->query();
+        $requestSearchQuery = new RequestSearchQuery($request, $query, [
+            'status',
+        ]);
+
+        return $requestSearchQuery->resultJobcard([
+            'jobcard.id',
+            'jobcard_num',
+            'description',
+            'problem_type',
+            'priority',
+            'status',
+            'facility_name',
+            'district',
+            'sub_district',
+            'projectmanager_id',
+            'contractor_id',
             //'quoted_amount',
             'jobcard.created_at',
             'jobcard.updated_at',

@@ -7,7 +7,7 @@
       <b-datatable
         ref="datasource"
         @context-changed="onContextChanged"
-        search-route="admin.invoices.invoicereport"
+        search-route="admin.invoices.ageingreport"
         delete-route="admin.invoices.destroy"
         action-route="admin.invoices.batch_action"
         :selected.sync="selected"
@@ -90,7 +90,7 @@ export default {
       totalPaid: '0.00',
       totalOwned: '0.00',
       fields: [
-        { key: 'invoice_number', label: 'Invoice Number' },
+        { key: 'invoice_number', label: 'Invoice #' },
         { key: 'net_amount', label: 'Amount before VAT' },
         { key: 'invoice_status', label: 'Status' }
       ],

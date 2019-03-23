@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Invoices;
+use App\Models\Jobcard;
 use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
 use Illuminate\Support\Facades\Gate;
@@ -96,7 +97,7 @@ class InvoicesController extends BackendController
         ]);
     }
 
-    public function invoicereport(Request $request)
+    public function ageingreport(Request $request)
     {
 
         /** @var Builder $query */
@@ -159,6 +160,45 @@ class InvoicesController extends BackendController
         ]);
     }
     
+    public function vatreport(Request $request, Jobcard $jobcard)
+    {
+
+        /** @var Builder $query */
+        $query = $this->invoice->query();
+        
+        $columns = [
+            "id",
+            "invoice_number",
+            "vat_amount",
+            "total_amount",
+            "invoice_status",
+            "rows",
+            'invoices.created_at',
+            'invoices.updated_at',
+        ];
+        $result = $query->paginate(10, $columns);
+        $result->getCollection()->transform(function ($value) use ($jobcard) {
+            $value['rows'] = json_decode($value['rows'], true);
+            $rows = $value['rows'];
+            $value['payable_vat'] = '0.00';
+            $quotes = array();
+            foreach($rows as $row) {
+             if(isset($row['quotation_id'])) {
+                $quote_id = $row['quotation_id'];
+                array_push($quotes, $quote_id);
+             }
+            }
+            $input_vat = $jobcard::whereIn('quote_id', $quotes)->sum('vat_rate');
+            $value['input_vat'] = number_format($input_vat, 2);
+            unset($value['rows']);
+            if($value['invoice_status'] == 'unpaid' || $value['invoice_status'] == 'overdue') {
+                $value['payable_vat'] = $value['vat_amount'] + $value['input_vat'];
+            }
+            return $value;
+        });
+        return $result;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
