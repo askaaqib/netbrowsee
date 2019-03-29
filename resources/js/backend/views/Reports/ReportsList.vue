@@ -12,12 +12,11 @@
       <b-datatable
         ref="datasource"
         @context-changed="onContextChanged"
-        search-route="admin.reports.jobcardreports"
+        search-route="admin.jobcard.jobcardreports"
         delete-route="admin.reports.destroy"
         action-route="admin.reports.batch_action"
         :actions="actions"
         :selected.sync="selected"
-        :search="false"
       >
         <b-table
           ref="datatable"

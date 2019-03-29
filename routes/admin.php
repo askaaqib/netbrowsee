@@ -39,6 +39,7 @@ Route::post('jobscards/addedfile', 'JobcardController@addedfile')->name('jobcard
 //Route::post('jobscards/file', 'JobcardController@file')->name('jobcards.file');
 Route::post('jobscards/store', 'JobcardController@store')->name('jobcards.store');
 Route::get('jobscard/statusreport', 'JobcardController@statusreport')->name('jobcard.statusreport');
+Route::get('jobscard/jobcardreports', 'JobcardController@jobcardreports')->name('jobcard.jobcardreports');
 /************* JobCard Routes *************/
 
 /************* Project Routes *************/

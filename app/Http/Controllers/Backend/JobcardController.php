@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateJobcardRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\JobcardRepository;
 use Mail;
+use DB;
 
 class JobcardController extends BackendController
 {
@@ -133,6 +134,64 @@ class JobcardController extends BackendController
         ]);
     }
 
+    public function jobcardreports(Request $request) {
+        /** @var Builder $query */
+        $query = $this->jobcard->query();
+        $model = $query->getModel();
+
+        if(isset($request->item_id)) {
+            $query->where('item_id', $request->item_id);
+        }
+
+        $searchables = [
+            'status',
+        ];
+
+        if ($request->get('exportData')) {
+            return $requestSearchQuery->export([
+                'color',
+                'size',
+                'jobcard.created_at',
+                'jobcard.updated_at',
+            ],
+                [
+                    __('validation.jobcard.description'),
+                    __('validation.jobcard.color'),
+                    __('validation.jobcard.size'),
+                    __('labels.created_at'),
+                    __('labels.updated_at'),
+                ],
+                'jobcard');
+        }
+        if ($search = $request->get('search')) {
+            $query->where(function (Builder $query) use ($model, $searchables, $search) {
+                foreach ($searchables as $key => $searchableColumn) {
+                    $query->orWhere(
+                        $this->getLocalizedColumn($model, $searchableColumn), 'like', "%{$search}%"
+                    );
+                }
+            });
+        }
+        $columns = [
+            'jobcard.id',
+            'jobcard_num',
+            'labour_paid',
+            'materials_paid',
+            'travelling_paid',
+            'quote_id',
+            'quote_amount',
+            'status',
+            'jobcard.created_at',
+            'jobcard.updated_at',
+        ];
+        $result = $query->select(
+                'id', 'jobcard_num', 'labour_paid',
+                'materials_paid', 'travelling_paid',
+                'quote_id', 'quote_amount', 'status',
+                DB::raw('(labour_paid + materials_paid + travelling_paid) as expenses'))
+                ->paginate($request->get('perPage'), $columns);
+        return $result;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -422,5 +481,16 @@ class JobcardController extends BackendController
         });
         }
         catch(Exception $e){}
+    }
+
+    private function getLocalizedColumn(Jobcard $model, $column)
+    {
+        if (property_exists($model, 'translatable') && \in_array($column, $model->translatable, true)) {
+            $locale = app()->getLocale();
+
+            return "$column->$locale";
+        }
+
+        return $column;
     }
 }
