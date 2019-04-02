@@ -6,6 +6,10 @@ return [
         'form'   => 'Forms',
         'access' => 'Access',
         'seo'    => 'SEO',
+        'reports' => 'Reports',
+        'projects' => 'Projects',
+        'invoices' => 'Invoices',
+        'quotes' => 'Quotes',
     ],
 
     'access' => [
@@ -18,6 +22,36 @@ return [
     'view' => [
         'form_settings' => [
             'display_name' => 'View form settings',
+            'description'  => 'Can view form settings.',
+        ],
+
+        'quotes' => [
+            'display_name' => 'View Quotes',
+            'description'  => 'Can view Quotes.',
+            ],
+
+         'projects' => [
+            'display_name' => 'View Projects',
+            'description'  => 'Can view Projects.',
+        ],
+         'invoices' => [
+            'display_name' => 'View Invoices',
+            'description'  => 'Can view Invoices.',
+        ],
+        'expenses_report_view' => [
+            'display_name' => 'Expenses Reports',
+            'description'  => 'Can view form settings.',
+        ],
+        'ageing_report_view' => [
+            'display_name' => 'Ageing Reports',
+            'description'  => 'Can view form settings.',
+        ],
+        'vat_report_view' => [
+            'display_name' => 'Vat Reports',
+            'description'  => 'Can view form settings.',
+        ],
+        'status_report_view' => [
+            'display_name' => 'Status Reports',
             'description'  => 'Can view form settings.',
         ],
 
@@ -72,6 +106,19 @@ return [
             'display_name' => 'Create form settings',
             'description'  => 'Can create form settings.',
         ],
+        'projects' => [
+            'display_name' => 'Create Projects',
+            'description'  => 'Can create Projects.',
+        ],
+
+        'quotes' => [
+            'display_name' => 'Create Quotes',
+            'description'  => 'Can create Quotes.',
+        ],
+         'invoices' => [
+            'display_name' => 'Create Invoices',
+            'description'  => 'Can create Invoices.',
+        ],
 
         'users' => [
             'display_name' => 'Create users',
@@ -107,6 +154,19 @@ return [
         'form_settings' => [
             'display_name' => 'Edit form settings',
             'description'  => 'Can edit form settings.',
+        ],
+        'quotes' => [
+            'display_name' => 'Edit Quotes',
+            'description'  => 'Can edit Quotes.',
+        ],
+        'projects' => [
+            'display_name' => 'Edit Projects',
+            'description'  => 'Can edit projects.',
+        ],
+
+        'invoices' => [
+            'display_name' => 'Edit Invoices',
+            'description'  => 'Can edit Invoices.',
         ],
 
         'users' => [
@@ -154,6 +214,18 @@ return [
         'form_settings' => [
             'display_name' => 'Delete form settings',
             'description'  => 'Can delete form settings.',
+        ],
+         'projects' => [
+            'display_name' => 'Delete Projects',
+            'description'  => 'Can delete Projects.',
+        ],
+        'quotes' => [
+        'display_name' => 'Delete Quotes',
+        'description'  => 'Can delete Quotes.',
+        ],
+        'invoices' => [
+            'display_name' => 'Delete Invoices',
+            'description'  => 'Can delete Invoices.',
         ],
 
         'form_submissions' => [

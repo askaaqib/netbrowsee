@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Repositories\Contracts\JobcardRepository;
 use Mail;
 use DB;
+use App\Exports\DataTableExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JobcardController extends BackendController
 {
@@ -26,10 +28,11 @@ class JobcardController extends BackendController
      *
      * @param \App\Repositories\Contracts\JobcardRepository $jobcard
      */
-    public function __construct(JobcardRepository $jobcard)
+    public function __construct(JobcardRepository $jobcard, Builder $query)
     {
         //dd($jobcards);
         $this->jobcard = $jobcard;
+        $this->query = $query;
     }
 
     /**
@@ -60,6 +63,7 @@ class JobcardController extends BackendController
         ]);
 
         if ($request->get('exportData')) {
+            //dd('hello');
             return $requestSearchQuery->export([
                 'jobcard_num',
                 'description',
@@ -114,7 +118,30 @@ class JobcardController extends BackendController
         $query = $this->jobcard->query();
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
             'status',
+            'jobcard_num',
+            'jobcard.created_at',
+            'jobcard.updated_at',
+
+            
         ]);
+            if ($request->get('exportData')) {
+            return $requestSearchQuery->export([
+            'jobcard_num',
+            'description',
+            'status',
+            ],
+                [
+                    __('validation.attributes.jobcard_num'),
+                    __('validation.attributes.description'),
+                    __('validation.attributes.status'),
+                ],
+                'quotes');
+        }
+
+
+
+
+
 
         return $requestSearchQuery->resultJobcard([
             'jobcard.id',
@@ -145,21 +172,18 @@ class JobcardController extends BackendController
 
         $searchables = [
             'status',
+             'jobcard.created_at',
+            'jobcard.updated_at',
         ];
 
+        // if ($request->get('exportData')) {
+        //     return $requestSearchQuery->export([
         if ($request->get('exportData')) {
-            return $requestSearchQuery->export([
-                'color',
-                'size',
-                'jobcard.created_at',
-                'jobcard.updated_at',
+            return $this->export([
+                 'jobcard_num'
             ],
                 [
                     __('validation.jobcard.description'),
-                    __('validation.jobcard.color'),
-                    __('validation.jobcard.size'),
-                    __('labels.created_at'),
-                    __('labels.updated_at'),
                 ],
                 'jobcard');
         }
@@ -187,6 +211,7 @@ class JobcardController extends BackendController
         $result = $query->select(
                 'id', 'jobcard_num', 'labour_paid',
                 'materials_paid', 'travelling_paid',
+                'created_at',
                 'quote_id', 'quote_amount', 'status',
                 DB::raw('(labour_paid + materials_paid + travelling_paid) as expenses'))
                 ->paginate($request->get('perPage'), $columns);
@@ -492,5 +517,16 @@ class JobcardController extends BackendController
         }
 
         return $column;
+    }
+
+    public function export($columns, $headings, $fileName)
+    {
+        $model = $this->query->getModel();
+        $currentDate = date('dmY-His');
+
+        return Excel::download(
+            new DataTableExport($headings, $this->query, $columns),
+            "$fileName-export-$currentDate.xlsx"
+        );
     }
 }

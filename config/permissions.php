@@ -201,4 +201,125 @@ return [
         'description'  => 'permissions.delete.redirections.description',
         'category'     => 'permissions.categories.seo',
     ],
+
+    'view reporte_view' => [
+        'display_name' => 'permissions.view.expenses_report_view.display_name',
+        'description'  => 'permissions.view.expenses_report_view.display_name',
+        'category'     => 'permissions.categories.reports',
+    ],
+    'view reporta_view' => [
+        'display_name' => 'permissions.view.ageing_report_view.display_name',
+        'description'  => 'permissions.view.ageing_report_view.display_name',
+        'category'     => 'permissions.categories.reports',
+    ],
+    'view reportv_view' => [
+        'display_name' => 'permissions.view.vat_report_view.display_name',
+        'description'  => 'permissions.view.vat_report_view.display_name',
+        'category'     => 'permissions.categories.reports',
+    ],
+    'view reports_view' => [
+        'display_name' => 'permissions.view.status_report_view.display_name',
+        'description'  =>'permissions.view.status_report_view.display_name',
+        'category'     => 'permissions.categories.reports',
+    ],
+
+
+
+
+
+
+
+'view projects' => [
+        'display_name' => 'permissions.view.projects.display_name',
+        'description'  => 'permissions.view.projects.display_name',
+        'category'     => 'permissions.categories.projects',
+    ],
+    'create projects' => [
+        'display_name' => 'permissions.create.projects.display_name',
+        'description'  => 'permissions.create.projects.display_name',
+        'category'     => 'permissions.categories.projects',
+    ],
+    'edit projects' => [
+        'display_name' => 'permissions.edit.projects.display_name',
+        'description'  => 'permissions.edit.projects.display_name',
+        'category'     => 'permissions.categories.projects',
+    ],
+    'delete projects' => [
+        'display_name' => 'permissions.delete.projects.display_name',
+        'description'  =>'permissions.delete.projects.display_name',
+        'category'     => 'permissions.categories.projects',
+    ],
+
+
+
+
+
+
+
+
+'view invoices' => [
+        'display_name' => 'permissions.view.invoices.display_name',
+        'description'  => 'permissions.view.invoices.display_name',
+        'category'     => 'permissions.categories.invoices',
+    ],
+    'create invoices' => [
+        'display_name' => 'permissions.create.invoices.display_name',
+        'description'  => 'permissions.create.invoices.display_name',
+        'category'     => 'permissions.categories.invoices',
+    ],
+    'edit invoices' => [
+        'display_name' => 'permissions.edit.invoices.display_name',
+        'description'  => 'permissions.edit.invoices.display_name',
+        'category'     => 'permissions.categories.invoices',
+    ],
+    'delete invoices' => [
+        'display_name' => 'permissions.delete.invoices.display_name',
+        'description'  =>'permissions.delete.invoices.display_name',
+        'category'     => 'permissions.categories.invoices',
+    ],
+
+
+
+
+
+
+
+
+
+
+'view quotes' => [
+        'display_name' => 'permissions.view.quotes.display_name',
+        'description'  => 'permissions.view.quotes.display_name',
+        'category'     => 'permissions.categories.quotes',
+    ],
+    'create quotes' => [
+        'display_name' => 'permissions.create.quotes.display_name',
+        'description'  => 'permissions.create.quotes.display_name',
+        'category'     => 'permissions.categories.quotes',
+    ],
+    'edit quotes' => [
+        'display_name' => 'permissions.edit.quotes.display_name',
+        'description'  => 'permissions.edit.quotes.display_name',
+        'category'     => 'permissions.categories.quotes',
+    ],
+    'delete quotes' => [
+        'display_name' => 'permissions.delete.quotes.display_name',
+        'description'  =>'permissions.delete.quotes.display_name',
+        'category'     => 'permissions.categories.quotes',
+    ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ];

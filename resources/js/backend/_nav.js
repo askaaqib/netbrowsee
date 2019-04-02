@@ -25,7 +25,7 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       name: i18n.t('labels.backend.projects.titles.main'),
       url: '/projects',
       icon: 'fe fe-aperture',
-      access: app.user.can('view')
+      access: app.user.can('view projects')
     },
     {
       name: i18n.t('labels.backend.project_managers.titles.main'),
@@ -85,7 +85,7 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       name: 'Quotes',
       url: '/quotes',
       icon: 'fe fe-info',
-      access: app.user.can('view')
+      access: app.user.can('view quotes')
     },
     {
       divider: true,
@@ -100,7 +100,7 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       name: 'Reports',
       url: '/reports',
       icon: 'fe fe-bar-chart-2',
-      access: app.user.can('view')
+      access: app.user.can('view reporte_view')
     },
     // {
     //   name: 'Profilt & Loss',
@@ -112,19 +112,19 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       name: 'Ageing Report',
       url: '/ageingreport',
       icon: 'fe fe-bar-chart-2',
-      access: app.user.can('view')
+      access: app.user.can('view reporta_view')
     },
     {
       name: 'Vat Report',
       url: '/vatreport',
       icon: 'fe fe-bar-chart-2',
-      access: app.user.can('view')
+      access: app.user.can('view reportv_view')
     },
     {
       name: 'Status Report',
       url: '/statusreport',
       icon: 'fe fe-bar-chart-2',
-      access: app.user.can('view')
+      access: app.user.can('view reports_view')
     },
     {
       divider: true,
@@ -139,18 +139,18 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       name: 'Invoices',
       url: '/invoices',
       icon: 'fe fe-book',
-      access: app.user.can('view')
+      access: app.user.can('view invoices')
     },
     {
       title: true,
       name: 'Settings',
-      access: app.blogEnabled && app.user.can('view')
+      access: app.blogEnabled && app.user.can('view form_settings')
     },
     {
       name: 'Settings',
       url: '/settings',
       icon: 'fe fe-settings',
-      access: app.user.can('view')
+      access: app.user.can('view form_settings')
     },
     {
       name: 'District',

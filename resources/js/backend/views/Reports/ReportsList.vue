@@ -32,6 +32,9 @@
           sort-by="reports.created_at"
           :sort-desc="true"
         >
+          <template slot="created_at" slot-scope="row">
+            <span>{{ row.item.created_at }}</span>
+          </template>
           <template slot="expenses" slot-scope="row">
             <span>$ {{ row.item.expenses }}</span>
           </template>
@@ -42,14 +45,14 @@
             <span>$ {{ parseFloat(row.item.expenses) - parseFloat(row.item.quote_amount) }}</span>
           </template>
           <template slot="status" slot-scope="row">
-            <span v-if="row.item.status == 1">Received</span>
-            <span v-if="row.item.status == 2">Assigned</span>
-            <span v-if="row.item.status == 3">On Hold</span>
-            <span v-if="row.item.status == 4">Completed</span>
-            <span v-if="row.item.status == 5">Submitted for Vetting</span>
-            <span v-if="row.item.status == 6">Invoiced</span>
-            <span v-if="row.item.status == 7">Paid</span>
-            <span v-if="row.item.status == 8">Cancelled</span>
+            <span v-if="row.item.status == 'received'">Received</span>
+            <span v-if="row.item.status == 'assigned'">Assigned</span>
+            <span v-if="row.item.status == 'on hold'">On Hold</span>
+            <span v-if="row.item.status == 'completed'">Completed</span>
+            <span v-if="row.item.status == 'submitted for vetting'">Submitted for Vetting</span>
+            <span v-if="row.item.status == 'invoiced'">Invoiced</span>
+            <span v-if="row.item.status == 'paid'">Paid</span>
+            <span v-if="row.item.status == 'cancelled'">Cancelled</span>
           </template>
         </b-table>
       </b-datatable>
@@ -65,6 +68,7 @@ export default {
     return {
       selected: [],
       fields: [
+        { key: 'created_at', label: 'Date' },
         { key: 'jobcard_num', label: 'Jobcard #' },
         { key: 'expenses', label: 'Expenses' },
         { key: 'quote_amount', label: 'Quoted Amount' },

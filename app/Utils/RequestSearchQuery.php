@@ -77,15 +77,25 @@ class RequestSearchQuery
 
     public function resultJobcard($columns)
     {
+
+        $model = $this->query->getModel();
         $user_id = auth()->user()->id;
+        //dd($user_id);
         $role = auth()->user()->roles;
-        $user_role = isset($role[0]->display_name) ? $role[0]->display_name : '';
-        if ($user_role == 'Clerk') {
-            $this->query->where('status', 2)->orWhere('status', 3)->orWhere('contractor_id', $user_id);
+        //dd($role);
+        $user_role = isset($role[0]->id ) ? $role[0]->id : '';
+
+        //dd($user_role);
+        // return response()->json(['hi' => !empty($user_role)]);
+        if ($user_role > 1 || !empty($user_role)) {
+            $result =  $this->query->Where('contractor_id', $user_id)->paginate($this->request->get('perPage'), $columns);
+            return $result;
+        }else{ 
+            $result = $this->query->paginate($this->request->get('perPage'), $columns);
+            // return response()->json(['hi' => $result]);
+            return $result;
         }
-        $result = $this->query->paginate($this->request->get('perPage'), $columns);
-        return $result;
-    }
+}
 
     /**
      * @param       $columns

@@ -179,6 +179,9 @@ return [
         'unpublished_at'            => 'Unpublish at',
         'metable_type'              => 'Entity',
         'rate'                      => 'Rate',
+        'jobcard_num'                => 'Jobcard No',
+        'description'                => 'Description',
+        'status'                  => 'Status'
     ],
 
 
@@ -286,7 +289,9 @@ return [
       'invoice_reference' => 'Reference No',
       'client_email' => 'Client Email',
       'invoice_date' => 'Invoice Date',
-      'jobcard_id'          => 'Jobcard'
+      'jobcard_id'          => 'Jobcard',
+      'invoice_number' => 'Invoice #',
+      'vats_amount'=>'Output VAT'
     ],
 
     'clients' => [

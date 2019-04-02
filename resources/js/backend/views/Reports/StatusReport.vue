@@ -11,7 +11,7 @@
         delete-route="admin.jobcard.destroy"
         action-route="admin.jobcard.batch_action"
         :selected.sync="selected"
-        :export-data="false"
+        :export-data="true"
       >
         <b-table
           ref="datatable"
@@ -27,6 +27,9 @@
           sort-by="jobcard.created_at"
           :sort-desc="true"
         >
+          <template slot="created_at" slot-scope="row">
+            <span>{{ row.item.created_at }}</span>
+          </template>
           <template slot="project_manager" slot-scope="row">
             <span>{{ row.item.get_project_manager.name }}</span>
           </template>
@@ -34,14 +37,14 @@
             <span>{{ row.item.get_assigned_user.name }}</span>
           </template>
           <template slot="status" slot-scope="row">
-            <span v-if="row.item.status == 1">Received</span>
-            <span v-if="row.item.status == 2">Assigned</span>
-            <span v-if="row.item.status == 3">On Hold</span>
-            <span v-if="row.item.status == 4">Completed</span>
-            <span v-if="row.item.status == 5">Submitted for Vetting</span>
-            <span v-if="row.item.status == 6">Invoiced</span>
-            <span v-if="row.item.status == 7">Paid</span>
-            <span v-if="row.item.status == 8">Cancelled</span>
+            <span v-if="row.item.status == 'received'">Received</span>
+            <span v-if="row.item.status == 'assigned'">Assigned</span>
+            <span v-if="row.item.status == 'on hold'">On Hold</span>
+            <span v-if="row.item.status == 'completed'">Completed</span>
+            <span v-if="row.item.status == 'submitted for vetting'">Submitted for Vetting</span>
+            <span v-if="row.item.status == 'invoiced'">Invoiced</span>
+            <span v-if="row.item.status == 'paid'">Paid</span>
+            <span v-if="row.item.status == 'cancelled'">Cancelled</span>
           </template>
         </b-table>
       </b-datatable>
@@ -56,6 +59,7 @@ export default {
     return {
       selected: [],
       fields: [
+        { key: 'created_at', label: 'Date' },
         { key: 'jobcard_num', label: 'Jobcard #' },
         { key: 'description', label: 'Description' },
         { key: 'project_manager', label: 'Project Manager' },

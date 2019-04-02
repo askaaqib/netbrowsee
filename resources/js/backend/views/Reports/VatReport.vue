@@ -11,8 +11,8 @@
         delete-route="admin.invoices.destroy"
         action-route="admin.invoices.batch_action"
         :selected.sync="selected"
-        :search="false"
-        :export-data="false"
+        :search="true"
+        :export-data="true"
       >
         <b-table
           ref="datatable"
@@ -28,6 +28,9 @@
           sort-by="invoices.created_at"
           :sort-desc="true"
         >
+          <template slot="created_at" slot-scope="row">
+            <span>{{ row.item.created_at }}</span>
+          </template>
           <template slot="vat_amount" slot-scope="row">
             <span>$ {{ row.item.vat_amount }}</span>
           </template>
@@ -50,6 +53,7 @@ export default {
     return {
       selected: [],
       fields: [
+        { key: 'created_at', label: 'Date' },
         { key: 'invoice_number', label: 'Invoice #' },
         { key: 'vat_amount', label: 'Output VAT' },
         { key: 'input_vat', label: 'Input VAT' },

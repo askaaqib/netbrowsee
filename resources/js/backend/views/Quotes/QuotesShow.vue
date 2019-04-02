@@ -7,7 +7,9 @@
           <b-row>
             <b-col class="col-md-12">
               <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print<i class="fe fe-printer fe-lg"></i></b-btn>
-              <b-btn class="btn-show pull-right" id="hidedownload" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+              <div id="hideprint">
+                <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+              </div>
             </b-col>
           </b-row>
           <!-- ViewPort  Starts -->
@@ -25,7 +27,7 @@
               </b-col>
               <b-col sm="6">
                 <div id="org-img">
-                  <img v-if="model.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ model.company_logo" alt="">
+                  <img v-if="settings.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ settings.company_logo" alt="">
                 </div>
               </b-col>
             </b-row>
@@ -240,7 +242,7 @@
           <!-------------------------------Attachment Pictures to show------------------------->
           <!-- ViewPort  Ends -->
           <b-row id="hideback" slot="footer">
-            <b-col md>
+            <b-col id="back" md>
               <b-button to="/quotes" exact variant="danger" size="md">
                 {{ $t('buttons.back') }}
               </b-button>
@@ -1043,6 +1045,7 @@ export default {
       }, 1000)
     },
     printFacture: function () {
+      this.HideButtons()
       var elementor = document.getElementById('quotes-view')
       html2pdf(elementor, {
         margin: 1.5,
@@ -1051,6 +1054,32 @@ export default {
         html2canvas: { dpi: 192, letterRendering: true },
         jsPDF: { unit: 'cm', format: 'a4', orientation: 'p' }
       })
+      var x = document.getElementById('hideprint')
+      var y = document.getElementById('back')
+      var z = document.getElementById('download')
+      setTimeout(() => { x.style.display = 'block' }, 3000)
+      setTimeout(() => { y.style.display = 'block' }, 3000)
+      setTimeout(() => { z.style.display = 'block' }, 3000)
+    },
+    HideButtons: function () {
+      var x = document.getElementById('back')
+      if (x.style.display === 'none') {
+        x.style.display = 'block'
+      } else {
+        x.style.display = 'none'
+      }
+      var y = document.getElementById('hideprint')
+      if (y.style.display === 'none') {
+        y.style.display = 'block'
+      } else {
+        y.style.display = 'none'
+      }
+      var z = document.getElementById('download')
+      if (z.style.display === 'none') {
+        z.style.display = 'block'
+      } else {
+        z.style.display = 'none'
+      }
     },
     downloadjspdf: function () {
 

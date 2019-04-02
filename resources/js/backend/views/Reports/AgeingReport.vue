@@ -11,7 +11,7 @@
         delete-route="admin.invoices.destroy"
         action-route="admin.invoices.batch_action"
         :selected.sync="selected"
-        :search="false"
+        :search="true"
       >
         <b-table
           ref="datatable"
@@ -27,6 +27,9 @@
           sort-by="invoices.created_at"
           :sort-desc="true"
         >
+          <template slot="created_at" slot-scope="row">
+            <span class="created_at" v-text="row.item.created_at"></span>
+          </template>
           <template slot="invoice_status" slot-scope="row">
             <span class="invoice-status" v-text="row.item.invoice_status"></span>
           </template>
@@ -90,6 +93,7 @@ export default {
       totalPaid: '0.00',
       totalOwned: '0.00',
       fields: [
+        { key: 'created_at', label: 'Date' },
         { key: 'invoice_number', label: 'Invoice #' },
         { key: 'net_amount', label: 'Amount before VAT' },
         { key: 'invoice_status', label: 'Status' }

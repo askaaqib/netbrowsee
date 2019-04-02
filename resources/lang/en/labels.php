@@ -122,11 +122,13 @@ return [
 
     'backend' => [
         'dashboard' => [
-            'new_posts'            => 'New posts',
-            'pending_posts'        => 'Pending posts',
-            'published_posts'      => 'Published posts',
-            'active_users'         => 'Active users',
-            'form_submissions'     => 'Submissions',
+            'unallocated_jobcards'           => 'Unallocated Jobcards',
+            'jobards_in_progress'            => 'Jobards in Progress',
+            'completed_jobards'              => 'Completed Jobards',
+            'quoted_jobcards'                => 'Quoted Jobcards',
+            'invoiced_jobcards'              => 'Invoiced Jobcards',
+            'quoted_amount' => 'Quote Amount',
+            'invoiced_amount' => 'Invoice Amount',
             'last_posts'           => 'Last posts',
             'last_published_posts' => 'Last publications',
             'last_pending_posts'   => 'Last pending posts',

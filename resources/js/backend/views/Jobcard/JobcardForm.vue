@@ -231,8 +231,8 @@
                 v-model="model.status"
               >
                 <option value="null">Please Select Status</option>
-                <option value="1" data-foo="Received">Received</option>
-                <option value="2" data-foo="Assigned">Assigned</option>
+                <option value="Received" data-foo="Received">Received</option>
+                <option value="Assigned" data-foo="Assigned">Assigned</option>
                 <option value="3" data-foo="On Hold">On Hold</option>
                 <option value="4" data-foo="Completed">Completed</option>
                 <option value="5" data-foo="Submitted for Vetting">Submitted for Vetting</option>

@@ -27,6 +27,13 @@ Route::get('clients/getclients', 'AjaxController@searchClients')->name('clients.
 Route::get('quotations/search', 'AjaxController@searchQuotes')->name('quotations.searchquotes');
 Route::post('jobcards/removeimage', 'AjaxController@JobcardRemoveImage')->name('jobcards.removeimage');
 Route::get('invoices/lastref', 'AjaxController@getInvoicesRecentReference')->name('invoices.getreference');
+Route::get('dashboard/completeJobcard','AjaxController@CompleteJobcards')->name('dashboard.completeJobcard');
+Route::get('dashboard/quotedJobcard','AjaxController@QuotedJobcards')->name('dashboard.quotedJobcard');
+Route::get('dashboard/invoicedJobcard','AjaxController@InvoicedJobcard')->name('dashboard.invoicedJobcard');
+Route::get('dashboard/unallocatedJobcard','AjaxController@UnallocatedJobcard')->name('dashboard.unallocatedJobcard');
+Route::get('dashboard/progressJobcard','AjaxController@ProgressJobcard')->name('dashboard.progressJobcard');
+Route::get('dashboard/quotedamount','AjaxController@Quotedamount')->name('dashboard.quotedamount');
+Route::get('dashboard/invoiceamount','AjaxController@Invoiceamount')->name('dashboard.invoiceamount');
 /********* AJAX REQEUSTS ************************/
 
 /************* JobCard Routes *************/

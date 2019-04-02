@@ -7,6 +7,9 @@
           <b-col class="col-md-12">
             <!--             <b-btn class="btn-show pull-right" variant="secondary" @click="print('viewport')">Print<i class="fe fe-printer fe-lg"></i></b-btn> -->
             <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printinvoices()">Print<i class="fe fe-printer fe-lg"></i></b-btn>
+            <div id="hideprint">
+              <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+            </div>
             <!--  <b-btn class="btn-show pull-right" variant="secondary">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn> -->
           </b-col>
         </b-row>
@@ -26,7 +29,7 @@
             </b-col>
             <b-col sm="6">
               <div id="org-img">
-                <img v-if="model.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ model.company_logo" alt="">
+                <img v-if="settings.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ settings.company_logo" alt="">
               </div>
             </b-col>
           </b-row>
@@ -180,7 +183,7 @@
         </div>
         <!-- ViewPort  Ends -->
         <b-row id="hideprint" slot="footer">
-          <b-col md>
+          <b-col id="back" md>
             <b-button to="/Invoices" exact variant="danger" size="md">
               {{ $t('buttons.back') }}
             </b-button>
@@ -652,6 +655,7 @@ import moment from 'moment'
 import bModalDirective from 'bootstrap-vue/es/directives/modal/modal'
 import swal from 'sweetalert2'
 import JSPDF from 'jspdf'
+import html2pdf from 'html2pdf.js'
 
 export default {
   name: 'InvoicesShow',
@@ -831,7 +835,7 @@ export default {
       var saveVal = 'empty'
       if (val !== '""null""') {
         val.map((item, index) => {
-          console.log(item)
+          // console.log(item)
           if (item.labour || item.parts || item.quotation) {
             if (!this.isNew) {
               this.Invoices.InvoicesNetTotal += parseInt(item.net_total)
@@ -922,6 +926,43 @@ export default {
         this.printstatus = 1
         window.print()
       }, 1000)
+    },
+    printFacture: function () {
+      this.HideButtons()
+      var elementor = document.getElementById('Invoices-view')
+      html2pdf(elementor, {
+        margin: 1.5,
+        filename: 'myfile.pdf',
+        // image: { type: 'png' },
+        html2canvas: { dpi: 192, letterRendering: true },
+        jsPDF: { unit: 'cm', format: 'a4', orientation: 'p' }
+      })
+      var x = document.getElementById('hideprint')
+      var y = document.getElementById('back')
+      var z = document.getElementById('download')
+      setTimeout(() => { x.style.display = 'block' }, 3000)
+      setTimeout(() => { y.style.display = 'block' }, 3000)
+      setTimeout(() => { z.style.display = 'block' }, 3000)
+    },
+    HideButtons: function () {
+      var x = document.getElementById('back')
+      if (x.style.display === 'none') {
+        x.style.display = 'block'
+      } else {
+        x.style.display = 'none'
+      }
+      var y = document.getElementById('hideprint')
+      if (y.style.display === 'none') {
+        y.style.display = 'block'
+      } else {
+        y.style.display = 'none'
+      }
+      var z = document.getElementById('download')
+      if (z.style.display === 'none') {
+        z.style.display = 'block'
+      } else {
+        z.style.display = 'none'
+      }
     },
     downloadjspdf: function () {
       // Landscape export, 2×4 inches
@@ -1196,6 +1237,7 @@ export default {
       this.settings.company_name = data.company_name
       this.settings.company_address = data.company_address
       this.settings.company_logo = data.company_logo
+      // console.log(this.settings.company_logo )
       this.settings.bank_account = data.bank_account
       this.settings.Invoice_ref_start = data.Invoice_ref_start
       this.model.vat_rates = this.settings.Invoice_vat = data.quote_vat

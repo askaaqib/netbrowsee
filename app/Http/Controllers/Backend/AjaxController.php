@@ -487,6 +487,195 @@ class AjaxController extends Controller
         }
       }
     }
+
+
+    public function CompleteJobcards( Request $request, Jobcard $jobcard){
+
+        $completedJobcards = $jobcard::where( 'status', 'completed')->get();
+        //dd($completedJobcards);
+
+       //$savedNewUser = $jobcard::whereDate('created_at', Carbon::today())->get();
+        // $savedNewUser  =  $users::where('created_at','new Date().toISOString()');
+        $completedJobcardsCount    =   $completedJobcards->count();
+        //dd($completedJobcardsCount);
+
+            if ($completedJobcardsCount) {
+            return response()->json([
+                'status' => 200,
+                'completed_jobcards' => $completedJobcardsCount
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'response' => 'Something Went wrong, Please Try Again'
+            ]);
+        }
+    }
+
+
+    public function QuotedJobcards(Request $request, Quotes $quotes){
+       //$completedJobcards = $quotes::where( 'status', 'completed')->get();
+       $quotedJobcards = $quotes::select( 'jobcard_id')->get();
+
+        //dd($quotedJobcards);
+
+       //$savedNewUser = $jobcard::whereDate('created_at', Carbon::today())->get();
+        // $savedNewUser  =  $users::where('created_at','new Date().toISOString()');
+        $quotedJobcardsCount    =   $quotedJobcards->count();
+        //dd($quotedJobcardsCount);
+
+            if ($quotedJobcardsCount) {
+            return response()->json([
+                'status' => 200,
+                'quoted_jobcards' => $quotedJobcardsCount
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'response' => 'Something Went wrong, Please Try Again'
+            ]);
+        }
+
+
+    }
+
+    public function UnallocatedJobcard(Request $request, Jobcard $jobcard){
+       $unallocatedJobcards = $jobcard::where( 'status', 'received')->get();
+        //dd($unallocatedJobcards);
+
+       //$savedNewUser = $jobcard::whereDate('created_at', Carbon::today())->get();
+        // $savedNewUser  =  $users::where('created_at','new Date().toISOString()');
+        $unallocatedJobcardsCount    =   $unallocatedJobcards->count();
+        //dd($unallocatedJobcardsCount);
+
+            if ($unallocatedJobcardsCount) {
+            return response()->json([
+                'status' => 200,
+                'unallocated_jobcards' => $unallocatedJobcardsCount
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'response' => 'Something Went wrong, Please Try Again'
+            ]);
+        }
+
+    }
+
+    public function progressJobcard(Request $request, Jobcard $jobcard){
+
+
+             //$completedJobcards = $quotes::where( 'status', 'completed')->get();
+       $progressJobcards = $jobcard::select( 'contractor_id')->get();
+
+        //dd($progressJobcards);
+
+       //$savedNewUser = $jobcard::whereDate('created_at', Carbon::today())->get();
+        // $savedNewUser  =  $users::where('created_at','new Date().toISOString()');
+        $progressJobcardsCount    =   $progressJobcards->count();
+        //dd($progressJobcardsCount);
+
+            if ($progressJobcardsCount) {
+            return response()->json([
+                'status' => 200,
+                'progress_jobcards' => $progressJobcardsCount
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'response' => 'Something Went wrong, Please Try Again'
+            ]);
+        }
+
+
+    }
+
+    public function Quotedamount(Request $request, Quotes $quotes){
+
+    $quotedamount = $quotes::select('total_amount')
+                  ->sum('total_amount');
+
+
+
+       //$qoutedamount = $quotes::select( 'total_amount')->get();
+      // $qoutedamount = $quotes::sum('total_amount')->get();
+
+        //dd($quotedamount);
+
+       //$savedNewUser = $jobcard::whereDate('created_at', Carbon::today())->get();
+        // $savedNewUser  =  $users::where('created_at','new Date().toISOString()');
+        // $qoutedamountSum    =   sum($qoutedamount);
+        //dd($qoutedamountSum);
+
+            if ($quotedamount) {
+            return response()->json([
+                'status' => 200,
+                'quoted_amountSum' => $quotedamount
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'response' => 'Something Went wrong, Please Try Again'
+            ]);
+        }
+
+
+    }
+     public function Invoiceamount(Request $request, Invoices $invoice){
+
+$invoiceamount = $invoice::select('total_amount')
+                  ->sum('total_amount');
+
+//dd($invoiceamount);
+       //$qoutedamount = $quotes::select( 'total_amount')->get();
+       //$qoutedamount = $invoice::sum('total_amount')->get();
+
+        //dd($qoutedamount);
+
+       //$savedNewUser = $jobcard::whereDate('created_at', Carbon::today())->get();
+        // $savedNewUser  =  $users::where('created_at','new Date().toISOString()');
+       // $qoutedamountSum    =   sum($qoutedamount);
+        //dd($qoutedamountSum);
+
+            if ($invoiceamount) {
+            return response()->json([
+                'status' => 200,
+                'invoice_amount' => $invoiceamount
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'response' => 'Something Went wrong, Please Try Again'
+            ]);
+        }
+
+
+    }
+
+
+    public function InvoicedJobcard(Request $request, Jobcard $jobcard){
+       $invoicedJobcards = $jobcard::where( 'status', 'invoiced')->get();
+        //dd($invoicedJobcards);
+
+       //$savedNewUser = $jobcard::whereDate('created_at', Carbon::today())->get();
+        // $savedNewUser  =  $users::where('created_at','new Date().toISOString()');
+        $invoicedJobcardsCount    =   $invoicedJobcards->count();
+        //dd($invoicedJobcardsCount);
+
+            if ($invoicedJobcardsCount) {
+            return response()->json([
+                'status' => 200,
+                'invoiced_jobcards' => $invoicedJobcardsCount
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'response' => 'Something Went wrong, Please Try Again'
+            ]);
+        }
+
+    }
+
     
     public function jobcardreports(Request $request, Jobcard $jobcard, JobcardRepository $jobcard_rep) {
       $data = $jobcard_rep->query()
