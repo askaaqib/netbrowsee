@@ -24,7 +24,7 @@ class InvoicesController extends BackendController
         //dd($jobcards);
         $this->invoice = $invoices;
     }
-    
+
     /**
      * Show the application dashboard.
      *
@@ -39,7 +39,7 @@ class InvoicesController extends BackendController
 
         /** @var Builder $query */
         $query = $this->invoice->query();
-        
+
 
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
 			"invoice_number",
@@ -58,7 +58,7 @@ class InvoicesController extends BackendController
 			"bank_account" ,
 			"company_address",
             "company_logo",
-			"invoice_status" 
+			"invoice_status"
         ]);
 
         if ($request->get('exportData')) {
@@ -103,7 +103,7 @@ class InvoicesController extends BackendController
 
         /** @var Builder $query */
         $query = $this->invoice->query();
-        
+
         $requestSearchQuery = new RequestSearchQuery($request, $query, [
 
             "invoice_number",
@@ -124,17 +124,15 @@ class InvoicesController extends BackendController
             'invoices.updated_at',
             "company_address",
             "company_logo",
-            "invoice_status" ,
-            'invoices.created_at',
-            'invoices.updated_at',
+            "invoice_status"
         ]);
 
         if ($request->get('exportData')) {
             return $requestSearchQuery->export([
                 "invoice_number",
             "net_amount",
-            "invoice_status" 
-                
+            "invoice_status"
+
                 // "invoice_name",
                 // "client_email",
                 // "vat_amount",
@@ -169,7 +167,7 @@ class InvoicesController extends BackendController
             'invoices.updated_at',
         ]);
     }
-    
+
     public function vatreport(Request $request, Jobcard $jobcard)
     {
 
@@ -187,7 +185,7 @@ class InvoicesController extends BackendController
             'invoices.created_at',
             'invoices.updated_at',
 
-           
+
         ]);
 
         if ($request->get('exportData')) {
@@ -207,7 +205,7 @@ class InvoicesController extends BackendController
                 ],
                 'invoices');
         }
-        
+
         $columns = [
             "id",
             "invoice_number",
@@ -249,14 +247,14 @@ class InvoicesController extends BackendController
      */
     public function store(StoreInvoicesRequest $request)
     {
-        
+
         $data = $request->all();
        //var_dump($data);
         $data['rows'] = json_encode($request->rows);
-       
-        $invoice = $this->invoice->make($data); 
-       
-       //dd($request->input());     
+
+        $invoice = $this->invoice->make($data);
+
+       //dd($request->input());
        $this->invoice->save($invoice, $data);
 
        return $this->redirectResponse($request, __('alerts.backend.invoices.created'));
@@ -297,13 +295,13 @@ class InvoicesController extends BackendController
      * @return \Illuminate\Http\Response
      */
     public function update(Invoices $invoice, UpdateInvoicesRequest $request)
-    {   
+    {
         $data = $request->all();
         $data['rows'] = json_encode($request->rows);
         $invoice->fill($data);
-        
+
         $this->invoice->save($invoice, $data);
-           
+
         return $this->redirectResponse($request, __('alerts.backend.invoices.updated'));
     }
 
@@ -330,9 +328,9 @@ class InvoicesController extends BackendController
     {
         $action = $request->get('action');
         $ids = $request->get('ids');
-        
+
         switch ($action) {
-            case 'destroy':                
+            case 'destroy':
                     $this->invoice->batchDestroy($ids);
                     return $this->redirectResponse($request, __('alerts.backend.invoices.bulk_destroyed'));
                 break;

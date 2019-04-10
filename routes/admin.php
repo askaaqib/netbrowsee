@@ -17,6 +17,7 @@ Route::get('labours/info', 'AjaxController@getLabours')->name('labours.getdata')
 Route::get('labours/search', 'AjaxController@searchLabours')->name('labours.searchlabour');
 Route::get('materials/info', 'AjaxController@getMaterials')->name('materials.getdata');
 Route::get('users/getids', 'AjaxController@getUsers')->name('users.getdata');
+Route::get('users/getTechnician', 'AjaxController@getTechnician')->name('users.getTechnician');
 Route::get('quotations/getids', 'AjaxController@getQuotations')->name('quotations.getdata');
 Route::get('jobcards/getids', 'AjaxController@getJobcards')->name('jobcards.getdata');
 Route::get('vats/getids', 'AjaxController@getVats')->name('vats.getdata');

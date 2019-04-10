@@ -285,10 +285,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{ parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.net_total }}
+                      {{ parseFloat(row.net_total).toFixed(2) }}
                     </td>
                     <td>
                       <div class="pull-right">
@@ -305,10 +305,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{ parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.net_total }}
+                      {{ parseFloat(row.net_total).toFixed(2) }}
                     </td>
                     <td>
                       <div class="pull-right">
@@ -323,10 +323,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{  parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.total_amount }}
+                      {{ parseFloat(row.total_amount).toFixed(2) }}
                     </td>
                     <td>
                       <div class="pull-right">
@@ -372,7 +372,7 @@
                   <th class="vertical-th">Total VAT Amount</th>
                   <td>
                     ZAR
-                    <input class="form-control pull-right" id="id_total_tax" name="total_tax" readonly type="text" v-model="invoices.invoicesVatTotal">
+                    <input class="form-control pull-right" id="id_total_tax" name="total_tax" readonly type="text" v-model="parseFloat(invoices.invoicesVatTotal).toFixed(2)">
                   </td>
                 </tr>
                 <tr>

@@ -278,10 +278,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{ parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.net_total }}
+                      {{ parseFloat(row.net_total).toFixed(2) }}
                     </td>
                     <td>
                       <div class="pull-right">
@@ -298,10 +298,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{ parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.net_total }}
+                      {{ parseFloat(row.net_total).toFixed(2) }}
                     </td>
                     <td>
                       <div class="pull-right">

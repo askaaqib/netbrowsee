@@ -40,6 +40,15 @@
             <span v-text="row.item.invoice_digit"></span>-
             <span v-text="row.item.invoice_number"></span>
           </template>
+          <template slot="net_amount" slot-scope="row">
+            <span>{{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
+          </template>
+          <template slot="vat_amount" slot-scope="row">
+            <span>{{ parseFloat(row.item.vat_amount).toFixed(2) }}</span>
+          </template>
+          <template slot="total_amount" slot-scope="row">
+            <span>{{ parseFloat(row.item.total_amount).toFixed(2) }}</span>
+          </template>
           <template slot="invoice_status" slot-scope="row">
             <span style="text-transform: capitalize;" v-text="row.item.invoice_status"></span>
           </template>

@@ -71,7 +71,7 @@
                     <label class="control-label"><b>Invoice date: </b></label> <span class="form-control-static">{{ model.quotation_date }}</span>
                   </div>
                   <div class="form-group" data-original-title="" title="">
-                    <label class="control-label"><b>Invoice reference: </b></label> <span class="form-control-static">QU-{{ model.quotation_number }}</span>
+                    <label class="control-label"><b>Invoice reference: </b></label> <span class="form-control-static">{{ model.invoice_digit }} - {{ model.invoice_number }}</span>
                   </div>
                 </div>
               <!-- /right -->
@@ -111,10 +111,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{ parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.net_total }}
+                      {{ parseFloat(row.net_total).toFixed(2) }}
                     </td>
                   </template>
                   <template v-else-if="row.parts">
@@ -125,10 +125,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{ parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.net_total }}
+                      {{ parseFloat(row.net_total).toFixed(2) }}
                     </td>
                   </template>
                   <template v-else-if="row.quotation">
@@ -139,10 +139,10 @@
                       {{ row.quantity }}
                     </td>
                     <td>
-                      {{ row.net_amount }}
+                      {{ parseFloat(row.net_amount).toFixed(2) }}
                     </td>
                     <td>
-                      {{ row.net_total }}
+                      {{ parseFloat(row.net_total).toFixed(2) }}
                     </td>
                   </template>
                 </tr>
@@ -164,15 +164,15 @@
                 <tbody>
                   <tr>
                     <th class="verticle-th">Total Net Amount</th>
-                    <td>ZAR {{ model.net_amount }}</td>
+                    <td>ZAR {{ parseFloat(model.net_amount).toFixed(2) }}</td>
                   </tr>
                   <tr>
                     <th class="verticle-th">Total VAT Amount</th>
-                    <td>ZAR {{ model.vat_amount }}</td>
+                    <td>ZAR {{ parseFloat(model.vat_amount).toFixed(2) }}</td>
                   </tr>
                   <tr>
                     <th class="verticle-th">Total</th>
-                    <td>ZAR {{ model.total_amount }}</td>
+                    <td>ZAR {{ parseFloat(model.total_amount).toFixed(2) }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -744,7 +744,7 @@ export default {
         company_address: null,
         Invoice_vat: null,
         company_name: null,
-        Invoice_ref_start: null,
+        invoice_ref_start: null,
         bank_account: null,
         company_logo: null
       },
@@ -759,6 +759,8 @@ export default {
         labour_rates: null,
         materials_rates: null,
         vat_rates: null,
+        invoice_number: null,
+        invoice_digit: null,
         // jobcard_id: null,
         project_id: null,
         project_managers_id: null,
@@ -790,7 +792,7 @@ export default {
   },
   computed: {
     randomNumber: function () {
-      return 'QU-001'
+      return 'INV-001'
     }
   },
   watch: {

@@ -650,7 +650,7 @@ export default {
       this.subdistrict = data
     },
     async getUsers () {
-      let { data } = await axios.get(this.$app.route('admin.users.getdata'), {})
+      let { data } = await axios.get(this.$app.route('admin.users.getTechnician'), {})
       this.assigned_to = data
     },
     async getQuotations () {

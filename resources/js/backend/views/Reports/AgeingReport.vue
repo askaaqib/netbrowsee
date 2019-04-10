@@ -1,8 +1,13 @@
 <template>
-  <div class="ageing-report">
+  <div class="ageing-report" id="ageing-report">
     <b-card>
       <template slot="header">
         <h3 class="card-title">Ageing Reports</h3>
+      </template>
+      <template class="pull-right">
+          <div id="hideprint" class="pull-right">
+            <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+          </div>
       </template>
       <b-datatable
         ref="datasource"
@@ -26,7 +31,10 @@
           :items="dataLoadProvider"
           sort-by="invoices.created_at"
           :sort-desc="true"
+          id="table-view"
+          v-model="rows"
         >
+
           <template slot="created_at" slot-scope="row">
             <span class="created_at" v-text="row.item.created_at"></span>
           </template>
@@ -34,7 +42,13 @@
             <span class="invoice-status" v-text="row.item.invoice_status"></span>
           </template>
           <template slot="net_amount" slot-scope="row">
-            <span>$ {{ row.item.net_amount }}</span>
+            <span>$ {{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
+          </template>
+          <template slot="bottom-row" slot-scope="row" >
+            <td>Total</td>
+            <td></td>
+            <td>$ {{ parseFloat(netAmount).toFixed(2) }}</td>
+            <td></td>
           </template>
         </b-table>
       </b-datatable>
@@ -83,6 +97,8 @@
 
 <script>
 import axios from 'axios'
+import html2pdf from 'html2pdf.js'
+import { setTimeout } from 'timers'
 
 export default {
   name: 'AgeingReport',
@@ -92,6 +108,7 @@ export default {
       countsData: null,
       totalPaid: '0.00',
       totalOwned: '0.00',
+      rows: [],
       fields: [
         { key: 'created_at', label: 'Date' },
         { key: 'invoice_number', label: 'Invoice #' },
@@ -106,15 +123,48 @@ export default {
   created () {
     this.getInvoiceRecords()
   },
+  computed: {
+    netAmount: function () {
+      return this.rows.reduce((accum, item) => {
+      // Assuming expenses is the field you want to total up
+        return accum + parseFloat(item.net_amount)
+      }, 0.00)
+      // return this.$store.state.totals.expense
+    }
+  },
   methods: {
-    dataLoadProvider (ctx) {
-      return this.$refs.datasource.loadData(ctx.sortBy, ctx.sortDesc)
+    async dataLoadProvider (ctx) {
+      await this.$refs.datasource.loadData(ctx.sortBy, ctx.sortDesc)
+        .then((res) => {
+          this.rows = res
+        })
+      // console.log(this.model.rows)
+      return this.rows
     },
     onContextChanged () {
       return this.$refs.datatable.refresh()
     },
     onDelete (id) {
       this.$refs.datasource.deleteRow({ report: id })
+    },
+    printFacture: function () {
+      this.HideButtons()
+      var elementor = document.getElementById('ageing-report')
+      html2pdf(elementor, {
+        margin: 1.5,
+        filename: 'ageingReport.pdf',
+        // image: { type: 'png' },
+        html2canvas: { dpi: 900, letterRendering: false },
+        jsPDF: { unit: 'cm', format: 'a3', orientation: 'l' }
+      })
+      setTimeout(() => {
+        $('.card-body .row').show()
+        $('#download').show()
+      }, 2000)
+    },
+    HideButtons: function () {
+      $('.card-body .row').hide()
+      $('#download').hide()
     },
     async getInvoiceRecords () {
       await axios.get(this.$app.route('admin.invoices.getInvoiceRecords')).then((result) => {

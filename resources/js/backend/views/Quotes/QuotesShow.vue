@@ -108,10 +108,10 @@
                         {{ row.quantity }}
                       </td>
                       <td>
-                        {{ row.net_amount }}
+                        {{ parseFloat(row.net_amount).toFixed(2) }}
                       </td>
                       <td>
-                        {{ row.net_total }}
+                        {{ parseFloat(row.net_total).toFixed(2) }}
                       </td>
                     </template>
                     <template v-else-if="row.parts">
@@ -122,10 +122,10 @@
                         {{ row.quantity }}
                       </td>
                       <td>
-                        {{ row.net_amount }}
+                        {{ parseFloat(row.net_amount).toFixed(2) }}
                       </td>
                       <td>
-                        {{ row.net_total }}
+                        {{ parseFloat(row.net_total).toFixed(2) }}
                       </td>
                     </template>
                   </tr>
@@ -147,15 +147,15 @@
                   <tbody>
                     <tr>
                       <th class="verticle-th">Total Net Amount</th>
-                      <td>ZAR {{ model.net_amount }}</td>
+                      <td>ZAR {{ parseFloat(model.net_amount).toFixed(2) }}</td>
                     </tr>
                     <tr>
                       <th class="verticle-th">Total VAT Amount</th>
-                      <td>ZAR {{ model.vat_amount }}</td>
+                      <td>ZAR {{ parseFloat(model.vat_amount).toFixed(2) }}</td>
                     </tr>
                     <tr>
                       <th class="verticle-th">Total</th>
-                      <td>ZAR {{ model.total_amount }}</td>
+                      <td>ZAR {{ parseFloat(model.total_amount).toFixed(2) }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1051,8 +1051,8 @@ export default {
         margin: 1.5,
         filename: 'myfile.pdf',
         // image: { type: 'png' },
-        html2canvas: { dpi: 192, letterRendering: true },
-        jsPDF: { unit: 'cm', format: 'a4', orientation: 'p' }
+        html2canvas: { dpi: 900, letterRendering: false },
+        jsPDF: { unit: 'cm', format: 'a3', orientation: 'l' }
       })
       var x = document.getElementById('hideprint')
       var y = document.getElementById('back')
@@ -1212,9 +1212,9 @@ export default {
         this.errors.labour_name = ''
       }
       if (this.section_select !== 'null') {
-        this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar.tofixed(2), labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+        this.rows.splice(this.section_select + 1, 0, { labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar, net_total: this.labour.net_labour_price_zar.toFixed(2), labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
       } else {
-        this.rows.unshift({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar.tofixed(2), net_total: this.labour.net_labour_price_zar.tofixed(2), labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
+        this.rows.unshift({ labour: this.labour.labour_name, parent_section: this.section_select, name: this.labour.labour_name, quantity: this.labour.labour_quantity, net_amount: this.labour.labour_rate_zar.toFixed(2), net_total: this.labour.net_labour_price_zar.toFixed(2), labour_vat_rate: this.labour.labour_vat_rate, labour_vat_amount_zar: this.labour.labour_vat_amount_zar, labour_total_zar: this.labour.labour_total_zar })
       }
       this.hideModal('addLabourSection')
     },

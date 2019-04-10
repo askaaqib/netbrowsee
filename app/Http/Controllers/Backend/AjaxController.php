@@ -193,7 +193,7 @@ class AjaxController extends Controller
         return $project->query()
                 ->where('id' ,'>' ,0)
                 ->select('id','name')->get();
-        
+
     }
     public function getProjectManager(ProjectManagerRepository $project_manager)
     {
@@ -228,7 +228,7 @@ class AjaxController extends Controller
         } else {
             return $quote->query()
                 ->where('id' ,'>' ,0)
-                ->get();    
+                ->get();
         }
     }
 
@@ -242,7 +242,7 @@ class AjaxController extends Controller
         } else {
             return $labour->query()
                 ->where('id' ,'>' ,0)
-                ->get();    
+                ->get();
         }
     }
 
@@ -258,7 +258,7 @@ class AjaxController extends Controller
         } else {
             return $users = Clients::where('id', '>', 0)
             ->select('id','first_name','last_name','business_name','email', 'primary_phone', 'secondary_phone', 'street', 'town', 'region', 'postcode','notes')
-            ->get();  
+            ->get();
         }
         // if ($search) {
         //     return $users = User::whereHas('roles', function($q){
@@ -272,7 +272,7 @@ class AjaxController extends Controller
         //         $q->where('name', 'redactor');
         //     })
         //     ->select('id','name','email')
-        //     ->get();  
+        //     ->get();
         // }
     }
 
@@ -280,7 +280,7 @@ class AjaxController extends Controller
     {
         return $labour->query()
         ->where('id' ,'>' ,0)
-        ->select('id','name')->get();    
+        ->select('id','name')->get();
     }
 
 
@@ -290,7 +290,7 @@ class AjaxController extends Controller
         return $material->query()
                 ->where('id' ,'>' ,0)
                 ->select('id','name')->get();
-        
+
     }
 
     public function getUsers(UserRepository $user)
@@ -299,7 +299,22 @@ class AjaxController extends Controller
         return $user->query()
                 ->where('id' ,'>' ,0)
                 ->select('id','name')->get();
-        
+
+    }
+
+    public function getTechnician(UserRepository $user)
+    {
+
+        return ($user->query()->select('id','name')->whereHas('roles', function ($q) {
+            //conditions from role table
+                 $q->Where('name', 'Technician/SubContractor');
+
+             })->get());
+        // exit;
+        // return $user->query()
+        //         ->where('id' ,'>' ,0)
+        //         ->select('id','name')->get();
+
     }
 
     public function getQuotations(QuotesRepository $quotes)
@@ -308,7 +323,7 @@ class AjaxController extends Controller
         return $quotes->query()
                 ->where('id' ,'>' ,0)
                 ->select('id','quotation_name')->get();
-        
+
     }
 
     public function getJobcards(JobcardRepository $jobcard, Request $request)
@@ -324,15 +339,15 @@ class AjaxController extends Controller
           return $jobcard->query()
             ->where('quote_id' , $quote_id)
             ->orWhere('quote_id' , NULL)
-            ->select('jobcard_num','id')->get();          
+            ->select('jobcard_num','id')->get();
         }
         else{
             return $jobcard->query()
                 ->where('quote_id' , NULL)
-                ->select('jobcard_num','id')->get();  
+                ->select('jobcard_num','id')->get();
         }
-        
-        
+
+
     }
 
     public function getVats(VatRepository $vat)
@@ -341,7 +356,7 @@ class AjaxController extends Controller
         return $vat->query()
                 ->where('id' ,'>' ,0)
                 ->select('id','name')->get();
-        
+
     }
 
     public function getProjectManagers(ProjectManagerRepository $project_manager, Request $request)
@@ -360,23 +375,23 @@ class AjaxController extends Controller
 
     public function getSettingsData()
     {
-        $settings = Settings::orderBy('id', 'DESC')->first();    
+        $settings = Settings::orderBy('id', 'DESC')->first();
         return $settings;
-       
+
     }
 
     public function getQuotationsRecentReference()
     {
-        $quote = Quotes::orderBy('id', 'DESC')->first();       
+        $quote = Quotes::orderBy('id', 'DESC')->first();
         return $quote;
-       
+
     }
 
     public function getInvoicesRecentReference()
     {
-        $invoice = Invoices::orderBy('id', 'DESC')->first();       
+        $invoice = Invoices::orderBy('id', 'DESC')->first();
         return $invoice;
-       
+
     }
     /**
      * @param Request $request
@@ -427,11 +442,11 @@ class AjaxController extends Controller
                 return response()->json([
                   'status'  => 200,
                   'image_delete' => $image_name
-                ]); 
+                ]);
               } else {
                 return response()->json([
                   'status'  => 403
-                ]); 
+                ]);
               }
             }
           }
@@ -452,11 +467,11 @@ class AjaxController extends Controller
                 return response()->json([
                   'status'  => 200,
                   'image_delete' => $image_name
-                ]); 
+                ]);
               } else {
                 return response()->json([
                   'status'  => 403
-                ]); 
+                ]);
               }
             }
         }
@@ -477,11 +492,11 @@ class AjaxController extends Controller
                 return response()->json([
                   'status'  => 200,
                   'image_delete' => $image_name
-                ]); 
+                ]);
               } else {
                 return response()->json([
                   'status'  => 403
-                ]); 
+                ]);
               }
             }
         }
@@ -676,7 +691,7 @@ $invoiceamount = $invoice::select('total_amount')
 
     }
 
-    
+
     public function jobcardreports(Request $request, Jobcard $jobcard, JobcardRepository $jobcard_rep) {
       $data = $jobcard_rep->query()
                 ->select(
@@ -700,17 +715,17 @@ $invoiceamount = $invoice::select('total_amount')
       $less_30 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->where('created_at', '>', $upto_30)
                   ->sum('total_amount');
-      
+
       /************ MONEY OWNED UPTO 60 ************/
       $plus_30 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->whereBetween('created_at', array($upto_60, $upto_30))
                   ->sum('total_amount');
-      
+
       /************ MONEY OWNED UPTO 90 ************/
       $plus_60 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->whereBetween('created_at', array($upto_90, $upto_60))
                   ->sum('total_amount');
-      
+
       /************ MONEY OWNED UPTO 120 ************/
       $plus_90 = $invoice::whereIn('invoice_status', ['unpaid', 'overdue'])
                   ->whereBetween('created_at', array($upto_120, $upto_90))
@@ -724,7 +739,7 @@ $invoiceamount = $invoice::select('total_amount')
       /****************** TOTAL OWNED *******************/
       $total_owned = $less_30 + $plus_30 + $plus_60 + $plus_90 + $plus_120;
       $total_owned = number_format($total_owned, 2);
-      
+
       /****************** TOTAL PAID *******************/
       $total_paid = $invoice::where('invoice_status', 'paid')->sum('total_amount');
       $total_paid = number_format($total_paid, 2);

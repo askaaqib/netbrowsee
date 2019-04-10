@@ -3,12 +3,13 @@
     <b-card>
       <template slot="header">
         <h3 class="card-title">{{ $t('labels.backend.reports.titles.index') }}</h3>
-        <div class="card-options" v-if="this.$app.user.can('create reports')">
-          <b-button to="/reports/create" variant="success" size="sm">
-            <i class="fe fe-plus-circle"></i> {{ $t('buttons.reports.create') }}
-          </b-button>
+      </template>
+      <template class="pull-right">
+        <div id="hideprint" class="pull-right">
+          <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
         </div>
       </template>
+
       <b-datatable
         ref="datasource"
         @context-changed="onContextChanged"
@@ -31,18 +32,20 @@
           :items="dataLoadProvider"
           sort-by="reports.created_at"
           :sort-desc="true"
+          id="expenses-report"
+          v-model="model.rows"
         >
           <template slot="created_at" slot-scope="row">
             <span>{{ row.item.created_at }}</span>
           </template>
           <template slot="expenses" slot-scope="row">
-            <span>$ {{ row.item.expenses }}</span>
+            <span>$ {{ parseFloat(row.item.expenses).toFixed(2) }}</span>
           </template>
           <template slot="quote_amount" slot-scope="row">
-            <span>$ {{ row.item.quote_amount }}</span>
+            <span>$ {{ parseFloat(row.item.quote_amount).toFixed(2) }}</span>
           </template>
           <template slot="profit" slot-scope="row">
-            <span>$ {{ parseFloat(row.item.expenses) - parseFloat(row.item.quote_amount) }}</span>
+            <span>$ {{ (parseFloat(row.item.expenses) - parseFloat(row.item.quote_amount)).toFixed(2) }}</span>
           </template>
           <template slot="status" slot-scope="row">
             <span v-if="row.item.status == 'received'">Received</span>
@@ -54,19 +57,35 @@
             <span v-if="row.item.status == 'paid'">Paid</span>
             <span v-if="row.item.status == 'cancelled'">Cancelled</span>
           </template>
+          <template slot="bottom-row" slot-scope="row" >
+            <td>Total</td>
+            <td></td>
+            <td>$ {{ parseFloat(totalExpense).toFixed(2) }}</td>
+            <td>$ {{ parseFloat(amountQuoted).toFixed(2) }}</td>
+            <td>$ {{ parseFloat(profit).toFixed(2) }}</td>
+            <td></td>
+          </template>
         </b-table>
       </b-datatable>
     </b-card>
   </div>
 </template>
-
 <script>
+import html2pdf from 'html2pdf.js'
+import { setTimeout } from 'timers'
 
 export default {
   name: 'ReportsList',
   data () {
     return {
+      model: {
+        expenses: [],
+        services: [],
+        rows: []
+      },
       selected: [],
+      totalexp: 0,
+      quotedAmount: [],
       fields: [
         { key: 'created_at', label: 'Date' },
         { key: 'jobcard_num', label: 'Jobcard #' },
@@ -80,15 +99,68 @@ export default {
       }
     }
   },
+  computed: {
+    totalExpense: function () {
+      console.log(this.model.rows)
+      return this.model.rows.reduce((accum, item) => {
+      // Assuming expenses is the field you want to total up
+        return accum + parseFloat(item.expenses)
+      }, 0.00)
+      // return this.$store.state.totals.expense
+    },
+    amountQuoted: function () {
+      // console.log(this.model.rows)
+      return this.model.rows.reduce((accum, item) => {
+      // Assuming expenses is the field you want to total up
+        return accum + parseFloat(item.quote_amount)
+      }, 0.00)
+      // return this.$store.state.totals.expense
+    },
+    profit: function () {
+      // console.log(this.model.rows)
+      return this.model.rows.reduce((accum, item) => {
+      // Assuming expenses is the field you want to total up
+        let netAmount = parseFloat(item.expenses) - parseFloat(item.quote_amount)
+        return accum + parseFloat(netAmount)
+      }, 0.00)
+      // return this.$store.state.totals.expense
+    }
+
+  },
   methods: {
-    dataLoadProvider (ctx) {
-      return this.$refs.datasource.loadData(ctx.sortBy, ctx.sortDesc)
+    async dataLoadProvider (ctx) {
+      await this.$refs.datasource.loadData(ctx.sortBy, ctx.sortDesc)
+        .then((res) => { this.model.rows = res })
+      // console.log(this.model.rows)
+      return this.model.rows
     },
     onContextChanged () {
       return this.$refs.datatable.refresh()
     },
     onDelete (id) {
       this.$refs.datasource.deleteRow({ report: id })
+    },
+    // searchByDate(ctx) {
+    //   this.$refs.datasource.loadData(this.date).then(res => this.$refs.datatable.refresh())
+    // },
+    printFacture: function () {
+      this.HideButtons()
+      var elementor = document.getElementById('expenses-report')
+      html2pdf(elementor, {
+        margin: 1.5,
+        filename: 'expensesReport.pdf',
+        // image: { type: 'png' },
+        html2canvas: { dpi: 900, letterRendering: false },
+        jsPDF: { unit: 'cm', format: 'a3', orientation: 'l' }
+      })
+      setTimeout(() => {
+        $('.card-body .row').show()
+        $('#download').show()
+      }, 2000)
+    },
+    HideButtons: function () {
+      $('.card-body .row').hide()
+      $('#download').hide()
     }
   }
 }

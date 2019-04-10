@@ -31,6 +31,9 @@ export function createActions (route) {
     },
     ADD_SECTION: ({ commit }) => {
       return 'Section'
+    },
+    TOTALS: ({ commit }, data) => {
+      commit('SET_TOTAL', data)
     }
   }
 }

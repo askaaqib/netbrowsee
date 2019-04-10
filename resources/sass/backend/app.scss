@@ -29,6 +29,11 @@
 // RTL
 @import "../bootstrap-rtl";
 
+$icon-size: 3rem;
+$dasboard: (
+  dash-card: 1rem
+);
+
 [v-cloak] {
   display: none;
 }
@@ -386,5 +391,51 @@ table#table-invoice-total th, table#table-invoice-total td {
   .pagebreak {
     page-break-inside: avoid;
   }
+}
+
+.icon-shield {
+  font-size: $icon-size;
+}
+
+.unallocated-jobs {
+  background-color: #2FDC9A;
+  font-size: map-get($dasboard, dash-card);
+  box-shadow: 1px 1px 6px 2px #0c6f0391;
+}
+
+.in-progress-jobs {
+  background-color: #4F94F5;
+  font-size: map-get($dasboard, dash-card);
+  box-shadow: 1px 1px 6px 2px #144256b5
+}
+
+.completed-jobs {
+  background-color: #EF6C49;
+  font-size: map-get($dasboard, dash-card);
+  box-shadow: 1px 1px 6px 2px #8e321aa1
+}
+
+.quoted-jobs {
+  background-color: #EAD84D;
+  font-size: map-get($dasboard, dash-card);
+  box-shadow: 1px 1px 6px 2px #90821894
+}
+
+.invoiced-jobs {
+  background-color: #2FDC9A;
+  font-size: map-get($dasboard, dash-card);
+  box-shadow: 1px 1px 6px 2px #0c6f0391;
+}
+
+.quoted-amount {
+  background-color: #4F94F5;
+  font-size: map-get($dasboard, dash-card);
+  box-shadow: 1px 1px 6px 2px #144256b5
+}
+
+.invoiced-amount {
+  background-color: #EF6C49;
+  font-size: map-get($dasboard, dash-card);
+  box-shadow: 1px 1px 6px 2px #8e321aa1
 }
 /* PRINT MEDIA QUERIES */

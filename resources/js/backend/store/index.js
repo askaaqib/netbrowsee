@@ -18,6 +18,9 @@ export function createStore (route) {
       },
       quotes: {
         section: null
+      },
+      totals: {
+        expense: 0
       }
     },
     actions,

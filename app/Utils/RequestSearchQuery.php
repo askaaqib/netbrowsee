@@ -52,13 +52,34 @@ class RequestSearchQuery
                 $this->request->get('direction') ?? 'asc'
             );
         }
-
         if ($search = $this->request->get('search')) {
             $this->query->where(function (Builder $query) use ($model, $searchables, $search) {
                 foreach ($searchables as $key => $searchableColumn) {
                     $query->orWhere(
                         $this->getLocalizedColumn($model, $searchableColumn), 'like', "%{$search}%"
                     );
+                }
+            });
+        }elseif($date = $this->request->get('date')) {
+            $date = explode('to', $date);
+            // dd($date);
+            $this->query->where(function (Builder $query) use ($model, $searchables, $date) {
+
+                foreach ($searchables as $key => $searchableColumn) {
+                    if($searchableColumn == 'invoices.created_at'
+                    || $searchableColumn == 'jobcard.created_at'){
+                        if($date[0]){
+                            $query->Where(
+                                $this->getLocalizedColumn($model, $searchableColumn), '>=', "{$date[0]}"
+                            );
+                        }
+                        if( isset($date[1]) ){
+                            $stop_date = date('Y-m-d', strtotime($date[1] . ' +1 day'));
+                            $query->Where(
+                                $this->getLocalizedColumn($model, $searchableColumn), '<=', "{$stop_date}"
+                            );
+                        }
+                    }
                 }
             });
         }
@@ -71,6 +92,7 @@ class RequestSearchQuery
      */
     public function result($columns)
     {
+        dd($this->query->toSql());
         $result = $this->query->paginate($this->request->get('perPage'), $columns);
         return $result;
     }
@@ -90,7 +112,7 @@ class RequestSearchQuery
         if ($user_role > 1 || !empty($user_role)) {
             $result =  $this->query->Where('contractor_id', $user_id)->paginate($this->request->get('perPage'), $columns);
             return $result;
-        }else{ 
+        }else{
             $result = $this->query->paginate($this->request->get('perPage'), $columns);
             // return response()->json(['hi' => $result]);
             return $result;

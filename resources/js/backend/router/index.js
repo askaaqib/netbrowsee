@@ -801,7 +801,7 @@ export function createRouter (base, i18n) {
             path: 'statusreport',
             component: StatusReport,
             meta: {
-              label: 'Vat Report'
+              label: 'Status Report'
             }
           }
         ]

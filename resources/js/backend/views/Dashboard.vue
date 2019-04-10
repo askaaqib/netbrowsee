@@ -2,49 +2,80 @@
   <div>
     <b-row>
       <b-col xl="12">
-        <b-row v-if="this.$app.user.can('view own posts')">
+        <b-row v-if="this.$app.user.can('view users')">
           <b-col sm>
-            <b-card bg-variant="danger" text-variant="white">
+            <b-card text-variant="white" class="unallocated-jobs text-center">
+              <b-row>
+                <b-col class="icon-shield">
+                  <i class="fe fe-shield-off"></i>
+                </b-col>
+              </b-row>
               <h4 class="mb-0">{{ Unallocatedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.unallocated_jobcards') }}</p>
             </b-card>
           </b-col>
           <b-col sm>
-            <b-card bg-variant="warning" text-variant="white">
+            <b-card class="in-progress-jobs text-center" text-variant="white">
+              <b-row>
+                <b-col class="icon-shield">
+                  <i class="fe fe-repeat"></i>
+                </b-col>
+              </b-row>
               <h4 class="mb-0">{{ Progressjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.jobards_in_progress') }}</p>
             </b-card>
           </b-col>
           <b-col sm>
-            <b-card bg-variant="success" text-variant="white">
+            <b-card class="completed-jobs text-center" text-variant="white">
+               <b-row>
+                <b-col class="icon-shield">
+                  <i class="fe fe-check"></i>
+                </b-col>
+              </b-row>
               <h4 class="mb-0">{{ Completedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.completed_jobards') }}</p>
             </b-card>
           </b-col>
-        </b-row>
-        <b-row>
           <b-col sm v-if="this.$app.user.can('view users')">
-            <b-card bg-variant="primary" text-variant="white">
+            <b-card class="quoted-jobs text-center" text-variant="white">
+               <b-row>
+                <b-col class="icon-shield">
+                  <i class="fe fe-inbox"></i>
+                </b-col>
+              </b-row>
               <h4 class="mb-0">{{ Quotedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.quoted_jobcards') }}</p>
             </b-card>
           </b-col>
           <b-col sm v-if="this.$app.user.can('view form_submissions')">
-            <b-card bg-variant="info" text-variant="white">
+            <b-card class="invoiced-jobs text-center" text-variant="white">
+              <b-row>
+                <b-col class="icon-shield">
+                  <i class="fe fe-map"></i>
+                </b-col>
+              </b-row>
               <h4 class="mb-0">{{ Invoicedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.invoiced_jobcards') }}</p>
             </b-card>
           </b-col>
-        </b-row>
-        <b-row>
           <b-col sm v-if="this.$app.user.can('view users')">
-            <b-card bg-variant="primary" text-variant="white">
+            <b-card class="quoted-amount text-center" text-variant="white">
+               <b-row>
+                <b-col class="icon-shield">
+                  <i class="fe fe-tag"></i>
+                </b-col>
+              </b-row>
               <h4 class="mb-0">{{ QuotedAmount }}</h4>
               <p>{{ $t('labels.backend.dashboard.quoted_amount') }}</p>
             </b-card>
           </b-col>
           <b-col sm v-if="this.$app.user.can('view form_submissions')">
-            <b-card bg-variant="info" text-variant="white">
+            <b-card class="invoiced-amount text-center" text-variant="white">
+              <b-row>
+                <b-col class="icon-shield">
+                  <i class="fe fe-dollar-sign"></i>
+                </b-col>
+              </b-row>
               <h4 class="mb-0">{{ InvoiceAmount }}</h4>
               <p>{{ $t('labels.backend.dashboard.invoiced_amount') }}</p>
             </b-card>
@@ -88,10 +119,10 @@ export default {
     this.quotedamount()
     this.invoiceamount()
 
-    if (this.$app.user.can('view own posts')) {
-      let { data } = await axios.get(this.$app.route('admin.posts.latest'))
-      this.posts = data
-    }
+    // if (this.$app.user.can('view own posts')) {
+    //   let { data } = await axios.get(this.$app.route('admin.posts.latest'))
+    //   this.posts = data
+    // }
   },
   methods: {
     async completeJobcard () {

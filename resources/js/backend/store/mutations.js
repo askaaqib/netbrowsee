@@ -4,5 +4,8 @@ export default {
   },
   ADD_SECTION: (state, name) => {
     state.quotes.section[name] = name
+  },
+  SET_TOTAL: (state, totals) => {
+    state.totals.expense = totals
   }
 }

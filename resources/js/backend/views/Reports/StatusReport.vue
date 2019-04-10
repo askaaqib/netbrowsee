@@ -1,8 +1,13 @@
 <template>
-  <div class="ageing-report">
+  <div class="status-report" >
     <b-card>
       <template slot="header">
         <h3 class="card-title">Status Reports</h3>
+      </template>
+      <template class="pull-right">
+        <div id="hideprint" class="pull-right">
+          <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+        </div>
       </template>
       <b-datatable
         ref="datasource"
@@ -26,6 +31,7 @@
           :items="dataLoadProvider"
           sort-by="jobcard.created_at"
           :sort-desc="true"
+          id="status-report"
         >
           <template slot="created_at" slot-scope="row">
             <span>{{ row.item.created_at }}</span>
@@ -53,6 +59,9 @@
 </template>
 
 <script>
+import html2pdf from 'html2pdf.js'
+import { setTimeout } from 'timers'
+
 export default {
   name: 'StatusReport',
   data () {
@@ -81,6 +90,25 @@ export default {
     },
     onDelete (id) {
       this.$refs.datasource.deleteRow({ report: id })
+    },
+    printFacture: function () {
+      this.HideButtons()
+      var elementor = document.getElementById('status-report')
+      html2pdf(elementor, {
+        margin: 1.5,
+        filename: 'ageingReport.pdf',
+        // image: { type: 'png' },
+        html2canvas: { dpi: 900, letterRendering: false },
+        jsPDF: { unit: 'cm', format: 'a3', orientation: 'l' }
+      })
+      setTimeout(() => {
+        $('.card-body .row').show()
+        $('#download').show()
+      }, 2000)
+    },
+    HideButtons: function () {
+      $('.card-body .row').hide()
+      $('#download').hide()
     }
   }
 }

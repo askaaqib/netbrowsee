@@ -122,7 +122,7 @@ class JobcardController extends BackendController
             'jobcard.created_at',
             'jobcard.updated_at',
 
-            
+
         ]);
             if ($request->get('exportData')) {
             return $requestSearchQuery->export([
@@ -165,6 +165,7 @@ class JobcardController extends BackendController
         /** @var Builder $query */
         $query = $this->jobcard->query();
         $model = $query->getModel();
+        // dd($request->all());
 
         if(isset($request->item_id)) {
             $query->where('item_id', $request->item_id);
@@ -172,7 +173,7 @@ class JobcardController extends BackendController
 
         $searchables = [
             'status',
-             'jobcard.created_at',
+            'jobcard.created_at',
             'jobcard.updated_at',
         ];
 
@@ -195,6 +196,29 @@ class JobcardController extends BackendController
                     );
                 }
             });
+        }elseif($date = $request->get('date')){
+
+            $date = explode('to', $date);
+
+
+            $query->where(function (Builder $query) use ($model, $searchables, $date) {
+                foreach ($searchables as $key => $searchableColumn) {
+                    if($searchableColumn == 'jobcard.created_at'){
+                        if($date[0]){
+                            $query->Where(
+                                $this->getLocalizedColumn($model, $searchableColumn), '>', "{$date[0]}"
+                            );
+                        }
+
+                        if( isset($date[1]) ){
+                            $query->Where(
+                                $this->getLocalizedColumn($model, $searchableColumn), '<', "{$date[1]}"
+                            );
+                        }
+                    }
+
+                }
+            });
         }
         $columns = [
             'jobcard.id',
@@ -208,6 +232,8 @@ class JobcardController extends BackendController
             'jobcard.created_at',
             'jobcard.updated_at',
         ];
+
+
         $result = $query->select(
                 'id', 'jobcard_num', 'labour_paid',
                 'materials_paid', 'travelling_paid',

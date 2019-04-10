@@ -1,5 +1,38 @@
+
 <template>
+
   <div>
+    <template
+    v-if="this.$route.path === '/ageingreport'
+        || this.$route.path === '/reports'
+        || this.$route.path === '/vatreport'
+        || this.$route.path === '/statusreport'
+    ">
+      <b-row>
+        <b-col xl="3 pl-0 mb-5">
+          Search By Date: <flat-pickr
+            :search.sync="search"
+            v-model="date"
+            :config="config"
+            class="form-control"
+            placeholder="Select date"
+            name="date"
+            @on-change="debounceInput"
+            >
+          </flat-pickr>
+        </b-col>
+        <!-- <b-col xl="3 pl-0">
+          <b-input-group>
+            <b-input-group-append>
+              <b-button @click="searchByDate"
+                variant="primary">
+                Search
+              </b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-col> -->
+      </b-row>
+    </template>
     <b-row>
       <b-col md="4" class="mb-3">
         <b-form inline v-if="lengthChange">
@@ -45,6 +78,8 @@
 <script>
 import axios from 'axios'
 import _ from 'lodash'
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/flatpickr.css'
 
 export default {
   props: {
@@ -96,8 +131,20 @@ export default {
       totalRows: 0,
       pageOptions: [ 5, 10, 15, 25, 50 ],
       searchQuery: null,
-      action: null
+      action: null,
+      config: {
+        mode: 'range',
+        defaultDate: [new Date()],
+        wrap: true,
+        altFormat: 'Y-m-d',
+        altInput: true,
+        dateFormat: 'Y-m-d'
+      },
+      date: null,
     }
+  },
+  components: {
+    flatPickr
   },
   watch: {
     actions: {
@@ -124,7 +171,8 @@ export default {
             perPage: this.perPage,
             column: sortBy,
             direction: sortDesc ? 'desc' : 'asc',
-            search: this.searchQuery
+            search: this.searchQuery,
+            date: this.date
           }
         })
 
