@@ -92,7 +92,6 @@ class RequestSearchQuery
      */
     public function result($columns)
     {
-        dd($this->query->toSql());
         $result = $this->query->paginate($this->request->get('perPage'), $columns);
         return $result;
     }
