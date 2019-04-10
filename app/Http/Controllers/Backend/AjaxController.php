@@ -195,12 +195,18 @@ class AjaxController extends Controller
                 ->select('id','name')->get();
 
     }
-    public function getProjectManager(ProjectManagerRepository $project_manager)
+    // public function getProjectManager(ProjectManagerRepository $project_manager)
+    public function getProjectManager(UserRepository $user)
     {
-        return $project_manager->query()
-                 ->where('id' , '>' ,0)
-                 ->select('id','name')->get();
+        // return $project_manager->query()
+        //          ->where('id' , '>' ,0)
+        //          ->select('id','name')->get();
+        return ($user->query()->select('id','name')->whereHas('roles', function ($q) {
+            //conditions from role table
+                 $q->Where('name', 'Project Manager');
+             })->get());
     }
+
     public function getDistricts(DistrictRepository $district){
 
         return $district->query()
