@@ -173,19 +173,10 @@ class InvoicesController extends BackendController
 
         /** @var Builder $query */
         $query = $this->invoice->query();
-
-
-
-
-
-
- $requestSearchQuery = new RequestSearchQuery($request, $query, [
-
+        $requestSearchQuery = new RequestSearchQuery($request, $query, [
             "invoice_number",
             'invoices.created_at',
-            'invoices.updated_at',
-
-
+            'invoices.updated_at'
         ]);
 
         if ($request->get('exportData')) {
@@ -194,16 +185,16 @@ class InvoicesController extends BackendController
             "vat_amount",
             "total_amount",
             ],
-                [
-                    __('validation.invoices.invoice_number'),
-                    __('validation.invoices.vat_amount'),
-                    __('validation.invoices.total_amount'),
-                    // __('validation.invoices.net_amount'),
-                    // __('validation.invoices.total_amount'),
-                    // __('labels.created_at'),
-                    // __('labels.updated_at'),
-                ],
-                'invoices');
+            [
+            __('validation.invoices.invoice_number'),
+            __('validation.invoices.vat_amount'),
+            __('validation.invoices.total_amount'),
+            // __('validation.invoices.net_amount'),
+            // __('validation.invoices.total_amount'),
+            // __('labels.created_at'),
+            // __('labels.updated_at'),
+            ],
+            'invoices');
         }
 
         $columns = [

@@ -14,6 +14,7 @@ use Mail;
 use DB;
 use App\Exports\DataTableExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\User;
 
 class JobcardController extends BackendController
 {
@@ -260,7 +261,7 @@ class JobcardController extends BackendController
      */
     public function store(StoreJobcardRequest $request)
     {
-
+        
        //  $data = $request->all();
        // // dd($data);
        //  // $data['projects_id'] = $request->projects_id['id'];
@@ -315,9 +316,17 @@ class JobcardController extends BackendController
         // dd($data);
         $jobcard = $this->jobcard->make($data);
 
+        $jobcarStatus = $request->status;
+
         if ('publish' === $data['status']) {
             $this->jobcard->saveAndPublish($jobcard, $data);
+            //send email to project manager
         } else {
+            if(isset($request->projectmanager_id)){
+                $projectmanager_email = User::where('id', $request->projectmanager_id)->value('email');
+                $data['porjectmanager_email'] = $projectmanager_email;
+                $this->sendEmail($jobcarStatus, $data);
+            }
             $this->jobcard->saveAsDraft($jobcard, $data);
         }
         return $this->redirectResponse($request, __('alerts.backend.jobcards.created'));
@@ -368,6 +377,7 @@ class JobcardController extends BackendController
         $data = $request->all();
         $old_status = $jobcard->status;
         $new_status = $data['status'];
+
         /************* BEFORE PICTURES *************/
         if(isset($data['before_pictures']) && !isset($data['before_pictures_edit'])) {
             $data['before_pictures'] = json_encode($data['before_pictures']);
@@ -444,8 +454,13 @@ class JobcardController extends BackendController
         $saved = $this->jobcard->saveAndPublish($jobcard, $data);
 
         if ($saved) {
-            if ($old_status != $new_status) {
-                $this->sendEmail($old_status, $data);
+            if (strtolower($old_status) !== strtolower($new_status)) {
+               // $this->sendEmail($old_status, $data);
+                if(isset($request->projectmanager_id)){
+                    $projectmanager_email = User::where('id', $request->projectmanager_id)->value('email');
+                    $data['porjectmanager_email'] = $projectmanager_email;
+                    $this->sendEmail($old_status, $data);
+                }
             }
         }
         return $this->redirectResponse($request, __('alerts.backend.jobcards.updated'));
@@ -522,7 +537,10 @@ class JobcardController extends BackendController
     public function addedfile() {}
 
     protected function sendEmail($old_status, $data) {
-      $to_email = 'netbrowse@yopmail.com';
+
+
+
+      $to_email = $data['porjectmanager_email'];
       $mail_data = array("old_status" => $old_status, "data" => $data);
        try{
         Mail::send('emails.mail', $mail_data, function($message) use ($to_email) {
@@ -530,8 +548,13 @@ class JobcardController extends BackendController
             ->subject('NetBrowse');
           $message->from('support@netbrowse.com','Netbrowse App Support');
         });
+
+        return 'success';
         }
-        catch(Exception $e){}
+        catch(Exception $e){
+
+            throw $e;
+        }
     }
 
     private function getLocalizedColumn(Jobcard $model, $column)

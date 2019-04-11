@@ -11,6 +11,7 @@ Route::get('vats/getrates', 'AjaxController@getVatRates')->name('vats.getids');
 Route::get('district/getids','AjaxController@getDistricts')->name('district.getdata');
 Route::get('subdistrict/getids','AjaxController@getSubDistricts')->name('subdistrict.getdata');
 
+
 Route::get('projects/getids', 'AjaxController@getProjects')->name('projects.getdata');
 Route::get('project_manager/getids', 'AjaxController@getProjectManager')->name('project_manager.getdata');
 Route::get('labours/info', 'AjaxController@getLabours')->name('labours.getdata');

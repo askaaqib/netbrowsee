@@ -1,6 +1,7 @@
 @php
 $new_status_name = '';
 $old_status_name = '';
+
 if ($old_status == 1) { $old_status_name = 'Received';}
 if ($data['status'] == 1) { $new_status_name = 'Received';}
 
@@ -24,8 +25,10 @@ if ($data['status'] == 7) { $new_status_name = 'Paid';}
 
 if ($old_status == 8) { $old_status_name = 'Cancelled';}
 if ($data['status'] == 8) { $new_status_name = 'Cancelled';}
+
 @endphp
 
-Jobcard Status changed from {{ $old_status_name }} to {{ $new_status_name }}
+Jobcard Status changed from {{ $old_status }} to {{ $data['status'] }}
+
 
 Thank you

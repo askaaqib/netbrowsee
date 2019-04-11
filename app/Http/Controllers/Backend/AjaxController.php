@@ -203,8 +203,8 @@ class AjaxController extends Controller
         //          ->select('id','name')->get();
         return ($user->query()->select('id','name')->whereHas('roles', function ($q) {
             //conditions from role table
-                 $q->Where('name', 'Project Manager');
-             })->get());
+            $q->Where('name', 'Project Manager');
+        })->get());
     }
 
     public function getDistricts(DistrictRepository $district){
