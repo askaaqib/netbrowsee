@@ -27,12 +27,12 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       icon: 'fe fe-aperture',
       access: app.user.can('view projects')
     },
-    {
-      name: i18n.t('labels.backend.project_managers.titles.main'),
-      url: '/project_managers',
-      icon: 'fe fe-user',
-      access: app.user.can('view')
-    },
+    // {
+    //   name: i18n.t('labels.backend.project_managers.titles.main'),
+    //   url: '/project_managers',
+    //   icon: 'fe fe-user',
+    //   access: app.user.can('view')
+    // },
     {
       name: i18n.t('labels.backend.labour_rates.titles.main'),
       url: '/labour_rates',
@@ -97,7 +97,7 @@ export default (app, i18n, newPostsCount, pendingPostsCount) => {
       access: app.blogEnabled && app.user.can('view')
     },
     {
-      name: 'Reports',
+      name: 'Expense Reports',
       url: '/reports',
       icon: 'fe fe-bar-chart-2',
       access: app.user.can('view reporte_view')

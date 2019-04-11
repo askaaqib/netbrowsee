@@ -43,14 +43,14 @@
             <span>{{ row.item.get_assigned_user.name }}</span>
           </template>
           <template slot="status" slot-scope="row">
-            <span v-if="row.item.status == 'received'">Received</span>
-            <span v-if="row.item.status == 'assigned'">Assigned</span>
-            <span v-if="row.item.status == 'on hold'">On Hold</span>
-            <span v-if="row.item.status == 'completed'">Completed</span>
-            <span v-if="row.item.status == 'submitted for vetting'">Submitted for Vetting</span>
-            <span v-if="row.item.status == 'invoiced'">Invoiced</span>
-            <span v-if="row.item.status == 'paid'">Paid</span>
-            <span v-if="row.item.status == 'cancelled'">Cancelled</span>
+            <span v-if="row.item.status === 'Received'">Received</span>
+            <span v-if="row.item.status === 'Assigned'">Assigned</span>
+            <span v-if="row.item.status === 'On Hold'">On Hold</span>
+            <span v-if="row.item.status === 'Completed'">Completed</span>
+            <span v-if="row.item.status === 'Submitted for vetting'">Submitted for Vetting</span>
+            <span v-if="row.item.status === 'Invoiced'">Invoiced</span>
+            <span v-if="row.item.status === 'Paid'">Paid</span>
+            <span v-if="row.item.status === 'Cancelled'">Cancelled</span>
           </template>
         </b-table>
       </b-datatable>

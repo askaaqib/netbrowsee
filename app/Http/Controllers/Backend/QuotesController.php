@@ -82,7 +82,8 @@ class QuotesController extends BackendController
     public function store(StoreQuotesRequest $request, Jobcard $jobcard)
     {
         $data = $request->all();
-        // dd($data);
+
+         
         $data['rows'] = json_encode($request->rows);
         $quote = $this->quote->make($data); 
         
@@ -92,7 +93,7 @@ class QuotesController extends BackendController
             $jobcard_id = $data['jobcard_id'];
             $quote_amount = $data['vat_amount'];
             /*************** UPDATE JOBCARD ***************/
-            $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount]);
+            $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount, 'status' => 'Submitted for vetting']);
         }
 
        return $this->redirectResponse($request, __('alerts.backend.quotes.created'));

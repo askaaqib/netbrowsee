@@ -41,11 +41,19 @@
           <template slot="invoice_status" slot-scope="row">
             <span class="invoice-status" v-text="row.item.invoice_status"></span>
           </template>
+          <template slot="client_name" slot-scope="row">
+            <span class="invoice-status" v-text="row.item.client_name"></span>
+          </template>
+          <template slot="client_email" slot-scope="row">
+            <span class="invoice-status" v-text="row.item.client_email"></span>
+          </template>
           <template slot="net_amount" slot-scope="row">
             <span>$ {{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
           </template>
           <template slot="bottom-row" slot-scope="row" >
             <td>Total</td>
+            <td></td>
+            <td></td>
             <td></td>
             <td>$ {{ parseFloat(netAmount).toFixed(2) }}</td>
             <td></td>
@@ -112,6 +120,8 @@ export default {
       fields: [
         { key: 'created_at', label: 'Date' },
         { key: 'invoice_number', label: 'Invoice #' },
+        { key: 'client_email', label: 'Client Emial' },
+        { key: 'client_name', label: 'Client Name' },
         { key: 'net_amount', label: 'Amount before VAT' },
         { key: 'invoice_status', label: 'Status' }
       ],

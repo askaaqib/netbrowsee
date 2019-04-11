@@ -58,7 +58,7 @@ class Jobcard extends Model
     }
 
     public function get_project_manager() {
-        return $this->belongsTo(ProjectManager::class, 'projectmanager_id');
+        return $this->belongsTo(User::class, 'projectmanager_id');
     }
 
     public function get_assigned_user() {

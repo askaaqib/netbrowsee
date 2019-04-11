@@ -27023,4 +27023,8 @@ table#table-invoice-total td {
 
 /* PRINT MEDIA QUERIES */
 
+.blueimp-gallery-display {
+  display: none;
+}
+
 

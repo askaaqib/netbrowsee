@@ -233,12 +233,12 @@
                 <option value="null">Please Select Status</option>
                 <option value="Received" data-foo="Received">Received</option>
                 <option value="Assigned" data-foo="Assigned">Assigned</option>
-                <option value="3" data-foo="On Hold">On Hold</option>
-                <option value="4" data-foo="Completed">Completed</option>
-                <option value="5" data-foo="Submitted for Vetting">Submitted for Vetting</option>
-                <option value="6" data-foo="Invoiced">Invoiced</option>
-                <option value="7" data-foo="Paid">Paid</option>
-                <option value="8" data-foo="Cancelled">Cancelled</option>
+                <option value="On Hold" data-foo="On Hold">On Hold</option>
+                <option value="Completed" data-foo="Completed">Completed</option>
+                <option value="Submitted for vetting" data-foo="Submitted for vetting">Submitted for Vetting</option>
+                <option value="Invoiced" data-foo="Invoiced">Invoiced</option>
+                <option value="Paid" data-foo="Paid">Paid</option>
+                <option value="Cancelled" data-foo="Cancelled">Cancelled</option>
               </b-select>
             </b-form-group>
 
@@ -258,7 +258,7 @@
             </b-form-group>
 
             <b-form-group
-              label="Vat Rate"
+              label="Vat Amount"
               label-for="vat_rate"
               horizontal
               :label-cols="2"

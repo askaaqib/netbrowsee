@@ -117,6 +117,7 @@ class InvoicesController extends BackendController
             "project_id",
             "project_managers_id",
             "client_email",
+            "client_name",
             "invoice_description",
             "rows",
             "bank_account" ,
@@ -159,6 +160,7 @@ class InvoicesController extends BackendController
             "invoice_number",
             "invoice_digit",
             "client_email",
+            "client_name",
             "vat_amount",
             "net_amount",
             "total_amount",
@@ -236,17 +238,28 @@ class InvoicesController extends BackendController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreInvoicesRequest $request)
+    public function store(StoreInvoicesRequest $request, Jobcard $jobcard)
     {
 
         $data = $request->all();
-       //var_dump($data);
+      
         $data['rows'] = json_encode($request->rows);
+        foreach($request->rows as $quotes) {
+            if(isset($quotes['quotation_id'])){
+                $jobcard::where('quote_id', $quotes['quotation_id'])
+                ->update(['status' => 'Invoiced']);
+            }
+        }
 
-        $invoice = $this->invoice->make($data);
+       $invoice = $this->invoice->make($data);
 
        //dd($request->input());
-       $this->invoice->save($invoice, $data);
+       $data_saved = $this->invoice->save($invoice, $data);
+       if($data_saved) {
+            /*************** UPDATE JOBCARD ***************/
+
+            
+        }
 
        return $this->redirectResponse($request, __('alerts.backend.invoices.created'));
     }

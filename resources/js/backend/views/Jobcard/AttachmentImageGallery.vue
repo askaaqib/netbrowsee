@@ -12,12 +12,13 @@
         :key="imageInd"
         @click="indexgallery = imageInd"
         :style="{
-          backgroundImage: 'url(' + image.image_name + ')',
           width: imageWidth,
+          backgroundImage: 'url(' + image.image_name + ')',
           height: imageHeight,
           backgroundSize: 'cover'
         }"
       >
+      {{getimge(image, imageInd)}}
         <template v-if="jobcardPicSize">
           <div class="edit">
             <b-button
@@ -99,6 +100,9 @@ export default {
             }
           })
       }
+    },
+    getimge(img, ind) {
+      console.log(img, ind)
     }
   }
 }
