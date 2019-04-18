@@ -91,9 +91,9 @@ class QuotesController extends BackendController
         if($data_saved) {
             $quote_id = $quote->id;
             $jobcard_id = $data['jobcard_id'];
-            $quote_amount = $data['vat_amount'];
+            $quote_amount = $data['total_amount'];
             /*************** UPDATE JOBCARD ***************/
-            $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount, 'status' => 'Submitted for vetting']);
+            $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount, 'status' => 'Quoted']);
         }
 
        return $this->redirectResponse($request, __('alerts.backend.quotes.created'));
@@ -143,9 +143,9 @@ class QuotesController extends BackendController
         $data = $request->all();
         $quote_id = $quote->id;
         $jobcard_id = $data['jobcard_id'];
-        $quote_amount = $data['vat_amount'];
+        $quote_amount = $data['total_amount'];
         /*************** UPDATE JOBCARD ***************/
-        $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount]);
+        $jobcard::where('id', $jobcard_id)->update(['quote_id' => $quote_id, 'quote_amount' => $quote_amount, 'status' => 'Quoted']);
         $data['rows'] = json_encode($request->rows);
         $quote->fill($data);
         
@@ -186,5 +186,10 @@ class QuotesController extends BackendController
         }
 
         return $this->redirectResponse($request, __('alerts.backend.actions.invalid'), 'error');
+    }
+
+    public function getDescriptionByJobCard(Request $request, Jobcard $jobcard) {
+        $jobcard_id = $request->get('jobcard_id');
+        return $jobcard::where('id', $jobcard_id)->value('description');
     }
 }

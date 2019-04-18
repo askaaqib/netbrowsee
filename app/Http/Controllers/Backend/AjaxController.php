@@ -252,6 +252,21 @@ class AjaxController extends Controller
         }
     }
 
+    public function searchCompany(MaterialRateRepository $companypart, Request $request){
+        $search = $request->get('q');
+        if ($search) {
+            return $companypart->query()
+                ->where('name' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('rate' ,'LIKE' ,'%'. $search .'%')
+                ->get();
+        } else {
+            return $companypart->query()
+                ->where('id' ,'>' ,0)
+                ->get();
+        }
+    }
+
+
     public function searchClients(Clients $client, Request $request){
         $search = $request->get('q');
         if ($search) {

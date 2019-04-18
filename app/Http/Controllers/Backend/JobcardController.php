@@ -568,6 +568,18 @@ class JobcardController extends BackendController
         return $column;
     }
 
+    public function problemtypes(Jobcard $jobcard, Request $request) {
+        return  $jobcard::where('problem_type',  'LIKE', "%{$request->get('keyword')}%")->pluck('problem_type');
+    }
+
+    public function priority(Jobcard $jobcard, Request $request) {
+        return  $jobcard::where('priority',  'LIKE', "%{$request->get('keyword')}%")->pluck('priority');
+    }
+
+    public function facility(Jobcard $jobcard, Request $request) {
+        return  $jobcard::where('facility_name',  'LIKE', "%{$request->get('keyword')}%")->pluck('facility_name');
+    }
+
     public function export($columns, $headings, $fileName)
     {
         $model = $this->query->getModel();

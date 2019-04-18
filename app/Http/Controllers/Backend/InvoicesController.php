@@ -225,7 +225,7 @@ class InvoicesController extends BackendController
             $value['input_vat'] = number_format($input_vat, 2);
             unset($value['rows']);
             if($value['invoice_status'] == 'unpaid' || $value['invoice_status'] == 'overdue') {
-                $value['payable_vat'] = $value['vat_amount'] + $value['input_vat'];
+                $value['payable_vat'] = $value['vat_amount'] - $value['input_vat'];
             }
             return $value;
         });

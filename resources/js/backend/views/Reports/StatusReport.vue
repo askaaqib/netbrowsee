@@ -48,6 +48,7 @@
             <span v-if="row.item.status === 'On Hold'">On Hold</span>
             <span v-if="row.item.status === 'Completed'">Completed</span>
             <span v-if="row.item.status === 'Submitted for vetting'">Submitted for Vetting</span>
+            <span v-if="row.item.status === 'Quoted'">Quoted</span>
             <span v-if="row.item.status === 'Invoiced'">Invoiced</span>
             <span v-if="row.item.status === 'Paid'">Paid</span>
             <span v-if="row.item.status === 'Cancelled'">Cancelled</span>

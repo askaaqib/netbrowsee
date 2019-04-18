@@ -27,7 +27,7 @@ export default {
       dropzoneOptions: {
         url: '/admin/jobscards/addedfile',
         thumbnailWidth: 150,
-        maxFilesize: 2,
+        maxFilesize: 10,
         maxFiles: 9,
         addRemoveLinks: true,
         clickable: true,

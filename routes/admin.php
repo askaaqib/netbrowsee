@@ -49,6 +49,12 @@ Route::post('jobscards/addedfile', 'JobcardController@addedfile')->name('jobcard
 Route::post('jobscards/store', 'JobcardController@store')->name('jobcards.store');
 Route::get('jobscard/statusreport', 'JobcardController@statusreport')->name('jobcard.statusreport');
 Route::get('jobscard/jobcardreports', 'JobcardController@jobcardreports')->name('jobcard.jobcardreports');
+Route::get('jobscard/problemtypes', 'JobcardController@problemtypes')->name('problemtypes.getdata');
+Route::get('jobscard/priority', 'JobcardController@priority')->name('priority.getdata');
+Route::get('jobscard/facility', 'JobcardController@facility')->name('facility.getdata');
+
+
+
 /************* JobCard Routes *************/
 
 /************* Project Routes *************/
@@ -130,6 +136,9 @@ Route::post('quotes/batch_action', 'QuotesController@batchAction')->name('quotes
 Route::get('quotes/{quote}/show', 'QuotesController@show')->name('quotes.show');
 Route::get('quotes/search', 'QuotesController@search')->name('quotes.search');
 Route::get('quotes/latest', 'QuotesController@getLastestquotes')->name('quotes.latest');
+Route::get('quotes/getDescriptionByJobCard', 'QuotesController@getDescriptionByJobCard')
+        ->name('quotes.getDescriptionByJobCard');
+Route::get('quotes/searchcompany', 'AjaxController@searchCompany')->name('company.searchcompany');
 // Route::get('quotes/index', 'QuotesController@index')->name('quotes.index');
 Route::resource('quotes', 'QuotesController', ['only' => ['store', 'update', 'destroy'],]);
 /************* Quotes Routes *************/

@@ -45,14 +45,17 @@
               :label-cols="2"
               :feedback="feedback('problem_type')"
             >
-              <b-form-input
+              <v-select
                 id="problem_type"
                 name="problem_type"
                 :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.problem_type')"
                 v-model="model.problem_type"
                 :state="state('problem_type')"
-              ></b-form-input>
+                @search-change="getProblemType"
+                :options="problemOptions"
+                autocomplete="on"
+              ></v-select>
             </b-form-group>
             <b-form-group
               :label="$t('validation.jobcards.priority')"
@@ -61,14 +64,17 @@
               :label-cols="2"
               :feedback="feedback('priority')"
             >
-              <b-form-input
+              <v-select
                 id="priority"
                 name="priority"
                 :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.priority')"
                 v-model="model.priority"
                 :state="state('priority')"
-              ></b-form-input>
+                @search-change="getPriority"
+                :options="priorityOptions"
+                autocomplete="on"
+              ></v-select>
             </b-form-group>
             <b-form-group
               :label="$t('validation.jobcards.facility_name')"
@@ -77,14 +83,17 @@
               :label-cols="2"
               :feedback="feedback('facility_name')"
             >
-              <b-form-input
+              <v-select
                 id="facility_name"
                 name="facility_name"
                 :required="model.contractor_id != '' ? true : false"
                 :placeholder="$t('validation.jobcards.facility_name')"
                 v-model="model.facility_name"
                 :state="state('facility_name')"
-              ></b-form-input>
+                @search-change="getfacility"
+                :options="facilityOptions"
+                autocomplete="on"
+              ></v-select>
             </b-form-group>
             <template v-if="district.length > 0">
               <b-form-group
@@ -236,7 +245,6 @@
                 <option value="On Hold" data-foo="On Hold">On Hold</option>
                 <option value="Completed" data-foo="Completed">Completed</option>
                 <option value="Submitted for vetting" data-foo="Submitted for vetting">Submitted for Vetting</option>
-                <option value="Invoiced" data-foo="Invoiced">Invoiced</option>
                 <option value="Paid" data-foo="Paid">Paid</option>
                 <option value="Cancelled" data-foo="Cancelled">Cancelled</option>
               </b-select>
@@ -419,6 +427,9 @@ export default {
       beforepictures: [],
       afterpictures: [],
       attachmentpictures: [],
+      problemOptions: [],
+      priorityOptions:[],
+      facilityOptions:[],
       config: {
         wrap: true,
         time_24hr: true,
@@ -427,7 +438,7 @@ export default {
       dropzoneOptions: {
         url: '/admin/jobscards/addedfile',
         thumbnailWidth: 150,
-        maxFilesize: 2,
+        maxFilesize: 10,
         maxFiles: 9,
         addRemoveLinks: true,
         clickable: true,
@@ -533,6 +544,40 @@ export default {
     this.getsubdistrict()
   },
   methods: {
+    clearOptions() {
+      this.problemOptions = [];
+    },
+    getProblemType: _.debounce(function () {
+      this.getAllproblems()
+    }, 200),
+    getPriority: _.debounce(function () {
+      this.getAllpriority()
+    }, 200),
+    getfacility: _.debounce(function () {
+      this.getAllfacility()
+    }, 200),
+    async getAllproblems () {
+      this.problemOptions = [];
+      let val = document.getElementById('problem_type').value
+      this.model.problem_type = val
+      // console.log(val, 'valuysss')
+      let { data } = await axios.get(this.$app.route('admin.problemtypes.getdata'), { params: { keyword: val } })
+      this.problemOptions = data
+    },
+    async getAllpriority () {
+      this.priorityOptions = [];
+      let val = document.getElementById('priority').value
+      this.model.priority = val
+      let { data } = await axios.get(this.$app.route('admin.priority.getdata'), { params: { keyword: val } })
+      this.priorityOptions = data
+    },
+    async getAllfacility() {
+      this.facilityOptions = [];
+      let val = document.getElementById('facility_name').value
+      this.model.facility_name = val
+      let { data } = await axios.get(this.$app.route('admin.facility.getdata'), { params: { keyword: val } })
+      this.facilityOptions = data
+    },  
     changeBeforeGalleryImage (images) {
       this.model.before_pictures = images
     },
@@ -617,13 +662,16 @@ export default {
       // formData.append('_method', 'PATCH')
       await axios.post(action, formData)
         .then((response) => {
+          console.log(response)
           if (response.data.status === 'success') {
             this.$app.noty[response.data.status](response.data.message)
             this.$router.push('/jobcards')
           } else {
             this.$app.noty[response.data.status](response.message)
           }
-        })
+        }).catch(function (error) {
+          console.log(error);
+        });
     },
     async getLabours () {
       let { data } = await axios.get(this.$app.route('admin.labours.getdata'), {})

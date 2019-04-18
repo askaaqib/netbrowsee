@@ -64,6 +64,10 @@ export default {
 
         // Validation errors
         if (e.response.status === 422) {
+          console.log(e.response.data.errors, e.response.data.errors[0])
+          var keyNames = Object.keys(e.response.data.errors);
+          // console.log(keyNames[0])
+          document.getElementById(keyNames[0]).focus()
           this.validation = e.response.data
           return
         }

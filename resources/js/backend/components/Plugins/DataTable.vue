@@ -10,27 +10,41 @@
     ">
       <b-row>
         <b-col xl="3 pl-0 mb-5">
-          Search By Date: <flat-pickr
+           <flat-pickr
             :search.sync="search"
             v-model="date"
             :config="config"
             class="form-control"
             placeholder="Select date"
             name="date"
-            @on-change="debounceInput"
             >
           </flat-pickr>
         </b-col>
-        <!-- <b-col xl="3 pl-0">
+        <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/ageingreport'">
+          <b-form-input v-model="client_name" placeholder="Select Client Name"></b-form-input>
+        </b-col>
+        <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/ageingreport'">
+          <b-form-input v-model="invoice_status" placeholder="Select Status"></b-form-input>
+        </b-col>
+        <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/statusreport'">
+          <b-form-input v-model="technician" placeholder="Search Technician"></b-form-input>
+        </b-col>
+        <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/statusreport'">
+          <b-form-input v-model="manager" placeholder="Search manager"></b-form-input>
+        </b-col>
+        <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/statusreport'">
+          <b-form-input v-model="jobcardstatus" placeholder="Search Status"></b-form-input>
+        </b-col>
+        <b-col xl="3 pl-0 mb-5">
           <b-input-group>
             <b-input-group-append>
-              <b-button @click="searchByDate"
+              <b-button @click="debounceInput"
                 variant="primary">
                 Search
               </b-button>
             </b-input-group-append>
           </b-input-group>
-        </b-col> -->
+        </b-col>
       </b-row>
     </template>
     <b-row>
@@ -132,6 +146,11 @@ export default {
       pageOptions: [ 5, 10, 15, 25, 50 ],
       searchQuery: null,
       action: null,
+      client_name: null,
+      invoice_status: null,
+      technician: null,
+      manager: null,
+      jobcardstatus: null,
       config: {
         mode: 'range',
         defaultDate: [new Date()],
@@ -172,7 +191,14 @@ export default {
             column: sortBy,
             direction: sortDesc ? 'desc' : 'asc',
             search: this.searchQuery,
-            date: this.date
+            custom_search: {
+              date: this.date,
+              client_name: this.client_name,
+              invoice_status: this.invoice_status,
+              technician: this.technician,
+              manager: this.manager,
+              jobcardstatus: this.jobcardstatus
+            }
           }
         })
 

@@ -8,7 +8,6 @@
             <address class=" newwidth form-group">
               <template id="newwidth" v-if="settings.company_address">
                 <h5>Company Address:</h5>
-                <!-- <p>{{ settings.company_address }}</p> -->
                 <template v-for="(seprate, index) in settings.company_address.split('\n')">
                   <p class="line" :key="index">{{ seprate }}</p>
                 </template>
@@ -27,8 +26,12 @@
               <template v-if="settings.company_logo">
                 <img class="thumbnail pull-right card-img-top" :src="'/uploads/'+ settings.company_logo" alt="">
               </template>
-              <template v-else-if="model.company_logo">
-                <img class="thumbnail pull-right card-img-top" :src="'/uploads/'+ model.company_logo" alt="">
+              <template v-else>
+                <b-col md>
+                  <b-button to="/settings" exact variant="danger" size="md">
+                    Upload Logo
+                  </b-button>
+                </b-col>
               </template>
             </div>
           </b-col>
@@ -113,7 +116,7 @@
                 :label-cols="2"
                 :feedback="feedback('jobcard_id')"
               >
-                <b-select class="col-sm-4" v-model="model.jobcard_id" :state="state('jobcard_id')">
+                <b-select id="jobcard_id" class="col-sm-4" v-model="model.jobcard_id" :state="state('jobcard_id')">
                   <option value="">Please Select Jobcards</option>
                   <option v-for="(option, index) in jobcards" :key="index" :value="option.id">
                     {{ option.jobcard_num }}
@@ -651,7 +654,7 @@
     </b-modal>
     <!-- Parts Modal -------- PARTS SECTION -----------  -->
     <b-modal ref="AddPartsSection" hide-footer id="parts-modal">
-      <b-tabs>
+      <b-tabs v-model="partsTabIndex">
         <b-tab title="Supplier Parts" active>
           <div class="model-body">
             <b-input-group>
@@ -683,6 +686,28 @@
                 <b-btn variant="success" @click="searchCompanyParts"><i class="fe fe-search"></i></b-btn>
               </b-input-group-append>
             </b-input-group>
+          </div>
+          <div class="model-body search-content">
+            <ul v-if="!company_search.company_info_get.error" class="grid">
+              <li v-for="(company, index) in company_search.company_info_get" :key="company.id">
+                <div class="part-list">
+                  <input type="hidden" :class="'part_json_' +company.id" v-model="company_search.company_searched_data">
+                  <h4 class="part-name">{{ company.name }}</h4>
+                  <div v-if="company.description" class="description">
+                    <h5>Description:</h5>
+                    <p>{{ company.description }} </p>
+                  </div>
+                  <b-btn variant="outline-primary" size="sm" class="pull-right" @click="selectSearchedCompany(index)">Select<i class="fe fe-check"></i></b-btn>
+                  <div class="total-price">
+                    <h4 class="h-total-price">Total Price:</h4>
+                    <span class="company-total-price">ZAR{{ company.rate }}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div v-if="company_search.company_info_get.error" class="mt-2">
+              <b-alert show variant="danger">{{ company_search.company_info_get.error }}</b-alert>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" @click="hideModal('addPartsSection')">Cancel</button>
@@ -888,9 +913,11 @@ export default {
       jobcards_facility: [],
       last_quote_ref: null,
       labourTabIndex: 0,
+      partsTabIndex:0,
       sectionStatus: null,
       rowsRemember: null,
       quotation_reference: null,
+      company: null,
       client_search: {
         search_client: null,
         client_info_get: [],
@@ -919,6 +946,11 @@ export default {
         search_labour: '',
         labour_info_get: [],
         labour_searched_data: []
+      },
+      company_search: {
+        search_company: '',
+        company_info_get: [],
+        company_searched_data: []
       },
       parts: {
         parts_name: '',
@@ -1014,6 +1046,7 @@ export default {
     'model.jobcard_id': function (val) {
       if (val) {
         this.getJobcardsFacility(val)
+        this.getDescription(val)
       } else {
         this.model.quotation_name = ''
       }
@@ -1147,9 +1180,9 @@ export default {
     this.getVats()
     this.getJobcards()
     this.getProjects()
-    if (this.isNew) {
-      this.getSettings()
-    }
+    // if (this.isNew) {
+    this.getSettings()
+    // }
     this.getQuotesReference()
   },
   methods: {
@@ -1359,11 +1392,29 @@ export default {
       this.labour.labour_vat_amount_zar = (this.labour.labour_vat_rate * this.labour.net_labour_price_zar) / 100
       this.labour.labour_total_zar = this.labour.net_labour_price_zar + this.labour.labour_vat_amount_zar
     },
+    selectSearchedCompany: function (index) {
+      this.partsTabIndex += 1
+      this.parts.parts_name = this.company_search.company_info_get[index].name
+      this.parts.parts_quantity = 1
+      this.parts.parts_rate_zar = this.company_search.company_info_get[index].rate
+      this.parts.parts_vat_rate = this.settings.quote_vat
+
+      this.parts.net_parts_price_zar = parseInt(this.parts.parts_quantity) * parseInt(this.parts.parts_rate_zar)
+      this.parts.parts_vat_amount_zar = (this.parts.parts_vat_rate * this.parts.net_parts_price_zar) / 100
+      this.parts.parts_total_zar = this.parts.net_parts_price_zar + this.parts.parts_vat_amount_zar
+    },
     searchSupplierParts: function () {
       // console.log('Search Supplier Parts')
     },
-    searchCompanyParts: function () {
-      // console.log('Search Company Parts')
+    async searchCompanyParts () {
+      let { data } = await axios.get(this.$app.route('admin.company.searchcompany'), { })
+      console.log(data)
+      if (data.length > 0) {
+        this.company_search.company_info_get = data
+        this.company_search.company_searched_data = { id: data.id, name: data.name, description: data.description, vat_rate: 15, rate: data.rate }
+      } else {
+        this.company_search.company_info_get = { error: 'No company Found' }
+      }
     },
     async searchClientClick ($q) {
       let { data } = await axios.get(this.$app.route('admin.clients.searchclients'), { params: { q: $q } })
@@ -1407,6 +1458,15 @@ export default {
       let { data } = await axios.get(this.$app.route('admin.vats.getids'), {})
 
       this.vat_rates = data.ids
+    },
+    async getDescription () {
+      let { data } = await axios.get(this.$app.route('admin.quotes.getDescriptionByJobCard'), {
+        params: {
+          jobcard_id: this.model.jobcard_id
+        }
+      })
+
+      this.model.quotation_description = data
     },
     async getJobcards () {
       let { data } = await axios.get(this.$app.route('admin.jobcards.getdata'), {

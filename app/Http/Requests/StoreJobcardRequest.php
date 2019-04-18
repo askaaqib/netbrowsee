@@ -56,13 +56,13 @@ class StoreJobcardRequest extends FormRequest
                 //'travelling_paid' => 'required',
                 'jobcard_num'          => 'required',
                  //'problem_type' => 'required',
-                'description' => 'required',
+                'description' => 'required|max:255',
             ];
         }
         return [
             'jobcard_num'          => 'required',
              //'problem_type' => 'required',
-            'description' => 'required',
+            'description' => 'required|max:255',
             // 'priority' => 'required',
              //'facility_name' => 'required',
             // 'district' => 'required',

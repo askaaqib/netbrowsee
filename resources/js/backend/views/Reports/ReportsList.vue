@@ -45,7 +45,7 @@
             <span>$ {{ parseFloat(row.item.quote_amount).toFixed(2) }}</span>
           </template>
           <template slot="profit" slot-scope="row">
-            <span>$ {{ (parseFloat(row.item.expenses) - parseFloat(row.item.quote_amount)).toFixed(2) }}</span>
+            <span>$ {{ (parseFloat(row.item.quote_amount) - parseFloat(row.item.expenses)).toFixed(2) }}</span>
           </template>
           <template slot="status" slot-scope="row">
             <span v-if="row.item.status === 'Received'">Received</span>
@@ -53,6 +53,7 @@
             <span v-if="row.item.status === 'On Hold'">On Hold</span>
             <span v-if="row.item.status === 'Completed'">Completed</span>
             <span v-if="row.item.status === 'Submitted for vetting'">Submitted for Vetting</span>
+            <span v-if="row.item.status === 'Quoted'">Quoted</span>
             <span v-if="row.item.status === 'Invoiced'">Invoiced</span>
             <span v-if="row.item.status === 'Paid'">Paid</span>
             <span v-if="row.item.status === 'Cancelled'">Cancelled</span>
@@ -120,7 +121,7 @@ export default {
       // console.log(this.model.rows)
       return this.model.rows.reduce((accum, item) => {
       // Assuming expenses is the field you want to total up
-        let netAmount = parseFloat(item.expenses) - parseFloat(item.quote_amount)
+        let netAmount =  parseFloat(item.quote_amount) - parseFloat(item.expenses)
         return accum + parseFloat(netAmount)
       }, 0.00)
       // return this.$store.state.totals.expense
