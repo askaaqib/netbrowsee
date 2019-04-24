@@ -568,16 +568,25 @@ class JobcardController extends BackendController
         return $column;
     }
 
-    public function problemtypes(Jobcard $jobcard, Request $request) {
-        return  $jobcard::where('problem_type',  'LIKE', "%{$request->get('keyword')}%")->pluck('problem_type');
+    public function getSearchValue(StatusReport $statusreport, Request $request, User $user){
+            // dd('hello');
+         $na = $user::where('name',  'LIKE', "%{$request->get('keyword')}%")->groupBy('name')->pluck('name');
+    //dd($na);
+    return $na;
+
     }
+    public function problemtypes(Jobcard $jobcard, Request $request) {
+     $na = $jobcard::where('problem_type',  'LIKE', "%{$request->get('keyword')}%")->groupBy('problem_type')->pluck('problem_type');
+       // dd($na);
+        return  $na;
+           }
 
     public function priority(Jobcard $jobcard, Request $request) {
-        return  $jobcard::where('priority',  'LIKE', "%{$request->get('keyword')}%")->pluck('priority');
+        return  $jobcard::where('priority',  'LIKE', "%{$request->get('keyword')}%")->groupBy('priority')->pluck('priority');
     }
 
     public function facility(Jobcard $jobcard, Request $request) {
-        return  $jobcard::where('facility_name',  'LIKE', "%{$request->get('keyword')}%")->pluck('facility_name');
+        return  $jobcard::where('facility_name',  'LIKE', "%{$request->get('keyword')}%")->groupBy('facility_name')->pluck('facility_name');
     }
 
     public function export($columns, $headings, $fileName)

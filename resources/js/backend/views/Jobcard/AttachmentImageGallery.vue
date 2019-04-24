@@ -101,7 +101,7 @@ export default {
           })
       }
     },
-    getimge(img, ind) {
+    getimge (img, ind) {
       console.log(img, ind)
     }
   }

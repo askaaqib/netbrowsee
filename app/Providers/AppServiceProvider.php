@@ -53,6 +53,8 @@ use App\Repositories\EloquentSubDistrictRepository;
 use App\Repositories\Contracts\SubDistrictRepository;
 use App\Repositories\EloquentClientsRepository;
 use App\Repositories\Contracts\ClientsRepository;
+use App\Repositories\EloquentStatusReportRepository;
+use App\Repositories\Contracts\StatusReportRepository;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -193,6 +195,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             ClientsRepository::class,
             EloquentClientsRepository::class
+        );
+        $this->app->bind(
+            StatusReportRepository::class,
+            EloquentStatusReportRepository::class
         );
     }
 }

@@ -21,19 +21,20 @@
           </flat-pickr>
         </b-col>
         <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/ageingreport'">
-          <b-form-input v-model="client_name" placeholder="Select Client Name"></b-form-input>
+          <v-select v-model="client_name" id="ageing_name_type" @search-change="getageingname" :options="ageingnameOptions" placeholder="Select Client Name"></v-select>
         </b-col>
         <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/ageingreport'">
-          <b-form-input v-model="invoice_status" placeholder="Select Status"></b-form-input>
+          <v-select v-model="invoice_status" id="ageing_status_type" @search-change="getageingstatus" :options="ageingstatusOptions" placeholder="Select Status"></v-select>
         </b-col>
         <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/statusreport'">
-          <b-form-input v-model="technician" placeholder="Search Technician"></b-form-input>
+          <v-select v-model="technician" id="value_type" @search-change="getvalue" :options="valueOptions" placeholder="Search Technician"></v-select>
+          <!-- <b-form-input v-model="technician" @keypress="" @keypress="getvalue" placeholder="Search Technician"></b-form-input> -->
         </b-col>
         <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/statusreport'">
-          <b-form-input v-model="manager" placeholder="Search manager"></b-form-input>
+         <v-select v-model="manager" id="manager_type" @search-change="getmanager" :options="managerOptions" placeholder="Search manager"></v-select>
         </b-col>
         <b-col xl="3 pl-0 mb-5" v-if="this.$route.path === '/statusreport'">
-          <b-form-input v-model="jobcardstatus" placeholder="Search Status"></b-form-input>
+          <v-select v-model="jobcardstatus" id="status_type" @search-change="getstatus" :options="statusOptions" placeholder="Search Status"></v-select>
         </b-col>
         <b-col xl="3 pl-0 mb-5">
           <b-input-group>
@@ -150,6 +151,16 @@ export default {
       invoice_status: null,
       technician: null,
       manager: null,
+      valueOptions: [],
+      managerOptions: [],
+      statusOptions: [],
+      ageingstatusOptions: [],
+      ageingnameOptions: [],
+      value_type: null,
+      status_type: null,
+      ageing_status_type: null,
+      ageing_name_type: null,
+      manager_type: null,
       jobcardstatus: null,
       config: {
         mode: 'range',
@@ -159,7 +170,7 @@ export default {
         altInput: true,
         dateFormat: 'Y-m-d'
       },
-      date: null,
+      date: null
     }
   },
   components: {
@@ -176,11 +187,71 @@ export default {
     }
   },
   methods: {
+    clearOptions () {
+      this.valueOptions = []
+    },
     debounceInput: _.debounce(function () {
       this.onContextChanged()
     }, 200),
     onContextChanged () {
       this.$emit('context-changed')
+    },
+    getvalue: _.debounce(function () {
+      this.getAllValues()
+    }, 200),
+    getmanager: _.debounce(function () {
+      this.getSearchManager()
+    }, 200),
+    getstatus: _.debounce(function () {
+      this.getSearchStatus()
+    }, 200),
+    getageingstatus: _.debounce(function () {
+      this.getAgeingStatus()
+    }, 200),
+    getageingname: _.debounce(function () {
+      this.getAgeingName()
+    }, 200),
+    async getAllValues () {
+      this.valueOptions = []
+      let val = document.getElementById('value_type').value
+      this.value_type = val
+      // console.log(val, 'valuysss', this.value_type)
+      let { data } = await axios.get(this.$app.route('admin.getSearchValue.getdata'), { params: { keyword: val } })
+      // console.log('hey',data)
+      this.valueOptions = data
+    },
+    async getSearchManager () {
+      this.managerOptions = []
+      let val = document.getElementById('manager_type').value
+      this.manager_type = val
+      // console.log(val, 'valuysss', this.manager_type)
+      let { data } = await axios.get(this.$app.route('admin.getSearchManager.getdata'), { params: { keyword: val } })
+      this.managerOptions = data
+    },
+    async getSearchStatus () {
+      this.statusOptions = []
+      let val = document.getElementById('status_type').value
+      this.status_type = val
+      // console.log(val, 'valuysss', this.value_type)
+      let { data } = await axios.get(this.$app.route('admin.getSearchStatus.getdata'), { params: { keyword: val } })
+      // console.log('hey',data)
+      this.statusOptions = data
+    },
+    async getAgeingStatus () {
+      this.ageingstatusOptions = []
+      let val = document.getElementById('ageing_status_type').value
+      this.ageing_status_type = val
+      // console.log(val, 'valuysss', this.value_type)
+      let { data } = await axios.get(this.$app.route('admin.getAgeingStatus.getdata'), { params: { keyword: val } })
+      // console.log('hey',data)
+      this.ageingstatusOptions = data
+    },
+    async getAgeingName () {
+      this.ageingnameOptions = []
+      let val = document.getElementById('ageing_name_type').value
+      this.ageing_name_type = val
+      let { data } = await axios.get(this.$app.route('admin.getAgeingName.getdata'), { params: { keyword: val } })
+      this.ageingnameOptions = data
     },
     async loadData (sortBy, sortDesc) {
       try {

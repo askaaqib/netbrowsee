@@ -1,5 +1,5 @@
 <template>
-  <div class="status-report" >
+  <div class="status-report">
     <b-card>
       <template slot="header">
         <h3 class="card-title">Status Reports</h3>
