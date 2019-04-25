@@ -6,12 +6,12 @@ use App\Models\StatusReport;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Gate;
-use App\Repositories\Contracts\ContactRepository;
+use App\Repositories\Contracts\ReportsRepository;
 
 /**
  * Class EloquentBanksRepository.
  */
-class EloquentStatusReportRepository extends EloquentBaseRepository implements ContactRepository
+class EloquentStatusReportRepository extends EloquentBaseRepository implements ReportsRepository
 {
     /**
      * EloquentUserRepository constructor.

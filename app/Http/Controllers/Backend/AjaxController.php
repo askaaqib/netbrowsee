@@ -25,6 +25,7 @@ use App\Models\Jobcard;
 use App\Models\Settings;
 use App\Models\Quotes;
 use App\Models\Invoices;
+use App\Models\ProjectManager;
 use App\Models\User;
 use App\Models\Clients;
 use DB;
@@ -331,6 +332,79 @@ class AjaxController extends Controller
                  $q->Where('name', 'Technician/SubContractor');
 
              })->get());
+        // exit;
+        // return $user->query()
+        //         ->where('id' ,'>' ,0)
+        //         ->select('id','name')->get();
+
+    }
+    public function getTechniciansName(UserRepository $user)
+    {
+
+        $tchnician_name = $user->query()->whereHas('roles', function ($q) {
+            //conditions from role table
+                 $q->Where('name', 'Technician/SubContractor');
+
+             })->groupBy('name')->pluck('name');
+          // $na = $user::where('name',  'LIKE', "%{$request->get('keyword')}%")->groupBy('name')->pluck('name');
+
+        //dd($tchnician_name);
+        return $tchnician_name;
+        // exit;
+        // return $user->query()
+        //         ->where('id' ,'>' ,0)
+        //         ->select('id','name')->get();
+
+    }
+    public function getManagerName(UserRepository $user, ProjectManager $project_managers, Request $request)
+    {
+          $val= $request->val;
+          $project_manager_name = $user->query()->whereHas('roles', function ($q) {
+            //conditions from role table
+                 $q->Where('name', 'Project Manager');
+
+             })->groupBy('name')->pluck('name');
+        return $project_manager_name;
+    }
+      public function getStatus(UserRepository $user, Jobcard $jobcard, ProjectManager $project_managers, Request $request)
+    {
+          $val= $request->val;
+         //dd('hello');
+          $status = $jobcard::where('status',  'LIKE', "%{$request->get('keyword')}%")->groupBy('status')->pluck('status');
+        //$manager_name = $jobcard->query()->select('name')->where('name','val')->get();
+        //dd($status,'hhhh');
+        return $status;
+        // exit;
+        // return $user->query()
+        //         ->where('id' ,'>' ,0)
+        //         ->select('id','name')->get();
+
+    }
+
+    public function getAgeingStatus(UserRepository $user, Jobcard $jobcard, Invoices $invoice, Request $request)
+    {
+          $val= $request->val;
+         //dd('hello');
+          $status = $invoice::where('invoice_status',  'LIKE', "%{$request->get('keyword')}%")->groupBy('invoice_status')->pluck('invoice_status');
+        //$manager_name = $jobcard->query()->select('name')->where('name','val')->get();
+        //dd($status,'hhhh');
+        return $status;
+        // exit;
+        // return $user->query()
+        //         ->where('id' ,'>' ,0)
+        //         ->select('id','name')->get();
+
+    }
+
+
+    public function getAgeingName(UserRepository $user, Jobcard $jobcard, Invoices $invoice, Request $request)
+    {
+          $val= $request->val;
+         //dd('hello');
+          $status = $invoice::where('client_name',  'LIKE', "%{$request->get('keyword')}%")->groupBy('client_name')->pluck('client_name');
+        //$manager_name = $jobcard->query()->select('name')->where('name','val')->get();
+        //dd($status,'hhhh');
+        return $status;
         // exit;
         // return $user->query()
         //         ->where('id' ,'>' ,0)
