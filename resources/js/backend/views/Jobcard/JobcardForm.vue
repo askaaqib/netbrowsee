@@ -428,8 +428,8 @@ export default {
       afterpictures: [],
       attachmentpictures: [],
       problemOptions: [],
-      priorityOptions:[],
-      facilityOptions:[],
+      priorityOptions: [],
+      facilityOptions: [],
       config: {
         wrap: true,
         time_24hr: true,
@@ -544,8 +544,8 @@ export default {
     this.getsubdistrict()
   },
   methods: {
-    clearOptions() {
-      this.problemOptions = [];
+    clearOptions () {
+      this.problemOptions = []
     },
     getProblemType: _.debounce(function () {
       this.getAllproblems()
@@ -557,7 +557,7 @@ export default {
       this.getAllfacility()
     }, 200),
     async getAllproblems () {
-      this.problemOptions = [];
+      this.problemOptions = []
       let val = document.getElementById('problem_type').value
       this.model.problem_type = val
       // console.log(val, 'valuysss')
@@ -565,19 +565,19 @@ export default {
       this.problemOptions = data
     },
     async getAllpriority () {
-      this.priorityOptions = [];
+      this.priorityOptions = []
       let val = document.getElementById('priority').value
       this.model.priority = val
       let { data } = await axios.get(this.$app.route('admin.priority.getdata'), { params: { keyword: val } })
       this.priorityOptions = data
     },
-    async getAllfacility() {
-      this.facilityOptions = [];
+    async getAllfacility () {
+      this.facilityOptions = []
       let val = document.getElementById('facility_name').value
       this.model.facility_name = val
       let { data } = await axios.get(this.$app.route('admin.facility.getdata'), { params: { keyword: val } })
       this.facilityOptions = data
-    },  
+    },
     changeBeforeGalleryImage (images) {
       this.model.before_pictures = images
     },
@@ -670,8 +670,7 @@ export default {
             this.$app.noty[response.data.status](response.message)
           }
         }).catch(function (error) {
-          console.log(error);
-        });
+        })
     },
     async getLabours () {
       let { data } = await axios.get(this.$app.route('admin.labours.getdata'), {})

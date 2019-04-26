@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\StatusReport;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
 use Illuminate\Support\Facades\Gate;
@@ -104,6 +105,14 @@ class StatusReportController extends BackendController
   // dd($contactus);
        return $statusreport;
     }
+//     public function getSearchValue(StatusReport $statusreport, Request $request, User $user){
+//         // dd('hello');
+//      $na = $user::where('name',  'LIKE', "%{$request->get('keyword')}%")->groupBy('name')->pluck('name');
+// //dd($na);
+// return $na;
+
+//     }
+
 
     /**se
      * Show the form for editing the specified resource.

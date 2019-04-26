@@ -5,9 +5,9 @@
         <h3 class="card-title">Ageing Reports</h3>
       </template>
       <template class="pull-right">
-          <div id="hideprint" class="pull-right">
-            <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
-          </div>
+        <div id="hideprint" class="pull-right">
+          <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+        </div>
       </template>
       <b-datatable
         ref="datasource"
@@ -50,7 +50,7 @@
           <template slot="net_amount" slot-scope="row">
             <span>$ {{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
           </template>
-          <template slot="bottom-row" slot-scope="row" >
+          <template slot="bottom-row" slot-scope="row">
             <td>Total</td>
             <td></td>
             <td></td>

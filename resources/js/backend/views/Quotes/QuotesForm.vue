@@ -913,7 +913,7 @@ export default {
       jobcards_facility: [],
       last_quote_ref: null,
       labourTabIndex: 0,
-      partsTabIndex:0,
+      partsTabIndex: 0,
       sectionStatus: null,
       rowsRemember: null,
       quotation_reference: null,

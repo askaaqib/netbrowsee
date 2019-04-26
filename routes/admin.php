@@ -52,6 +52,11 @@ Route::get('jobscard/jobcardreports', 'JobcardController@jobcardreports')->name(
 Route::get('jobscard/problemtypes', 'JobcardController@problemtypes')->name('problemtypes.getdata');
 Route::get('jobscard/priority', 'JobcardController@priority')->name('priority.getdata');
 Route::get('jobscard/facility', 'JobcardController@facility')->name('facility.getdata');
+Route::get('jobcard/getSearchValue', 'AjaxController@getTechniciansName')->name('getSearchValue.getdata');
+Route::get('jobcard/getSearchManager', 'AjaxController@getManagerName')->name('getSearchManager.getdata');
+Route::get('jobcard/getSearchStatus', 'AjaxController@getStatus')->name('getSearchStatus.getdata');
+Route::get('jobcard/getAgeingStatus', 'AjaxController@getAgeingStatus')->name('getAgeingStatus.getdata');
+Route::get('jobcard/getAgeingName', 'AjaxController@getAgeingName')->name('getAgeingName.getdata');
 
 
 
