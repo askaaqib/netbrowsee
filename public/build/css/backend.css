@@ -26619,6 +26619,52 @@ body .v-select .selected-tag {
   border-radius: 0;
 }
 
+.app-header {
+  height: 55px;
+  background: linear-gradient(150deg, #281483 15%, #8f6ed5 70%, #d782d9 94%);
+  font-family: 'Roboto', sans-serif;
+}
+
+.sidebar .sidebar-header {
+  background: linear-gradient(150deg, #281483 15%, #8f6ed5 70%, #d782d9 94%);
+}
+
+.navbar-nav .nav-link {
+  color: #f8f9fa;
+}
+
+.sidebar {
+  background: #281483;
+}
+
+.sidebar .sidebar-header {
+  background: linear-gradient(150deg, #281483 15%, #8f6ed5 70%, #d782d9 94%);
+}
+
+.sidebar .sidebar-footer {
+  background: none;
+}
+
+.sidebar .sidebar-form .form-control {
+  color: #fff;
+  background: #281483;
+  border: 0;
+}
+
+.sidebar .nav-link.active {
+  color: #281483;
+  background: #fff;
+}
+
+.sidebar .nav-link:hover {
+  color: #fff;
+  background: #281483 !important;
+}
+
+.sidebar .nav-title {
+  background: linear-gradient(150deg, #281483 15%, #8f6ed5 70%, #d782d9 94%);
+}
+
 .table th {
   white-space: nowrap;
 }
