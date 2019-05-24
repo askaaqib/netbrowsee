@@ -73,6 +73,7 @@
     "webpack-notifier": "^1.6.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "html2canvas": "^1.0.0-alpha.12",
     "jspdf": "^1.4.1",
     "moment": "^2.22.2",
