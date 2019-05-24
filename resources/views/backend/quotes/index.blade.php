@@ -630,9 +630,9 @@
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown user-dropdown">
                     <a href="#" class="dropdown-toggle"
-                       data-toggle="dropdown"><strong class="hidden-md hidden-sm">judekotrading@gmail.com </strong><span
+                       data-toggle="dropdown"><strong class="hidden-md hidden-sm">example@domain.com </strong><span
                             class="glyphicon glyphicon-user" data-toggle="tooltip" data-placement="bottom"
-                            title="judekotrading@gmail.com"></span> <b class="caret"></b></a>
+                            title="Netbrowse"></span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="/accounts/password/change/"><span
                                 class="glyphicon glyphicon-lock"></span>  Change Password</a></li>
@@ -698,30 +698,30 @@
                 
                 
                     <p class="form-control-static">
-                        <span  id="id_organization_address_business" name="organization_address_business">Judeko Trading and Projects</span></p>
+                        <span  id="id_organization_address_business" name="organization_address_business">Company Name</span></p>
                 
                 
                     <p class="form-control-static">
-                        <span  id="id_organization_address_street" name="organization_address_street">Vincent, East London, 5217</span></p>
+                        <span  id="id_organization_address_street" name="organization_address_street">Company Address</span></p>
                 
                 
                     <p class="form-control-static">
-                        <span  id="id_organization_address_town" name="organization_address_town">Reg. Number: 2015/345707/07</span></p>
+                        <span  id="id_organization_address_town" name="organization_address_town">Reg. Number: 2XXXXX/XX</span></p>
                 
                 
                     <p class="form-control-static">
-                        <span  id="id_organization_address_region" name="organization_address_region">Tax Number: 9217883199</span></p>
+                        <span  id="id_organization_address_region" name="organization_address_region">Tax Number: XXXXXXXXXX</span></p>
                 
                 
                     <p class="form-control-static">
-                        <span  id="id_organization_address_postcode" name="organization_address_postcode">VAT Number: 4610275366</span></p>
+                        <span  id="id_organization_address_postcode" name="organization_address_postcode">VAT Number: XXXXXXXX</span></p>
                 
             </address>
             
                 <div class="form-inline">
                     <label class="control-label">Tel: </label>
                     <span class="form-control-static">
-                        <span  id="id_organization_tel_no" name="organization_tel_no">0430042314   Cell: 0735879015</span></span>
+                        <span  id="id_organization_tel_no" name="organization_tel_no">043XXXXX   Cell: 0XXXXXX</span></span>
                 </div>
             
 
@@ -729,7 +729,7 @@
                 <div class="form-inline">
                     <label class="control-label">Email: </label>
 
-                    <span class="form-control-static"> <span  id="id_organization_email" name="organization_email">judekotrading@gmail.com</span></span></div>
+                    <span class="form-control-static"> <span  id="id_organization_email" name="organization_email">email@domain.com</span></span></div>
             
             
         </div>

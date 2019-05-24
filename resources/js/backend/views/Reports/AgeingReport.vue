@@ -48,25 +48,25 @@
             <span class="invoice-status" v-text="row.item.client_email"></span>
           </template>
           <template slot="net_amount" slot-scope="row">
-            <span>$ {{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
+            <span>ZAR {{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
           </template>
           <template slot="bottom-row" slot-scope="row">
             <td>Total</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>$ {{ parseFloat(netAmount).toFixed(2) }}</td>
+            <td>ZAR {{ parseFloat(netAmount).toFixed(2) }}</td>
             <td></td>
           </template>
         </b-table>
       </b-datatable>
     </b-card>
     <b-card>
-      <h3>Money Owned</h3>
+      <h3>Amount Receivable</h3>
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Less than 30 Days</th>
+            <th>Current</th>
             <th>30 Days +</th>
             <th>60 Days +</th>
             <th>90 Days +</th>
@@ -75,11 +75,11 @@
         </thead>
         <tbody>
           <tr v-if="countsData">
-            <td>$ {{ countsData.less_30 }}</td>
-            <td>$ {{ countsData.plus_30 }}</td>
-            <td>$ {{ countsData.plus_60 }}</td>
-            <td>$ {{ countsData.plus_90 }}</td>
-            <td>$ {{ countsData.plus_120 }}</td>
+            <td>ZAR {{ countsData.less_30 }}</td>
+            <td>ZAR {{ countsData.plus_30 }}</td>
+            <td>ZAR {{ countsData.plus_60 }}</td>
+            <td>ZAR {{ countsData.plus_90 }}</td>
+            <td>ZAR {{ countsData.plus_120 }}</td>
           </tr>
         </tbody>
       </table>
@@ -89,13 +89,13 @@
         <thead>
           <tr>
             <th>Total Paid</th>
-            <th>Total Owned</th>
+            <th>Total Receivable</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>$ {{ totalPaid }}</td>
-            <td>$ {{ totalOwned }}</td>
+            <td>ZAR {{ totalPaid }}</td>
+            <td>ZAR {{ totalOwned }}</td>
           </tr>
         </tbody>
       </table>
@@ -107,7 +107,6 @@
 import axios from 'axios'
 import html2pdf from 'html2pdf.js'
 import { setTimeout } from 'timers'
-
 export default {
   name: 'AgeingReport',
   data () {

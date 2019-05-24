@@ -38,13 +38,13 @@
             <span>{{ row.item.created_at }}</span>
           </template>
           <template slot="vat_amount" slot-scope="row">
-            <span>$ {{ parseFloat(row.item.vat_amount).toFixed(2) }}</span>
+            <span>ZAR {{ parseFloat(row.item.vat_amount).toFixed(2) }}</span>
           </template>
           <template slot="input_vat" slot-scope="row">
-            <span>$ {{ parseFloat(row.item.input_vat).toFixed(2) }}</span>
+            <span>ZAR {{ parseFloat(row.item.input_vat).toFixed(2) }}</span>
           </template>
           <template slot="payable_vat" slot-scope="row">
-            <span>$ {{ parseFloat(row.item.payable_vat).toFixed(2) }}</span>
+            <span>ZAR {{ parseFloat(row.item.payable_vat).toFixed(2) }}</span>
           </template>
           <template slot="bottom-row" slot-scope="row">
             <td>Total</td>
