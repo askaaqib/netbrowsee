@@ -1052,7 +1052,7 @@ export default {
         filename: 'myfile.pdf',
         // image: { type: 'png' },
         html2canvas: { dpi: 900, letterRendering: false },
-        jsPDF: { unit: 'cm', format: 'a3', orientation: 'p' }
+        jsPDF: { unit: 'cm', format: 'a4', orientation: 'p' }
       })
       var x = document.getElementById('hideprint')
       var y = document.getElementById('back')
