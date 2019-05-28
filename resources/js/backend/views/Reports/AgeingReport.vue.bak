@@ -48,7 +48,7 @@
             <span class="invoice-status" v-text="row.item.client_email"></span>
           </template>
           <template slot="net_amount" slot-scope="row">
-            <span>ZAR {{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
+            <span>$ {{ parseFloat(row.item.net_amount).toFixed(2) }}</span>
           </template>
           <template slot="bottom-row" slot-scope="row">
             <td>Total</td>
@@ -107,6 +107,7 @@
 import axios from 'axios'
 import html2pdf from 'html2pdf.js'
 import { setTimeout } from 'timers'
+
 export default {
   name: 'AgeingReport',
   data () {
@@ -125,7 +126,8 @@ export default {
         { key: 'invoice_status', label: 'Status' }
       ],
       actions: {
-        destroy: this.$t('labels.backend.invoices.actions.destroy')
+        destroy: this.w
+$t('labels.backend.invoices.actions.destroy')
       }
     }
   },
