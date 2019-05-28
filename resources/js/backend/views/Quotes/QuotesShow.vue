@@ -3,12 +3,13 @@
     <div ref="quotesView" id="quotes-view" class="container">
       <div class="quotes-form action texty" id="fontset">
         <b-card>
+          <div id="quotes-invoice" class="container">
           <h3 class="card-title" slot="header">Completed Quote</h3>
           <b-row>
             <b-col class="col-md-12">
-              <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print<i class="fe fe-printer fe-lg"></i></b-btn>
+              <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print Invoice<i class="fe fe-printer fe-lg"></i></b-btn>
               <div id="hideprint">
-                <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Pdf<i class="fe fe-file fe-lg"></i></b-btn>
+                <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Invoice<i class="fe fe-file fe-lg"></i></b-btn>
               </div>
             </b-col>
           </b-row>
@@ -164,91 +165,100 @@
             </div>
             <!-- Bank Details & Total Amount Section Ends -->
           </div>
-          <!-------------------------------Before Pictures to show------------------------->
-          <div class="pagebreak">
-            <template v-if="beforepictures.length > 0">
-              <h3>Before Pictures</h3>
-              <b-form-group
-                class="font-weight-bold"
-                label-for="before_pictures"
-                horizontal
-                :label-cols="4"
-                :feedback="feedback('jobcard.before_pictures')"
-              >
-              </b-form-group>
-              <template>
-                <b-row>
-                  <BeforeImageGallery
-                    :id="id"
-                    :quotes-pic-size="true"
-                    :image-width="'280px'"
-                    :image-height="'280px'"
-                    :beforepictures="beforepictures"
-                    :modelbeforepictures="model.jobcard.before_pictures"
-                    @changeFile="changeBeforeGalleryImage"
-                  ></BeforeImageGallery>
-                </b-row>
-              </template>
-            </template>
           </div>
-          <!-------------------------------Before Pictures to show------------------------->
-          <!-------------------------------After Pictures to show------------------------->
-          <template v-if="afterpictures.length > 0">
-            <div class="pagebreak">
-              <h3>After Pictures</h3>
-              <b-form-group
-                class="font-weight-bold"
-                label-for="after_pictures"
-                horizontal
-                :label-cols="4"
-                :feedback="feedback('jobcard.after_pictures')"
-              >
-              </b-form-group>
-              <template>
-                <b-row>
-                  <AfterImageGallery
-                    :id="id"
-                    :quotes-pic-size="true"
-                    :image-width="'280px'"
-                    :image-height="'240px'"
-                    :afterpictures="afterpictures"
-                    :modelafterpictures="model.jobcard.after_pictures"
-                    @changeFile="changeAfterGalleryImage"
-                  ></AfterImageGallery>
-                </b-row>
-              </template>
-            </div>
-          </template>
-          <!-------------------------------After Pictures to show------------------------->
-          <!-------------------------------Attachment Pictures to show------------------------->
-          <template v-if="attachmentpictures.length > 0">
-            <div class="pagebreak">
-              <h3>Proof of Purchases</h3>
-              <template>
-                <b-row>
-                  <AttachmentImageGallery
-                    :id="id"
-                    :quotes-pic-size="true"
-                    :image-width="'280px'"
-                    :image-height="'280px'"
-                    :attachmentpictures="attachmentpictures"
-                    :modelattachmentpictures="model.jobcard.attachment_receipt"
-                    @changeFile="changeAttachmentGalleryImage"
-                  ></AttachmentImageGallery>
-                </b-row>
-              </template>
-            </div>
-          </template>
-          <!-------------------------------Attachment Pictures to show------------------------->
-          <!-- ViewPort  Ends -->
-          <b-row id="hideback" slot="footer">
-            <b-col id="back" md>
-              <b-button to="/quotes" exact variant="danger" size="md">
-                {{ $t('buttons.back') }}
-              </b-button>
+          <div id="quotes-attachment" class="container">
+            <b-col class="col-md-12">
+              <b-btn class="btn-show pull-right" id="hideprint-attach" variant="secondary" @click="printattachments()">Print Attachments<i class="fe fe-printer fe-lg"></i></b-btn>
+              <div id="hideprint-attachment">
+                <b-btn class="btn-show pull-right" id="download-attach" variant="secondary" @click="downloadAttachments()">Download Attachments<i class="fe fe-file fe-lg"></i></b-btn>
+              </div>
             </b-col>
-          </b-row>
-          <!-- Footer Section Ends -->
+            <!-------------------------------Before Pictures to show------------------------->
+            <div class="pagebreak">
+              <template v-if="beforepictures.length > 0">
+                <h3>Before Pictures</h3>
+                <b-form-group
+                  class="font-weight-bold"
+                  label-for="before_pictures"
+                  horizontal
+                  :label-cols="4"
+                  :feedback="feedback('jobcard.before_pictures')"
+                >
+                </b-form-group>
+                <template>
+                  <b-row>
+                    <BeforeImageGallery
+                      :id="id"
+                      :quotes-pic-size="true"
+                      :image-width="'280px'"
+                      :image-height="'280px'"
+                      :beforepictures="beforepictures"
+                      :modelbeforepictures="model.jobcard.before_pictures"
+                      @changeFile="changeBeforeGalleryImage"
+                    ></BeforeImageGallery>
+                  </b-row>
+                </template>
+              </template>
+            </div>
+            <!-------------------------------Before Pictures to show------------------------->
+            <!-------------------------------After Pictures to show------------------------->
+            <template v-if="afterpictures.length > 0">
+              <div class="pagebreak">
+                <h3>After Pictures</h3>
+                <b-form-group
+                  class="font-weight-bold"
+                  label-for="after_pictures"
+                  horizontal
+                  :label-cols="4"
+                  :feedback="feedback('jobcard.after_pictures')"
+                >
+                </b-form-group>
+                <template>
+                  <b-row>
+                    <AfterImageGallery
+                      :id="id"
+                      :quotes-pic-size="true"
+                      :image-width="'280px'"
+                      :image-height="'240px'"
+                      :afterpictures="afterpictures"
+                      :modelafterpictures="model.jobcard.after_pictures"
+                      @changeFile="changeAfterGalleryImage"
+                    ></AfterImageGallery>
+                  </b-row>
+                </template>
+              </div>
+            </template>
+            <!-------------------------------After Pictures to show------------------------->
+            <!-------------------------------Attachment Pictures to show------------------------->
+            <template v-if="attachmentpictures.length > 0">
+              <div class="pagebreak">
+                <h3>Proof of Purchases</h3>
+                <template>
+                  <b-row>
+                    <AttachmentImageGallery
+                      :id="id"
+                      :quotes-pic-size="true"
+                      :image-width="'280px'"
+                      :image-height="'280px'"
+                      :attachmentpictures="attachmentpictures"
+                      :modelattachmentpictures="model.jobcard.attachment_receipt"
+                      @changeFile="changeAttachmentGalleryImage"
+                    ></AttachmentImageGallery>
+                  </b-row>
+                </template>
+              </div>
+            </template>
+            <!-------------------------------Attachment Pictures to show------------------------->
+            <!-- ViewPort  Ends -->
+            <b-row id="hideback" slot="footer">
+              <b-col id="back" md>
+                <b-button to="/quotes" exact variant="danger" size="md">
+                  {{ $t('buttons.back') }}
+                </b-button>
+              </b-col>
+            </b-row>
+            <!-- Footer Section Ends -->
+          </div>
         </b-card>
       </div>
       <!-- Find Client Modal -->
@@ -1037,8 +1047,35 @@ export default {
     this.getQuotesReference()
   },
   methods: {
+    printattachments: function () {
+      this.printstatus = null
+      $('body').append("<style type='text/css'>@media print { @page { margin: 2cm;} body { background:white !important;} #quotes-attachment { display: block !important; page-break-inside: avoid !important; page-break-after: avoid !important; visibility: visible !important; } #quotes-invoice { display: none !important; visibility: hidden !important;} #hideprint-attach, #back, #download-attach { display: none !important;}  }</style>");
+      setTimeout(function () {
+        this.printstatus = 1
+        window.print()
+      }, 1000)
+
+    },
+    downloadAttachments: function () {
+      this.HideButtonsAttachment()
+      var elementor = document.getElementById('quotes-attachment')
+      html2pdf(elementor, {
+        margin: 1.5,
+        filename: 'attachments.pdf',
+        // image: { type: 'png' },
+        html2canvas: { dpi: 900, letterRendering: false },
+        jsPDF: { unit: 'cm', format: 'a4', orientation: 'p' }
+      })
+      var x = document.getElementById('hideprint-attach')
+      var y = document.getElementById('back')
+      var z = document.getElementById('download-attach')
+      setTimeout(() => { x.style.display = 'block' }, 3000)
+      setTimeout(() => { y.style.display = 'block' }, 3000)
+      setTimeout(() => { z.style.display = 'block' }, 3000)
+    },
     printquotes: function () {
       this.printstatus = null
+      $('body').append("<style type='text/css'>@media print { @page { margin: 2cm; } body { background:white !important;} #quotes-invoice { display: block !important; page-break-inside: avoid !important; page-break-after: avoid !important; visibility: visible !important;} #quotes-attachment { display: none !important; visibility: hidden !important;  }  }</style>");
       setTimeout(function () {
         this.printstatus = 1
         window.print()
@@ -1046,7 +1083,8 @@ export default {
     },
     printFacture: function () {
       this.HideButtons()
-      var elementor = document.getElementById('quotes-view')
+      // var elementor = document.getElementById('quotes-view')
+      var elementor = document.getElementById('quotes-invoice')
       html2pdf(elementor, {
         margin: 1.5,
         filename: 'myfile.pdf',
@@ -1075,6 +1113,26 @@ export default {
         y.style.display = 'none'
       }
       var z = document.getElementById('download')
+      if (z.style.display === 'none') {
+        z.style.display = 'block'
+      } else {
+        z.style.display = 'none'
+      }
+    },
+    HideButtonsAttachment: function () {
+      var x = document.getElementById('back')
+      if (x.style.display === 'none') {
+        x.style.display = 'block'
+      } else {
+        x.style.display = 'none'
+      }
+      var y = document.getElementById('hideprint-attach')
+      if (y.style.display === 'none') {
+        y.style.display = 'block'
+      } else {
+        y.style.display = 'none'
+      }
+      var z = document.getElementById('download-attach')
       if (z.style.display === 'none') {
         z.style.display = 'block'
       } else {

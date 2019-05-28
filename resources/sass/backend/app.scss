@@ -273,6 +273,10 @@ form.quotes-form .table>thead>tr>th {
   overflow: hidden;
   margin-top: 30px;
 }
+#quotes-invoice #viewport {
+  overflow: hidden;
+  margin-top: 30px;
+}
 .btn-show {
   margin-left:10px;
 }
@@ -354,7 +358,7 @@ line-height: 0.4;
     }
   }
 }
-#quotes-view {
+#quotes-view, #quotes-invoice, #quotes-attachment {
   font-size: 12px;
   page-break-inside: avoid;
 }
@@ -409,11 +413,13 @@ table#table-invoice-total th, table#table-invoice-total td {
     text-shadow: none;
     color: #fff !important;
   }
-
+  button {
+    visibility: hidden;
+  }
   body * {
       visibility: hidden;
     }
-    #Invoices-view, #quotes-view, #quotes-view *,  #Invoices-view * {
+    #Invoices-view, #quotes-view, #quotes-view *,#quotes-invoice, #quotes-invoice *,  #Invoices-view * {
       visibility: visible;
     }
     #Invoices-view, #quotes-view {
