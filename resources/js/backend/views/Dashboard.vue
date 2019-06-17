@@ -10,7 +10,7 @@
                   <i class="fe fe-shield-off"></i>
                 </b-col>
               </b-row>
-              <h4 class="mb-0">{{ Unallocatedjobcards ? Unallocatedjobcards : '0' }}</h4>
+              <h4 class="mb-0">{{ Unallocatedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.unallocated_jobcards') }}</p>
             </b-card>
           </b-col>
@@ -21,7 +21,7 @@
                   <i class="fe fe-repeat"></i>
                 </b-col>
               </b-row>
-              <h4 class="mb-0">{{ Progressjobcards ? Progressjobcards : '0' }}</h4>
+              <h4 class="mb-0">{{ Progressjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.jobards_in_progress') }}</p>
             </b-card>
           </b-col>
@@ -32,7 +32,7 @@
                   <i class="fe fe-check"></i>
                 </b-col>
               </b-row>
-              <h4 class="mb-0">{{ Completedjobcards ? Completedjobcards : '0' }}</h4>
+              <h4 class="mb-0">{{ Completedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.completed_jobards') }}</p>
             </b-card>
           </b-col>
@@ -43,7 +43,7 @@
                   <i class="fe fe-inbox"></i>
                 </b-col>
               </b-row>
-              <h4 class="mb-0">{{ Quotedjobcards ? Quotedjobcards : '0' }}</h4>
+              <h4 class="mb-0">{{ Quotedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.quoted_jobcards') }}</p>
             </b-card>
           </b-col>
@@ -54,7 +54,7 @@
                   <i class="fe fe-map"></i>
                 </b-col>
               </b-row>
-              <h4 class="mb-0">{{ Invoicedjobcards ? Invoicedjobcards : '0' }}</h4>
+              <h4 class="mb-0">{{ Invoicedjobcards }}</h4>
               <p>{{ $t('labels.backend.dashboard.invoiced_jobcards') }}</p>
             </b-card>
           </b-col>
@@ -65,7 +65,7 @@
                   <i class="fe fe-tag"></i>
                 </b-col>
               </b-row>
-              <h4 class="mb-0">{{ QuotedAmount ? QuotedAmount : '0' }}</h4>
+              <h4 class="mb-0">{{ QuotedAmount }}</h4>
               <p>{{ $t('labels.backend.dashboard.quoted_amount') }}</p>
             </b-card>
           </b-col>
