@@ -28,7 +28,9 @@ if ($data['status'] == 8) { $new_status_name = 'Cancelled';}
 
 @endphp
 
-Jobcard Status changed from {{ $old_status }} to {{ $data['status'] }}
+Received status = {{ $data['status'] }} <br>
+Good day, This is an acknowledgement that we have received jobcards number <b>{{ $data['jobcard_num'] }}.</b> We will attend to this jobcard as soon as possible and will update you on every stage until closed.
 
+{{-- Jobcard Status changed from {{ $old_status }} to {{ $data['status'] }} --}}
 
 Thank you

@@ -76,7 +76,7 @@
                   <i class="fe fe-dollar-sign"></i>
                 </b-col>
               </b-row>
-              <h4 class="mb-0">{{ InvoiceAmount }}</h4>
+              <h4 class="mb-0">{{ InvoiceAmount ? InvoiceAmount : '0' }}</h4>
               <p>{{ $t('labels.backend.dashboard.invoiced_amount') }}</p>
             </b-card>
           </b-col>
