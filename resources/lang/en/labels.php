@@ -123,8 +123,8 @@ return [
     'backend' => [
         'dashboard' => [
             'unallocated_jobcards'           => 'Unallocated Jobcards',
-            'jobards_in_progress'            => 'Jobcards in Progress',
-            'completed_jobards'              => 'Completed Jobcards',
+            'jobcards_in_progress'            => 'Jobcards in Progress',
+            'completed_jobcards'              => 'Completed Jobcards',
             'quoted_jobcards'                => 'Quoted Jobcards',
             'invoiced_jobcards'              => 'Invoiced Jobcards',
             'quoted_amount' => 'Quote Amount',

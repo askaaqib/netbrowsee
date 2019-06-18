@@ -22,7 +22,7 @@
                 </b-col>
               </b-row>
               <h4 class="mb-0">{{ Progressjobcards ? Progressjobcards : '0' }}</h4>
-              <p>{{ $t('labels.backend.dashboard.jobards_in_progress') }}</p>
+              <p>{{ $t('labels.backend.dashboard.jobcards_in_progress') }}</p>
             </b-card>
           </b-col>
           <b-col sm>
@@ -33,7 +33,7 @@
                 </b-col>
               </b-row>
               <h4 class="mb-0">{{ Completedjobcards ? Completedjobcards : '0' }}</h4>
-              <p>{{ $t('labels.backend.dashboard.completed_jobards') }}</p>
+              <p>{{ $t('labels.backend.dashboard.completed_jobcards') }}</p>
             </b-card>
           </b-col>
           <b-col sm v-if="this.$app.user.can('view users')">
