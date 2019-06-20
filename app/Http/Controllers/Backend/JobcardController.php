@@ -540,8 +540,8 @@ class JobcardController extends BackendController
 
 
 
-      $to_email = $data['porjectmanager_email'];
-      // $to_email = 'mitchellstarc@yopmail.com';
+      // $to_email = $data['porjectmanager_email'];
+      $to_email = 'mitchellstarc@yopmail.com';
       $mail_data = array("old_status" => $old_status, "data" => $data);
        try{
         Mail::send('emails.mail', $mail_data, function($message) use ($to_email) {

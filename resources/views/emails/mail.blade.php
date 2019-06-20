@@ -28,9 +28,42 @@ if ($data['status'] == 8) { $new_status_name = 'Cancelled';}
 
 @endphp
 
-Received status = {{ $data['status'] }} <br>
+<!-- RECEIVED -->
+@php
+if($data['status'] == 'Received') {
+@endphp
 Good day, This is an acknowledgement that we have received jobcards number <b>{{ $data['jobcard_num'] }}.</b> We will attend to this jobcard as soon as possible and will update you on every stage until closed.
+@php
+}
+@endphp
+
+<!-- Assigned -->
+@php
+if($data['status'] == 'Assigned') {
+@endphp
+ Good day, this servers to notify you that jobcard number <b>{{ $data['jobcard_num'] }}.</b> which we received has been assigned to a technician today. We will let you know when it is completed in due course.
+@php
+}
+@endphp
+
+<!-- Completed -->
+@php
+if($data['status'] == 'Completed') {
+@endphp
+Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard_num'] }}.</b> has been completed we will soon be submitting our quote for for your approval.
+@php
+}
+@endphp
+
+<!-- Cancelled -->
+@php
+if($data['status'] == 'Cancelled') {
+@endphp
+Please note that jobcard <b>{{ $data['jobcard_num'] }}.</b> has been cancelled please update your system to keep our performance metrics true.
+@php
+}
+@endphp
 
 {{-- Jobcard Status changed from {{ $old_status }} to {{ $data['status'] }} --}}
-
+<br><br>
 Thank you
