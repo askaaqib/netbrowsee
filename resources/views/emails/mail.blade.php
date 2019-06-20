@@ -39,7 +39,7 @@ Good day, This is an acknowledgement that we have received jobcards number <b>{{
 
 <!-- Assigned -->
 @php
-if($data['status'] == 'Assigned') {
+else if($data['status'] == 'Assigned') {
 @endphp
  Good day, this servers to notify you that jobcard number <b>{{ $data['jobcard_num'] }}.</b> which we received has been assigned to a technician today. We will let you know when it is completed in due course.
 @php
@@ -48,7 +48,7 @@ if($data['status'] == 'Assigned') {
 
 <!-- Completed -->
 @php
-if($data['status'] == 'Completed') {
+else if($data['status'] == 'Completed') {
 @endphp
 Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard_num'] }}.</b> has been completed we will soon be submitting our quote for for your approval.
 @php
@@ -57,9 +57,19 @@ Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard
 
 <!-- Cancelled -->
 @php
-if($data['status'] == 'Cancelled') {
+else if($data['status'] == 'Cancelled') {
 @endphp
 Please note that jobcard <b>{{ $data['jobcard_num'] }}.</b> has been cancelled please update your system to keep our performance metrics true.
+@php
+}
+@endphp
+
+<!-- Cancelled -->
+@php
+else {
+@endphp
+{{-- Jobcard Status changed from {{ $old_status }} to {{ $data['status'] }} --}}
+Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard_num'] }}.</b> status has been changed to {{ $data['status'] }}
 @php
 }
 @endphp
