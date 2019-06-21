@@ -66,7 +66,7 @@ Please note that jobcard <b>{{ $data['jobcard_num'] }}.</b> has been cancelled p
 
 <!-- Cancelled -->
 @php
-if($data['status'] != 'Received' && $data['status'] != 'Assigned' && $data['status'] != 'Completed' && $data['status'] != 'Cancelled') { {
+if($data['status'] != 'Received' && $data['status'] != 'Assigned' && $data['status'] != 'Completed' && $data['status'] != 'Cancelled') { 
 @endphp
 {{-- Jobcard Status changed from {{ $old_status }} to {{ $data['status'] }} --}}
 Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard_num'] }}.</b> status has been changed to {{ $data['status'] }}
