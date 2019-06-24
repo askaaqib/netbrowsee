@@ -10,3 +10,4 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('login', 'Api\ApiController@userAuthenticate')->name('authenticate');
