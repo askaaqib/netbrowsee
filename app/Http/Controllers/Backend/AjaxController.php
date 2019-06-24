@@ -676,7 +676,7 @@ class AjaxController extends Controller
 
 
              //$completedJobcards = $quotes::where( 'status', 'completed')->get();
-       $progressJobcards = $jobcard::select( 'contractor_id')->get();
+       $progressJobcards = $jobcard::select('contractor_id')->where('status', 'Assigned')->get();
 
         //dd($progressJobcards);
 
