@@ -1083,7 +1083,7 @@ export default {
             "backend": {
                 "dashboard": {
                     "unallocated_jobcards": "Unallocated Jobcards",
-                    "jobcards_in_progress": "Jobcards in Progress",
+                    "jobcards_in_progress": "Pending Jobcards",
                     "completed_jobcards": "Completed Jobcards",
                     "quoted_jobcards": "Quoted Jobcards",
                     "invoiced_jobcards": "Invoiced Jobcards",

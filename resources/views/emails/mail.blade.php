@@ -32,7 +32,9 @@ if ($data['status'] == 8) { $new_status_name = 'Cancelled';}
 @php
 if($data['status'] == 'Received') {
 @endphp
-Good day, This is an acknowledgement that we have received jobcards number <b>{{ $data['jobcard_num'] }}.</b> We will attend to this jobcard as soon as possible and will update you on every stage until closed.
+Good day
+<br><br>
+This is an acknowledgement that we have received jobcards number <b>{{ $data['jobcard_num'] }}.</b> We will attend to this jobcard as soon as possible and will update you on every stage until closed.
 @php
 }
 @endphp
@@ -41,7 +43,9 @@ Good day, This is an acknowledgement that we have received jobcards number <b>{{
 @php
 if($data['status'] == 'Assigned') {
 @endphp
- Good day, this servers to notify you that jobcard number <b>{{ $data['jobcard_num'] }}.</b> which we received has been assigned to a technician today. We will let you know when it is completed in due course.
+ Good day
+<br><br> 
+This servers to notify you that jobcard number <b>{{ $data['jobcard_num'] }}.</b> which we received has been assigned to a technician today. We will let you know when it is completed in due course.
 @php
 }
 @endphp
@@ -50,7 +54,9 @@ if($data['status'] == 'Assigned') {
 @php
 if($data['status'] == 'Completed') {
 @endphp
-Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard_num'] }}.</b> has been completed we will soon be submitting our quote for for your approval.
+Good day
+<br><br> 
+This serves to notify you that the jobcard number <b>{{ $data['jobcard_num'] }}.</b> has been completed we will soon be submitting our quote for for your approval.
 @php
 }
 @endphp
@@ -59,6 +65,8 @@ Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard
 @php
 if($data['status'] == 'Cancelled') {
 @endphp
+Good day
+<br><br>
 Please note that jobcard <b>{{ $data['jobcard_num'] }}.</b> has been cancelled please update your system to keep our performance metrics true.
 @php
 }
@@ -77,3 +85,5 @@ Good day, This serves to notify you that the jobcard number <b>{{ $data['jobcard
 {{-- Jobcard Status changed from {{ $old_status }} to {{ $data['status'] }} --}}
 <br><br>
 Thank you
+<br><br>
+5ML Development 

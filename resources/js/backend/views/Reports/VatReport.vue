@@ -49,9 +49,9 @@
           <template slot="bottom-row" slot-scope="row">
             <td>Total</td>
             <td></td>
-            <td>$ {{ outputVat.toFixed(2) }}</td>
-            <td>$ {{ inputVat.toFixed(2) }}</td>
-            <td>$ {{ payableVat.toFixed(2) }}</td>
+            <td>ZAR {{ outputVat.toFixed(2) }}</td>
+            <td>ZAR {{ inputVat.toFixed(2) }}</td>
+            <td>ZAR {{ payableVat.toFixed(2) }}</td>
             <td></td>
           </template>
         </b-table>

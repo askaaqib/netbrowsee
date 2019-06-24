@@ -546,8 +546,8 @@ class JobcardController extends BackendController
        try{
         Mail::send('emails.mail', $mail_data, function($message) use ($to_email) {
           $message->to($to_email)
-            ->subject('NetBrowse');
-          $message->from('support@netbrowse.com','Netbrowse App Support');
+            ->subject('Jobcard status Notification');
+          $message->from('admin@5mldevelopment.com','5ML Development');
         });
 
         return 'success';

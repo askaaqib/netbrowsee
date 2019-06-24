@@ -39,13 +39,13 @@
             <span>{{ row.item.created_at }}</span>
           </template>
           <template slot="expenses" slot-scope="row">
-            <span>$ {{ parseFloat(row.item.expenses).toFixed(2) }}</span>
+            <span>ZAR {{ parseFloat(row.item.expenses).toFixed(2) }}</span>
           </template>
           <template slot="quote_amount" slot-scope="row">
-            <span>$ {{ parseFloat(row.item.quote_amount).toFixed(2) }}</span>
+            <span>ZAR {{ parseFloat(row.item.quote_amount).toFixed(2) }}</span>
           </template>
           <template slot="profit" slot-scope="row">
-            <span>$ {{ (parseFloat(row.item.quote_amount) - parseFloat(row.item.expenses)).toFixed(2) }}</span>
+            <span>ZAR {{ (parseFloat(row.item.quote_amount) - parseFloat(row.item.expenses)).toFixed(2) }}</span>
           </template>
           <template slot="status" slot-scope="row">
             <span v-if="row.item.status === 'Received'">Received</span>
@@ -61,9 +61,9 @@
           <template slot="bottom-row" slot-scope="row">
             <td>Total</td>
             <td></td>
-            <td>$ {{ parseFloat(totalExpense).toFixed(2) }}</td>
-            <td>$ {{ parseFloat(amountQuoted).toFixed(2) }}</td>
-            <td>$ {{ parseFloat(profit).toFixed(2) }}</td>
+            <td>ZAR {{ parseFloat(totalExpense).toFixed(2) }}</td>
+            <td>ZAR {{ parseFloat(amountQuoted).toFixed(2) }}</td>
+            <td>ZAR {{ parseFloat(profit).toFixed(2) }}</td>
             <td></td>
           </template>
         </b-table>
