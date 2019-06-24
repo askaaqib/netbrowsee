@@ -20,8 +20,10 @@
                 <address class="form-group">
                   <h5 v-if="model.company_address">Company Address:</h5>
                   <!-- <p>{{ model.company_address }}</p> -->
-                  <template v-for="(seprate, index) in model.company_address.split('\n')">
-                    <p class="line" :key="index">{{ seprate }}</p>
+                  <template v-if="model.company_address">
+                    <template v-for="(seprate, index) in model.company_address.split('\n')">
+                      <p class="line" :key="index">{{ seprate }}</p>
+                    </template>                  
                   </template>
                   <!-- <p v-html="settings.company_address"></p> -->
                 </address>
@@ -965,11 +967,11 @@ export default {
       val.forEach((item, index) => {
         if (item.labour || item.parts) {
           if (!this.isNew) {
-            this.quotes.quotesNetTotal += parseFloat(item.net_total).toFixed(2)
-            this.quotes.quotesVatTotal += parseFloat(this.model.vat_rates).toFixed(2) * parseFloat(item.net_total).toFixed(2) / 100
+            this.quotes.quotesNetTotal += parseFloat(item.net_total)
+            this.quotes.quotesVatTotal += parseFloat(this.model.vat_rates) * parseFloat(item.net_total) / 100
           } else {
-            this.quotes.quotesNetTotal += parseFloat(item.net_total).toFixed(2)
-            this.quotes.quotesVatTotal += parseFloat(this.settings.quote_vat).toFixed(2) * parseFloat(item.net_total).toFixed(2) / 100
+            this.quotes.quotesNetTotal += parseFloat(item.net_total)
+            this.quotes.quotesVatTotal += parseFloat(this.settings.quote_vat) * parseFloat(item.net_total) / 100
           }
         }
         if (item.section) {
