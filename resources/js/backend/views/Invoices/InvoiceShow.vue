@@ -21,8 +21,10 @@
                 <h5 v-if="model.company_address">Company Address:</h5>
                 <!-- <p>{{ model.company_address }}</p> -->
                 <!--  <p v-html="settings.company_address"></p> -->
-                <template v-for="(seprate, index) in model.company_address.split('\n')">
-                  <p class="line" :key="index">{{ seprate }}</p>
+                <template v-if="model.company_address">
+                  <template v-for="(seprate, index) in model.company_address.split('  ')">
+                    <p class="line" :key="index">{{ seprate }}</p>
+                  </template>
                 </template>
                 <!--  <p>{{ model.company_address }}</p> -->
               </address>
@@ -155,8 +157,8 @@
           <div class="row">
             <!-- Terms and conditions -->
             <div class="col-sm-6">
-              <h3 class="payment-terms" style="color:#303030">Bank Details</h3>
-              FNB Cheque Account: 62589280066
+              <h3 class="payment-terms" style="color:#000">Bank Details</h3>
+            <span class="check-text"> FNB Cheque Account: 62589280066 </span>
             </div>
             <!-- Totals -->
             <div class="col-sm-6 align-right">
