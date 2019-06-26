@@ -3,6 +3,7 @@
 /public/storage
 /public/dist
 /public/images
+/public/build
 /storage/*.key
 /vendor
 /.idea

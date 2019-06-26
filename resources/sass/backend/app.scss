@@ -276,6 +276,7 @@ form.quotes-form .table>thead>tr>th {
 #quotes-invoice #viewport {
   overflow: hidden;
   margin-top: 30px;
+  color: #000;
 }
 .btn-show {
   margin-left:10px;
@@ -296,6 +297,7 @@ form.invoices-form .table > thead > tr > th {
 #Invoices-view #viewport {
   overflow: hidden;
   margin-top: 30px;
+  color:#000;
 }
 // ::-webkit-scrollbar {
 //     width: 12px;
@@ -367,12 +369,14 @@ line-height: 0.4;
     tr {
       th {
        padding: 2px 10px;
+       color:#000;
       }
       td {
         h3 {
           margin: 0;
         }
        padding: 2px 10px;
+       color:#000;
       }
     }
     thead {
@@ -384,8 +388,15 @@ line-height: 0.4;
     }
   }
 }
+
+.form-control-static, .check-text, .quotes-data p, .pagebreak h3 {
+  color: #000;
+}
+
+
 table#table-invoice-total th, table#table-invoice-total td {
   padding: 4px;
+  color:#000;
 }
 .ageing-report {
   .invoice-status {

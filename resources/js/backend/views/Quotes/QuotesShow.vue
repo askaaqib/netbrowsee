@@ -3,8 +3,8 @@
     <div ref="quotesView" id="quotes-view" class="container">
       <div class="quotes-form action texty" id="fontset">
         <b-card>
-          <div id="quotes-invoice" class="container">
-          <h3 class="card-title" slot="header">Completed Quote</h3>
+          <div class="container">
+          <h3 id="quotes-heading" class="card-title" slot="header">Completed Quote</h3>
           <b-row>
             <b-col class="col-md-12">
               <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print Invoice<i class="fe fe-printer fe-lg"></i></b-btn>
@@ -141,8 +141,8 @@
             <div class="row">
               <!-- Terms and conditions -->
               <div class="col-sm-6">
-                <h3 class="payment-terms" style="color:#303030">Bank Details</h3>
-                FNB Cheque Account: 62589280066
+                <h3 class="payment-terms" style="color:#000">Bank Details</h3>
+              <span class="check-text"> FNB Cheque Account: 62589280066 </span>
               </div>
               <!-- Totals -->
               <div class="col-sm-6 align-right">
@@ -1051,7 +1051,7 @@ export default {
   methods: {
     printattachments: function () {
       this.printstatus = null
-      $('body').append("<style type='text/css'>@media print { @page { margin: 2cm;} body { background:white !important;} #quotes-attachment { display: block !important; page-break-inside: avoid !important; page-break-after: avoid !important; visibility: visible !important; } #quotes-invoice { display: none !important; visibility: hidden !important;} #hideprint-attach, #back, #download-attach { display: none !important;}  }</style>");
+      $('body').append("<style type='text/css'>@media print { @page { margin: 2cm;} body { background:white !important;} #quotes-attachment { display: block !important; page-break-inside: avoid !important; page-break-after: avoid !important; visibility: visible !important; } #quotes-invoice { display: none !important; visibility: hidden !important;} #hideprint-attach, #back, #download-attach, #quotes-heading { display: none !important;}  }</style>");
       setTimeout(function () {
         this.printstatus = 1
         window.print()
@@ -1077,7 +1077,7 @@ export default {
     },
     printquotes: function () {
       this.printstatus = null
-      $('body').append("<style type='text/css'>@media print { @page { margin: 2cm; } body { background:white !important;} #quotes-invoice { display: block !important; page-break-inside: avoid !important; page-break-after: avoid !important; visibility: visible !important;} #quotes-attachment { display: none !important; visibility: hidden !important;  }  }</style>");
+      $('body').append("<style type='text/css'>@media print { @page { margin: 2cm; } body { background:white !important;} #quotes-invoice { display: block !important; page-break-inside: avoid !important; page-break-after: avoid !important; visibility: visible !important;} #quotes-attachment, #quotes-heading { display: none !important; visibility: hidden !important;  }  }</style>");
       setTimeout(function () {
         this.printstatus = 1
         window.print()
@@ -1097,9 +1097,11 @@ export default {
       var x = document.getElementById('hideprint')
       var y = document.getElementById('back')
       var z = document.getElementById('download')
+      var headings = document.getElementById('quotes-heading')
       setTimeout(() => { x.style.display = 'block' }, 3000)
       setTimeout(() => { y.style.display = 'block' }, 3000)
       setTimeout(() => { z.style.display = 'block' }, 3000)
+      setTimeout(() => { headings.style.display = 'block' }, 3000)
     },
     HideButtons: function () {
       var x = document.getElementById('back')
@@ -1119,6 +1121,14 @@ export default {
         z.style.display = 'block'
       } else {
         z.style.display = 'none'
+      }
+
+      var headings = document.getElementById('quotes-heading')
+      console.log(headings.style.display )
+      if (headings.style.display === 'none') {
+        headings.style.display = 'block'
+      } else {
+        headings.style.display = 'none'
       }
     },
     HideButtonsAttachment: function () {
