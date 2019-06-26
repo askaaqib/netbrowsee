@@ -264,4 +264,10 @@ class User extends Authenticatable
     {
         return $this->name;
     }
+
+    public function cleanImageName($image) {
+        $image = trim($image);
+        $cleanImage = preg_replace('/[^a-zA-Z0-9-_.]/','', $image);
+        return $cleanImage;
+    }
 }

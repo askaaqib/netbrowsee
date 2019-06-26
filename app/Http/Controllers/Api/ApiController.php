@@ -18,7 +18,8 @@ class ApiController extends Controller
             if(isset(auth()->user()->roles[0]->name) && auth()->user()->roles[0]->name == 'Technician/SubContractor'){
                 return response()->json([
                     'status' => 200,
-                    'response' => 'Succesfully Logged In'
+                    'response' => 'Succesfully Logged In',
+                    'userId' => auth()->user()->id
                 ]);
             } else {
                 return response()->json([

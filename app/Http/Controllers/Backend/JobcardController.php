@@ -259,7 +259,7 @@ class JobcardController extends BackendController
      *
      * @return mixed
      */
-    public function store(StoreJobcardRequest $request)
+    public function store(StoreJobcardRequest $request, User $user_model)
     {
         
        //  $data = $request->all();
@@ -287,7 +287,9 @@ class JobcardController extends BackendController
             $imageNames = array();
             $images = $data['before_pictures'];
             foreach($images as $image) {
-                $imageName = rand(0,10000000).$image->getClientOriginalName();
+                $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
+                $imageName = rand(0,10000000).$cleanImageName;
+                // $imageName = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
                 $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
             }
@@ -297,7 +299,9 @@ class JobcardController extends BackendController
             $imageNames = array();
             $images = $data['after_pictures'];
             foreach($images as $image) {
-                $imageName = rand(0,10000000).$image->getClientOriginalName();
+                $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
+                $imageName = rand(0,10000000).$cleanImageName;
+                // $imageName = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
                 $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
             }
@@ -307,7 +311,9 @@ class JobcardController extends BackendController
             $imageNames = array();
             $images = $data['attachment_receipt'];
             foreach($images as $image) {
-                $imageName = rand(0,10000000).$image->getClientOriginalName();
+                $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
+                $imageName = rand(0,10000000).$cleanImageName;
+                // $imageName = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
                 $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
             }
@@ -372,7 +378,7 @@ class JobcardController extends BackendController
      *
      * @return mixed
      */
-    public function update(Jobcard $jobcard, UpdateJobcardRequest $request)
+    public function update(Jobcard $jobcard, UpdateJobcardRequest $request, User $user_model)
     {
         $data = $request->all();
         $old_status = $jobcard->status;
@@ -394,7 +400,9 @@ class JobcardController extends BackendController
         if (isset($data['before_pictures_edit'])) {
             $new_images_before = $data['before_pictures_edit'];
             foreach($new_images_before as $image) {
-                $imageNameBefore = rand(0,10000000).$image->getClientOriginalName();
+                $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
+                $imageName = rand(0,10000000).$cleanImageName;
+                // $imageNameBefore = rand(0,10000000).$image->getClientOriginalName();
                 $uploadedBefore = $image->move(base_path('/public/images/jobcard/'),$imageNameBefore);
                 $imageNamesBefore[]['image_name'] = '/images/jobcard/'.$imageNameBefore;
             }
@@ -417,7 +425,9 @@ class JobcardController extends BackendController
         if (isset($data['after_pictures_edit'])) {
             $new_images_after = $data['after_pictures_edit'];
             foreach($new_images_after as $image) {
-                $imageNameAfter = rand(0,10000000).$image->getClientOriginalName();
+                $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
+                $imageName = rand(0,10000000).$cleanImageName;
+                // $imageNameAfter = rand(0,10000000).$image->getClientOriginalName();
                 $uploadedAfter = $image->move(base_path('/public/images/jobcard/'),$imageNameAfter);
                 $imageNamesAfter[]['image_name'] = '/images/jobcard/'.$imageNameAfter;
             }
@@ -440,7 +450,9 @@ class JobcardController extends BackendController
         if (isset($data['attachment_receipt_edit'])) {
             $new_images = $data['attachment_receipt_edit'];
             foreach($new_images as $image) {
-                $imageNameAttachment = rand(0,10000000).$image->getClientOriginalName();
+                $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
+                $imageName = rand(0,10000000).$cleanImageName;
+                // $imageNameAttachment = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageNameAttachment);
                 $imageNamesAttachment[]['image_name'] = '/images/jobcard/'.$imageNameAttachment;
             }
