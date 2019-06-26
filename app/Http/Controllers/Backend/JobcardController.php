@@ -401,7 +401,7 @@ class JobcardController extends BackendController
             $new_images_before = $data['before_pictures_edit'];
             foreach($new_images_before as $image) {
                 $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
-                $imageName = rand(0,10000000).$cleanImageName;
+                $imageNameBefore = rand(0,10000000).$cleanImageName;
                 // $imageNameBefore = rand(0,10000000).$image->getClientOriginalName();
                 $uploadedBefore = $image->move(base_path('/public/images/jobcard/'),$imageNameBefore);
                 $imageNamesBefore[]['image_name'] = '/images/jobcard/'.$imageNameBefore;
@@ -426,7 +426,7 @@ class JobcardController extends BackendController
             $new_images_after = $data['after_pictures_edit'];
             foreach($new_images_after as $image) {
                 $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
-                $imageName = rand(0,10000000).$cleanImageName;
+                $imageNameAfter = rand(0,10000000).$cleanImageName;
                 // $imageNameAfter = rand(0,10000000).$image->getClientOriginalName();
                 $uploadedAfter = $image->move(base_path('/public/images/jobcard/'),$imageNameAfter);
                 $imageNamesAfter[]['image_name'] = '/images/jobcard/'.$imageNameAfter;
@@ -451,7 +451,7 @@ class JobcardController extends BackendController
             $new_images = $data['attachment_receipt_edit'];
             foreach($new_images as $image) {
                 $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
-                $imageName = rand(0,10000000).$cleanImageName;
+                $imageNameAttachment = rand(0,10000000).$cleanImageName;
                 // $imageNameAttachment = rand(0,10000000).$image->getClientOriginalName();
                 $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageNameAttachment);
                 $imageNamesAttachment[]['image_name'] = '/images/jobcard/'.$imageNameAttachment;
