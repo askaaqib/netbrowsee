@@ -53,7 +53,8 @@ export default {
         formData.append('_method', 'PATCH')
       }
 
-      if (this.selectedLogo) {
+
+      if ('File' in window && this.selectedLogo instanceof File) {
         formData.append('selectedLogo', this.selectedLogo, this.model.new_company_logo)
       }
       try {
