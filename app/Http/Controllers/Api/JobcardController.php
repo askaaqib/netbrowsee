@@ -48,10 +48,6 @@ class JobcardController extends BackendController
     public function search(Request $request, Jobcard $jobcard)
     {
 
-        $jobcards = $jobcard::all():
-
-        return response()->json($jobcards);
-         
         /** @var Builder $query */
         $query = $this->jobcard->query();
 

@@ -21,7 +21,8 @@ class Jobcard extends Model
     protected $with = [
         'quotes',
         'get_assigned_user',
-        'get_project_manager'
+        'get_project_manager',
+        'get_district'
     ];
 	/**
      * The attributes that are mass assignable.
@@ -64,6 +65,11 @@ class Jobcard extends Model
     public function get_assigned_user() {
         return $this->belongsTo(User::class, 'contractor_id');
     }
+
+    public function get_district() {
+        return $this->belongsTo(District::class, 'district');
+    }
+
     const DRAFT = 0;
     const PENDING = 1;
     const PUBLISHED = 2;
