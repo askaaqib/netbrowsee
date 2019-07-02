@@ -251,7 +251,6 @@ export default {
     onFileSelected: function (event) {
       this.selectedLogo = event.target.files[0]
       this.model.new_company_logo = event.target.files[0].name
-      console.log(this.selectedLogo)
     },
     async getVats () {
       let { data } = await axios.get(this.$app.route('admin.vats.getids'), {})
@@ -261,4 +260,3 @@ export default {
   }
 }
 </script>
->>>>>>> 76b8f4a3c477c5968492707712c6acd136dd280c:resources/js/backend/views/Settings/SettingsForm.vue
