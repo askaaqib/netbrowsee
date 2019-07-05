@@ -15,4 +15,5 @@ Route::get('getJobCards', 'Api\ApiController@getJobCards')->name('getJobCards');
 Route::get('getSettingsInfo', 'Api\ApiController@getSettingsInfo')->name('getSettingsInfo');
 Route::get('getUserInfo', 'Api\ApiController@getUserInfo')->name('getUserInfo');
 Route::post('updateUserInfo', 'Api\ApiController@updateUserInfo')->name('updateUserInfo');
+Route::post('uploadJobcardPhoto', 'Api\ApiController@uploadJobcardPhoto')->name('uploadJobcardPhoto');
 Route::get('getJobcard', 'Api\ApiController@getJobcard')->name('getJobcard');

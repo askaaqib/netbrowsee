@@ -37,10 +37,10 @@
             <span>{{ row.item.created_at }}</span>
           </template>
           <template slot="project_manager" slot-scope="row">
-            <span>{{ row.item.get_project_manager.name }}</span>
+            <span v-if="row.item.get_project_manager">{{ row.item.get_project_manager.name }}</span>
           </template>
           <template slot="assigned_user" slot-scope="row">
-            <span>{{ row.item.get_assigned_user.name }}</span>
+            <span v-if="row.item.get_assigned_user">{{ row.item.get_assigned_user.name }}</span>
           </template>
           <template slot="status" slot-scope="row">
             <span v-if="row.item.status === 'Received'">Received</span>

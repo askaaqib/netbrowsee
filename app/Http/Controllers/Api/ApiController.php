@@ -109,4 +109,59 @@ class ApiController extends Controller
 
         return $data;
     }
+
+    public function uploadJobcardPhoto(Request $request, Jobcard $jobcard, User $user_model) {
+        if ($request->hasFile('uploadimagetmp')) {
+            $jobcard_id = $request->jobcard_id;
+            $type = $request->type;
+
+            $jobcard_data = $jobcard::where('id', $jobcard_id)->select('before_pictures', 'after_pictures', 'attachment_receipt')->first();
+            
+            $image = $request->file('uploadimagetmp');
+
+            $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
+
+            $imageName = rand(0,10000000).$cleanImageName;
+            $uploaded = $image->move(base_path('/public/images/jobcard/'), $imageName);
+            dd($imageName);
+            $type_json = [];
+            if ($type === 'before_pictures') {
+                $decode_arr = json_decode($jobcard_data->before_pictures, true);
+                $decode_arr[]['image_name'] = '/images/jobcard/'. $imageName;
+                $type_json = json_encode($decode_arr);
+            }
+           
+            // $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
+
+            // $name = $file->getClientOriginalName();
+            // $data[ 'uploadimagetmp' ] = $name;
+
+            // $request->file('uploadimagetmp')->move(base_path('/public/images/jobcard/'), 'MobileUpload-' .$name);
+            // $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
+            if ($uploaded) {
+                $update_arr = [
+                  $type => $type_json
+                ];
+                $update_json = $jobcard::where('id', $jobcard_id)->update($update_arr);
+                if ($update_json) {
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Uploaded successfully'
+                    ]);                
+                } else {
+                    return response()->json([
+                        'message' => 'Unable to update json'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'message' => 'Unable to upload'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Nothing found'
+            ]);
+        }
+    }
 }
