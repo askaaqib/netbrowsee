@@ -9,6 +9,7 @@ use App\Models\Jobcard;
 use App\Models\Settings;
 use App\Models\User;
 use Hash;
+use Image;
 
 class ApiController extends Controller
 {
@@ -111,6 +112,27 @@ class ApiController extends Controller
     }
 
     public function uploadJobcardPhoto(Request $request, Jobcard $jobcard, User $user_model) {
+        $data = $request->all();
+        $images = $data['uploadimagetmp'];
+        $images = json_decode($images, true);
+        $datee = date("Y-m-d",time());
+        $new_images = array();
+        foreach($images as $img) {
+            $png_url = "MobileUpload-".$datee."-".rand(100,100000).".png";
+            $path = base_path('/public/images/jobcard/'). $png_url;
+            // $img['data'] = str_replace(' ', '+', $img['data']);
+
+            // $saved = Image::make($img['path'])->save($path);
+            // if ($saved) {
+            //     array_push($new_images, ['image_name' => $png_url]);
+            // }
+        }
+             
+        return response()->json([
+            'status' => true,
+            'response' => $new_images
+        ]);
+
         if ($request->hasFile('uploadimagetmp')) {
             $jobcard_id = $request->jobcard_id;
             $type = $request->type;
@@ -123,14 +145,23 @@ class ApiController extends Controller
 
             $imageName = rand(0,10000000).$cleanImageName;
             $uploaded = $image->move(base_path('/public/images/jobcard/'), $imageName);
-            dd($imageName);
             $type_json = [];
             if ($type === 'before_pictures') {
                 $decode_arr = json_decode($jobcard_data->before_pictures, true);
                 $decode_arr[]['image_name'] = '/images/jobcard/'. $imageName;
                 $type_json = json_encode($decode_arr);
             }
-           
+            if ($type === 'after_pictures') {
+                $decode_arr = json_decode($jobcard_data->after_pictures, true);
+                $decode_arr[]['image_name'] = '/images/jobcard/'. $imageName;
+                $type_json = json_encode($decode_arr);
+            }
+            if ($type === 'attachment_receipt') {
+                $decode_arr = json_decode($jobcard_data->attachment_receipt, true);
+                $decode_arr[]['image_name'] = '/images/jobcard/'. $imageName;
+                $type_json = json_encode($decode_arr);
+            }
+            
             // $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
 
             // $name = $file->getClientOriginalName();

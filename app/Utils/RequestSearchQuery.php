@@ -169,6 +169,7 @@ class RequestSearchQuery
                     $this->query->leftjoin('role_user', 'role_user.user_id', 'users.id');
                     $this->query->where('users.name', $technician);
                     $this->query->where('role_user.role_id', '7');
+                    $this->query->where('jobcard.status','!=', 'Completed');
                 }
 
                 // if($jobcardstatus) {
@@ -180,7 +181,7 @@ class RequestSearchQuery
         //dd($user_role);
         // return response()->json(['hi' => !empty($user_role)]);
         if ($user_role > 1 || !empty($user_role)) {
-            $result =  $this->query->Where('contractor_id', $user_id)->paginate($this->request->get('perPage'), $columns);
+            $result =  $this->query->Where('contractor_id', $user_id)->where('jobcard.status','!=', 'Completed')->paginate($this->request->get('perPage'), $columns);
             return $result;
         }else{
         //     $result = vsprintf(str_replace('?', '%s', $this->query->toSql()), collect($this->query->getBindings())->map(function ($binding) {

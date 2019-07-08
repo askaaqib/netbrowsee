@@ -1075,28 +1075,31 @@ export default {
       this.quotes.quotesNetTotal = 0
       this.quotes.quotesVatTotal = 0
       var saveVal = 'empty'
-      val.forEach((item, index) => {
-        if (item.labour || item.parts) {
-          if (!this.isNew) {
-            this.quotes.quotesNetTotal += parseFloat(item.net_total)
-            this.quotes.quotesVatTotal += parseFloat(this.model.vat_rates * item.net_total) / 100
+      if(val && val !== 'null') {
+        val.forEach((item, index) => {
+          if (item.labour || item.parts) {
+            if (!this.isNew) {
+              this.quotes.quotesNetTotal += parseFloat(item.net_total)
+              this.quotes.quotesVatTotal += parseFloat(this.model.vat_rates * item.net_total) / 100
+            } else {
+              this.quotes.quotesNetTotal += parseFloat(item.net_total)
+              this.quotes.quotesVatTotal += parseFloat(this.settings.quote_vat * item.net_total) / 100
+            }
+          }
+          if (item.section) {
+            saveVal = index
+            this.sectionStatus = 1
           } else {
-            this.quotes.quotesNetTotal += parseFloat(item.net_total)
-            this.quotes.quotesVatTotal += parseFloat(this.settings.quote_vat * item.net_total) / 100
+            if (saveVal !== 'empty') {
+              item.parent_section = saveVal
+            }
+            if (saveVal === 'empty') {
+              this.sectionStatus = null
+            }
           }
-        }
-        if (item.section) {
-          saveVal = index
-          this.sectionStatus = 1
-        } else {
-          if (saveVal !== 'empty') {
-            item.parent_section = saveVal
-          }
-          if (saveVal === 'empty') {
-            this.sectionStatus = null
-          }
-        }
-      })
+        })      
+      }
+  
       // -------------------------------------------------------------------------------------------------------------------------
       if (val.length === 0) {
         this.sectionStatus = null

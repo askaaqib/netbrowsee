@@ -82,9 +82,11 @@ class QuotesController extends BackendController
     public function store(StoreQuotesRequest $request, Jobcard $jobcard)
     {
         $data = $request->all();
-
-         
-        $data['rows'] = json_encode($request->rows);
+        if(!isset($request->rows)) {
+            $data['rows'] = '[]';
+        } else {
+            $data['rows'] = json_encode($request->rows);
+        }     
         $quote = $this->quote->make($data); 
         
         $data_saved = $this->quote->save($quote, $data);
