@@ -112,7 +112,13 @@ class ApiController extends Controller
     }
 
     public function uploadJobcardPhoto(Request $request, Jobcard $jobcard, User $user_model) {
+
+
         $data = $request->all();
+      return response()->json([
+            'status' => true,
+            'response' => $data
+        ]);
         $images = $data['uploadimagetmp'];
         $images = json_decode($images, true);
         $datee = date("Y-m-d",time());
@@ -128,10 +134,7 @@ class ApiController extends Controller
             // }
         }
              
-        return response()->json([
-            'status' => true,
-            'response' => $new_images
-        ]);
+  
 
         if ($request->hasFile('uploadimagetmp')) {
             $jobcard_id = $request->jobcard_id;
