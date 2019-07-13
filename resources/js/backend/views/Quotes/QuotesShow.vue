@@ -14,167 +14,171 @@
             </b-col>
           </b-row>
           <!-- ViewPort  Starts -->
-          <div id="viewport" class="quotes-data table-responsive">
-            <b-row>
-              <b-col sm="6">
-                <address class="form-group">
-                  <h5 v-if="model.company_address">Company Address:</h5>
-                  <!-- <p>{{ model.company_address }}</p> -->
-                  <template v-if="model.company_address">
-                    <template v-for="(seprate, index) in model.company_address.split('\n')">
-                      <p class="line" :key="index">{{ seprate }}</p>
-                    </template>                  
-                  </template>
-                  <!-- <p v-html="settings.company_address"></p> -->
-                </address>
-              </b-col>
-              <b-col sm="6">
-                <div id="org-img">
-                  <img v-if="settings.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ settings.company_logo" alt="">
-                </div>
-              </b-col>
-            </b-row>
-            <hr>
-            <!-- Client Details Section Starts -->
-            <b-row>
-              <b-col sm="6">
-                <b-col sm="8">
-                  <div class="well" id="manage">
-                    <address class="form-group">
-                      <label class="control-label"><b>Quote for:</b></label>
-                      <template v-if="model.client_email">
-                        <p class="form-control-static">
-                          <b>Email:</b> {{ model.client_email }}
-                        </p>
-                      </template>
-                      <template v-if="model.client_name">
-                        <p class="form-control-static">
-                          <b>Name:</b> {{ model.client_name }}
-                        </p>
-                      </template>
-                      <template v-if="model.client_business">
-                        <p class="form-control-static">
-                          <b>Business Name:</b> {{ model.client_business }}
-                        </p>
-                      </template>
-                    </address>
+          <div id="quotes-invoice">
+            <div id="viewport" class="quotes-data table-responsive">
+              <b-row>
+                <b-col sm="6">
+                  <address class="form-group">
+                    <h5 v-if="model.company_address">Company Address:</h5>
+                    <!-- <p>{{ model.company_address }}</p> -->
+                    <template v-if="model.company_address">
+                      <template v-for="(seprate, index) in model.company_address.split('\n')">
+                        <p class="line" :key="index">{{ seprate }}</p>
+                      </template>                  
+                    </template>
+                    <!-- <p v-html="settings.company_address"></p> -->
+                  </address>
+                </b-col>
+                <b-col sm="6">
+                  <div id="org-img">
+                    <img v-if="settings.company_logo" class="thumbnail pull-right card-img-top" :src="'/uploads/'+ settings.company_logo" alt="">
+                  </div>
+                </b-col>
+              </b-row>
+              <hr>
+              <!-- Client Details Section Starts -->
+              <b-row>
+                <b-col sm="6">
+                  <b-col sm="8">
+                    <div class="well" id="manage">
+                      <address class="form-group">
+                        <label class="control-label"><b>Quote for:</b></label>
+                        <template v-if="model.client_email">
+                          <p class="form-control-static">
+                            <b>Email:</b> {{ model.client_email }}
+                          </p>
+                        </template>
+                        <template v-if="model.client_name">
+                          <p class="form-control-static">
+                            <b>Name:</b> {{ model.client_name }}
+                          </p>
+                        </template>
+                        <template v-if="model.client_business">
+                          <p class="form-control-static">
+                            <b>Business Name:</b> {{ model.client_business }}
+                          </p>
+                        </template>
+                      </address>
+                    <!-- /right -->
+                    </div>
+                  </b-col>
+                </b-col>
+                <b-col sm="6">
+                  <div class="well" id="box_right">
+                    <div class="box_text">
+                      <div class="form-group">
+                        <label class="control-label"><b>Quote name: </b></label> <span class="form-control-static">{{ model.quotation_name }}</span>
+                      </div>
+                      <div class="form-group" data-original-title="" title="">
+                        <label class="control-label"><b>Quote date: </b></label> <span class="form-control-static">{{ model.quotation_date }}</span>
+                      </div>
+                      <div class="form-group" data-original-title="" title="">
+                        <label class="control-label"><b>Quote reference: </b></label> <span class="form-control-static">QU-{{ model.quotation_number }}</span>
+                      </div>
+                    </div>
                   <!-- /right -->
                   </div>
                 </b-col>
-              </b-col>
-              <b-col sm="6">
-                <div class="well" id="box_right">
-                  <div class="box_text">
-                    <div class="form-group">
-                      <label class="control-label"><b>Quote name: </b></label> <span class="form-control-static">{{ model.quotation_name }}</span>
-                    </div>
-                    <div class="form-group" data-original-title="" title="">
-                      <label class="control-label"><b>Quote date: </b></label> <span class="form-control-static">{{ model.quotation_date }}</span>
-                    </div>
-                    <div class="form-group" data-original-title="" title="">
-                      <label class="control-label"><b>Quote reference: </b></label> <span class="form-control-static">QU-{{ model.quotation_number }}</span>
-                    </div>
-                  </div>
-                <!-- /right -->
-                </div>
-              </b-col>
-            </b-row>
-            <!-- Client Details Section End -->
-            <hr>
-            <!-- Description Section -->
-            <h3 style="color:#303030">Description Of Work</h3>
-            <p>{{ model.quotation_description }}</p>
-            <!-- Description Section Ends -->
-            <!-- Quote Details Section -->
-            <br>
-            <div id="jobPartsTableDivShow">
-              <table ref="detailsTable" id="sideline" class="table table-striped table-hover" width="100%">
-                <thead class="thead-show">
-                  <tr>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Net Amount</th>
-                    <th>Net Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(row, index) in rows" :key="index" track-by="index">
-                    <template v-if="row.section">
-                      <!-- <td>{{ index }}</td> -->
-                      <td colspan="4"><h3>{{ row.section }}</h3></td>
-                    </template>
-                    <template v-else-if="row.labour">
-                      <td>
-                        {{ row.name }}
-                      </td>
-                      <td>
-                        {{ row.quantity }}
-                      </td>
-                      <td>
-                        {{ parseFloat(row.net_amount).toFixed(2) }}
-                      </td>
-                      <td>
-                        {{ parseFloat(row.net_total).toFixed(2) }}
-                      </td>
-                    </template>
-                    <template v-else-if="row.parts">
-                      <td>
-                        {{ row.name }}
-                      </td>
-                      <td>
-                        {{ row.quantity }}
-                      </td>
-                      <td>
-                        {{ parseFloat(row.net_amount).toFixed(2) }}
-                      </td>
-                      <td>
-                        {{ parseFloat(row.net_total).toFixed(2) }}
-                      </td>
-                    </template>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- Quote Details Section Ends -->
-            <hr>
-            <!-- Bank Details & Total Amount Section  -->
-            <div class="row">
-              <!-- Terms and conditions -->
-              <div class="col-sm-6">
-                <h3 class="payment-terms" style="color:#000">Bank Details</h3>
-              <span class="check-text"> FNB Cheque Account: 62589280066 </span>
-              </div>
-              <!-- Totals -->
-              <div class="col-sm-6 align-right">
-                <table id="table-invoice-total" class="table table-striped table-hover">
+              </b-row>
+              <!-- Client Details Section End -->
+              <hr>
+              <!-- Description Section -->
+              <h3 style="color:#303030">Description Of Work</h3>
+              <p>{{ model.quotation_description }}</p>
+              <!-- Description Section Ends -->
+              <!-- Quote Details Section -->
+              <br>
+              <div id="jobPartsTableDivShow">
+                <table ref="detailsTable" id="sideline" class="table table-striped table-hover" width="100%">
+                  <thead class="thead-show">
+                    <tr>
+                      <th>Name</th>
+                      <th>Quantity</th>
+                      <th>Net Amount</th>
+                      <th>Net Total</th>
+                    </tr>
+                  </thead>
                   <tbody>
-                    <tr>
-                      <th class="verticle-th">Total Net Amount</th>
-                      <td>ZAR {{ parseFloat(model.net_amount).toFixed(2) }}</td>
-                    </tr>
-                    <tr>
-                      <th class="verticle-th">Total VAT Amount</th>
-                      <td>ZAR {{ parseFloat(model.vat_amount).toFixed(2) }}</td>
-                    </tr>
-                    <tr>
-                      <th class="verticle-th">Total</th>
-                      <td>ZAR {{ parseFloat(model.total_amount).toFixed(2) }}</td>
+                    <tr v-for="(row, index) in rows" :key="index" track-by="index">
+                      <template v-if="row.section">
+                        <!-- <td>{{ index }}</td> -->
+                        <td colspan="4"><h3>{{ row.section }}</h3></td>
+                      </template>
+                      <template v-else-if="row.labour">
+                        <td>
+                          {{ row.name }}
+                        </td>
+                        <td>
+                          {{ row.quantity }}
+                        </td>
+                        <td>
+                          {{ parseFloat(row.net_amount).toFixed(2) }}
+                        </td>
+                        <td>
+                          {{ parseFloat(row.net_total).toFixed(2) }}
+                        </td>
+                      </template>
+                      <template v-else-if="row.parts">
+                        <td>
+                          {{ row.name }}
+                        </td>
+                        <td>
+                          {{ row.quantity }}
+                        </td>
+                        <td>
+                          {{ parseFloat(row.net_amount).toFixed(2) }}
+                        </td>
+                        <td>
+                          {{ parseFloat(row.net_total).toFixed(2) }}
+                        </td>
+                      </template>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <!-- /col6 -->
+              <!-- Quote Details Section Ends -->
+              <hr>
+              <!-- Bank Details & Total Amount Section  -->
+              <div class="row">
+                <!-- Terms and conditions -->
+                <div class="col-sm-6">
+                  <h3 class="payment-terms" style="color:#000">Bank Details</h3>
+                <span class="check-text"> FNB Cheque Account: 62589280066 </span>
+                </div>
+                <!-- Totals -->
+                <div class="col-sm-6 align-right">
+                  <table id="table-invoice-total" class="table table-striped table-hover">
+                    <tbody>
+                      <tr>
+                        <th class="verticle-th">Total Net Amount</th>
+                        <td>ZAR {{ parseFloat(model.net_amount).toFixed(2) }}</td>
+                      </tr>
+                      <tr>
+                        <th class="verticle-th">Total VAT Amount</th>
+                        <td>ZAR {{ parseFloat(model.vat_amount).toFixed(2) }}</td>
+                      </tr>
+                      <tr>
+                        <th class="verticle-th">Total</th>
+                        <td>ZAR {{ parseFloat(model.total_amount).toFixed(2) }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /col6 -->
+              </div>
+              <!-- Bank Details & Total Amount Section Ends -->
             </div>
-            <!-- Bank Details & Total Amount Section Ends -->
           </div>
           </div>
           <div id="quotes-attachment" class="container">
-            <b-col class="col-md-12">
-              <b-btn class="btn-show pull-right" id="hideprint-attach" variant="secondary" @click="printattachments()">Print Attachments<i class="fe fe-printer fe-lg"></i></b-btn>
-              <div id="hideprint-attachment">
-                <b-btn class="btn-show pull-right" id="download-attach" variant="secondary" @click="downloadAttachments()">Download Attachments<i class="fe fe-file fe-lg"></i></b-btn>
-              </div>
-            </b-col>
+            <template v-if="beforepictures.length > 0 || afterpictures.length > 0 || attachmentpictures.length > 0">
+              <b-col class="col-md-12">
+                <b-btn class="btn-show pull-right" id="hideprint-attach" variant="secondary" @click="printattachments()">Print Attachments<i class="fe fe-printer fe-lg"></i></b-btn>
+                <div id="hideprint-attachment">
+                  <b-btn class="btn-show pull-right" id="download-attach" variant="secondary" @click="downloadAttachments()">Download Attachments<i class="fe fe-file fe-lg"></i></b-btn>
+                </div>
+              </b-col>
+            </template>
             <!-------------------------------Before Pictures to show------------------------->
             <div class="pagebreak">
               <template v-if="beforepictures.length > 0">
