@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Invoices;
+use App\Models\Quotes;
 use App\Models\Jobcard;
 use Illuminate\Http\Request;
 use App\Utils\RequestSearchQuery;
@@ -242,14 +243,18 @@ class InvoicesController extends BackendController
     {
 
         $data = $request->all();
-      
-        $data['rows'] = json_encode($request->rows);
-        foreach($request->rows as $quotes) {
-            if(isset($quotes['quotation_id'])){
-                $jobcard::where('quote_id', $quotes['quotation_id'])
-                ->update(['status' => 'Invoiced']);
+        if(!isset($request->rows)) {
+            $data['rows'] = '[]';
+        } else {
+            $data['rows'] = json_encode($request->rows);
+            foreach($request->rows as $quotes) {
+                if(isset($quotes['quotation_id'])){
+                    $jobcard::where('quote_id', $quotes['quotation_id'])
+                    ->update(['status' => 'Invoiced']);
+                }
             }
-        }
+        } 
+            
 
        $invoice = $this->invoice->make($data);
 
@@ -315,9 +320,29 @@ class InvoicesController extends BackendController
      * @param  \App\Invoices  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoices $invoice, Request $request)
+    public function destroy(Invoices $invoice, Request $request, Quotes $quote, Jobcard $jobcard)
     {
-
+        $rows = json_decode($invoice->rows, true);
+        $quotes = array();
+        
+        if ($rows && count($rows) > 0) {
+            foreach($rows as $row) {
+                foreach($row as $inKey => $inVal) {
+                    if($inKey == 'quotation_id') {
+                        array_push($quotes, $inVal);
+                    }
+                }
+            }
+            if (count($quotes) > 0) {
+                $get_jobcards = $jobcard->select('id')->whereIn('quote_id', $quotes)->get();
+                $jobcardss = array();
+                foreach($get_jobcards as $jobcard) {
+                    array_push($jobcardss, $jobcard->id);
+                }
+                $update_jobcards = $jobcard->whereIn('id', $jobcardss)->update(['status' => 'Completed']);            
+            }
+        }
+        
         $this->invoice->destroy($invoice);
 
         return $this->redirectResponse($request, __('alerts.backend.invoices.deleted'));

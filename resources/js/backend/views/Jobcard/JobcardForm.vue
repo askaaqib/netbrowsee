@@ -228,27 +228,29 @@
                 :state="state('materials_paid')"
               ></b-form-input>
             </b-form-group>
-
-            <b-form-group
-              :label="$t('validation.jobcards.status')"
-              label-for="status"
-              horizontal
-              :label-cols="2"
-              :feedback="feedback('status')"
-            >
-              <b-select
-                v-model="model.status"
+              
+            <template v-if="model.status != 'Invoiced' && model.status != 'Quoted'">
+              <b-form-group
+                :label="$t('validation.jobcards.status')"
+                label-for="status"
+                horizontal
+                :label-cols="2"
+                :feedback="feedback('status')"
               >
-                <option value="null">Please Select Status</option>
-                <option value="Received" data-foo="Received">Received</option>
-                <option value="Assigned" data-foo="Assigned">Assigned</option>
-                <option value="On Hold" data-foo="On Hold">On Hold</option>
-                <option value="Completed" data-foo="Completed">Completed</option>
-                <option value="Submitted for vetting" data-foo="Submitted for vetting">Submitted for Vetting</option>
-                <option value="Paid" data-foo="Paid">Paid</option>
-                <option value="Cancelled" data-foo="Cancelled">Cancelled</option>
-              </b-select>
-            </b-form-group>
+                <b-select
+                  v-model="model.status"
+                >
+                  <option value="null">Please Select Status</option>
+                  <option value="Received" data-foo="Received">Received</option>
+                  <option value="Assigned" data-foo="Assigned">Assigned</option>
+                  <option value="On Hold" data-foo="On Hold">On Hold</option>
+                  <option value="Completed" data-foo="Completed">Completed</option>
+                  <option value="Submitted for vetting" data-foo="Submitted for vetting">Submitted for Vetting</option>
+                  <option value="Paid" data-foo="Paid">Paid</option>
+                  <option value="Cancelled" data-foo="Cancelled">Cancelled</option>
+                </b-select>
+              </b-form-group>
+            </template>
 
             <b-form-group
               :label="$t('validation.jobcards.assigned_to')"
