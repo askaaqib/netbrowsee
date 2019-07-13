@@ -106,6 +106,7 @@ class JobcardController extends BackendController
             'facility_name',
             'district',
             'sub_district',
+            'quote_id',
             //'quoted_amount',
             'jobcard.created_at',
             'jobcard.updated_at',

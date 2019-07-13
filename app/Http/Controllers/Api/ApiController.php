@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-// use App\Models\Jobcard;
-use App\Models\JobcardTest as Jobcard;
+use App\Models\Jobcard;
+// use App\Models\JobcardTest as Jobcard;
 use App\Models\Settings;
 use App\Models\User;
 use Hash;
@@ -113,90 +113,143 @@ class ApiController extends Controller
     }
 
     public function uploadJobcardPhoto(Request $request, Jobcard $jobcard, User $user_model) {
-
-
-        $data = $request->all();
-      return response()->json([
-            'status' => true,
-            'response' => $data
-        ]);
-        $images = $data['uploadimagetmp'];
-        $images = json_decode($images, true);
-        $datee = date("Y-m-d",time());
-        $new_images = array();
-        foreach($images as $img) {
-            $png_url = "MobileUpload-".$datee."-".rand(100,100000).".png";
-            $path = base_path('/public/images/jobcard/'). $png_url;
-            // $img['data'] = str_replace(' ', '+', $img['data']);
-
-            // $saved = Image::make($img['path'])->save($path);
-            // if ($saved) {
-            //     array_push($new_images, ['image_name' => $png_url]);
-            // }
-        }
-             
-  
-
-        if ($request->hasFile('uploadimagetmp')) {
+        if ($request->hasFile('images')) {
             $jobcard_id = $request->jobcard_id;
             $type = $request->type;
 
             $jobcard_data = $jobcard::where('id', $jobcard_id)->select('before_pictures', 'after_pictures', 'attachment_receipt')->first();
-            
-            $image = $request->file('uploadimagetmp');
 
-            $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
-
-            $imageName = rand(0,10000000).$cleanImageName;
-            $uploaded = $image->move(base_path('/public/images/jobcard/'), $imageName);
-            $type_json = [];
+            /******** STORE AND SAVE IMAGES TO DATABASE ********/
+            $type_json= array();
+            $images = $request->file('images');
             if ($type === 'before_pictures') {
                 $decode_arr = json_decode($jobcard_data->before_pictures, true);
-                $decode_arr[]['image_name'] = '/images/jobcard/'. $imageName;
-                $type_json = json_encode($decode_arr);
             }
             if ($type === 'after_pictures') {
                 $decode_arr = json_decode($jobcard_data->after_pictures, true);
-                $decode_arr[]['image_name'] = '/images/jobcard/'. $imageName;
-                $type_json = json_encode($decode_arr);
             }
             if ($type === 'attachment_receipt') {
                 $decode_arr = json_decode($jobcard_data->attachment_receipt, true);
-                $decode_arr[]['image_name'] = '/images/jobcard/'. $imageName;
-                $type_json = json_encode($decode_arr);
             }
-            
-            // $imageNames[]['image_name'] = '/images/jobcard/'.$imageName;
+            foreach($images as $image) {
+                $cleanImageName = $user_model->cleanImageName($image->getClientOriginalName());
 
-            // $name = $file->getClientOriginalName();
-            // $data[ 'uploadimagetmp' ] = $name;
-
-            // $request->file('uploadimagetmp')->move(base_path('/public/images/jobcard/'), 'MobileUpload-' .$name);
-            // $uploaded = $image->move(base_path('/public/images/jobcard/'),$imageName);
-            if ($uploaded) {
-                $update_arr = [
-                  $type => $type_json
-                ];
-                $update_json = $jobcard::where('id', $jobcard_id)->update($update_arr);
-                if ($update_json) {
+                $imageName = rand(0,10000000).$cleanImageName;
+                $moved = $image->move(base_path('/public/images/jobcard/'), 'MobileUpload'.$imageName);
+                if(!$moved) {
                     return response()->json([
-                        'status' => true,
-                        'message' => 'Uploaded successfully'
-                    ]);                
-                } else {
-                    return response()->json([
-                        'message' => 'Unable to update json'
+                        'response' => 'Unable to upload file'
                     ]);
+                } 
+                if ($type === 'before_pictures') {
+                    $decode_arr[]['image_name'] = '/images/jobcard/'. 'MobileUpload'.$imageName;
                 }
+                if ($type === 'after_pictures') {
+                    $decode_arr[]['image_name'] = '/images/jobcard/'. 'MobileUpload'.$imageName;
+                }
+                if ($type === 'attachment_receipt') {
+                    $decode_arr[]['image_name'] = '/images/jobcard/'. 'MobileUpload'.$imageName;
+                    // $type_json = json_encode($decode_arr);
+                }
+            }
+
+            $update_arr = [
+              $type => json_encode($decode_arr)
+            ];
+            
+            $update_json = $jobcard::where('id', $jobcard_id)->update($update_arr);
+
+            if ($update_json) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Uploaded successfully'
+                ]);                
             } else {
                 return response()->json([
-                    'message' => 'Unable to upload'
+                    'message' => 'Unable to update json'
                 ]);
             }
         } else {
             return response()->json([
-                'message' => 'Nothing found'
+                'status' => false,
+                'response' => 'No Uploaded Files Found'
             ]);
         }
+    }
+
+    public function deleteJobcardPic(Request $request, Jobcard $jobcard){
+        $data = $request->all();
+        $jobcard_id = $request->id;
+        $type = $request->type;
+        $image_name = $request->image_name;
+
+        $jobcard_data = $jobcard::where('id', $jobcard_id)->select('before_pictures', 'after_pictures', 'attachment_receipt')->first();
+
+        if ($type === 'before_pictures') {
+            $decode_arr = json_decode($jobcard_data->before_pictures, true);
+        }
+        if ($type === 'after_pictures') {
+            $decode_arr = json_decode($jobcard_data->after_pictures, true);
+        }
+        if ($type === 'attachment_receipt') {
+            $decode_arr = json_decode($jobcard_data->attachment_receipt, true);
+        }
+        $old_array = $decode_arr;
+        /* REMOVE IMAGE NAME FROM THE ARRAY*/
+        foreach($decode_arr as $key => $entry) {
+            $found = false;
+            if($entry['image_name'] == $image_name) {
+                $found = true;
+                unset($decode_arr[$key]);
+                break;
+            }
+        }
+        if ($found) {
+            if(file_exists(public_path().$image_name)) {
+              unlink(public_path().$image_name);
+            }
+        }
+
+        $update_arr = [
+          $type => json_encode(array_values($decode_arr))
+        ];
+        // $json_out = json_encode(array_values($your_array_here));    
+        $update_json = $jobcard::where('id', $jobcard_id)->update($update_arr);
+        
+        if ($update_json) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Deleted successfully'
+            ]);                
+        } else {
+            return response()->json([
+                'message' => 'Unable to update json'
+            ]);
+        }
+    }
+
+    public function updateJobcard(Request $request, Jobcard $jobcard) {
+        $data = $request->postdata;
+        $jobcard_id = $data["id"];
+        
+        $update_arr = [
+          'jobcard_num' => $data["jobcard_num"], 
+          'description' => $data["description"], 
+          'facility_name' => $data["facility_name"], 
+          'priority' => $data["priority"]
+        ];
+        
+        $update = $jobcard::where('id', $jobcard_id)->update($update_arr);
+        if ($update) {
+            return response()->json([
+                'status' => true,
+                'response' => $data
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Unable to update'
+            ]);
+        }
+            
     }
 }

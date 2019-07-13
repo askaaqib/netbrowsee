@@ -439,6 +439,7 @@ class AjaxController extends Controller
         else{
             return $jobcard->query()
                 ->where('quote_id' , NULL)
+                ->orWhere('status', 'Completed')
                 ->select('jobcard_num','id')->get();
         }
 

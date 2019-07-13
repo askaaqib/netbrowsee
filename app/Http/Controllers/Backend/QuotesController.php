@@ -162,10 +162,15 @@ class QuotesController extends BackendController
      * @param  \App\Quotes  $quote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quotes $quote, Request $request)
+    public function destroy(Quotes $quote, Request $request, Jobcard $jobcard)
     {
+        $quote_id = $quote->id;
 
-        $this->quote->destroy($quote);
+        $deleted = $this->quote->destroy($quote);
+
+        if ($deleted) {
+            $jobcard->where('quote_id', $quote_id)->update(['quote_id' => NULL]);
+        }
 
         return $this->redirectResponse($request, __('alerts.backend.quotes.deleted'));
     }
