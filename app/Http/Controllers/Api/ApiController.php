@@ -41,10 +41,36 @@ class ApiController extends Controller
         }
     }
 
+
     public function getJobCards(Request $request, Jobcard $jobcard) {
         $user_id = (isset($request->user_id)) ? $request->user_id : 27;
-        $jobcards = $jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'projectmanager_id')->where('contractor_id', $user_id)->get();
+        $search = (isset($request->search)) ? $request->search : null;
+        if($search) {
+            $jobcards = Jobcard::select('id', 'jobcard_num', 'description' ,'problem_type', 'priority', 'facility_name', 'district', 'projectmanager_id', 'created_at', 'status')->where('contractor_id', $user_id)->where(function($query) use ($search) {
+                $query->where('jobcard_num', 'LIKE', '%'.$search.'%')
+                    ->orWhere('priority', 'LIKE', '%'.$search.'%')
+                    ->orWhere('description', 'LIKE', '%'.$search.'%')
+                    ->orWhere('status', 'LIKE', '%'.$search.'%')
+                    ->orWhere('facility_name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('problem_type', 'LIKE', '%'.$search.'%')
+                    ->orWhere('labour_paid', 'LIKE', '%'.$search.'%')
+                    ->orWhere('materials_paid', 'LIKE', '%'.$search.'%')
+                    ->orWhere('travelling_paid', 'LIKE', '%'.$search.'%');
+            })->get();
 
+        } else {
+            $jobcards = $jobcard::select('id', 'jobcard_num', 'description' ,'problem_type', 'priority', 'facility_name', 'district', 'projectmanager_id', 'created_at', 'status')->where('contractor_id', $user_id)->get();    
+            foreach($jobcards as $jobcard) {
+                $jobcard->date = $jobcard->created_at->format('d/m/Y');
+            }
+        }
+        
+        if (count($jobcards) > 0) {
+            foreach($jobcards as $jobcard) {
+                $jobcard->date = $jobcard->created_at->format('d/m/Y');
+            }
+        }
+            
         return $jobcards;
     }
 
@@ -107,8 +133,8 @@ class ApiController extends Controller
 
     public function getJobcard(Request $request, Jobcard $jobcard) {
         $id = $request->id;
-        $data = $jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt')->where('id', $id)->first();
-
+        $data = $jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('id', $id)->first();
+        
         return $data;
     }
 
