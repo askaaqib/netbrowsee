@@ -46,7 +46,7 @@ class ApiController extends Controller
         $user_id = (isset($request->user_id)) ? $request->user_id : 27;
         $search = (isset($request->search)) ? $request->search : null;
         if($search) {
-            $jobcards = Jobcard::select('id', 'jobcard_num', 'description' ,'problem_type', 'priority', 'facility_name', 'district', 'projectmanager_id', 'created_at', 'status')->where('contractor_id', $user_id)->where(function($query) use ($search) {
+            $jobcards = Jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->where(function($query) use ($search) {
                 $query->where('jobcard_num', 'LIKE', '%'.$search.'%')
                     ->orWhere('priority', 'LIKE', '%'.$search.'%')
                     ->orWhere('description', 'LIKE', '%'.$search.'%')
@@ -59,7 +59,7 @@ class ApiController extends Controller
             })->get();
 
         } else {
-            $jobcards = $jobcard::select('id', 'jobcard_num', 'description' ,'problem_type', 'priority', 'facility_name', 'district', 'projectmanager_id', 'created_at', 'status')->where('contractor_id', $user_id)->get();    
+            $jobcards = $jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->get();    
             foreach($jobcards as $jobcard) {
                 $jobcard->date = $jobcard->created_at->format('d/m/Y');
             }
