@@ -46,7 +46,7 @@ class ApiController extends Controller
         $user_id = (isset($request->user_id)) ? $request->user_id : 27;
         $search = (isset($request->search)) ? $request->search : null;
         if($search) {
-            $jobcards = Jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->where(function($query) use ($search) {
+            $jobcards = Jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->where(function($query) use ($search) {
                 $query->where('jobcard_num', 'LIKE', '%'.$search.'%')
                     ->orWhere('priority', 'LIKE', '%'.$search.'%')
                     ->orWhere('description', 'LIKE', '%'.$search.'%')
@@ -59,7 +59,7 @@ class ApiController extends Controller
             })->get();
 
         } else {
-            $jobcards = $jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->get();    
+            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->get();    
             foreach($jobcards as $jobcard) {
                 $jobcard->date = $jobcard->created_at->format('d/m/Y');
             }
@@ -133,7 +133,7 @@ class ApiController extends Controller
 
     public function getJobcard(Request $request, Jobcard $jobcard) {
         $id = $request->id;
-        $data = $jobcard::select('id', 'jobcard_num', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('id', $id)->first();
+        $data = $jobcard::select('id', 'jobcard_num', 'problem_type','description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('id', $id)->first();
         
         return $data;
     }
@@ -276,6 +276,67 @@ class ApiController extends Controller
                 'message' => 'Unable to update'
             ]);
         }
+    }
+
+    public function saveOfflineImages(Request $request, Jobcard $jobcard, User $user_model) {
+        // $data = json_decode($request->data, true);
+        $images = $request->file('images');
+        $filename = 'initialized';
+        $before_pictures_new = array();
+        $after_pictures_new = array();
+        $attachment_receipt_new = array();
+        foreach($images as $id => $data) {
+            $jobcard_id = $id;
+            $jobcard_data = $jobcard::where('id', $jobcard_id)->select('before_pictures', 'after_pictures', 'attachment_receipt')->first();
+
+            $decode_before = json_decode($jobcard_data->before_pictures, true);
+            $decode_after = json_decode($jobcard_data->after_pictures, true);
+            $decode_attachment = json_decode($jobcard_data->attachment_receipt, true);
+
+            foreach($data as $type => $imageData) {
+                foreach($imageData as $imgg) {
+                    $cleanImageName = $user_model->cleanImageName($imgg->getClientOriginalName());
+
+                    $imageName = rand(0,10000000).$cleanImageName;
+                    $moved = $imgg->move(base_path('/public/images/jobcard/'), 'NewMobileUpload'.$imageName);
+                    
+                    if($moved) {
+                        if($type == 'before_pictures') {
+                            $decode_before[]['image_name'] = '/images/jobcard/'. 'NewMobileUpload'.$imageName;
+                        }
+                        if($type == 'after_pictures') {
+                            $decode_after[]['image_name'] = '/images/jobcard/'. 'NewMobileUpload'.$imageName;
+                        }
+                        if($type == 'attachment_receipt') {
+                            $decode_attachment[]['image_name'] = '/images/jobcard/'. 'NewMobileUpload'.$imageName;
+                        }
+                    } 
+                }
+            }
+             
+            $encode_before = (count($decode_before) > 0) ? json_encode($decode_before) : '[]'; 
+            $encode_after = (count($decode_after) > 0) ? json_encode($decode_after) : '[]'; 
+            $encode_attachment = (count($decode_attachment) > 0) ? json_encode($decode_attachment) : '[]'; 
             
+            $update_arr = [
+              'before_pictures' => $encode_before,
+              'after_pictures' => $encode_after,
+              'attachment_receipt' => $encode_attachment
+            ];
+
+            $update_json = $jobcard::where('id', $jobcard_id)->update($update_arr);
+            
+            if(!$update_json) {
+                return response()->json([
+                    'status' => true,
+                    'response' => 'Unable to update data'
+                ]);
+            }
+        }
+        
+        return response()->json([
+            'status' => true,
+            'response' => 'Successfully Uploaded Images'
+        ]);        
     }
 }
