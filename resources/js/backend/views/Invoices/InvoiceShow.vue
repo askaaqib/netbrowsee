@@ -22,7 +22,7 @@
                 <!-- <p>{{ model.company_address }}</p> -->
                 <!--  <p v-html="settings.company_address"></p> -->
                 <template v-if="model.company_address">
-                  <template v-for="(seprate, index) in model.company_address.split('  ')">
+                  <template v-for="(seprate, index) in model.company_address.split('\n')">
                     <p class="invoice-address-line" :key="index">{{ seprate }}</p>
                   </template>
                 </template>
