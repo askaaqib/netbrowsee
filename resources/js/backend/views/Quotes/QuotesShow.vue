@@ -180,7 +180,7 @@
               </b-col>
             </template>
             <!-------------------------------Before Pictures to show------------------------->
-            <div class="pagebreak">
+            <div class="images-block">
               <template v-if="beforepictures.length > 0">
                 <h3>Before Pictures</h3>
                 <b-form-group
@@ -206,10 +206,11 @@
                 </template>
               </template>
             </div>
+            <div class="pagebreak"></div>  
             <!-------------------------------Before Pictures to show------------------------->
             <!-------------------------------After Pictures to show------------------------->
             <template v-if="afterpictures.length > 0">
-              <div class="pagebreak">
+              <div class="images-block">
                 <h3>After Pictures</h3>
                 <b-form-group
                   class="font-weight-bold"
@@ -233,11 +234,12 @@
                   </b-row>
                 </template>
               </div>
+              <div class="pagebreak"></div>
             </template>
             <!-------------------------------After Pictures to show------------------------->
             <!-------------------------------Attachment Pictures to show------------------------->
             <template v-if="attachmentpictures.length > 0">
-              <div class="pagebreak">
+              <div class="images-block">
                 <h3>Proof of Purchases</h3>
                 <template>
                   <b-row>

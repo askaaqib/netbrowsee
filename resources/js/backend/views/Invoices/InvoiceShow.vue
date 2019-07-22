@@ -23,7 +23,7 @@
                 <!--  <p v-html="settings.company_address"></p> -->
                 <template v-if="model.company_address">
                   <template v-for="(seprate, index) in model.company_address.split('  ')">
-                    <p class="line" :key="index">{{ seprate }}</p>
+                    <p class="invoice-address-line" :key="index">{{ seprate }}</p>
                   </template>
                 </template>
                 <!--  <p>{{ model.company_address }}</p> -->
@@ -67,7 +67,7 @@
               <div class="well" style="border:1px solid #CCCCCC">
                 <div class="align-right">
                   <div class="form-group">
-                    <label class="control-label"><b>Invoice name: </b></label> <span class="form-control-static">{{ model.quotation_name }}</span>
+                    <label class="control-label"><b>Invoice name: </b></label> <span class="form-control-static">{{ model.invoice_name }}</span>
                   </div>
                   <div class="form-group" data-original-title="" title="">
                     <label class="control-label"><b>Invoice date: </b></label> <span class="form-control-static">{{ model.quotation_date }}</span>
@@ -751,8 +751,7 @@ export default {
         company_logo: null
       },
       model: {
-        quotation_number: null,
-        quotation_name: null,
+        invoice_name: null,
         travelling_time: null,
         travelling_km: null,
         vat_amount: null,

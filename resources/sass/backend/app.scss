@@ -346,6 +346,9 @@ form.invoices-form .table > thead > tr > th {
 .line{
 line-height: 0.4;
 }
+.invoice-address-line{
+  line-height: 1.4;
+}
 .w-45 {
   width: 45%;
 }
@@ -451,10 +454,13 @@ table#table-invoice-total th, table#table-invoice-total td {
     margin: 2cm;
   }
   #viewport {
-    page-break-inside: avoid;
+    // page-break-inside: avoid;
   }
   .pagebreak {
-    page-break-inside: avoid;
+    page-break-after: always !important;
+  }
+  .images-block {
+    // page-break-inside: avoid;
   }
 }
 
