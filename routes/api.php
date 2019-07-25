@@ -19,4 +19,5 @@ Route::post('uploadJobcardPhoto', 'Api\ApiController@uploadJobcardPhoto')->name(
 Route::post('deleteJobcardPic', 'Api\ApiController@deleteJobcardPic')->name('deleteJobcardPic');
 Route::post('updateJobcard', 'Api\ApiController@updateJobcard')->name('updateJobcard');
 Route::post('saveOfflineImages', 'Api\ApiController@saveOfflineImages')->name('saveOfflineImages');
+Route::post('saveOfflineJobcards', 'Api\ApiController@saveOfflineJobcards')->name('saveOfflineJobcards');
 Route::get('getJobcard', 'Api\ApiController@getJobcard')->name('getJobcard');

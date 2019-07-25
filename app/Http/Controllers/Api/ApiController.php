@@ -339,4 +339,33 @@ class ApiController extends Controller
             'response' => 'Successfully Uploaded Images'
         ]);        
     }
+
+    public function saveOfflineJobcards(Request $request, Jobcard $jobcard) {
+        $data = $request->data;
+        $decode_data = json_decode($data, true);
+        
+        foreach($decode_data as $data1) {
+            $update_arr = [
+                'jobcard_num' => $data1['data']['jobcard_num'],
+                'description' => $data1['data']['description'],
+                'facility_name' => $data1['data']['facility_name'],
+                'priority' => $data1['data']['priority'],
+                'labour_paid' => $data1['data']['labour_paid'],
+                'travelling_paid' => $data1['data']['travelling_paid'],
+                'materials_paid' => $data1['data']['materials_paid']
+            ];
+            unset($data1['data']['id']);
+            $update = $jobcard::where('id', $data1['id'])->update($update_arr);
+            if(!$update) {
+                return response()->json([
+                    'status' => true,
+                    'response' => $data1['data']
+                ]);
+            }
+        }
+        return response()->json([
+            'status' => true,
+            'response' => 'Successfully Updated Everything'
+        ]);
+    }
 }
