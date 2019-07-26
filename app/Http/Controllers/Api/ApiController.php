@@ -21,16 +21,24 @@ class ApiController extends Controller
 
         if (Auth::attempt(['email' => $email, 'password' => $password]))
         {
-            if(isset(auth()->user()->roles[0]->name) && auth()->user()->roles[0]->name == 'Technician/SubContractor'){
+            
+            if(
+                isset(auth()->user()->roles[0]->name) &&
+                ( auth()->user()->roles[0]->name == 'Technician/SubContractor' ||
+                  auth()->user()->roles[0]->name == 'Administrator'
+                )
+            ){
                 return response()->json([
                     'status' => 200,
                     'response' => 'Succesfully Logged In',
-                    'userId' => auth()->user()->id
+                    'userId' => auth()->user()->id,
+                    'role' => auth()->user()->roles[0]->name 
                 ]);
             } else {
                 return response()->json([
                     'status' => 400,
-                    'response' => 'Unable to login'
+                    'response' => 'Unable to login',
+                    'role' => auth()->user()->roles[0]->name
                 ]);
             }
         } else {
@@ -60,6 +68,37 @@ class ApiController extends Controller
 
         } else {
             $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->get();    
+            foreach($jobcards as $jobcard) {
+                $jobcard->date = $jobcard->created_at->format('d/m/Y');
+            }
+        }
+        
+        if (count($jobcards) > 0) {
+            foreach($jobcards as $jobcard) {
+                $jobcard->date = $jobcard->created_at->format('d/m/Y');
+            }
+        }
+            
+        return $jobcards;
+    }
+
+    public function getAllJobCards(Request $request, Jobcard $jobcard) {
+        $search = (isset($request->search)) ? $request->search : null;
+        if($search) {
+            $jobcards = Jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where(function($query) use ($search) {
+                $query->where('jobcard_num', 'LIKE', '%'.$search.'%')
+                    ->orWhere('priority', 'LIKE', '%'.$search.'%')
+                    ->orWhere('description', 'LIKE', '%'.$search.'%')
+                    ->orWhere('status', 'LIKE', '%'.$search.'%')
+                    ->orWhere('facility_name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('problem_type', 'LIKE', '%'.$search.'%')
+                    ->orWhere('labour_paid', 'LIKE', '%'.$search.'%')
+                    ->orWhere('materials_paid', 'LIKE', '%'.$search.'%')
+                    ->orWhere('travelling_paid', 'LIKE', '%'.$search.'%');
+            })->get();
+
+        } else {
+            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->get();    
             foreach($jobcards as $jobcard) {
                 $jobcard->date = $jobcard->created_at->format('d/m/Y');
             }
@@ -258,13 +297,15 @@ class ApiController extends Controller
         $data = $request->postdata;
         $jobcard_id = $data["id"];
         
-        $update_arr = [
-          'jobcard_num' => $data["jobcard_num"], 
-          'description' => $data["description"], 
-          'facility_name' => $data["facility_name"], 
-          'priority' => $data["priority"]
-        ];
-        
+        // $update_arr = [
+        //   'jobcard_num' => $data["jobcard_num"], 
+        //   'description' => $data["description"], 
+        //   'facility_name' => $data["facility_name"], 
+        //   'priority' => $data["priority"],
+        //   'status' => $data["status"]
+        // ];
+        $update_arr = $data;
+        unset($update_arr['id']);
         $update = $jobcard::where('id', $jobcard_id)->update($update_arr);
         if ($update) {
             return response()->json([
