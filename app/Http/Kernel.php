@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'metas'         => \App\Http\Middleware\MetaTags::class,
         'localize'      => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        'cors'          => \App\Http\Middleware\Cors::class, 
     ];
 }
