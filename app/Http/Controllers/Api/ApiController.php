@@ -53,16 +53,16 @@ class ApiController extends Controller
     public function getJobCards(Request $request, Jobcard $jobcard) {
         $user_id = (isset($request->user_id)) ? $request->user_id : 27;
         $search = (isset($request->search)) ? $request->search : null;
-        $page = (isset($request->page)) ? $request->page : null;
-        $per_page = (isset($request->per_page)) ? $request->per_page : null;
+        // $page = (isset($request->page)) ? $request->page : null;
+        // $per_page = (isset($request->per_page)) ? $request->per_page : null;
 
-        $offset = ($page * $per_page) - $per_page;
-        if(!isset($page) || !isset($per_page)) {
-            return response()->json([
-                'status' => 400,
-                'response' => 'Parameters are Required'
-            ]);
-        }
+        // $offset = ($page * $per_page) - $per_page;
+        // if(!isset($page) || !isset($per_page)) {
+        //     return response()->json([
+        //         'status' => 400,
+        //         'response' => 'Parameters are Required'
+        //     ]);
+        // }
 
         if($search) {
             $jobcards = Jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->where(function($query) use ($search) {
@@ -78,7 +78,7 @@ class ApiController extends Controller
             })->get();
 
         } else {
-            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->skip($offset)->take($per_page)->get();   
+            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->get();   
             foreach($jobcards as $jobcard) {
                 $jobcard->date = $jobcard->created_at->format('d/m/Y');
             }
@@ -95,16 +95,16 @@ class ApiController extends Controller
 
     public function getAllJobCards(Request $request, Jobcard $jobcard) {
         $search = (isset($request->search)) ? $request->search : null;
-        $page = (isset($request->page)) ? $request->page : null;
-        $per_page = (isset($request->per_page)) ? $request->per_page : null;
+        // $page = (isset($request->page)) ? $request->page : null;
+        // $per_page = (isset($request->per_page)) ? $request->per_page : null;
 
-        $offset = ($page * $per_page) - $per_page;
-        if(!isset($page) || !isset($per_page)) {
-            return response()->json([
-                'status' => 400,
-                'response' => 'Parameters are Required'
-            ]);
-        }
+        // $offset = ($page * $per_page) - $per_page;
+        // if(!isset($page) || !isset($per_page)) {
+        //     return response()->json([
+        //         'status' => 400,
+        //         'response' => 'Parameters are Required'
+        //     ]);
+        // }
         if($search) {
             $jobcards = Jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where(function($query) use ($search) {
                 $query->where('jobcard_num', 'LIKE', '%'.$search.'%')
@@ -119,7 +119,7 @@ class ApiController extends Controller
             })->get();
 
         } else {
-            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->skip($offset)->take($per_page)->get();   
+            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->get();   
             foreach($jobcards as $jobcard) {
                 $jobcard->date = $jobcard->created_at->format('d/m/Y');
             }
