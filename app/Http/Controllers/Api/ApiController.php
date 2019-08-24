@@ -78,7 +78,9 @@ class ApiController extends Controller
             })->get();
 
         } else {
-            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->get();   
+            $jobcards = $jobcard::select('id', 'jobcard_num', 'problem_type', 'description', 'priority', 'facility_name', 'district', 'before_pictures', 'after_pictures', 'attachment_receipt','created_at', 'status','labour_paid', 'materials_paid', 'travelling_paid')->where('contractor_id', $user_id)->where(function ($query) {
+                            $query->where('status', '=', 'Assigned')->orWhere('status', '=', 'Completed');
+                        })->get();   
             foreach($jobcards as $jobcard) {
                 $jobcard->date = $jobcard->created_at->format('d/m/Y');
             }
