@@ -1508,7 +1508,7 @@ export default {
       }
     },
     async searchQuote ($q) {
-      let { data } = await axios.get(this.$app.route('admin.quotations.searchquotes'), { params: { q: $q } })
+      let { data } = await axios.get(this.$app.route('admin.quotations.searchquotesinvoice'), { params: { q: $q } })
       /* CHECK IF SEARCHED QUOTES ARE SELECTED / EXCLUDE THEM */
       var indexesToRemove = []
       data.map((dataitem, indexdata) => {

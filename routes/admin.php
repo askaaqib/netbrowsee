@@ -27,6 +27,7 @@ Route::get('settings/data', 'AjaxController@getSettingsData')->name('settings.ge
 Route::get('quotations/lastref', 'AjaxController@getQuotationsRecentReference')->name('quotations.getreference');
 Route::get('clients/getclients', 'AjaxController@searchClients')->name('clients.searchclients');
 Route::get('quotations/search', 'AjaxController@searchQuotes')->name('quotations.searchquotes');
+Route::get('quotations/searchquotesinvoice', 'AjaxController@searchQuotesInvoice')->name('quotations.searchquotesinvoice');
 Route::post('jobcards/removeimage', 'AjaxController@JobcardRemoveImage')->name('jobcards.removeimage');
 Route::get('invoices/lastref', 'AjaxController@getInvoicesRecentReference')->name('invoices.getreference');
 Route::get('dashboard/completeJobcard','AjaxController@CompleteJobcards')->name('dashboard.completeJobcard');

@@ -16,6 +16,7 @@ use App\Repositories\Contracts\ProjectManagerRepository;
 use App\Repositories\Contracts\PostRepository;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Contracts\QuotesRepository;
+use App\Repositories\Contracts\InvoicesRepository;
 use App\Repositories\Contracts\JobcardRepository;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 use App\Repositories\Contracts\DistrictRepository;
@@ -237,6 +238,37 @@ class AjaxController extends Controller
                 ->where('id' ,'>' ,0)
                 ->get();
         }
+    }
+
+    public function searchQuotesInvoice(QuotesRepository $quote, Request $request, Invoices $invoice){
+        $search = $request->get('q');
+        $query = '';
+        $selected_quotes = [];
+        $all_invoices = $invoice::select('rows')->get();
+        foreach($all_invoices as $invoice) {
+          if($invoice->rows) {
+            $rows = json_decode($invoice->rows);
+            foreach($rows as $row) {
+              if(isset($row->quotation)) {
+                $selected_quotes[] = $row->quotation_id;
+              }
+            }
+          }
+        }
+        if ($search) {
+            $query = $quote->query()
+                ->where('quotation_name' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('quotation_digit' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('quotation_number' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('client_email' ,'LIKE' ,'%'. $search .'%');
+        } else {
+            $query = $quote->query()
+              ->where('id' ,'>' ,0);
+        }
+        if(count($selected_quotes) > 0) {
+          $query->whereNotIn('id', $selected_quotes);
+        }
+        return $query->get();
     }
 
     public function searchLabours(LabourRateRepository $labour, Request $request){
