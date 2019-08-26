@@ -257,17 +257,17 @@ class AjaxController extends Controller
         }
         if ($search) {
             $query = $quote->query()
-                ->where('quotation_name' ,'LIKE' ,'%'. $search .'%')
-                ->orWhere('quotation_digit' ,'LIKE' ,'%'. $search .'%')
-                ->orWhere('quotation_number' ,'LIKE' ,'%'. $search .'%')
-                ->orWhere('client_email' ,'LIKE' ,'%'. $search .'%');
+                ->orWhere('quotation_name' ,'LIKE' ,'%'. $search .'%')
+                // ->orWhere('quotation_digit' ,'LIKE' ,'%'. $search .'%')
+                ->orWhere('quotation_number' ,'LIKE' ,'%'. $search .'%');
+                // ->orWhere('client_email' ,'LIKE' ,'%'. $search .'%');
         } else {
-            $query = $quote->query()
-              ->where('id' ,'>' ,0);
+            $query = $quote->query()->where('id' ,'>' ,0);
+            
         }
         if(count($selected_quotes) > 0) {
-          $query->whereNotIn('id', $selected_quotes);
-        }
+              $query->whereNotIn('id', $selected_quotes);
+            }
         return $query->get();
     }
 
