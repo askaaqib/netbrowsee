@@ -926,7 +926,7 @@
 import axios from 'axios'
 import form from '../../mixins/form'
 import moment from 'moment'
-import bModalDirective from 'bootstrap-vue'
+import bModalDirective from 'bootstrap-vue/esm/directives/modal/modal'
 import swal from 'sweetalert2'
 
 export default {
