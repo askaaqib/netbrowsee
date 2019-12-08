@@ -7,9 +7,9 @@
           <h3 id="quotes-heading" class="card-title" slot="header">Completed Quote</h3>
           <b-row>
             <b-col class="col-md-12">
-              <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print Invoice<i class="fe fe-printer fe-lg"></i></b-btn>
+              <b-btn class="btn-show pull-right" id="hideprint" variant="secondary" @click="printquotes()">Print Invoice/Quote<i class="fe fe-printer fe-lg"></i></b-btn>
               <div id="hideprint">
-                <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Invoice<i class="fe fe-file fe-lg"></i></b-btn>
+                <b-btn class="btn-show pull-right" id="download" variant="secondary" @click="printFacture()">Download Invoice/Quote<i class="fe fe-file fe-lg"></i></b-btn>
               </div>
             </b-col>
           </b-row>
@@ -138,12 +138,13 @@
               </div>
               <!-- Quote Details Section Ends -->
               <hr>
+              
               <!-- Bank Details & Total Amount Section  -->
               <div class="row">
                 <!-- Terms and conditions -->
                 <div class="col-sm-6">
                   <h3 class="payment-terms" style="color:#000">Bank Details</h3>
-                <span class="check-text"> FNB Cheque Account: 62589280066 </span>
+                <span class="check-text"> FNB Cheque Account: {{settings.bank_account}}  </span>
                 </div>
                 <!-- Totals -->
                 <div class="col-sm-6 align-right">

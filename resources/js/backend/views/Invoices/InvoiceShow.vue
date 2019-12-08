@@ -158,7 +158,7 @@
             <!-- Terms and conditions -->
             <div class="col-sm-6">
               <h3 class="payment-terms" style="color:#000">Bank Details</h3>
-            <span class="check-text"> FNB Cheque Account: 62589280066 </span>
+            <span class="check-text"> FNB Cheque Account: {{settings.bank_account}}  </span>
             </div>
             <!-- Totals -->
             <div class="col-sm-6 align-right">
