@@ -694,7 +694,7 @@
             <address class="form-group">
                 <label class="control-label"> Company Address: </label>
                 
-                    <p class="form-control-static"><span  id="id_organization_address_heading" name="organization_address_heading">Shop No 2, 24B Devereaux Avenue</span></p>
+                    <p class="form-control-static"><span  id="id_organization_address_heading" name="organization_address_heading">example</span></p>
                 
                 
                     <p class="form-control-static">
