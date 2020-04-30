@@ -40,7 +40,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html2pdf.js": "^0.9.1",
     "intl-tel-input": "^13.0.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.4.2",
     "node-sass": "^4.9.3",
